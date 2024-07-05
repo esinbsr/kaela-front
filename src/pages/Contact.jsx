@@ -11,7 +11,12 @@ const Contact = () => {
     responseMessage: ""
   });
 
-  const { email, object, message, responseMessage } = formData;
+  const {
+    email,
+    object,
+    message,
+    responseMessage 
+    } = formData; //objet à partir duquel j'extrais les valeurs
 
   const handleChange = (e) => {
     setFormData({
@@ -25,7 +30,7 @@ const Contact = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost/travail-perso/kaela-couture/index.php?action=contact",
+        "http://localhost/travail-perso/kaela-couture/contact",
         formData,
         {
           headers: {
@@ -79,6 +84,7 @@ const Contact = () => {
         <button type="submit">Send</button>
       </form>
       {responseMessage && <p>{responseMessage}</p>}
+  
     </div>
   );
 };
