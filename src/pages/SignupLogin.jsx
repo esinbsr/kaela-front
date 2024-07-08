@@ -13,9 +13,6 @@ const SignupLogin = () => {
             <NavLink to="/login">
               Login
             </NavLink>
-
-            
-            
         </div>
     );
 };

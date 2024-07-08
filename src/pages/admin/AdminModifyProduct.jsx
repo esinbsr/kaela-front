@@ -1,49 +1,67 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import Navigation from "../components/Navigation";
+import Navigation from "../../components/Navigation";
+import { useParams } from "react-router-dom";
 
-const AdminAddProduct = () => {
+const AdminModifyProduct = () => {
+  const { productId } = useParams();
+
   const [productName, setProductName] = useState("");
   const [productDescription, setProductDescription] = useState("");
   const [productCategory, setProductCategory] = useState("");
   const [productImage, setProductImage] = useState(null);
-  const [categories, setCategories] = useState([]);
   const [responseMessage, setResponseMessage] = useState("");
 
+  const [categories, setCategories] = useState([]);
+
   useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const response = await axios.get(
-          "http://localhost/travail-perso/kaela-couture/getCategorie"
-        );
-
-        if (response.data.success) {
-          setCategories(response.data.categories);
-
-          if (response.data.categories.length > 0) {
-            setProductCategory(response.data.categories[0].id);
-          }
-        } else {
-          setResponseMessage("Failed to fetch categories");
-        }
-      } catch (error) {
-        console.error("Error fetching categories:", error);
-        setResponseMessage("Error fetching categories");
-      }
-    };
-
+    fetchProduct();
     fetchCategories();
   }, []);
+
+  const fetchProduct = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost/travail-perso/kaela-couture/getProduct/${productId}`
+      );
+      console.log(response);
+
+      if (response.data.success) {
+        const product = response.data.product;
+        setProductName(product.name);
+        setProductDescription(product.description);
+        setProductCategory(product.categorie_id);
+      } else {
+        setResponseMessage("Failed to fetch product");
+      }
+    } catch (error) {
+      console.error("Error fetching product:", error);
+      setResponseMessage("Error fetching product");
+    }
+  };
+
+  const fetchCategories = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost/travail-perso/kaela-couture/getCategorie"
+      );
+
+      if (response.data.success) {
+        setCategories(response.data.categories);
+      } else {
+        setResponseMessage("Failed to fetch categories");
+      }
+    } catch (error) {
+      console.error("Error fetching categories:", error);
+      setResponseMessage("Error fetching categories");
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!productName || !productDescription || !productCategory || !productImage) {
-      setResponseMessage("All fields are required");
-      return;
-    }
-
     const formData = new FormData();
+    formData.append("productId", productId);
     formData.append("productName", productName);
     formData.append("productDescription", productDescription);
     formData.append("productCategory", productCategory);
@@ -51,7 +69,7 @@ const AdminAddProduct = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost/travail-perso/kaela-couture/adminAddProduct",
+        `http://localhost/travail-perso/kaela-couture/updateProduct`,
         formData,
         {
           headers: {
@@ -59,15 +77,9 @@ const AdminAddProduct = () => {
           },
         }
       );
-
+      console.log("Backend response:", response.data);
       const message = response.data.message || "No message returned";
       setResponseMessage(message);
-
-      setProductName("");
-      setProductDescription("");
-      setProductCategory(categories.length > 0 ? categories[0].id : ""); // Réinitialisez avec un ID valide
-      setProductImage(null);
-      
     } catch (error) {
       console.error("Error submitting form:", error);
       setResponseMessage("Error submitting form");
@@ -76,8 +88,9 @@ const AdminAddProduct = () => {
 
   return (
     <div>
-        <Navigation/>
-      <h2>Add a product</h2>
+      <Navigation />
+      <h2>Modify a product</h2>
+
       <form onSubmit={handleSubmit}>
         <label htmlFor="productName">Name of product:</label>
         <input
@@ -117,12 +130,13 @@ const AdminAddProduct = () => {
           name="productImage"
           onChange={(e) => setProductImage(e.target.files[0])}
         />
-        
-        <button type="submit">Create product</button>
+
+        <button type="submit">Modify product</button>
       </form>
+
       {responseMessage && <p>{responseMessage}</p>}
     </div>
   );
 };
 
-export default AdminAddProduct;
+export default AdminModifyProduct;
