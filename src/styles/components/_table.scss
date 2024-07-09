@@ -2,8 +2,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh; 
-    margin: 0; 
   }
   
   .table {
@@ -11,7 +9,6 @@
     max-width: 800px; 
     border-collapse: collapse;
     font-size: 18px;
-    text-align: left;
   
     th, td {
       border: 1px solid #dddddd;
@@ -26,8 +23,5 @@
       background-color: #f9f9f9;
     }
   
-    th.action-header {
-      text-align: center;
-    }
   }
   

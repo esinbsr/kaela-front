@@ -1,0 +1,12 @@
+.home {
+  @include flexbox(center, center);
+  img {
+    margin: 20px;
+    width: 300px;
+  }
+}
+
+.large-image img {
+    width: 350px;
+}
+

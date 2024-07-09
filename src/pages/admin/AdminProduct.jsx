@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Navigation from "../../components/Navigation";
 import AdminProductCard from "../../components/AdminProductCard";
+import { Link } from "react-router-dom";
 
 const AdminProduct = () => {
   const [responseMessage, setResponseMessage] = useState("");
@@ -72,6 +73,7 @@ const AdminProduct = () => {
           </tbody>
         </table>
       </div>
+        <Link to="/adminAddProduct">Add a new product</Link>
       {responseMessage && <p>{responseMessage}</p>}
     </div>
   );

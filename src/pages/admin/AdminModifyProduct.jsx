@@ -11,8 +11,8 @@ const AdminModifyProduct = () => {
   const [productCategory, setProductCategory] = useState("");
   const [productImage, setProductImage] = useState(null);
   const [responseMessage, setResponseMessage] = useState("");
-
   const [categories, setCategories] = useState([]);
+  const [reloadImageKey, setReloadImageKey] = useState(Date.now());
 
   useEffect(() => {
     fetchProduct();
@@ -80,6 +80,10 @@ const AdminModifyProduct = () => {
       console.log("Backend response:", response.data);
       const message = response.data.message || "No message returned";
       setResponseMessage(message);
+
+      if (response.data.success) {
+        setReloadImageKey(Date.now()); // Mettre à jour la clé pour recharger l'image
+      }
     } catch (error) {
       console.error("Error submitting form:", error);
       setResponseMessage("Error submitting form");
@@ -135,6 +139,15 @@ const AdminModifyProduct = () => {
       </form>
 
       {responseMessage && <p>{responseMessage}</p>}
+
+      {productImage && (
+        <div className="image-container">
+          <img
+            src={`http://localhost/travail-perso/kaela-couture/assets/img/${productImage.name}?key=${reloadImageKey}`}
+            alt={productName}
+          />
+        </div>
+      )}
     </div>
   );
 };

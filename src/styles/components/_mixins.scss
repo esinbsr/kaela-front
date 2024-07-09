@@ -1,0 +1,12 @@
+@mixin flexbox($jc, $ai, $fd:false, $fw:false) {
+    display: flex;
+    justify-content: $jc;
+    align-items: $ai;
+
+    @if $fd {
+        flex-direction: $fd;
+    }
+    @if $fw {
+        flex-wrap: $fw;
+    }
+}

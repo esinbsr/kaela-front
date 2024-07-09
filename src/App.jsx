@@ -8,6 +8,9 @@ import Admin from "./pages/admin/Admin";
 import AdminAddProduct from "./pages/admin/AdminAddProduct";
 import AdminModifyProduct from "./pages/admin/AdminModifyProduct";
 import AdminProduct from "./pages/admin/AdminProduct";
+import AdminInformation from "./pages/admin/AdminInformation";
+import AdminAddInformation from "./pages/admin/AdminAddInformation";
+
 
 
 const App = () => {
@@ -24,6 +27,9 @@ const App = () => {
           <Route path="/adminProduct" element={<AdminProduct />} />
           <Route path="/adminAddProduct" element={<AdminAddProduct />} />
           <Route path="/adminModifyProduct/:productId" element={<AdminModifyProduct />} />
+          <Route path="/AdminInformation" element={<AdminInformation />} />
+          <Route path="/adminAddInformation" element={<AdminAddInformation />} />
+
         </Routes>
       </BrowserRouter>
     </div>
