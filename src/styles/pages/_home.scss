@@ -1,7 +1,7 @@
 .home {
   @include flexbox(center, center);
   img {
-    margin: 20px;
+    margin: 10px;
     width: 300px;
   }
 }

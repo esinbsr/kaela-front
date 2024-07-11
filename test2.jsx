@@ -1,17 +1,12 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import Navigation from "../../components/Navigation";
-import { addInformation } from "../../actions/informationAction";
+import axios from "axios";
 
 const AdminAddInformation = () => {
   const [description, setDescription] = useState("");
   const [mobile, setMobile] = useState("");
   const [address, setAddress] = useState("");
-
-  const dispatch = useDispatch();
-  
-  const message = useSelector((state) => state.information.message);
-  const error = useSelector((state) => state.information.error);
+  const [responseMessage, setResponseMessage] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -22,9 +17,23 @@ const AdminAddInformation = () => {
       address,
     };
 
-    dispatch(addInformation(formData));
+    try {
+      const response = await axios.post(
+        "http://localhost/travail-perso/kaela-couture/adminAddInformation",
+        formData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const message = response.data.message || "No message returned";
+      setResponseMessage(message);
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      setResponseMessage("Error submitting form");
+    }
   };
-
   return (
     <div>
       <Navigation />
@@ -58,8 +67,7 @@ const AdminAddInformation = () => {
 
         <button type="submit">Add</button>
       </form>
-      {message && <p>{message}</p>}
-      {error && <p>{error}</p>}
+      {responseMessage && <p>{responseMessage}</p>}
     </div>
   );
 };

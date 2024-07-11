@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Navigation from "../../components/Navigation";
-import AdminProductCard from "../../components/AdminProductCard";
+import AdminProductCard from "../../components/admin/AdminProductCard";
 import { Link } from "react-router-dom";
 
 const AdminProduct = () => {

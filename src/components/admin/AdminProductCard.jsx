@@ -1,4 +1,4 @@
-import AdminDeleteProduct from '../pages/admin/AdminDeleteProduct';
+import AdminDeleteProduct from './AdminDeleteProduct';
 import { Link } from 'react-router-dom';
 
 const AdminProductCard = ({ product, onDelete }) => {

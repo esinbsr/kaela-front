@@ -10,9 +10,10 @@ const AdminModifyProduct = () => {
   const [productDescription, setProductDescription] = useState("");
   const [productCategory, setProductCategory] = useState("");
   const [productImage, setProductImage] = useState(null);
-  const [responseMessage, setResponseMessage] = useState("");
+  
   const [categories, setCategories] = useState([]);
   const [reloadImageKey, setReloadImageKey] = useState(Date.now());
+  const [responseMessage, setResponseMessage] = useState("");
 
   useEffect(() => {
     fetchProduct();
@@ -27,10 +28,13 @@ const AdminModifyProduct = () => {
       console.log(response);
 
       if (response.data.success) {
+
         const product = response.data.product;
+
         setProductName(product.name);
         setProductDescription(product.description);
         setProductCategory(product.categorie_id);
+
       } else {
         setResponseMessage("Failed to fetch product");
       }
@@ -61,6 +65,7 @@ const AdminModifyProduct = () => {
     e.preventDefault();
 
     const formData = new FormData();
+
     formData.append("productId", productId);
     formData.append("productName", productName);
     formData.append("productDescription", productDescription);
@@ -69,7 +74,7 @@ const AdminModifyProduct = () => {
 
     try {
       const response = await axios.post(
-        `http://localhost/travail-perso/kaela-couture/updateProduct`,
+        "http://localhost/travail-perso/kaela-couture/updateProduct",
         formData,
         {
           headers: {
@@ -77,7 +82,7 @@ const AdminModifyProduct = () => {
           },
         }
       );
-      console.log("Backend response:", response.data);
+      // console.log("Backend response:", response.data);
       const message = response.data.message || "No message returned";
       setResponseMessage(message);
 
