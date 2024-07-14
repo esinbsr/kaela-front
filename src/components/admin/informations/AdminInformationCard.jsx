@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import AdminDeleteInformation from './AdminDeleteInformation';
 
+
 const AdminInformationCard = ({ infos, onDelete }) => {
     return (
         <tr>

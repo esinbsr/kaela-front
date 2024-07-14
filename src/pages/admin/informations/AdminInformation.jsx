@@ -1,9 +1,10 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import Navigation from '../../components/Navigation';
-import AdminInformationCard from '../../components/admin/AdminInformationCard';
-import { getInformation, deleteInformation } from '../../actions/informationAction';
+import { deleteInformation, getInformation } from '../../../actions/informationAction';
+import Navigation from '../../../components/Navigation';
+import AdminInformationCard from '../../../components/admin/informations/AdminInformationCard';
+
 
 const AdminInformation = () => {
     const dispatch = useDispatch();

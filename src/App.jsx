@@ -5,12 +5,16 @@ import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
 import Contact from "./pages/Contact";
 import Admin from "./pages/admin/Admin";
-import AdminAddProduct from "./pages/admin/AdminAddProduct";
-import AdminModifyProduct from "./pages/admin/AdminModifyProduct";
-import AdminProduct from "./pages/admin/AdminProduct";
-import AdminInformation from "./pages/admin/AdminInformation";
-import AdminAddInformation from "./pages/admin/AdminAddInformation";
-import AdminInformationModify from "./pages/admin/AdminInformationModify";
+
+import AdminDeleteInformation from "./components/admin/informations/AdminDeleteInformation";
+
+import Testa from "../Testa";
+import AdminProduct from "./pages/admin/products/AdminProduct";
+import AdminAddProduct from "./pages/admin/products/AdminAddProduct";
+import AdminModifyProduct from "./pages/admin/products/AdminModifyProduct";
+import AdminInformation from "./pages/admin/informations/AdminInformation";
+import AdminAddInformation from "./pages/admin/informations/AdminAddInformation";
+import AdminInformationModify from "./pages/admin/informations/AdminInformationModify";
 
 
 
@@ -28,9 +32,11 @@ const App = () => {
           <Route path="/adminProduct" element={<AdminProduct />} />
           <Route path="/adminAddProduct" element={<AdminAddProduct />} />
           <Route path="/adminModifyProduct/:productId" element={<AdminModifyProduct />} />
-          <Route path="/AdminInformation" element={<AdminInformation />} />
+          <Route path="/adminInformation" element={<AdminInformation />} />
           <Route path="/adminAddInformation" element={<AdminAddInformation />} />
           <Route path="/adminInformationModify/:informationId" element={<AdminInformationModify />} />
+          <Route path="/adminDeleteInformation/:informationId" element={<AdminDeleteInformation/>} />
+          <Route path="/testa" element={<Testa/>} />
 
         </Routes>
       </BrowserRouter>

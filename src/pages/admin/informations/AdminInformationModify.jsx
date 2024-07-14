@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import Navigation from '../../components/Navigation';
-import { fetchSingleInformation, updateInformation } from '../../actions/informationAction';
+import { fetchSingleInformation, updateInformation } from '../../../actions/informationAction';
+import Navigation from '../../../components/Navigation';
+
 
 const AdminInformationModify = () => {
     const { informationId } = useParams();

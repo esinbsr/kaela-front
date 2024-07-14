@@ -12,18 +12,18 @@ import {
 } from '../actions/informationAction';
 
 const initialState = {
-    information: [],
+    information: [], //tableau vide pour stocker les informations récupérées
     singleInformation: null,
-    message: '',
+    message: '', //chaîne vide pour stocker les messages de retour (par exemple, des messages de succès)
     error: '',
 };
 
 const informationReducer = (state = initialState, action) => {
-    switch (action.type) {
+    switch (action.type) { //examine le type d'action pour déterminer comment mettre à jour l'état
         case GET_INFORMATION_SUCCESS:
             return {
                 ...state,
-                information: action.payload,
+                information: action.payload, // met à jour la propriété information avec les données récupérées depuis le payload de l'action 
                 message: action.message,
                 error: '',
             };

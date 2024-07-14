@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { deleteInformation } from '../../actions/informationAction';
+import { deleteInformation } from '../../../actions/informationAction';
+
 
 const AdminDeleteInformation = ({ informationId, onDelete }) => {
     const dispatch = useDispatch();
@@ -12,7 +13,7 @@ const AdminDeleteInformation = ({ informationId, onDelete }) => {
 
         if (confirmDelete) {
             dispatch(deleteInformation(informationId));
-            onDelete(informationId); // Optionnel si vous avez besoin d'une mise à jour locale
+            onDelete(informationId);
         }
     };
 

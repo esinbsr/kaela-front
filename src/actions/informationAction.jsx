@@ -11,7 +11,7 @@ export const DELETE_INFORMATION_ERROR = 'DELETE_INFORMATION_ERROR';
 export const FETCH_SINGLE_INFORMATION_SUCCESS = 'FETCH_SINGLE_INFORMATION_SUCCESS';
 export const FETCH_SINGLE_INFORMATION_ERROR = 'FETCH_SINGLE_INFORMATION_ERROR';
 
-const API_URL = 'http://localhost/travail-perso/kaela-couture/';
+const API_URL = 'http://localhost:8888/travail-perso/kaela-couture/';
 
 export const getInformation = () => {
     return async (dispatch) => {

@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import Navigation from '../../components/Navigation';
-import { addInformation } from '../../actions/informationAction';
+
+import { addInformation } from '../../../actions/informationAction';
+import Navigation from '../../../components/Navigation';
+
 
 const AdminAddInformation = () => {
     const [description, setDescription] = useState('');
