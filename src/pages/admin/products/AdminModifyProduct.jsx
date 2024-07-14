@@ -1,16 +1,13 @@
-// components/AdminModifyProduct.jsx
 import { useState, useEffect } from "react";
-import Navigation from "../../../components/Navigation";
-import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getProductById, updateProduct, getProductCategories } from "../../../actions/productAction";
-import { isEmpty } from "../../../components/Utils";
+import { useParams } from "react-router-dom";
+import { getProductById, updateProduct } from "../../../actions/productAction";
+import Navigation from "../../../components/Navigation";
 
 const AdminModifyProduct = () => {
     const { productId } = useParams();
     const dispatch = useDispatch();
     const productById = useSelector((state) => state.product.productById);
-    const categories = useSelector((state) => state.product.categories);
     const responseMessage = useSelector((state) => state.product.message);
     const errorMessage = useSelector((state) => state.product.error);
 
@@ -23,7 +20,6 @@ const AdminModifyProduct = () => {
         if (productId) {
             dispatch(getProductById(productId));
         }
-        dispatch(getProductCategories());
     }, [dispatch, productId]);
 
     useEffect(() => {
@@ -34,7 +30,7 @@ const AdminModifyProduct = () => {
         }
     }, [productById]);
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
 
         const formData = new FormData();
@@ -50,8 +46,7 @@ const AdminModifyProduct = () => {
     return (
         <div>
             <Navigation />
-            <h2>Modify a product</h2>
-
+            <h2>Modify Product</h2>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="productName">Name of product:</label>
                 <input
@@ -77,15 +72,8 @@ const AdminModifyProduct = () => {
                     value={productCategory}
                     onChange={(e) => setProductCategory(e.target.value)}
                 >
-                    {!isEmpty(categories) ? (
-                        categories.map((category) => (
-                            <option key={category.id} value={category.id}>
-                                {category.name}
-                            </option>
-                        ))
-                    ) : (
-                        <option value="">Loading categories...</option>
-                    )}
+                    <option value="">Select Category</option>
+                    {/* Add your categories options here */}
                 </select>
 
                 <label htmlFor="productImage">Image:</label>
@@ -96,11 +84,11 @@ const AdminModifyProduct = () => {
                     onChange={(e) => setProductImage(e.target.files[0])}
                 />
 
-                <button type="submit">Modify product</button>
+                <button type="submit">Modify</button>
             </form>
 
             {responseMessage && <p>{responseMessage}</p>}
-            {errorMessage && <p> {errorMessage}</p>}
+            {errorMessage && <p>{errorMessage}</p>}
         </div>
     );
 };

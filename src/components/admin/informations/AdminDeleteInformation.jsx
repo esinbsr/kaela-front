@@ -2,8 +2,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { deleteInformation } from '../../../actions/informationAction';
 
-
-const AdminDeleteInformation = ({ informationId, onDelete }) => {
+const AdminDeleteInformation = ({ informationId }) => {
     const dispatch = useDispatch();
 
     const handleDeleteClick = async (e) => {
@@ -13,15 +12,11 @@ const AdminDeleteInformation = ({ informationId, onDelete }) => {
 
         if (confirmDelete) {
             dispatch(deleteInformation(informationId));
-            onDelete(informationId);
         }
     };
 
     return (
-        <Link to="#" onClick={handleDeleteClick}>
-            {' '}
-            Delete{' '}
-        </Link>
+        <Link onClick={handleDeleteClick}>Delete</Link>
     );
 };
 

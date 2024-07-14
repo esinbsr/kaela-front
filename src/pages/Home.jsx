@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProduct } from '../actions/productAction';
 import Navigation from '../components/Navigation';

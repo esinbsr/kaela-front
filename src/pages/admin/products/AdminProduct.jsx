@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 import Navigation from "../../../components/Navigation";
-
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getProduct } from "../../../actions/productAction";
 import AdminProductCard from "../../../components/admin/products/AdminProductCard";
+import { isEmpty } from "../../../components/Utils";
 
 const AdminProduct = () => {
   const dispatch = useDispatch();
@@ -32,14 +32,14 @@ const AdminProduct = () => {
             </tr>
           </thead>
           <tbody>
-            {products.length > 0 ? (
-              products.map((product) => (
-                <AdminProductCard
-                  key={product.id}
-                  product={product}
-                />
-          
-              ))
+            {!isEmpty(products) ? (
+              products.map((product) => 
+                !isEmpty(product) && (
+                  <AdminProductCard 
+                      key={product.id} 
+                      product={product} />
+                )
+              )
             ) : (
               <tr>
                 <td colSpan="6" style={{ textAlign: "center" }}>

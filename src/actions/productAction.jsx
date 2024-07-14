@@ -18,7 +18,7 @@ const API_URL = 'http://localhost:8888/travail-perso/kaela-couture/';
 export const getProduct = () => {
     return async (dispatch) => {
         try {
-            const response = await axios.get(`${API_URL}productDisplay`);
+            const response = await axios.get(`${API_URL}getProduct`);
             const message = response.data.message || "No message returned";
 
             if (response.data.success) {
@@ -42,7 +42,7 @@ export const getProduct = () => {
 export const getProductById = (productId) => {
     return async (dispatch) => {
         try {
-            const response = await axios.get(`${API_URL}getProduct/${productId}`);
+            const response = await axios.get(`${API_URL}getProductById/${productId}`);
             const message = response.data.message || "No message returned";
 
             if (response.data.success) {
@@ -67,7 +67,7 @@ export const getProductById = (productId) => {
 export const getProductCategories = () => {
     return async (dispatch) => {
         try {
-            const response = await axios.get(`${API_URL}getCategorie`);
+            const response = await axios.get(`${API_URL}getProductCategory`);
             const message = response.data.message || "No message returned";
 
             if (response.data.success) {

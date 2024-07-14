@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { fetchSingleInformation, updateInformation } from '../../../actions/informationAction';
+import { getInformationById, updateInformation } from '../../../actions/informationAction';
 import Navigation from '../../../components/Navigation';
 
 
@@ -19,7 +19,7 @@ const AdminInformationModify = () => {
 
     useEffect(() => {
         if (informationId) {
-            dispatch(fetchSingleInformation(informationId));
+            dispatch(getInformationById(informationId));
         } else {
             setResponseMessage('Information ID missing in URL');
         }

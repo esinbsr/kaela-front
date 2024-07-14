@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { deleteInformation, getInformation } from '../../../actions/informationAction';
 import Navigation from '../../../components/Navigation';
 import AdminInformationCard from '../../../components/admin/informations/AdminInformationCard';
-
+import { isEmpty } from '../../../components/Utils';
 
 const AdminInformation = () => {
     const dispatch = useDispatch();
@@ -37,21 +37,25 @@ const AdminInformation = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {information.length > 0 ? (
-                            information.map((info) => (
-                                <AdminInformationCard
-                                    key={info.id}
-                                    infos={info}
-                                    onDelete={handleDelete}
-                                />
-                            ))
-                        ) : (
-                            <tr>
-                                <td colSpan="6" style={{ textAlign: 'center' }}>
-                                    There are no information
-                                </td>
-                            </tr>
-                        )}
+                        {
+                            !isEmpty(information) ? (
+                                information.map((info) => 
+                                    !isEmpty(info) && (
+                                        <AdminInformationCard
+                                            key={info.id}
+                                            infos={info}
+                                            onDelete={handleDelete}
+                                        />
+                                    )
+                                )
+                            ) : (
+                                <tr>
+                                    <td colSpan="6" style={{ textAlign: 'center' }}>
+                                        There are no information
+                                    </td>
+                                </tr>
+                            )
+                        }
                     </tbody>
                 </table>
             </div>

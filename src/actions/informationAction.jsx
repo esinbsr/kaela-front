@@ -16,7 +16,7 @@ const API_URL = 'http://localhost:8888/travail-perso/kaela-couture/';
 export const getInformation = () => {
     return async (dispatch) => {
         try {
-            const response = await axios.get(`${API_URL}adminInformation`);
+            const response = await axios.get(`${API_URL}getInformation`);
             dispatch({
                 type: GET_INFORMATION_SUCCESS,
                 payload: response.data.information,
@@ -31,10 +31,28 @@ export const getInformation = () => {
     };
 };
 
+export const getInformationById = (informationId) => {
+    return async (dispatch) => {
+        try {
+            const response = await axios.get(`${API_URL}getInformationById/${informationId}`);
+            dispatch({
+                type: FETCH_SINGLE_INFORMATION_SUCCESS,
+                payload: response.data.information,
+                message: response.data.message,
+            });
+        } catch (error) {
+            dispatch({
+                type: FETCH_SINGLE_INFORMATION_ERROR,
+                payload: error.message,
+            });
+        }
+    };
+};
+
 export const addInformation = (information) => {
     return async (dispatch) => {
         try {
-            const response = await axios.post(`${API_URL}adminAddInformation`, information, {
+            const response = await axios.post(`${API_URL}addInformation`, information, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -42,7 +60,7 @@ export const addInformation = (information) => {
             dispatch({
                 type: ADD_INFORMATION_SUCCESS,
                 payload: response.data.information,
-                message: response.data.message,  // Ajout du message
+                message: response.data.message,
             });
         } catch (error) {
             dispatch({
@@ -53,23 +71,6 @@ export const addInformation = (information) => {
     };
 };
 
-export const fetchSingleInformation = (informationId) => {
-    return async (dispatch) => {
-        try {
-            const response = await axios.get(`${API_URL}getInformation/${informationId}`);
-            dispatch({
-                type: FETCH_SINGLE_INFORMATION_SUCCESS,
-                payload: response.data.information,
-                message: response.data.message, 
-            });
-        } catch (error) {
-            dispatch({
-                type: FETCH_SINGLE_INFORMATION_ERROR,
-                payload: error.message,
-            });
-        }
-    };
-};
 
 export const updateInformation = (information) => {
     return async (dispatch) => {
@@ -104,7 +105,7 @@ export const deleteInformation = (informationId) => {
             dispatch({
                 type: DELETE_INFORMATION_SUCCESS,
                 payload: informationId,
-                message: response.data.message, 
+                message: response.data.message,
             });
         } catch (error) {
             dispatch({
