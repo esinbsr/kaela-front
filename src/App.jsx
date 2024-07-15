@@ -15,6 +15,7 @@ import AdminModifyProduct from "./pages/admin/products/AdminModifyProduct";
 import AdminInformation from "./pages/admin/informations/AdminInformation";
 import AdminAddInformation from "./pages/admin/informations/AdminAddInformation";
 import AdminInformationModify from "./pages/admin/informations/AdminInformationModify";
+import EveningDresses from "./pages/EveningDresses";
 
 
 
@@ -37,6 +38,7 @@ const App = () => {
           <Route path="/adminInformationModify/:informationId" element={<AdminInformationModify />} />
           <Route path="/adminDeleteInformation/:informationId" element={<AdminDeleteInformation/>} />
           <Route path="/testa" element={<Testa/>} />
+          <Route path="/eveningDresses" element={<EveningDresses/>} />
 
         </Routes>
       </BrowserRouter>

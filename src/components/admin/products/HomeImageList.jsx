@@ -1,9 +1,9 @@
-import React, { Fragment, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProduct } from '../../../actions/productAction';
 import { API_URL } from '../../../actions/informationAction';
 
-const ProductImageList = ({ start, end, additionalClass }) => {
+const HomeImageList = ({ start, end, additionalClass }) => {
     const dispatch = useDispatch();
     const products = useSelector((state) => state.product.products);
 
@@ -12,14 +12,18 @@ const ProductImageList = ({ start, end, additionalClass }) => {
     }, [dispatch]);
 
     return (
-        <div className={`home__img ${additionalClass || ''}`}>
+        <div className={`${additionalClass || ''}`}>
             {products && products.length > 0 ? (
-                products.slice(start, end).map((product, index) => {
+                products
+                .slice(start, end)
+                .map((product, index) => {
                     const globalIndex = start + index;
                     const isLargeImage = globalIndex === 1; // Vérifie si c'est la deuxième image globale
                     const showDescription = globalIndex >= 3; // Afficher pour la 4ème et 5ème image (indices 3 et 4)
-                    const buttonText = globalIndex === 3 ? "Discover" : "Explore";
-
+                    const buttonText = globalIndex === 3 ? "Discover" : "Explore"; // Définir le texte du bouton
+                    const title = globalIndex === 3 ? "Latest collection" : "Evening dresses";
+                    const p = globalIndex === 3 ? "Explore the newest trends with our latest arrivals." : "Distinguish yourself with our sensational evening gowns.";
+    
                     return (
                         <div key={product.id} className={isLargeImage ? "large-image" : ""}>
                             <img
@@ -28,8 +32,8 @@ const ProductImageList = ({ start, end, additionalClass }) => {
                             />
                             {showDescription && (
                                 <div className="product-info">
-                                    <h3>{product.name}</h3>
-                                    <p>{product.description}</p>
+                                    <h3>{title}</h3>
+                                    <p>{p}</p>
                                     <a href="#">{buttonText}</a>
                                 </div>
                             )}
@@ -43,4 +47,4 @@ const ProductImageList = ({ start, end, additionalClass }) => {
     );
 };
 
-export default ProductImageList;
+export default HomeImageList;

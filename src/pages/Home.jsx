@@ -1,16 +1,16 @@
 import Navigation from '../components/Navigation';
-import ProductImageList from '../components/admin/products/ProductImageList';
-import DescriptionList from '../components/admin/informations/DescriptionList';
+import HomeDescriptionList from '../components/admin/informations/HomeDescriptionList';
+import HomeImageList from '../components/admin/products/HomeImageList';
 
 const Home = () => {
     return (
         <div className='home'>
             <Navigation />
             <h1>KAELA COUTURE</h1>
-            <ProductImageList start={0} end={3} additionalClass="featured-image" />
-            <DescriptionList />
+            <HomeImageList start={0} end={3} additionalClass="featured-image" />
+            <HomeDescriptionList />
             <h2>Lorem</h2>
-            <ProductImageList start={3} end={5} additionalClass="more-products" />
+            <HomeImageList start={3} end={5} additionalClass="more-products" />
         </div>
     );
 };

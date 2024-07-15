@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getInformation } from '../../../actions/informationAction';
 
-const DescriptionList = () => {
+const HomeDescriptionList = () => {
     const dispatch = useDispatch();
     const description = useSelector((state) => state.information.information);
 
@@ -28,4 +28,4 @@ const DescriptionList = () => {
     );
 };
 
-export default DescriptionList;
+export default HomeDescriptionList;
