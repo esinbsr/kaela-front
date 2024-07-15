@@ -1,12 +1,38 @@
 .home {
-  @include flexbox(center, center);
-  img {
-    margin: 10px;
-    width: 300px;
+  h1 {
+    text-align: center;
+  }
+  .featured-image {
+    @include flexbox(center, center, null, wrap);
+
+    .large-image img {
+      width: 350px;
+    }
+
+    img {
+      width: 300px;
+    }
+
+    p {
+      margin-top: 10px;
+      font-size: 16px;
+      color: #333;
+      text-align: center;
+    }
+  }
+
+  .more-products {
+    @include flexbox(center, center, null, wrap);
+
+    .product-info  {
+      text-align: center;
+   
+
+    }
+
+    img {
+      width: 300px;
+    }
+
   }
 }
-
-.large-image img {
-    width: 350px;
-}
-

@@ -1,35 +1,16 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { getProduct } from '../actions/productAction';
 import Navigation from '../components/Navigation';
+import ProductImageList from '../components/admin/products/ProductImageList';
+import DescriptionList from '../components/admin/informations/DescriptionList';
 
 const Home = () => {
-    const dispatch = useDispatch();
-    const products = useSelector((state) => state.product.products);
-
-    useEffect(() => {
-        dispatch(getProduct());
-    }, [dispatch]);
-
     return (
-        <div>
+        <div className='home'>
             <Navigation />
             <h1>KAELA COUTURE</h1>
-            <div className="product-list">
-                {products.length > 0 ? (
-                    products.map((product) => (
-                        <div key={product.id} className="product-item">
-                            <img
-                                src={`http://localhost:8888/travail-perso/kaela-couture/assets/img/${product.path}`}
-                                alt={product.name}
-                        
-                            />
-                        </div>
-                    ))
-                ) : (
-                    <p>No products found.</p>
-                )}
-            </div>
+            <ProductImageList start={0} end={3} additionalClass="featured-image" />
+            <DescriptionList />
+            <h2>Lorem</h2>
+            <ProductImageList start={3} end={5} additionalClass="more-products" />
         </div>
     );
 };
