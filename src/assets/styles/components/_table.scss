@@ -1,7 +1,5 @@
 .table-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  @include flexbox(center, center);
   }
   
   .table {

@@ -1,0 +1,16 @@
+.navigation {
+    @include flexbox(space-between, center);
+    padding: 1rem;
+  
+    .logo_kaela {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+  
+    .nav_links {
+      display: flex;
+      gap: 1rem;
+    }
+  
+  }
+  
