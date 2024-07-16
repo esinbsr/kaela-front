@@ -1,14 +1,14 @@
+import EveningDressesDescriptionList from "../components/admin/informations/EveningDressesDescriptionList";
 import EveningDressesImageList from "../components/admin/products/EveningDressesImageList";
 import Navigation from "../components/Navigation";
 
 const EveningDresses = () => {
-
-
     return (
-        <div>
-            <Navigation/>
+        <div className="evening">
+            <Navigation />
             <h1>Evening Dresses</h1>
-            <EveningDressesImageList start={5} end={7} additionalClass="image"/>
+            <EveningDressesDescriptionList />
+            <EveningDressesImageList start={5} end={9} additionalClass="image" />
         </div>
     );
 };

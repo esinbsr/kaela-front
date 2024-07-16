@@ -1,15 +1,27 @@
-.image {
-    display: flex;
-    justify-content: center;
-    gap: 60px;
-    position: relative;
-    .first-image {
-        position: relative;
-        top: 150px; 
+.evening {
+    h1 {
+        margin-bottom: 80px;
     }
-    img {
-        width: 400px;
+
+    .image {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        position: relative;
+        gap: 80px;
+
+        .top-image {
+            position: relative;
+            top: 200px;
+        }
+
+        img {
+            flex: 1 1 auto;
+            width: 100%; 
+            height: 700px;
+            max-width: 600px;
+            object-fit: cover;
+            object-position: top;
+        }
     }
 }
-
-

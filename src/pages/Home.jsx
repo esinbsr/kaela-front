@@ -9,7 +9,6 @@ const Home = () => {
             <h1>KAELA COUTURE</h1>
             <HomeImageList start={0} end={3} additionalClass="featured-image" />
             <HomeDescriptionList />
-            <h2>Lorem</h2>
             <HomeImageList start={3} end={5} additionalClass="more-products" />
         </div>
     );

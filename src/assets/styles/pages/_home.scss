@@ -1,14 +1,18 @@
 .home {
+  h1 {
+    letter-spacing: 4px
+  }
   .featured-image {
     @include flexbox(center, center, null, wrap);
 
     .large-image img {
-      width: 350px;
+      width: 480px;
+      object-fit: cover;
     }
 
     img {
-      margin: 20px;
-      width: 300px;
+      margin: 25px;
+      width: 400px;
     }
 
     p {
@@ -28,10 +32,10 @@
   
     img {
       margin: 10px;
-      width: 450px;
-      height: 350px;
+      width: 700px;
+      height: 500px;
       object-fit: cover;
-      object-position: 50% 10px;
+      object-position:top;
     }
   }
 }  

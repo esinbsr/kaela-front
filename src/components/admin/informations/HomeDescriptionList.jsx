@@ -12,7 +12,8 @@ const HomeDescriptionList = () => {
 
     return (
         <div className='home_description'>
-            {description && description.length > 0 ? (
+            {
+            description && description.length > 0 ? (
                 description.slice(0, 1)
                 .map((desc) => (
                     <div key={desc.id}>
