@@ -1,0 +1,15 @@
+.image {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    position: relative;
+    .first-image {
+        position: relative;
+        top: 150px; 
+    }
+    img {
+        width: 400px;
+    }
+}
+
+

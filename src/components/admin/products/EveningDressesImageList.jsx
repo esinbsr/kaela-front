@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProduct } from "../../../actions/productAction";
 import { API_URL } from "../../../actions/informationAction";
 
-const EveningDressesImageList = ({ start, end }) => {
+const EveningDressesImageList = ({ start, end, additionalClass }) => {
     const dispatch = useDispatch();
     const products = useSelector((state) => state.product.products);
 
@@ -12,11 +12,11 @@ const EveningDressesImageList = ({ start, end }) => {
     }, [dispatch]);
 
     return (
-        <div>
+        <div className={`${additionalClass || ''}`}>
             {products && products.length > 0 ? (
-                products.slice(start, end).map((product) => {
+                products.slice(start, end).map((product, index) => {
                     return (
-                        <div key={product.id}>
+                        <div key={product.id} className={index === 0 ? "first-image" : ""}>
                             <img src={`${API_URL}assets/img/${product.path}`} alt={product.name} />
                         </div>
                     );

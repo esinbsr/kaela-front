@@ -1,7 +1,4 @@
 .home {
-  h1 {
-    text-align: center;
-  }
   .featured-image {
     @include flexbox(center, center, null, wrap);
 
@@ -24,16 +21,17 @@
 
   .more-products {
     @include flexbox(center, center, null, wrap);
-
-    .product-info  {
-      text-align: center;
-   
-
+  
+    .product-info {
+      text-align: center;    
     }
-
+  
     img {
-      width: 300px;
+      margin: 10px;
+      width: 450px;
+      height: 350px;
+      object-fit: cover;
+      object-position: 50% 10px;
     }
-
   }
-}
+}  

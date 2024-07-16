@@ -19,10 +19,10 @@ const HomeImageList = ({ start, end, additionalClass }) => {
                 .map((product, index) => {
                     const globalIndex = start + index;
                     const isLargeImage = globalIndex === 1; // Vérifie si c'est la deuxième image globale
-                    const showDescription = globalIndex >= 3; // Afficher pour la 4ème et 5ème image (indices 3 et 4)
-                    const buttonText = globalIndex === 3 ? "Discover" : "Explore"; // Définir le texte du bouton
-                    const title = globalIndex === 3 ? "Latest collection" : "Evening dresses";
-                    const p = globalIndex === 3 ? "Explore the newest trends with our latest arrivals." : "Distinguish yourself with our sensational evening gowns.";
+                    const showDescription = globalIndex >= 3 && globalIndex <= 4 ; // Afficher pour la 4ème et 5ème image (indices 3 et 4)
+                    const buttonText = globalIndex === 3 ? "Discover" : globalIndex === 4 ? "Explore" : ""; // Définir le texte du bouton
+                    const title = globalIndex === 3 ? "Latest collection" : globalIndex === 4 ?  "Evening dresses" : "";
+                    const p = globalIndex === 3 ? "Explore the newest trends with our latest arrivals." : globalIndex === 4 ? "Distinguish yourself with our sensational evening gowns." : "";
     
                     return (
                         <div key={product.id} className={isLargeImage ? "large-image" : ""}>

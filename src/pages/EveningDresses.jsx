@@ -8,7 +8,7 @@ const EveningDresses = () => {
         <div>
             <Navigation/>
             <h1>Evening Dresses</h1>
-            <EveningDressesImageList start={5} end={7}/>
+            <EveningDressesImageList start={5} end={7} additionalClass="image"/>
         </div>
     );
 };
