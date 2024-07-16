@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Navigation from "../components/Navigation";
 import axios from "axios";
 
 const SignUp = () => {
@@ -39,7 +38,6 @@ const SignUp = () => {
 
   return (
     <div>
-      <Navigation />
       <form onSubmit={handleSubmit}>
         
         <label htmlFor="username">Username</label>

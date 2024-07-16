@@ -4,12 +4,15 @@
     text-align: center;
   }
   img {
-    margin: 10px;
-    width: 100%;
+    margin: 20px;
     width: 500px;
     height: 400px;
     object-fit: cover;
     object-position: top;
+  }
+  h3 {
+    font-family: 'Montserrat-bold';
+    font-size: 1.3rem;
   }
 }
 

@@ -27,9 +27,9 @@ const CollectionImage = ({ start, end, additionalClass }) => {
           const linkPath = index === 0 ? "/latestCollection" : index === 1 ? "/eveningDresses" : "/";
 
           return (
-            <div key={product.id} className="product-item">
+            <div key={product.id} className="product-info">
               <img src={`${API_URL}assets/img/${product.path}`} alt={product.name} />
-              <p>{category ? category.name : 'No category name'}</p>
+              <h3>{category ? category.name : 'No category name'}</h3>
               <Link to={linkPath}>{buttonText}</Link>
             </div>
           );

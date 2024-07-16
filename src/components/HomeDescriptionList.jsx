@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getInformation } from '../../../actions/informationAction';
+import { getInformation } from '../actions/informationAction';
+import { Link } from 'react-router-dom';
 
 const HomeDescriptionList = () => {
     const dispatch = useDispatch();
@@ -18,7 +19,7 @@ const HomeDescriptionList = () => {
                 .map((desc) => (
                     <div key={desc.id}>
                     <p>{desc.description}</p>
-                    <button>About me</button>
+                    <Link to="/aboutMe">About me</Link>
                     </div>
                     
                 ))

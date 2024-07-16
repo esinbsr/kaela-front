@@ -9,7 +9,7 @@ const Navigation = () => {
       <div className="navigation_links">
         <NavLink to="/">Home</NavLink>
         <NavLink to="/collection">Collection</NavLink>
-        <NavLink to="/about">About me</NavLink>
+        <NavLink to="/aboutMe">About me</NavLink>
         <NavLink to="/signupLogin">Signup/Login</NavLink>
         <NavLink to="/contact">Contact</NavLink>
         <NavLink to="/admin">Admin</NavLink>

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getProductCategories } from '../../../actions/productAction';
+import { getProductCategories } from '../actions/productAction';
 import { useDispatch, useSelector } from 'react-redux';
 
 const EveningDressesDescriptionList = () => {

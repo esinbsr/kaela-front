@@ -1,10 +1,8 @@
 import { NavLink } from "react-router-dom";
-import Navigation from "../../components/Navigation";
 
-const Admin = () => {
+const AdminNavigation = () => {
     return (
         <div>
-            <Navigation/>
             <h2>Administration</h2>
             <NavLink to="/adminProduct">Product</NavLink>
             <NavLink to="/adminAddProduct">Add a product</NavLink>
@@ -14,4 +12,4 @@ const Admin = () => {
     );
 };
 
-export default Admin;
+export default AdminNavigation;

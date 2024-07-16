@@ -1,6 +1,5 @@
 import { useState } from "react";
 import axios from "axios";
-import Navigation from "../components/Navigation";
 
 const Contact = () => {
   
@@ -52,7 +51,6 @@ const Contact = () => {
 
   return (
     <div>
-      <Navigation />
       <form onSubmit={handleSubmit}>
         <h2>Contact me</h2>
         <label htmlFor="email">Email</label>

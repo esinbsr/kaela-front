@@ -6,21 +6,29 @@
     @include flexbox(center, center, null, wrap);
 
     .large-image img {
-      width: 400px;
+      width: 450px;
       object-fit: cover;
     }
 
     img {
       margin: 20px;
-      width: 300px;
-    }
-
-    p {
-      margin-top: 10px;
-      font-size: 16px;
-      color: #333;
-      text-align: center;
+      width: 400px;
     }
   }
+
+
+
+  .home_description  {
+    position: relative;
+    left: 250px; 
+    margin: 50px 0;
+
+    p {
+      width: 30%;
+      font-size: 1.4rem;
+    }
+
+  }
+ 
 
 }
