@@ -4,24 +4,26 @@
     }
 
     .image {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        justify-items: center;
         position: relative;
-        gap: 80px;
 
         .top-image {
-            position: relative;
             top: 200px;
+            position: relative
+        }
+
+        .test {
+            margin-bottom: 50px;
         }
 
         img {
-            flex: 1 1 auto;
             width: 100%; 
-            height: 700px;
             max-width: 600px;
             object-fit: cover;
             object-position: top;
         }
+
     }
 }

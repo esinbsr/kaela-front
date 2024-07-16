@@ -19,9 +19,11 @@ const EveningDressesImageList = ({ start, end, additionalClass }) => {
             {products && products.length > 0 ? (
                 products.slice(start, end).map((product, index) => {
                     const isTopImage = index === 0 || index === 2;
+                    const isTest = index === 0 || index === 1;
+                    const classes = `${isTopImage ? 'top-image' : ''} ${isTest ? 'test' : ''}`;
 
                     return (
-                        <div key={product.id} className={isTopImage ? "top-image" : ""}>
+                        <div key={product.id} className={`${classes}`}>
                             <img src={`${API_URL}assets/img/${product.path}`} alt={product.name} />
                         </div>
                     );

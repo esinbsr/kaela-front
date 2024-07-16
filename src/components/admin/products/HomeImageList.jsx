@@ -42,7 +42,8 @@ const HomeImageList = ({ start, end, additionalClass }) => {
                 })
             ) : (
                 <p>Product not found.</p>
-            )}
+            )
+            }
         </div>
     );
 };

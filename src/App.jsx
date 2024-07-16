@@ -16,6 +16,8 @@ import AdminInformation from "./pages/admin/informations/AdminInformation";
 import AdminAddInformation from "./pages/admin/informations/AdminAddInformation";
 import AdminInformationModify from "./pages/admin/informations/AdminInformationModify";
 import EveningDresses from "./pages/EveningDresses";
+import LatestCollection from "./pages/LatestCollection";
+import Collection from "./pages/Collection";
 
 
 
@@ -29,6 +31,7 @@ const App = () => {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/collection" element={<Collection />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/adminProduct" element={<AdminProduct />} />
           <Route path="/adminAddProduct" element={<AdminAddProduct />} />
@@ -39,6 +42,7 @@ const App = () => {
           <Route path="/adminDeleteInformation/:informationId" element={<AdminDeleteInformation/>} />
           <Route path="/testa" element={<Testa/>} />
           <Route path="/eveningDresses" element={<EveningDresses/>} />
+          <Route path="/latestCollection" element={<LatestCollection/>} />
 
         </Routes>
       </BrowserRouter>
