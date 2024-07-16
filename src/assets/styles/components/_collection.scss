@@ -1,0 +1,15 @@
+.more-products {
+  @include flexbox(center, center, null, wrap);
+  .product-info {
+    text-align: center;
+  }
+  img {
+    margin: 10px;
+    width: 100%;
+    width: 500px;
+    height: 400px;
+    object-fit: cover;
+    object-position: top;
+  }
+}
+

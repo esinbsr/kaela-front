@@ -6,13 +6,13 @@
     @include flexbox(center, center, null, wrap);
 
     .large-image img {
-      width: 480px;
+      width: 400px;
       object-fit: cover;
     }
 
     img {
-      margin: 25px;
-      width: 400px;
+      margin: 20px;
+      width: 300px;
     }
 
     p {
@@ -23,19 +23,4 @@
     }
   }
 
-  .more-products {
-    @include flexbox(center, center, null, wrap);
-  
-    .product-info {
-      text-align: center;    
-    }
-  
-    img {
-      margin: 10px;
-      width: 600px;
-      height: 450px;
-      object-fit: cover;
-      object-position:top;
-    }
-  }
-}  
+}
