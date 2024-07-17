@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { deleteInformation, getInformation } from '../../../actions/informationAction';
-import Navigation from '../../../components/Navigation';
 import AdminInformationCard from '../../../components/admin/informations/AdminInformationCard';
 import { isEmpty } from '../../../components/Utils';
 
@@ -22,8 +21,7 @@ const AdminInformation = () => {
 
     return (
         <div>
-            <Navigation />
-            <h2>My Information</h2>
+            <h1>My Information</h1>
             <div className="table-container">
                 <table className="table">
                     <thead>

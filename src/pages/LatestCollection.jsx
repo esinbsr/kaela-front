@@ -1,12 +1,10 @@
-import EveningDressesDescriptionList from "../components/EveningDressesDescriptionList";
+import EveningLatestDescriptionList from "../components/EveningLatestDescriptionList";
 import EveningLatestImageList from "../components/EveningLatestImageList";
-
 
 const LatestCollection = () => {
   return (
     <div className="evening-latest">
-        <h1>Latest Collection</h1>
-      <EveningDressesDescriptionList/>
+      <EveningLatestDescriptionList categoryIndex={0} />
       <EveningLatestImageList start={9} end={13} additionalClass="image" />
     </div>
   );

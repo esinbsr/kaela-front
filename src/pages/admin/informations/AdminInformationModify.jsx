@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getInformationById, updateInformation } from '../../../actions/informationAction';
-import Navigation from '../../../components/Navigation';
 
 
 const AdminInformationModify = () => {
@@ -48,8 +47,7 @@ const AdminInformationModify = () => {
 
     return (
         <div>
-            <Navigation />
-            <h2>Modify Information</h2>
+            <h1>Modify Information</h1>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="description">Description</label>
                 <textarea

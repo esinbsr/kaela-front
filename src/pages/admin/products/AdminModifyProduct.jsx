@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getProductById, updateProduct } from "../../../actions/productAction";
-import Navigation from "../../../components/Navigation";
 
 const AdminModifyProduct = () => {
     const { productId } = useParams();
@@ -45,8 +44,7 @@ const AdminModifyProduct = () => {
 
     return (
         <div>
-            <Navigation />
-            <h2>Modify Product</h2>
+            <h1>Modify Product</h1>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="productName">Name of product:</label>
                 <input

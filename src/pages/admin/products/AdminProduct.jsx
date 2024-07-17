@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import Navigation from "../../../components/Navigation";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getProduct } from "../../../actions/productAction";
@@ -16,8 +15,7 @@ const AdminProduct = () => {
 
   return (
     <div>
-      <Navigation />
-      <h2>List of products</h2>
+      <h1>List of products</h1>
       <div className="table-container">
         <table className="table">
           <thead>

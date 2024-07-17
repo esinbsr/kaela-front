@@ -2,7 +2,6 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addProduct, getProductCategories } from '../../../actions/productAction';
-import Navigation from '../../../components/Navigation';
 
 const AdminAddProduct = () => {
     const [productName, setProductName] = useState('');
@@ -39,8 +38,7 @@ const AdminAddProduct = () => {
 
     return (
         <div>
-            <Navigation />
-            <h2>Add a product</h2>
+            <h1>Add a product</h1>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="productName">Name of product:</label>
                 <input
