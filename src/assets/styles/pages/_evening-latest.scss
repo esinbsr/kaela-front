@@ -1,29 +1,47 @@
 .evening-latest {
-    h1 {
-        margin-bottom: 80px;
+  position: relative;
+  .image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    // background-color: red;
+    gap: 150px;
+    max-width:1600px;
+    margin:auto;
+    // flex: 1 0;
+
+    .top-image {
+      position: relative;
+      top: 15rem;
     }
 
-    .image {
-        display: grid;
-        grid-template-columns: repeat(2,1fr);
-        justify-items: center;
-        position: relative;
-
-        .top-image {
-            top: 200px;
-            position: relative
-        }
-
-        .bottomImage {
-            margin-bottom: 50px;
-        }
-
-        img {
-            width: 100%; 
-            max-width: 550px;
-            object-fit: cover;
-            object-position: top;
-        }
-
+    .bottomImage {
+      margin-bottom: 4rem;
     }
+
+    img {
+      width: 100%;
+      max-width: 650px;
+      height: auto;
+    }
+  }
+
+  .description-list {
+    position: absolute;
+    top: 16rem;
+    left: 9%;
+    width: 30%;
+    z-index: 10;
+    text-align: left;
+
+    h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      font-size: 1rem;
+    }
+  }
 }
