@@ -1,7 +1,8 @@
 // components/AdminAddProduct.jsx
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addProduct, getProductCategories } from '../../../actions/productAction';
+import { addProduct} from '../../../actions/productAction';
+import { getProductCategories } from '../../../actions/categoryAction';
 
 const AdminAddProduct = () => {
     const [productName, setProductName] = useState('');
@@ -10,7 +11,7 @@ const AdminAddProduct = () => {
     const [productImage, setProductImage] = useState(null);
 
     const dispatch = useDispatch();
-    const categories = useSelector((state) => state.product.categories);
+    const categories = useSelector((state) => state.category.categorie);
     const responseMessage = useSelector((state) => state.product.message);
     const errorMessage = useSelector((state) => state.product.error);
 

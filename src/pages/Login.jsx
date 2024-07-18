@@ -18,7 +18,7 @@ const Login = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost/travail-perso/kaela-couture/login",
+        "http://localhost:8888/travail-perso/kaela-couture/login",
         formData,
         {
           headers: {
@@ -31,7 +31,8 @@ const Login = () => {
       setResponseMessage(message);
 
       if (response.data.success) {
-        navigate('/');
+        // navigate('/');
+        console.log('good');
       }
 
     } catch (error) {

@@ -20,8 +20,6 @@ import Collection from "./pages/Collection";
 import Navigation from "./components/Navigation";
 import AdminNavigation from "./pages/admin/AdminNavigation";
 import AboutMe from "./pages/AboutMe";
-import AdminCategory from "./pages/admin/products/AdminCategory";
-import AdminUpdateCategory from "./pages/admin/products/AdminUpdateCategory";
 
 
 
@@ -49,8 +47,8 @@ const App = () => {
           <Route path="/eveningDresses" element={<EveningDresses/>} />
           <Route path="/latestCollection" element={<LatestCollection/>} />
           <Route path="/aboutMe" element={<AboutMe/>} />
-          <Route path="/adminCategory" element={<AdminCategory/>} />
-          <Route path="/adminUpdateCategory" element={<AdminUpdateCategory/>} />
+          {/* <Route path="/adminCategory" element={<AdminCategory/>} /> */}
+          {/* <Route path="/adminUpdateCategory" element={<AdminUpdateCategory/>} /> */}
 
         </Routes>
       </BrowserRouter>

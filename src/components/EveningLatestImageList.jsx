@@ -17,7 +17,8 @@ const EveningLatestImageList = ({ start, end, additionalClass }) => {
     return (
         <div className={`${additionalClass || ''}`}>
             {products && products.length > 0 ? (
-                products.slice(start, end).map((product, index) => {
+                products
+                .slice(start, end).map((product, index) => {
                     const isTopImage = index === 0 || index === 2;
                     const bottomImage = index === 0 || index === 1;
                     const classes = `${isTopImage ? 'top-image' : ''} ${bottomImage ? 'bottomImage' : ''}`;

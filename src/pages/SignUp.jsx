@@ -6,6 +6,7 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [responseMessage, setResponseMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -18,7 +19,7 @@ const SignUp = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost/travail-perso/kaela-couture/signup",
+        "http://localhost:8888/travail-perso/kaela-couture/signup",
         formData,
         {
           headers: {
@@ -29,17 +30,17 @@ const SignUp = () => {
 
       const message = response.data.message || "No message returned";
       setResponseMessage(message);
+      setErrorMessage("");  // Clear any previous error messages
 
     } catch (error) {
-        console.log(error);
+      setErrorMessage(error.response?.data?.message || "An error occurred");
+      setResponseMessage("");  // Clear any previous success messages
     }
-
   };
 
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        
         <label htmlFor="username">Username</label>
         <input
           id="username"
@@ -70,6 +71,7 @@ const SignUp = () => {
         <button type="submit">Sign Up</button>
       </form>
       {responseMessage && <p>{responseMessage}</p>}
+      {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
     </div>
   );
 };

@@ -4,8 +4,8 @@ export const GET_PRODUCT_SUCCESS = 'GET_PRODUCT_SUCCESS';
 export const GET_INFORMATION_ERROR = 'GET_INFORMATION_ERROR';
 export const GET_PRODUCT_BY_ID_SUCCESS = 'GET_PRODUCT_BY_ID_SUCCESS';
 export const GET_PRODUCT_BY_ID_ERROR = 'GET_PRODUCT_BY_ID_ERROR';
-export const GET_CATEGORIES_SUCCESS = 'GET_CATEGORIES_SUCCESS';
-export const GET_CATEGORIES_ERROR = 'GET_CATEGORIES_ERROR';
+// export const GET_CATEGORIES_SUCCESS = 'GET_CATEGORIES_SUCCESS';
+// export const GET_CATEGORIES_ERROR = 'GET_CATEGORIES_ERROR';
 export const UPDATE_PRODUCT_SUCCESS = 'UPDATE_PRODUCT_SUCCESS';
 export const UPDATE_PRODUCT_ERROR = 'UPDATE_PRODUCT_ERROR';
 export const DELETE_PRODUCT_SUCCESS = 'DELETE_PRODUCT_SUCCESS';
@@ -64,29 +64,29 @@ export const getProductById = (productId) => {
 };
 
 
-export const getProductCategories = () => {
-    return async (dispatch) => {
-        try {
-            const response = await axios.get(`${API_URL}getProductCategory`);
-            const message = response.data.message || "No message returned";
+// export const getProductCategories = () => {
+//     return async (dispatch) => {
+//         try {
+//             const response = await axios.get(`${API_URL}getProductCategory`);
+//             const message = response.data.message || "No message returned";
 
-            if (response.data.success) {
-                dispatch({
-                    type: GET_CATEGORIES_SUCCESS,
-                    payload: response.data.categorie,
-                    message: message
-                });
-            } else {
-                throw new Error(message);
-            }
-        } catch (error) {
-            dispatch({
-                type: GET_CATEGORIES_ERROR,
-                payload: error.response?.data?.message || error.message || "No message returned",
-            });
-        }
-    };
-};
+//             if (response.data.success) {
+//                 dispatch({
+//                     type: GET_CATEGORIES_SUCCESS,
+//                     payload: response.data.categorie,
+//                     message: message
+//                 });
+//             } else {
+//                 throw new Error(message);
+//             }
+//         } catch (error) {
+//             dispatch({
+//                 type: GET_CATEGORIES_ERROR,
+//                 payload: error.response?.data?.message || error.message || "No message returned",
+//             });
+//         }
+//     };
+// };
 
 export const addProduct = (formData) => {
     return async (dispatch) => {

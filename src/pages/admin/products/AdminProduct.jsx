@@ -31,7 +31,8 @@ const AdminProduct = () => {
           </thead>
           <tbody>
             {!isEmpty(products) ? (
-              products.map((product) => 
+              products
+              .map((product) => 
                 !isEmpty(product) && (
                   <AdminProductCard 
                       key={product.id} 
@@ -48,7 +49,7 @@ const AdminProduct = () => {
           </tbody>
         </table>
       </div>
-      <Link to="/adminAddProduct">Add a new product</Link>
+      {/* <Link to="/adminAddProduct">Add a new product</Link> */}
     </div>
   );
 };

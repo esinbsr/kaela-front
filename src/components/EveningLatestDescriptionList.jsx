@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { getProductCategories } from "../actions/productAction";
 import { useDispatch, useSelector } from "react-redux";
+import { getProductCategories } from "../actions/categoryAction";
 
 const EveningLatestDescriptionList = ({ categoryIndex }) => {
   const dispatch = useDispatch();
-  const categories = useSelector((state) => state.product.categories);
+  const categories = useSelector((state) => state.category.categorie);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -13,22 +13,17 @@ const EveningLatestDescriptionList = ({ categoryIndex }) => {
 
   if (loading) return <p>Loading...</p>;
 
-  // Déterminer le nom de la catégorie en fonction de l'index
-  const categoryName = categories && categories.length > categoryIndex
-    ? categories[categoryIndex].name
-    : "No Category";
+  const category = categories && categories.length > categoryIndex
+    ? categories[categoryIndex]
+    : null;
 
   return (
     <div className="description">
-      {categories && categories.length > 0 ? (
+      {category ? (
         <>
-          <h1>{categoryName}</h1>
-          {categories.map((category) => (
-            <div key={category.id} className="description-list">
-              <h3>{category.page_title}</h3>
-              <p>{category.page_description}</p>
-            </div>
-          ))}
+        <h1>{category.name}</h1>
+          <h3>{category.page_title}</h3>
+          <p>{category.page_description}</p>
         </>
       ) : (
         <p>Category description not found.</p>
