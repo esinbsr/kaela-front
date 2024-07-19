@@ -4,7 +4,7 @@ import { getProductCategories } from "../actions/categoryAction";
 
 const EveningLatestDescriptionList = ({ categoryIndex }) => {
   const dispatch = useDispatch();
-  const categories = useSelector((state) => state.category.categorie);
+  const categories = useSelector((state) => state.category.category);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

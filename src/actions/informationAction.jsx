@@ -1,17 +1,20 @@
 import axios from 'axios';
+import { API_URL } from './serverRequest';
 
 export const ADD_INFORMATION_SUCCESS = 'ADD_INFORMATION_SUCCESS';
 export const ADD_INFORMATION_ERROR = 'ADD_INFORMATION_ERROR';
+
 export const GET_INFORMATION_SUCCESS = 'GET_INFORMATION_SUCCESS';
 export const GET_INFORMATION_ERROR = 'GET_INFORMATION_ERROR';
+
 export const UPDATE_INFORMATION_SUCCESS = 'UPDATE_INFORMATION_SUCCESS';
 export const UPDATE_INFORMATION_ERROR = 'UPDATE_INFORMATION_ERROR';
+
 export const DELETE_INFORMATION_SUCCESS = 'DELETE_INFORMATION_SUCCESS';
 export const DELETE_INFORMATION_ERROR = 'DELETE_INFORMATION_ERROR';
+
 export const FETCH_SINGLE_INFORMATION_SUCCESS = 'FETCH_SINGLE_INFORMATION_SUCCESS';
 export const FETCH_SINGLE_INFORMATION_ERROR = 'FETCH_SINGLE_INFORMATION_ERROR';
-
-export const API_URL = 'http://localhost:8888/travail-perso/kaela-couture/';
 
 export const getInformation = () => {
     return async (dispatch) => {

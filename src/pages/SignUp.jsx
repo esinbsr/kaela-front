@@ -30,11 +30,11 @@ const SignUp = () => {
 
       const message = response.data.message || "No message returned";
       setResponseMessage(message);
-      setErrorMessage("");  // Clear any previous error messages
+      setErrorMessage("");
 
     } catch (error) {
       setErrorMessage(error.response?.data?.message || "An error occurred");
-      setResponseMessage("");  // Clear any previous success messages
+      setResponseMessage(""); 
     }
   };
 

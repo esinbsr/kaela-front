@@ -5,19 +5,13 @@
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    // background-color: red;
-    gap: 150px;
+    gap: 140px;
     max-width:1600px;
     margin:auto;
-    // flex: 1 0;
 
     .top-image {
       position: relative;
       top: 15rem;
-    }
-
-    .bottomImage {
-      margin-bottom: 4rem;
     }
 
     img {

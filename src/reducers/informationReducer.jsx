@@ -27,13 +27,7 @@ const informationReducer = (state = initialState, action) => {
                 message: action.message,
                 error: '',
             };
-        case ADD_INFORMATION_SUCCESS:
-            return {
-                ...state,
-                information: [...state.information, action.payload],
-                message: action.message,
-                error: '',
-            };
+   
         case FETCH_SINGLE_INFORMATION_SUCCESS:
             return {
                 ...state,
@@ -41,6 +35,15 @@ const informationReducer = (state = initialState, action) => {
                 message: action.message,
                 error: '',
             };
+
+            case ADD_INFORMATION_SUCCESS:
+                return {
+                    ...state,
+                    information: [...state.information, action.payload],
+                    message: action.message,
+                    error: '',
+                };
+
         case UPDATE_INFORMATION_SUCCESS:
             return {
                 ...state,

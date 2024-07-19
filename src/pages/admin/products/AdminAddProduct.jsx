@@ -11,7 +11,7 @@ const AdminAddProduct = () => {
     const [productImage, setProductImage] = useState(null);
 
     const dispatch = useDispatch();
-    const categories = useSelector((state) => state.category.categorie);
+    const categories = useSelector((state) => state.category.category);
     const responseMessage = useSelector((state) => state.product.message);
     const errorMessage = useSelector((state) => state.product.error);
 

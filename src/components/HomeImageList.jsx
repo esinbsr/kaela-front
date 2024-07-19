@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProduct } from '../actions/productAction';
-import { API_URL } from '../actions/informationAction';
+import { API_URL } from '../actions/serverRequest';
 
 const HomeImageList = ({ start, end, additionalClass }) => {
     const dispatch = useDispatch();

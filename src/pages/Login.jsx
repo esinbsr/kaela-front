@@ -1,12 +1,10 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [responseMessage, setResponseMessage] = useState("");
-  const navigate = useNavigate(); 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -31,8 +29,9 @@ const Login = () => {
       setResponseMessage(message);
 
       if (response.data.success) {
-        // navigate('/');
-        console.log('good');
+        const token = response.data.token;
+        localStorage.setItem("token", token); // Stocke le token dans le stockage local
+        console.log('Login successful, token stored.');
       }
 
     } catch (error) {
