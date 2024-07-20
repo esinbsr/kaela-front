@@ -1,8 +1,9 @@
 // components/AdminAddProduct.jsx
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addProduct} from '../../../actions/productAction';
+import { addProduct, getProduct} from '../../../actions/productAction';
 import { getProductCategories } from '../../../actions/categoryAction';
+import {isEmpty} from "../../../components/Utils";
 
 const AdminAddProduct = () => {
     const [productName, setProductName] = useState('');
@@ -10,10 +11,14 @@ const AdminAddProduct = () => {
     const [productCategory, setProductCategory] = useState('');
     const [productImage, setProductImage] = useState(null);
 
+    const fileInputRef = useRef(null);
+
     const dispatch = useDispatch();
+    
     const categories = useSelector((state) => state.category.category);
     const responseMessage = useSelector((state) => state.product.message);
-    const errorMessage = useSelector((state) => state.product.error);
+    
+    const error = useSelector((state) => state.product.error);
 
     useEffect(() => {
         dispatch(getProductCategories());
@@ -35,11 +40,25 @@ const AdminAddProduct = () => {
         formData.append('productImage', productImage);
 
         dispatch(addProduct(formData));
+        dispatch(getProduct());
     };
+
+    useEffect(() => {
+        if (responseMessage && !error) {
+            setProductName("");
+            setProductDescription("");
+            setProductCategory(categories.length > 0 ? categories[0].id : ""); //assure que le champ productCategory a toujours une valeur définie après la réinitialisation
+            setProductImage(null);
+            if (fileInputRef.current) {
+                fileInputRef.current.value = '';
+            }
+        }
+      }, [responseMessage, error, categories]);
+    
 
     return (
         <div>
-            <h1>Add a product</h1>
+            {/* <h1>Add a product</h1> */}
             <form onSubmit={handleSubmit}>
                 <label htmlFor="productName">Name of product:</label>
                 <input
@@ -65,7 +84,9 @@ const AdminAddProduct = () => {
                     value={productCategory}
                     onChange={(e) => setProductCategory(e.target.value)}
                 >
-                    {categories.map((category) => (
+                    {
+        
+                     categories.map((category) => (
                         <option key={category.id} value={category.id}>
                             {category.name}
                         </option>
@@ -77,13 +98,14 @@ const AdminAddProduct = () => {
                     type="file"
                     id="productImage"
                     name="productImage"
+                    ref={fileInputRef}
                     onChange={(e) => setProductImage(e.target.files[0])}
                 />
 
                 <button type="submit">Create product</button>
             </form>
             {responseMessage && <p>{responseMessage}</p>}
-            {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
+            {error && <p>{error}</p>}
         </div>
     );
 };

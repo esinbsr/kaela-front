@@ -2,15 +2,16 @@ import {
     GET_CATEGORIES_SUCCESS,
     GET_CATEGORIES_ERROR,
     GET_CATEGORIES_BY_ID_SUCCESS,
-    GET_CATEGORIES_BY_ID_ERROR,
+    ADD_CATEGORIES_SUCCESS,
+    ADD_CATEGORIES_ERROR,
 } from "../actions/categoryAction";
 
 const initialState = {
-    category: [],
+    category: [],  // Initialisé comme un tableau
     categoryById: null,
     message: '',
     error: ''
-}
+};
 
 const categoryReducer = (state = initialState, action) => {
     switch(action.type) {
@@ -21,7 +22,6 @@ const categoryReducer = (state = initialState, action) => {
                 message: action.message,
                 error: ''
             };
-
         case GET_CATEGORIES_BY_ID_SUCCESS:
             return {
                 ...state,
@@ -29,38 +29,23 @@ const categoryReducer = (state = initialState, action) => {
                 message: action.message,
                 error: ''
             };
-
-
-
-
-
-
-
-
-
-
-
-
-
+        case ADD_CATEGORIES_SUCCESS:
+            return {
+                ...state,
+                category: [...state.category, action.payload],  
+                message: action.message,
+                error: ''
+            };
+        case ADD_CATEGORIES_ERROR:
         case GET_CATEGORIES_ERROR:
-        // case GET_CATEGORIES_BY_ID_ERROR:
             return {
                 ...state,
                 message: "",
                 error: action.payload,
             };
-
-
-
-
-
-
-
-
-
         default:
             return state;
     }
-}
+};
 
 export default categoryReducer;

@@ -4,12 +4,14 @@ import { Link } from 'react-router-dom';
 import { deleteInformation, getInformation } from '../../../actions/informationAction';
 import AdminInformationCard from '../../../components/admin/informations/AdminInformationCard';
 import { isEmpty } from '../../../components/Utils';
+import AdminAddInformation from './AdminAddInformation';
+import Breadcrumb from "../../../components/Breadcrumb";
 
 const AdminInformation = () => {
     const dispatch = useDispatch();
     const information = useSelector((state) => state.information.information);
-    const message = useSelector((state) => state.information.message);
-    const error = useSelector((state) => state.information.error);
+    // const message = useSelector((state) => state.information.message);
+    // const error = useSelector((state) => state.information.error);
 
     useEffect(() => {
         dispatch(getInformation());
@@ -21,7 +23,10 @@ const AdminInformation = () => {
 
     return (
         <div>
+             <Breadcrumb />
             <h1>My Information</h1>
+            <AdminAddInformation/>
+            {/* <Link to="/adminAddInformation">Add a new information</Link> */}
             <div className="table-container">
                 <table className="table">
                     <thead>
@@ -57,9 +62,9 @@ const AdminInformation = () => {
                     </tbody>
                 </table>
             </div>
-            <Link to="/adminAddInformation">Add a new information</Link>
-            {message && <p>{message}</p>}
-            {error && <p>{error}</p>}
+         
+            {/* {message && <p>{message}</p>}
+            {error && <p>{error}</p>} */}
         </div>
     );
 };

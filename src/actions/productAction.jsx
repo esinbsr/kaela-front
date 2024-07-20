@@ -17,7 +17,7 @@ export const getProduct = () => {
     return async (dispatch) => {
         try {
             const response = await axios.get(`${API_URL}getProduct`);
-            const message = response.data.message || "No message returned";
+            const message = response.data.message;
 
             if (response.data.success) {
                 dispatch({
@@ -41,7 +41,7 @@ export const getProductById = (productId) => {
     return async (dispatch) => {
         try {
             const response = await axios.get(`${API_URL}getProductById/${productId}`);
-            const message = response.data.message || "No message returned";
+            const message = response.data.message;
 
             if (response.data.success) {
                 dispatch({
@@ -70,7 +70,7 @@ export const addProduct = (formData) => {
                     "Content-Type": "multipart/form-data",
                 },
             });
-            const message = response.data.message || "No message returned";
+            const message = response.data.message;
 
             if (response.data.success) {
                 dispatch({
@@ -98,7 +98,7 @@ export const updateProduct = (formData) => {
                     "Content-Type": "multipart/form-data",
                 },
             });
-            const message = response.data.message || "No message returned";
+            const message = response.data.message;
 
             if (response.data.success) {
                 dispatch({

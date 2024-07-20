@@ -10,8 +10,10 @@ const AdminInformationCard = ({ infos, onDelete }) => {
             <td>{infos.address}</td>
             <td>
                 <Link to={`/adminInformationModify/${infos.id}`}>Modify</Link>
-                <AdminDeleteInformation informationId={infos.id} onDelete={onDelete} />
             </td>
+            <td>
+                <AdminDeleteInformation informationId={infos.id} onDelete={onDelete} />
+                </td>
         </tr>
     );
 };

@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProduct } from "../../../actions/productAction";
 import AdminProductCard from "../../../components/admin/products/AdminProductCard";
 import { isEmpty } from "../../../components/Utils";
+import AdminAddProduct from "./AdminAddProduct";
+import Breadcrumb from "../../../components/Breadcrumb";
 
 const AdminProduct = () => {
   const dispatch = useDispatch();
@@ -15,7 +17,12 @@ const AdminProduct = () => {
 
   return (
     <div>
-      <h1>List of products</h1>
+         <Breadcrumb />
+      <h1>Products</h1>
+      <AdminAddProduct/>
+
+      {/* <Link to="/adminAddProduct">Add a new product</Link> */}
+      
       <div className="table-container">
         <table className="table">
           <thead>
@@ -49,7 +56,7 @@ const AdminProduct = () => {
           </tbody>
         </table>
       </div>
-      {/* <Link to="/adminAddProduct">Add a new product</Link> */}
+     
     </div>
   );
 };
