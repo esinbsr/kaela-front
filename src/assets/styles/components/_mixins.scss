@@ -10,3 +10,25 @@
         flex-wrap: $fw;
     }
 }
+
+@mixin buttonRound($color, $bc: null, $border: false) {
+    padding: 8px 50px;
+    border-radius: 50px;
+    cursor: pointer;
+    color: $color;
+    
+    @if $bc != null {
+        background-color: $bc;
+    }
+
+    @if $border {
+        border: 2px solid black;
+    }
+}
+
+@mixin buttonSuqare($color, $bc) {
+    padding: 8px 50px;
+    border-radius: 8px;
+    color: $color;
+    background-color: $bc;
+}

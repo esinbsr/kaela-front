@@ -32,12 +32,12 @@ const CollectionImage = ({ start, end, additionalClass }) => {
 
           const buttonText = index === 0 ? "Discover" : index === 1 ? "Explore" : "";
           const linkPath = index === 0 ? "/latestCollection" : index === 1 ? "/eveningDresses" : "";
-          const displayName = index === 0 ? "Latest Collection" : index === 1 ? "Evening Dresses" : categoryName;
+          const title = index === 0 ? "Latest Collection" : index === 1 ? "Evening Dresses" : categoryName;
 
           return (
             <div key={product.id} className="product-info">
               <img src={`${API_URL}assets/img/${product.path}`} alt={product.name} />
-              <h3>{displayName}</h3>
+              <h3>{title}</h3>
               <Link to={linkPath}>{buttonText}</Link>
             </div>
           );

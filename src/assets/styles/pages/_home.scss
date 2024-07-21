@@ -16,16 +16,18 @@
     }
   }
 
-
-
   .home_description  {
     position: relative;
     left: 250px; 
     margin: 50px 0;
 
     p {
-      width: 30%;
+      width: 20%;
       font-size: 1.4rem;
+      margin-bottom: 30px;
+    }
+    a {
+      @include buttonRound(black, null, true);
     }
 
   }

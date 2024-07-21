@@ -19,3 +19,14 @@
 .collection-center {
 min-height: 80vh;
 }
+
+.product-info {
+
+    h3 {
+      margin-bottom: 20px;
+    
+  }
+ a {
+  @include buttonRound(white, $main-color);
+ }
+}
