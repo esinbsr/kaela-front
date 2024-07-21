@@ -13,6 +13,9 @@ export const ADD_CATEGORIES_ERROR = 'ADD_CATEGORIES_ERROR';
 export const UPDATE_CATEGORY_SUCCESS = 'UPDATE_CATEGORY_SUCCESS';
 export const UPDATE_CATEGORY_ERROR = 'UPDATE_CATEGORY_ERROR';
 
+export const DELETE_CATEGORY_SUCCESS = 'DELETE_CATEGORY_SUCCESS';
+export const DELETE_CATEGORY_ERROR = 'DELETE_CATEGORY_ERROR';
+
 export const getProductCategories = () => {
   return async (dispatch) => {
     try {
@@ -100,3 +103,24 @@ export const updateCategory = (category) => {
   };
   
   
+export const deleteCategory = (categoryId) => {
+  return async (dispatch) => {
+      try {
+          const response = await axios.post(`${API_URL}deleteCategory`, { categoryId }, {
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+          });
+          dispatch({
+              type: DELETE_CATEGORY_SUCCESS,
+              payload: categoryId,
+              message: response.data.message,
+          });
+      } catch (error) {
+          dispatch({
+              type: DELETE_CATEGORY_ERROR,
+              payload: error.message,
+          });
+      }
+  };
+};

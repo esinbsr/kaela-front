@@ -7,6 +7,8 @@ import {
     ADD_CATEGORIES_ERROR,
     UPDATE_CATEGORY_SUCCESS,
     UPDATE_CATEGORY_ERROR,
+    DELETE_CATEGORY_SUCCESS,
+    DELETE_CATEGORY_ERROR,
 } from "../actions/categoryAction";
 
 const initialState = {
@@ -52,10 +54,24 @@ const categoryReducer = (state = initialState, action) => {
                 error: '',
             };
 
+            case DELETE_CATEGORY_SUCCESS:
+                return {
+                    ...state,
+                    category: state.category.filter(
+                        (category) => category.id !== action.payload
+                    ),
+                    message: action.message,
+                    error: '',
+                };
+
+
+
+
         case GET_CATEGORIES_ERROR:
         case GET_CATEGORY_BY_ID_ERROR:
         case ADD_CATEGORIES_ERROR:
         case UPDATE_CATEGORY_ERROR:
+        case DELETE_CATEGORY_ERROR:
             return {
                 ...state,
                 message: "",

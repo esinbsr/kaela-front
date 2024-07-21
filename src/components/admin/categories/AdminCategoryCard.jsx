@@ -1,7 +1,8 @@
 
 import { Link } from 'react-router-dom';
+import AdminDeleteCategory from './AdminDeleteCategory';
 
-const AdminCategoryCard = ({category}) => {
+const AdminCategoryCard = ({category, onDelete}) => {
     return (
             <tr>
                 <td>{category.name}</td>
@@ -12,7 +13,7 @@ const AdminCategoryCard = ({category}) => {
                     <Link to={`/adminUpdateCategory/${category.id}`}>Update</Link>
                 </td>
                 <td>
-                    <Link>Delete</Link>
+                    <AdminDeleteCategory categoryId={category.id} onDelete={onDelete} />
                 </td>
             </tr>
         
