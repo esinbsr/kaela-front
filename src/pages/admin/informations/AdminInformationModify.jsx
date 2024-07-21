@@ -3,18 +3,20 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getInformationById, updateInformation } from '../../../actions/informationAction';
 
-
 const AdminInformationModify = () => {
     const { informationId } = useParams();
     const dispatch = useDispatch();
+
     const singleInformation = useSelector((state) => state.information.singleInformation);
-    const message = useSelector((state) => state.information.message);
-    const error = useSelector((state) => state.information.error);
+
 
     const [description, setDescription] = useState('');
     const [mobile, setMobile] = useState('');
     const [address, setAddress] = useState('');
     const [responseMessage, setResponseMessage] = useState('');
+
+    const message = useSelector((state) => state.information.message);
+    const error = useSelector((state) => state.information.error);
 
     useEffect(() => {
         if (informationId) {
@@ -47,7 +49,7 @@ const AdminInformationModify = () => {
 
     return (
         <div>
-            <h1>Modify Information</h1>
+            <h1>Update Information</h1>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="description">Description</label>
                 <textarea

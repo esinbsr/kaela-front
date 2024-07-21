@@ -53,6 +53,7 @@ const informationReducer = (state = initialState, action) => {
                 message: action.message,
                 error: '',
             };
+            
         case DELETE_INFORMATION_SUCCESS:
             return {
                 ...state,

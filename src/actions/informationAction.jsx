@@ -20,6 +20,7 @@ export const getInformation = () => {
     return async (dispatch) => {
         try {
             const response = await axios.get(`${API_URL}getInformation`);
+            
             dispatch({
                 type: GET_INFORMATION_SUCCESS,
                 payload: response.data.information,

@@ -9,7 +9,7 @@ const AdminCategoryCard = ({category}) => {
                 <td>{category.page_title}</td>
                 <td>{category.page_description}</td>
                 <td>
-                    <Link to={`/adminUpdateCategory/${category.id}`}>Modify</Link>
+                    <Link to={`/adminUpdateCategory/${category.id}`}>Update</Link>
                 </td>
                 <td>
                     <Link>Delete</Link>

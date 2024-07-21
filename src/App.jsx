@@ -22,6 +22,7 @@ import AdminNavigation from "./pages/admin/AdminNavigation";
 import AboutMe from "./pages/AboutMe";
 import AdminCategory from "./pages/admin/categories/AdminCategory";
 import AdminAddCategory from "./pages/admin/categories/AdminAddCategory";
+import AdminUpdateCategory from "./pages/admin/categories/AdminUpdateCategory";
 
 
 
@@ -52,7 +53,7 @@ const App = () => {
           <Route path="/aboutMe" element={<AboutMe/>} />
           <Route path="/adminCategory" element={<AdminCategory/>} />
           <Route path="/adminAddCategory" element={<AdminAddCategory/>} />
-          {/* <Route path="/adminUpdateCategory" element={<AdminUpdateCategory/>} /> */}
+          <Route path="/adminUpdateCategory/:categoryId" element={<AdminUpdateCategory/>} />
 
         </Routes>
       </BrowserRouter>

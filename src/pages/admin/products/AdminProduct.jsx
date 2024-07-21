@@ -17,7 +17,7 @@ const AdminProduct = () => {
 
   return (
     <div>
-         <Breadcrumb />
+      <Breadcrumb />
       <h1>Products</h1>
       <AdminAddProduct/>
 
