@@ -1,26 +1,32 @@
 import axios from 'axios';
 
 export const GET_PRODUCT_SUCCESS = 'GET_PRODUCT_SUCCESS';
-export const GET_INFORMATION_ERROR = 'GET_INFORMATION_ERROR';
+export const GET_PRODUCT_ERROR = 'GET_PRODUCT_ERROR';
+
 export const GET_PRODUCT_BY_ID_SUCCESS = 'GET_PRODUCT_BY_ID_SUCCESS';
 export const GET_PRODUCT_BY_ID_ERROR = 'GET_PRODUCT_BY_ID_ERROR';
-export const UPDATE_PRODUCT_SUCCESS = 'UPDATE_PRODUCT_SUCCESS';
-export const UPDATE_PRODUCT_ERROR = 'UPDATE_PRODUCT_ERROR';
-export const DELETE_PRODUCT_SUCCESS = 'DELETE_PRODUCT_SUCCESS';
-export const DELETE_PRODUCT_ERROR = 'DELETE_PRODUCT_ERROR';
+
 export const ADD_PRODUCT_SUCCESS = 'ADD_PRODUCT_SUCCESS';
 export const ADD_PRODUCT_ERROR = 'ADD_PRODUCT_ERROR';
+
+export const UPDATE_PRODUCT_SUCCESS = 'UPDATE_PRODUCT_SUCCESS';
+export const UPDATE_PRODUCT_ERROR = 'UPDATE_PRODUCT_ERROR';
+
+export const DELETE_PRODUCT_SUCCESS = 'DELETE_PRODUCT_SUCCESS';
+export const DELETE_PRODUCT_ERROR = 'DELETE_PRODUCT_ERROR';
+
+
 import { API_URL } from "./serverRequest";
 
 
 export const getProduct = () => {
-    return async (dispatch) => {
+    return async (dispatch) => { //getProduct est une fonction qui retourne une autre fonction. Cette fonction retournée est une action asynchrone (thunk), la fonction retournée prend dispatch comme argument. dispatch est utilisé pour envoyer des actions.
         try {
             const response = await axios.get(`${API_URL}getProduct`);
             const message = response.data.message;
 
             if (response.data.success) {
-                dispatch({
+                dispatch({ // Les données passées à dispatch sont envoyées au reducer 
                     type: GET_PRODUCT_SUCCESS,
                     payload: response.data.product,
                     message: message
@@ -30,7 +36,7 @@ export const getProduct = () => {
             }
         } catch (error) {
             dispatch({
-                type: GET_INFORMATION_ERROR,
+                type: GET_PRODUCT_ERROR,
                 payload: error.response?.data?.message || error.message || "No message returned",
             });
         }
