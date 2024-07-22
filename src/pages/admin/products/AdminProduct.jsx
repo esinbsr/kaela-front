@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getProduct } from "../../../actions/productAction";
 import AdminProductCard from "../../../components/admin/products/AdminProductCard";
@@ -39,6 +38,7 @@ const AdminProduct = () => {
           <tbody>
             {!isEmpty(products) ? (
               products
+              .slice().sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
               .map((product) => 
                 !isEmpty(product) && (
                   <AdminProductCard 

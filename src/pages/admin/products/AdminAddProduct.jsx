@@ -1,9 +1,7 @@
-// components/AdminAddProduct.jsx
 import { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addProduct, getProduct} from '../../../actions/productAction';
+import { addProduct, getProduct } from '../../../actions/productAction';
 import { getProductCategories } from '../../../actions/categoryAction';
-import {isEmpty} from "../../../components/Utils";
 
 const AdminAddProduct = () => {
     const [productName, setProductName] = useState('');
@@ -17,7 +15,6 @@ const AdminAddProduct = () => {
     
     const categories = useSelector((state) => state.category.category);
     const responseMessage = useSelector((state) => state.product.message);
-    
     const error = useSelector((state) => state.product.error);
 
     useEffect(() => {
@@ -39,26 +36,27 @@ const AdminAddProduct = () => {
         formData.append('productCategory', productCategory);
         formData.append('productImage', productImage);
 
-        dispatch(addProduct(formData));
-        dispatch(getProduct());
+        dispatch(addProduct(formData)).then(() => {
+            // Rafraîchir les catégories et produits après l'ajout du produit
+            dispatch(getProductCategories());
+            dispatch(getProduct());
+        });
     };
 
     useEffect(() => {
         if (responseMessage && !error) {
             setProductName("");
             setProductDescription("");
-            setProductCategory(categories.length > 0 ? categories[0].id : ""); //assure que le champ productCategory a toujours une valeur définie après la réinitialisation
+            setProductCategory(categories.length > 0 ? categories[0].id : ""); 
             setProductImage(null);
             if (fileInputRef.current) {
                 fileInputRef.current.value = '';
             }
         }
-      }, [responseMessage, error, categories]);
-    
+    }, [responseMessage, error, categories]);
 
     return (
         <div>
-            {/* <h1>Add a product</h1> */}
             <form onSubmit={handleSubmit}>
                 <label htmlFor="productName">Name of product:</label>
                 <input
@@ -84,9 +82,7 @@ const AdminAddProduct = () => {
                     value={productCategory}
                     onChange={(e) => setProductCategory(e.target.value)}
                 >
-                    {
-        
-                     categories.map((category) => (
+                    {categories.map((category) => (
                         <option key={category.id} value={category.id}>
                             {category.name}
                         </option>
