@@ -38,7 +38,7 @@ const AdminProduct = () => {
           <tbody>
             {!isEmpty(products) ? (
               products
-              .slice().sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+              // .slice().sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
               .map((product) => 
                 !isEmpty(product) && (
                   <AdminProductCard 
