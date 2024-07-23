@@ -66,7 +66,9 @@ const AdminAddProduct = () => {
 
     return (
         <div>
+            <h2>Add new product</h2>
             <form onSubmit={handleSubmit}>
+
                 <label htmlFor="productName">Name of product:</label>
                 <input
                     id="productName"

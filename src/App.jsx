@@ -10,7 +10,6 @@ import AdminDeleteInformation from "./components/admin/informations/AdminDeleteI
 import Testa from "../Testa";
 import AdminProduct from "./pages/admin/products/AdminProduct";
 import AdminAddProduct from "./pages/admin/products/AdminAddProduct";
-import AdminModifyProduct from "./pages/admin/products/AdminModifyProduct";
 import AdminInformation from "./pages/admin/informations/AdminInformation";
 import AdminAddInformation from "./pages/admin/informations/AdminAddInformation";
 import AdminInformationModify from "./pages/admin/informations/AdminInformationModify";
@@ -23,6 +22,7 @@ import AboutMe from "./pages/AboutMe";
 import AdminCategory from "./pages/admin/categories/AdminCategory";
 import AdminAddCategory from "./pages/admin/categories/AdminAddCategory";
 import AdminUpdateCategory from "./pages/admin/categories/AdminUpdateCategory";
+import AdminUpdateProduct from "./pages/admin/products/AdminUpdateProduct";
 
 
 
@@ -42,7 +42,7 @@ const App = () => {
           <Route path="/admin" element={<AdminNavigation/>} />
           <Route path="/adminProduct" element={<AdminProduct />} />
           <Route path="/adminAddProduct" element={<AdminAddProduct />} />
-          <Route path="/adminModifyProduct/:productId" element={<AdminModifyProduct />} />
+          <Route path="/adminUpdateProduct/:productId" element={<AdminUpdateProduct/>} />
           <Route path="/adminInformation" element={<AdminInformation />} />
           <Route path="/adminAddInformation" element={<AdminAddInformation />} />
           <Route path="/adminInformationModify/:informationId" element={<AdminInformationModify />} />

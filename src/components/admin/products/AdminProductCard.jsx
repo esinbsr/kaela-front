@@ -28,7 +28,7 @@ const AdminProductCard = ({ product }) => {
       <td>{product.categorie}</td>
       <td>{product.section}</td>
       <td>
-        <Link to={`/adminModifyProduct/${product.id}`}>Modify</Link>
+        <Link to={`/adminUpdateProduct/${product.id}`}>Modify</Link>
       </td>
       <td>
         <Link to="#" onClick={handleDeleteClick}>Delete</Link>

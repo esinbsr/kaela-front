@@ -3,31 +3,38 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getProductById, updateProduct } from "../../../actions/productAction";
 
-const AdminModifyProduct = () => {
-    const { productId } = useParams();
-    const dispatch = useDispatch();
-    const productById = useSelector((state) => state.product.productById);
-    const responseMessage = useSelector((state) => state.product.message);
-    const errorMessage = useSelector((state) => state.product.error);
+const AdminUpdateProduct = () => {
 
     const [productName, setProductName] = useState("");
     const [productDescription, setProductDescription] = useState("");
     const [productCategory, setProductCategory] = useState("");
+    const [productSection, setProductSection] = useState('');
     const [productImage, setProductImage] = useState(null);
 
-    useEffect(() => {
-        if (productId) {
-            dispatch(getProductById(productId));
-        }
-    }, [dispatch, productId]);
+    const { productId } = useParams();
+    const dispatch = useDispatch();
+
+    const productById = useSelector((state) => state.product.productById);
+    const categories = useSelector((state) => state.category.category);
+    const section = useSelector((state) => state.section.section);
+    
+    const responseMessage = useSelector((state) => state.product.message);
+    const errorMessage = useSelector((state) => state.product.error);
 
     useEffect(() => {
-        if (productById) {
+        if (productId) { // si l'id du produit est définit, ca veut dire que il y a un ID de produit valide pour lequel je dois récupérer les détails
+            dispatch(getProductById(productId)); // envoie une requête pour récupérer les détails du produit.
+        }
+    }, [dispatch, productId]); // puisque dispatch est utilisé à l'intérieur du hook, il doit être inclus dans le tableau des dépendances pour que React sache qu'il doit re-exécuter l'effet si dispatch change
+
+    useEffect(() => {
+        if (productById) { // productById contient les détails du produit récupéré à partir de l'état global via Redux
             setProductName(productById.name);
             setProductDescription(productById.description);
             setProductCategory(productById.categorie_id);
+            setProductSection(productById.section_id);
         }
-    }, [productById]);
+    }, [productById]); //l'effet ne s'exécutera que lorsque productById change
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -37,6 +44,7 @@ const AdminModifyProduct = () => {
         formData.append("productName", productName);
         formData.append("productDescription", productDescription);
         formData.append("productCategory", productCategory);
+        formData.append("productSection", productSection);
         formData.append("productImage", productImage);
 
         dispatch(updateProduct(formData));
@@ -44,8 +52,9 @@ const AdminModifyProduct = () => {
 
     return (
         <div>
-            <h1>Modify Product</h1>
+            <h1>Update Product</h1>
             <form onSubmit={handleSubmit}>
+
                 <label htmlFor="productName">Name of product:</label>
                 <input
                     id="productName"
@@ -63,15 +72,33 @@ const AdminModifyProduct = () => {
                     onChange={(e) => setProductDescription(e.target.value)}
                 ></textarea>
 
-                <label htmlFor="productCategory">Category:</label>
+                 <label htmlFor="productCategory">Category:</label>
                 <select
                     id="productCategory"
                     name="productCategory"
                     value={productCategory}
                     onChange={(e) => setProductCategory(e.target.value)}
                 >
-                    <option value="">Select Category</option>
-                    {/* Add your categories options here */}
+                    {categories.map((category) => (
+                        <option key={category.id} value={category.id}>
+                            {category.name}
+                        </option>
+                    ))}
+                </select>
+
+
+                <label htmlFor="productSection">Section:</label>
+                <select
+                    id="productSection"
+                    name="productSection"
+                    value={productSection}
+                    onChange={(e) => setProductSection(e.target.value)}
+                >
+                    {section.map((section) => (
+                        <option key={section.id} value={section.id}>
+                            {section.name}
+                        </option>
+                    ))}
                 </select>
 
                 <label htmlFor="productImage">Image:</label>
@@ -91,4 +118,4 @@ const AdminModifyProduct = () => {
     );
 };
 
-export default AdminModifyProduct;
+export default AdminUpdateProduct;
