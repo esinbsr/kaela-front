@@ -41,6 +41,7 @@ const AdminAddProduct = () => {
         formData.append('productName', productName);
         formData.append('productDescription', productDescription);
         formData.append('productCategory', productCategory);
+        formData.append('productSection', productSection);
         formData.append('productImage', productImage);
 
         dispatch(addProduct(formData)).then(() => {
