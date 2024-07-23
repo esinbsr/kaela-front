@@ -2,11 +2,13 @@ import { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addProduct, getProduct } from '../../../actions/productAction';
 import { getProductCategories } from '../../../actions/categoryAction';
+import { getSection } from '../../../actions/sectionAction';
 
 const AdminAddProduct = () => {
     const [productName, setProductName] = useState('');
     const [productDescription, setProductDescription] = useState('');
     const [productCategory, setProductCategory] = useState('');
+    const [productSection, setProductSection] = useState('');
     const [productImage, setProductImage] = useState(null);
 
     const fileInputRef = useRef(null);
@@ -14,18 +16,23 @@ const AdminAddProduct = () => {
     const dispatch = useDispatch();
     
     const categories = useSelector((state) => state.category.category);
+    const section = useSelector((state) => state.section.section);
     const responseMessage = useSelector((state) => state.product.message);
     const error = useSelector((state) => state.product.error);
 
     useEffect(() => {
         dispatch(getProductCategories());
+        dispatch(getSection());
     }, [dispatch]);
 
     useEffect(() => {
         if (categories.length > 0) {
             setProductCategory(categories[0].id);
         }
-    }, [categories]);
+        if(section.length > 0) {
+            setProductSection(section[0].id);
+        }
+    }, [categories, section]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -48,12 +55,13 @@ const AdminAddProduct = () => {
             setProductName("");
             setProductDescription("");
             setProductCategory(categories.length > 0 ? categories[0].id : ""); 
+            setProductSection(section.length > 0 ? section[0].id : ""); 
             setProductImage(null);
             if (fileInputRef.current) {
                 fileInputRef.current.value = '';
             }
         }
-    }, [responseMessage, error, categories]);
+    }, [responseMessage, error, categories, section]);
 
     return (
         <div>
@@ -85,6 +93,20 @@ const AdminAddProduct = () => {
                     {categories.map((category) => (
                         <option key={category.id} value={category.id}>
                             {category.name}
+                        </option>
+                    ))}
+                </select>
+
+                <label htmlFor="productSection">Section:</label>
+                <select
+                    id="productSection"
+                    name="productSection"
+                    value={productSection}
+                    onChange={(e) => setProductSection(e.target.value)}
+                >
+                    {section.map((section) => (
+                        <option key={section.id} value={section.id}>
+                            {section.name}
                         </option>
                     ))}
                 </select>

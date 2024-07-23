@@ -19,8 +19,6 @@ const AdminProduct = () => {
       <Breadcrumb />
       <h1>Products</h1>
       <AdminAddProduct/>
-
-      {/* <Link to="/adminAddProduct">Add a new product</Link> */}
       
       <div className="table-container">
         <table className="table">
@@ -30,6 +28,7 @@ const AdminProduct = () => {
               <th>Name</th>
               <th>Description</th>
               <th>Categorie</th>
+              <th>Section</th>
               <th className="action-header" colSpan={2}>
                 Action
               </th>

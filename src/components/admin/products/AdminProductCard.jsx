@@ -26,6 +26,7 @@ const AdminProductCard = ({ product }) => {
       <td>{product.name}</td>
       <td>{product.description}</td>
       <td>{product.categorie}</td>
+      <td>{product.section}</td>
       <td>
         <Link to={`/adminModifyProduct/${product.id}`}>Modify</Link>
       </td>
