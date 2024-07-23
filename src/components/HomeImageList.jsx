@@ -3,23 +3,40 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getProduct } from '../actions/productAction';
 import { API_URL } from '../actions/serverRequest';
 
+const SECTIONS = {
+    HOME_HEADER: 2,
+};
+
 const HomeImageList = ({ start, end, additionalClass }) => {
+
     const dispatch = useDispatch();
     const products = useSelector((state) => state.product.products);
+    const error = useSelector((state) => state.product.error);
 
     useEffect(() => {
-        dispatch(getProduct());
+        dispatch(getProduct()); //envoie une action au reducer
     }, [dispatch]);
+
+    if (error) {
+        return <p>Error loading products: {error}</p>;
+    }
+
+    if (!products) {
+        return <p>Loading...</p>;
+    }
+
+    const filteredProducts = 
+    products.length > 0 ? 
+    products
+    .filter((product) => product.section_id === SECTIONS.HOME_HEADER)
+    .slice(start, end) : [];
 
     return (
         <div className={`${additionalClass || ''}`}>
-            
-            {products && products.length > 0 ? (
-                products
-                .slice(start, end)
+            {filteredProducts.length > 0 ? (
+                filteredProducts
                 .map((product, index) => {
-                    const globalIndex = start + index;
-                    const isLargeImage = globalIndex === 1; 
+                    const isLargeImage = index === 1;
                     return (
                         <div key={product.id} className={isLargeImage ? "large-image" : ""}>
                             <img
@@ -30,9 +47,8 @@ const HomeImageList = ({ start, end, additionalClass }) => {
                     );
                 })
             ) : (
-                <p>Product not found.</p>
-            )
-            }
+                <p>No products found for the home header.</p>
+            )}
         </div>
     );
 };

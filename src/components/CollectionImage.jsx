@@ -5,48 +5,65 @@ import { Link } from "react-router-dom";
 import { getProductCategories } from "../actions/categoryAction";
 import { API_URL } from "../actions/serverRequest";
 
+const SECTIONS = {
+    COLLECTION: 3,
+};
+
+const linkConfig = [
+    { title: "Latest Collection", linkPath: "/latestCollection", buttonText: "Discover" },
+    { title: "Evening Dresses", linkPath: "/eveningDresses", buttonText: "Explore" }
+];
+
 const CollectionImage = ({ start, end, additionalClass }) => {
-  const dispatch = useDispatch();
+    const dispatch = useDispatch();
+    const products = useSelector((state) => state.product.products);
+    const categories = useSelector((state) => state.category.category);
+    const productError = useSelector((state) => state.product.error);
+    const categoryError = useSelector((state) => state.category.error);
 
-  const products = useSelector((state) => state.product.products);
-  const categories = useSelector((state) => state.category.category);
+    useEffect(() => {
+        dispatch(getProduct());
+        dispatch(getProductCategories());
+    }, [dispatch]);
 
-  useEffect(() => {
-    dispatch(getProduct());
-    dispatch(getProductCategories());
-  }, [dispatch]);
+    if (productError) {
+        return <p>Error loading products: {productError}</p>;
+    }
 
-  return (
-    <div className={`${additionalClass || ''}`}>
-      {products && products.length > 0 ? (
-        products
-        .slice(start, end)
-        .map((product, index) => {
-       
-          let categoryName = 'No category name';
+    if (categoryError) {
+        return <p>Error loading categories: {categoryError}</p>;
+    }
 
-          const category = categories.find(cat => cat.id === product.categorie_id);
-          if (category) {
-            categoryName = category.name;
-          }
+    if (!products || !categories) {
+        return <p>Loading...</p>;
+    }
 
-          const buttonText = index === 0 ? "Discover" : index === 1 ? "Explore" : "";
-          const linkPath = index === 0 ? "/latestCollection" : index === 1 ? "/eveningDresses" : "";
-          const title = index === 0 ? "Latest Collection" : index === 1 ? "Evening Dresses" : categoryName;
+    const filteredProducts = products.length > 0
+        ? products.filter((product) => product.section_id === SECTIONS.COLLECTION).slice(start, end)
+        : [];
 
-          return (
-            <div key={product.id} className="product-info">
-              <img src={`${API_URL}assets/img/${product.path}`} alt={product.name} />
-              <h3>{title}</h3>
-              <Link to={linkPath}>{buttonText}</Link>
-            </div>
-          );
-        })
-      ) : (
-        <p>No products found.</p>
-      )}
-    </div>
-  );
+    return (
+        <div className={`${additionalClass || ''}`}>
+            {filteredProducts.length > 0 ? (
+                filteredProducts.map((product, index) => {
+                    const category = categories.find(cat => cat.id === product.categorie_id);
+                    const categoryName = category ? category.name : 'No category name';
+
+                    const { title, linkPath, buttonText } = linkConfig[index] || { title: categoryName, linkPath: "", buttonText: "" };
+
+                    return (
+                        <div key={product.id} className="product-info">
+                            <img src={`${API_URL}assets/img/${product.path}`} alt={product.name} />
+                            <h3>{title}</h3>
+                            <Link to={linkPath}>{buttonText}</Link>
+                        </div>
+                    );
+                })
+            ) : (
+                <p>No products found for the collection.</p>
+            )}
+        </div>
+    );
 };
 
 export default CollectionImage;

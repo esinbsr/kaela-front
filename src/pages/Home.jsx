@@ -8,9 +8,9 @@ const Home = () => {
     return (
         <div className='home'>
             <h1>KAELA COUTURE</h1>
-            <HomeImageList start={0} end={3} additionalClass="featured-image" />
+            <HomeImageList start={0} end={3} additionalClass="header-image" />
             <HomeDescriptionList />
-            <CollectionImage start={3} end={5} additionalClass="more-products"/>
+            <CollectionImage start={0} end={2} additionalClass="collection-image"/>
         
         </div>
     );

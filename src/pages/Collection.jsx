@@ -5,7 +5,7 @@ const Collection = () => {
     return (
         <div>
             <h1>Collection</h1>
-            <CollectionImage start={3} end={5} additionalClass="more-products collection-center"/>    
+            <CollectionImage start={0} end={2} additionalClass="collection-image collection-center"/>    
         </div>
     );
 };
