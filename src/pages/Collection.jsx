@@ -1,4 +1,3 @@
-
 import CollectionImage from '../components/CollectionImage';
 
 const Collection = () => {

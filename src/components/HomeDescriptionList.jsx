@@ -24,7 +24,7 @@ const HomeDescriptionList = () => {
                     
                 ))
             ) : (
-                <p>Description not found</p>
+                <p>Description not found.</p>
             )}
         </div>
     );

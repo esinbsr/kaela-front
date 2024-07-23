@@ -1,5 +1,3 @@
-
-
 import CollectionImage from '../components/CollectionImage';
 import HomeDescriptionList from '../components/HomeDescriptionList';
 import HomeImageList from '../components/HomeImageList';
@@ -11,7 +9,6 @@ const Home = () => {
             <HomeImageList start={0} end={3} additionalClass="header-image" />
             <HomeDescriptionList />
             <CollectionImage start={0} end={2} additionalClass="collection-image"/>
-        
         </div>
     );
 };
