@@ -9,7 +9,6 @@ const AdminInformationModify = () => {
 
     const singleInformation = useSelector((state) => state.information.singleInformation);
 
-
     const [description, setDescription] = useState('');
     const [mobile, setMobile] = useState('');
     const [address, setAddress] = useState('');

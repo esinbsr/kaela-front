@@ -12,7 +12,7 @@ const HomeDescriptionList = () => {
     }, [dispatch]);
 
     return (
-        <div className='home_description'>
+        <div className='home__description'>
             {
             description && description.length > 0 ? (
                 description.slice(0, 1)

@@ -1,0 +1,55 @@
+.about-me {
+  @include containerCenter;
+
+  .about-me__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 100px;
+  }
+
+  .about-me__description {
+    h2 {
+      margin-bottom: 20px;
+    }
+    p {
+      margin-bottom: 30px;
+      width: 70%;
+      font-size: 1.1rem;
+    }
+  }
+
+  .about-me__image {
+    img {
+      width: 500px;
+      height: 500px;
+      object-fit: cover;
+    }
+  }
+
+  .about-me__footer {
+    h2 {
+      margin-bottom: 40px;
+      text-align: center;
+    }
+
+    .about-me__footer-image {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+
+      div {
+        flex: 0 1 calc(25% - 20px); // 4 images par ligne avec un espace de 20px entre elles
+        margin-bottom: 20px;
+      }
+
+      img {
+        width: 100%;
+        height: 400px;
+        object-fit: cover;
+        object-position: top;
+        cursor: pointer;
+      }
+    }
+  }
+}

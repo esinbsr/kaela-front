@@ -19,11 +19,11 @@ const initialState = {
 };
 
 const informationReducer = (state = initialState, action) => {
-    switch (action.type) { //examine le type d'action pour déterminer comment mettre à jour l'état
+    switch (action.type) {
         case GET_INFORMATION_SUCCESS:
             return {
                 ...state,
-                information: action.payload, // met à jour la propriété information avec les données récupérées depuis le payload de l'action 
+                information: action.payload,
                 message: action.message,
                 error: '',
             };
@@ -36,13 +36,13 @@ const informationReducer = (state = initialState, action) => {
                 error: '',
             };
 
-            case ADD_INFORMATION_SUCCESS:
-                return {
-                    ...state,
-                    information: [...state.information, action.payload],
-                    message: action.message,
-                    error: '',
-                };
+        case ADD_INFORMATION_SUCCESS:
+            return {
+                ...state,
+                information: [...state.information, action.payload],
+                message: action.message,
+                error: '',
+            };
 
         case UPDATE_INFORMATION_SUCCESS:
             return {

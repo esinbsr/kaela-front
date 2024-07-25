@@ -2,9 +2,9 @@ import CollectionImage from '../components/CollectionImage';
 
 const Collection = () => {
     return (
-        <div>
+        <div className='collection'>
             <h1>Collection</h1>
-            <CollectionImage start={0} end={2} additionalClass="collection-image collection-center"/>    
+            <CollectionImage start={0} end={2} additionalClass="home__collection-image collection-center"/>    
         </div>
     );
 };

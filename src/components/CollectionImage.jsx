@@ -29,12 +29,8 @@ const CollectionImage = ({ start, end, additionalClass }) => {
         dispatch(getProductCategories());
     }, [dispatch]);
 
-    const filteredProducts = 
-    products.length > 0 ? 
-    products
-        .filter((product) => product.section_id === SECTIONS.COLLECTION)
-        .slice(start, end)
-        : [];
+    const filteredProducts = products.length > 0 ? 
+        products.filter((product) => product.section_id === SECTIONS.COLLECTION).slice(start, end) : [];
 
     return (
         <div className={`${additionalClass || ''}`}>
@@ -42,17 +38,19 @@ const CollectionImage = ({ start, end, additionalClass }) => {
                 filteredProducts.map((product) => {
                     const category = categories.find(cat => cat.id === product.categorie_id);
                     const description = category ? category.description : 'No category description';
-                    
                     const title = category ? category.name : 'Default Title';
                     const slug = category ? category.slug : '';
                     const linkPath = CATEGORY_LINKS[slug] || "";
 
                     return (
-                        <div key={product.id} className="product-info">
+                        <div key={product.id}>
                             <img src={`${API_URL}assets/img/${product.path}`} alt={product.name} />
+
+                            <div className="home__collection-description">
                             <h3>{title}</h3>
                             <p>{description}</p>
                             <Link to={linkPath}>Explore</Link>
+                            </div>
                         </div>
                     );
                 })

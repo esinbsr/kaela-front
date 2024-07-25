@@ -22,7 +22,9 @@ const EveningLatestImageList = ({ start, end, additionalClass, section }) => {
 
     return (
         <div className={`${additionalClass || ''}`}>
+
             {filteredProducts.length > 0 ? (
+                
                 filteredProducts.map((product, index) => {
                     const isTopImage = index === 0 || index === 2;
                     const classes = `${isTopImage ? 'top-image' : ''}`;

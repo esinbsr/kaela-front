@@ -1,14 +1,18 @@
-@mixin flexbox($jc, $ai, $fd:false, $fw:false) {
+@mixin flexbox($jc, $ai:false, $fd:false, $fw:false) {
     display: flex;
     justify-content: $jc;
     align-items: $ai;
 
+    @if $ai {
+        align-items: $fw;
+    }
     @if $fd {
         flex-direction: $fd;
     }
     @if $fw {
         flex-wrap: $fw;
     }
+   
 }
 
 @mixin buttonRound($color, $bc: null, $border: false) {
@@ -31,4 +35,10 @@
     border-radius: 8px;
     color: $color;
     background-color: $bc;
+}
+
+@mixin containerCenter {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
 }

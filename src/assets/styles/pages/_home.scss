@@ -1,33 +1,38 @@
 .home {
-  h1 {
-    letter-spacing: 4px
+  @include containerCenter;
+
+h1 {
+  letter-spacing: 4px;
+}
+.home__header-image {
+  @include flexbox(space-between, center, null, wrap);
+}
+
+.large-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    width: 450px;
+    object-fit: cover;
   }
-  .header-image {
-    @include flexbox(center, center, null, wrap);
+}
 
-    .large-image img {
-      width: 450px;
-      object-fit: cover;
-    }
+img {
+  width: 400px;
+}
 
-    img {
-      margin: 20px;
-      width: 400px;
-    }
+.home__description {
+  @include flexbox(space-between);
+  margin: 80px 0;
+  p {
+    width: 50%;
+    font-size: 1.2rem;
+    margin-bottom: 25px;
   }
-
-  .home_description  {
-    position: relative;
-    left: 250px; 
-    margin: 50px 0;
-
-    p {
-      width: 20%;
-      font-size: 1.4rem;
-      margin-bottom: 30px;
-    }
-    a {
-      @include buttonRound(black, null, true);
-    }
+  a {
+    @include buttonRound(black, null, true);
   }
+}
 }

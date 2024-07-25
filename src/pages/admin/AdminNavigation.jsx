@@ -7,7 +7,7 @@ const AdminNavigation = () => {
 
             <div className="admin-navitation">
             <Link to="/adminProduct">Product</Link>
-            <Link to="/adminInformation">Information</Link>
+            <Link to="/adminInformation">Information about me</Link>
             <Link to="/adminCategory">Category</Link>
             </div>
         </div>

@@ -6,9 +6,9 @@ const Home = () => {
     return (
         <div className='home'>
             <h1>KAELA COUTURE</h1>
-            <HomeImageList start={0} end={3} additionalClass="header-image" />
+            <HomeImageList start={0} end={3} additionalClass="home__header-image" />
             <HomeDescriptionList />
-            <CollectionImage start={0} end={2} additionalClass="collection-image"/>
+            <CollectionImage start={0} end={2} additionalClass="home__collection-image"/>
         </div>
     );
 };

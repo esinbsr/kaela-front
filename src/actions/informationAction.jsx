@@ -53,6 +53,7 @@ export const getInformationById = (informationId) => {
     };
 };
 
+
 export const addInformation = (information) => {
     return async (dispatch) => {
         try {
