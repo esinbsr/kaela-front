@@ -38,7 +38,7 @@ export const getInformation = () => {
 export const getInformationById = (informationId) => {
     return async (dispatch) => {
         try {
-            const response = await axios.get(`${API_URL}getInformationById/${informationId}`);
+            const response = await axios.get(`${API_URL}getInformationById/${informationId}`); // ${informationId} passe l'ID spécifique de l'information que je veux récupérer du serveur. j'utilises l'ID pour déclencher l'action getInformationById lorsque le composant est monté ou lorsque l'ID change
             dispatch({
                 type: FETCH_SINGLE_INFORMATION_SUCCESS,
                 payload: response.data.information,

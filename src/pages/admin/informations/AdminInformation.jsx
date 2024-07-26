@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { deleteInformation, getInformation } from '../../../actions/informationAction';
 import AdminInformationCard from '../../../components/admin/informations/AdminInformationCard';
 import { isEmpty } from '../../../components/Utils';

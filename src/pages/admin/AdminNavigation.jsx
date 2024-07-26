@@ -9,6 +9,7 @@ const AdminNavigation = () => {
             <Link to="/adminProduct">Product</Link>
             <Link to="/adminInformation">Information about me</Link>
             <Link to="/adminCategory">Category</Link>
+            <Link to="/adminSocialNetwork">Social network</Link>
             </div>
         </div>
     );
