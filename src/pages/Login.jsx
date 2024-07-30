@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
+import { API_URL } from "../actions/serverRequest";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -15,29 +16,57 @@ const Login = () => {
     };
 
     try {
-      const response = await axios.post(
-        "http://localhost:8888/travail-perso/kaela-couture/login",
-        formData,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
+      const response = await axios.post(`${API_URL}login`, formData, {
+        headers: {
+          "Content-Type": "application/json"
         }
-      );
-
-      const message = response.data.message || "No message returned";
-      setResponseMessage(message);
+      });
 
       if (response.data.success) {
-        const token = response.data.token;
-        localStorage.setItem("token", token); // Stocke le token dans le stockage local
-        console.log('Login successful, token stored.');
+        const { token } = response.data; //Extrait le token de la réponse
+        localStorage.setItem("token : ", token); // Stocke le token dans le localStorage
+        setResponseMessage(response.data.message); // Met à jour le message de réponse
+
+      } else {
+        setResponseMessage(response.data.message); 
       }
 
     } catch (error) {
-      console.error('Erreur lors de l\'envoi des données :', error);
+      console.error("Error sending data:", error);
+      setResponseMessage("An error occurred during login"); 
     }
   };
+
+  const verifyToken = async (token) => {
+    try {
+      const response = await axios.post(`${API_URL}verifyToken`, { token }, {
+        headers: {
+          "Content-Type": "application/json"
+        }
+      });
+
+      if (response.data.success) {
+        const newToken = response.data.token;
+        const updatedToken = response.data.updatedToken;
+
+        if (updatedToken) {
+          localStorage.setItem("token", newToken); // Met à jour le token dans le localStorage si renouvelé
+        }
+      } else {
+        setResponseMessage(response.data.message); // Met à jour le message de réponse en cas d'échec de la vérification
+      }
+    } catch (error) {
+      console.error("Error verifying token:", error);
+      setResponseMessage("An error occurred while verifying the token"); // Affiche un message d'erreur en cas d'exception
+    }
+  };
+
+  useEffect(() => {
+    const token = localStorage.getItem("token"); // Récupère le token stocké dans le localStorage du navigateur
+    if (token) {
+      verifyToken(token); // Vérifie le token s'il existe
+    }
+  }, []);
 
   return (
     <div>
@@ -62,7 +91,7 @@ const Login = () => {
 
         <button type="submit">Login</button>
       </form>
-      {responseMessage && <p>{responseMessage}</p>}
+      {responseMessage && <p>{responseMessage}</p>} 
     </div>
   );
 };

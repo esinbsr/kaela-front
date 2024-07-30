@@ -1,41 +1,30 @@
 .evening-latest {
-  position: relative;
-  .image {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 140px;
-    max-width:1600px;
-    margin:auto;
+  @include containerCenter();
+
+  .evening-latest__image {
+    @include flexbox(space-between, null, null, wrap);
+    margin: 0 auto;
 
     .top-image {
-      position: relative;
-      top: 15rem;
+      margin-top: 10rem;
     }
 
     img {
       width: 100%;
-      max-width: 650px;
+      height: auto;
+      max-width: 600px;
       height: auto;
     }
   }
 
-  .description-list {
-    position: absolute;
-    top: 16rem;
-    left: 9%;
-    width: 30%;
-    z-index: 10;
-    text-align: left;
+  .evening-latest__description {
+    max-width: 30%;
+    position:absolute;
+  }
 
-    h3 {
-      font-size: 1.3rem;
-      margin-bottom: 0.5rem;
-    }
+  h3 {
+  }
 
-    p {
-      font-size: 1rem;
-    }
+  p {
   }
 }

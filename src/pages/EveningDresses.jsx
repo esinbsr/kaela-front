@@ -9,7 +9,7 @@ const EveningDresses = () => {
   return (
     <div className="evening-latest">
       <EveningLatestDescriptionList categoryIndex={1} />
-      <EveningLatestImageList start={0} end={4} additionalClass="image" section={SECTIONS.EVENING_DRESSES} />
+      <EveningLatestImageList start={0} end={4} additionalClass="evening-latest__image" section={SECTIONS.EVENING_DRESSES} />
     </div>
   );
 };

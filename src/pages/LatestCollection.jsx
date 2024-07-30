@@ -9,7 +9,7 @@ const LatestCollection = () => {
   return (
     <div className="evening-latest">
       <EveningLatestDescriptionList categoryIndex={0} />
-      <EveningLatestImageList start={0} end={4} additionalClass="image" section={SECTIONS.LATEST_COLLECTION} />
+      <EveningLatestImageList start={0} end={4} additionalClass="evening-latest__image" section={SECTIONS.LATEST_COLLECTION} />
     </div>
   );
 };

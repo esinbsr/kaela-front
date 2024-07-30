@@ -27,11 +27,11 @@ const EveningLatestImageList = ({ start, end, additionalClass, section }) => {
                 
                 filteredProducts.map((product, index) => {
                     const isTopImage = index === 0 || index === 2;
-                    const classes = `${isTopImage ? 'top-image' : ''}`;
+                    const topImage = `${isTopImage ? 'top-image' : ''}`;
 
                     return (
-                        <div key={product.id} className={`${classes}`}>
-                            <img src={`${API_URL}assets/img/${product.path}`} alt={product.name} />
+                        <div key={product.id}>
+                            <img src={`${API_URL}assets/img/${product.path}`} alt={product.name} className={`${topImage}`}/>
                         </div>
                     );
                 })

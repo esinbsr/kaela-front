@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import { API_URL } from "../actions/serverRequest";
 
 const SignUp = () => {
   const [username, setUsername] = useState("");
@@ -18,20 +19,20 @@ const SignUp = () => {
     };
 
     try {
-      const response = await axios.post(
-        "http://localhost:8888/travail-perso/kaela-couture/signup",
-        formData,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await axios.post(`${API_URL}signup`, formData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
-      const message = response.data.message || "No message returned";
-      setResponseMessage(message);
-      setErrorMessage("");
+      console.log(response.data); // Ajout du console log pour vérifier la réponse de l'API
 
+      if (response.data.message) {
+        setResponseMessage(response.data.message);
+        setErrorMessage("");
+      } else {
+        setResponseMessage("No message returned");
+      }
     } catch (error) {
       setErrorMessage(error.response?.data?.message || "An error occurred");
       setResponseMessage(""); 
@@ -48,15 +49,17 @@ const SignUp = () => {
           onChange={(e) => setUsername(e.target.value)}
           name="username"
           value={username}
+          required
         />
 
         <label htmlFor="email">Email</label>
         <input
           id="email"
-          type="text"
+          type="email"
           onChange={(e) => setEmail(e.target.value)}
           name="email"
           value={email}
+          required
         />
 
         <label htmlFor="password">Password</label>
@@ -66,12 +69,13 @@ const SignUp = () => {
           onChange={(e) => setPassword(e.target.value)}
           name="password"
           value={password}
+          required
         />
 
         <button type="submit">Sign Up</button>
       </form>
       {responseMessage && <p>{responseMessage}</p>}
-      {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
+      {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
     </div>
   );
 };

@@ -18,17 +18,19 @@ const EveningLatestDescriptionList = ({ categoryIndex }) => {
     : null;
 
   return (
-    <div className="description">
+    <>
       {category ? (
         <>
         <h1>{category.name}</h1>
+        <div className="evening-latest__description">
           <h3>{category.page_title}</h3>
           <p>{category.page_description}</p>
+          </div>
         </>
       ) : (
         <p>Category description not found.</p>
       )}
-    </div>
+    </>
   );
 };
 
