@@ -3,9 +3,10 @@ import { API_URL } from './serverRequest';
 
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_ERROR = 'LOGIN_ERROR';
-
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 export const LOGOUT_ERROR = 'LOGOUT_ERROR';
+export const TOKEN_VERIFY_SUCCESS = 'TOKEN_VERIFY_SUCCESS';
+export const TOKEN_VERIFY_ERROR = 'TOKEN_VERIFY_ERROR';
 
 export const loginUser = (formData) => {
   return async (dispatch) => {
@@ -35,6 +36,40 @@ export const loginUser = (formData) => {
     } catch (error) {
       dispatch({
         type: LOGIN_ERROR,
+        payload:
+          error.response?.data?.message ||
+          error.message ||
+          'No message returned',
+      });
+    }
+  };
+};
+
+export const verifyToken = (token) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post(`${API_URL}verifyToken`, { token }, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (response.data.success) {
+        localStorage.setItem('token', response.data.token);
+
+        dispatch({
+          type: TOKEN_VERIFY_SUCCESS,
+          payload: {
+            token: response.data.token,
+            updatedToken: response.data.updatedToken,
+          },
+        });
+      } else {
+        throw new Error(response.data.message);
+      }
+    } catch (error) {
+      dispatch({
+        type: TOKEN_VERIFY_ERROR,
         payload:
           error.response?.data?.message ||
           error.message ||

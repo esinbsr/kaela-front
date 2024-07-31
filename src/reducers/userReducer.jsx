@@ -3,27 +3,26 @@ import {
   LOGIN_ERROR,
   LOGOUT_SUCCESS,
   LOGOUT_ERROR,
-} from "../actions/userAction";
+  TOKEN_VERIFY_SUCCESS,
+  TOKEN_VERIFY_ERROR,
+} from '../actions/userAction';
 
-
-// Lorsque l'application démarre, elle lit les valeurs stockées dans le localStorage pour initialiser l'état
 const initialState = {
-  role: localStorage.getItem("role"), // Initialiser à partir du localStorage
-  user_id: localStorage.getItem("user_id"),
-  token: localStorage.getItem("token"),
-  error: "",
+  role: localStorage.getItem('role'), // Initialiser à partir du localStorage
+  user_id: localStorage.getItem('user_id'),
+  token: localStorage.getItem('token'),
+  error: '',
 };
 
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
-    
     case LOGIN_SUCCESS:
       return {
         ...state,
         role: action.payload.role,
         user_id: action.payload.user_id,
         token: action.payload.token,
-        error: "",
+        error: '',
       };
 
     case LOGOUT_SUCCESS:
@@ -32,14 +31,22 @@ const userReducer = (state = initialState, action) => {
         role: null,
         user_id: null,
         token: null,
-        error: "",
+        error: '',
       };
 
     case LOGIN_ERROR:
     case LOGOUT_ERROR:
+    case TOKEN_VERIFY_ERROR:
       return {
         ...state,
         error: action.payload,
+      };
+
+    case TOKEN_VERIFY_SUCCESS:
+      return {
+        ...state,
+        token: action.payload.token,
+        error: '',
       };
 
     default:
