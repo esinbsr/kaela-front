@@ -4,7 +4,7 @@ import productReducer from './productReducer';
 import categoryReducer from './categoryReducer';
 import sectionReducer from './sectionReducter';
 import socialNetworkReducer from './socialNetworkReducer';
-// import userReducer from './userReducer';
+import userReducer from './userReducer';
 
 const rootReducer = combineReducers({
     information: informationReducer,
@@ -12,7 +12,7 @@ const rootReducer = combineReducers({
     category: categoryReducer,
     section: sectionReducer,
     socialNetwork: socialNetworkReducer,
-    // user: userReducer,
+    user: userReducer,
 });
 
 export default rootReducer;

@@ -1,5 +1,6 @@
 .evening-latest {
   @include containerCenter();
+  position: relative;
 
   .evening-latest__image {
     @include flexbox(space-between, null, null, wrap);
@@ -12,17 +13,20 @@
     img {
       width: 100%;
       height: auto;
-      max-width: 600px;
-      height: auto;
+      max-width: 500px;
     }
   }
 
   .evening-latest__description {
-    max-width: 30%;
-    position:absolute;
+    max-width: 35%;
+    position: absolute;
+    top: 120px;
+    left: 0; 
   }
 
   h3 {
+    margin-bottom: 8px;
+    font-family: 'Montserrat-Bold';
   }
 
   p {

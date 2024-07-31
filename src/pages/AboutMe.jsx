@@ -80,10 +80,10 @@ const AboutMe = () => {
 
       <div className="about-me__footer">
         <h2>Subscribe to my Instagram</h2>
-        <div className="about-me__footer-image">
+        <div className="about-me__footer-container">
           {filteredProducts.length > 1 && instagram && isValidUrl(instagram.url) ? (
             filteredProducts.slice(1, 9).map((product) => (
-              <div key={product.id}>
+              <div className="about-me__footer-image" key={product.id}>
                 <Link to={generateInstagramLoginUrl(instagram.url)} target="_blank" rel="noopener noreferrer">
                   <img
                     src={`${API_URL}assets/img/${product.path}`}

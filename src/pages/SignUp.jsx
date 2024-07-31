@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { API_URL } from "../actions/serverRequest";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
   const [username, setUsername] = useState("");
@@ -8,6 +9,7 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   const [responseMessage, setResponseMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,7 +31,7 @@ const SignUp = () => {
 
       if (response.data.message) {
         setResponseMessage(response.data.message);
-        setErrorMessage("");
+        navigate("/login")
       } else {
         setResponseMessage("No message returned");
       }

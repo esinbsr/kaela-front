@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProduct } from '../actions/productAction';
 import { API_URL } from '../actions/serverRequest';
+import { Link } from 'react-router-dom';
 
 const SECTIONS = {
     HOME_HEADER: 2,
@@ -39,10 +40,12 @@ const HomeImageList = ({ start, end, additionalClass }) => {
                     const isLargeImage = index === 1;
                     return (
                         <div key={product.id} className={isLargeImage ? "large-image" : ""}>
+                            <Link to="/admin">
                             <img
                                 src={`${API_URL}assets/img/${product.path}`}
                                 alt={product.name}
                             />
+                            </Link>
                         </div>
                     );
                 })

@@ -1,18 +1,28 @@
-import { Link, NavLink } from "react-router-dom";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const AdminNavigation = () => {
-    return (
-        <div className="admin-container">
-            <h1>Administration</h1>
+  const navigate = useNavigate();
 
-            <div className="admin-navitation">
-            <Link to="/adminProduct">Product</Link>
-            <Link to="/adminInformation">Information about me</Link>
-            <Link to="/adminCategory">Category</Link>
-            <Link to="/adminSocialNetwork">Social network</Link>
-            </div>
-        </div>
-    );
+  useEffect(() => {
+    const role = localStorage.getItem("role");
+    if (role !== "admin") {
+      navigate("/");
+    }
+  }, [navigate]);
+
+  return (
+    <div className="admin-container">
+      <h1>Administration</h1>
+      <div className="admin-navigation">
+        <Link to="/adminProduct">Product</Link>
+        <Link to="/adminInformation">Information about me</Link>
+        <Link to="/adminCategory">Category</Link>
+        <Link to="/adminSocialNetwork">Social network</Link>
+      </div>
+    </div>
+  );
 };
 
 export default AdminNavigation;

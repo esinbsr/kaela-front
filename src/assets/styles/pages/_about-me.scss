@@ -9,20 +9,22 @@
   }
 
   .about-me__description {
+    width: 50%;
+
     h2 {
       margin-bottom: 20px;
+      text-align: center;
     }
     p {
       margin-bottom: 30px;
-      width: 70%;
-      font-size: 1.1rem;
+      text-align: justify;
     }
   }
 
   .about-me__image {
     img {
-      width: 500px;
-      height: 500px;
+      width: 450px;
+      height: 450px;
       object-fit: cover;
     }
   }
@@ -33,19 +35,20 @@
       text-align: center;
     }
 
-    .about-me__footer-image {
+    .about-me__footer-container{
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
+      
 
-      div {
+      .about-me__footer-image {
         flex: 0 1 calc(25% - 20px); // 4 images par ligne avec un espace de 20px entre elles
         margin-bottom: 20px;
       }
 
       img {
         width: 100%;
-        height: 400px;
+        height: 350px;
         object-fit: cover;
         object-position: top;
         cursor: pointer;

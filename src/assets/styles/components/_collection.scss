@@ -3,18 +3,18 @@
 }
 
 .home__collection-image {
-  @include flexbox(space-between, null, null,wrap);
-margin: 0 auto;
+  @include flexbox(space-between, null, null, wrap);
+  margin: 0 auto;
 
   img {
-    width: 500px;
+    width: 450px;
     height: 400px;
     object-fit: cover;
     object-position: top;
   }
 
   .home__collection-description {
-    @include flexbox(center, center, column,wrap);
+    @include flexbox(center, center, column, wrap);
 
     h3 {
       margin-top: 10px;
