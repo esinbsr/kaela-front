@@ -23,6 +23,7 @@ import AdminSocialNetwork from "./pages/admin/socialNetworks/AdminSocialNetwork"
 import AdminAddSocialNetwork from "./pages/admin/socialNetworks/AdminAddSocialNetwork";
 import Logout from "./components/Logout";
 import AdminUpdateSocialNetwork from "./pages/admin/socialNetworks/AdminUpdateSocialNetwork";
+import ProductDetail from "./pages/ProductDetail";
 
 
 const ProtectedRoute = ({ children }) => {
@@ -38,6 +39,7 @@ const App = () => {
       <BrowserRouter>
         <Navigation />
         <Routes>
+          <Route path="*" element={<Home/>} />
           <Route path="/" element={<Home />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
@@ -47,7 +49,7 @@ const App = () => {
           <Route path="/latestCollection" element={<LatestCollection />} />
           <Route path="/aboutMe" element={<AboutMe />} />
           <Route path="/logout" element={<Logout />} />
-          <Route path="/home" element="*" />
+          <Route path="/productDetail/:productDetailId" element={<ProductDetail/>} />
 
           {/* Routes Admin protégées */}
           <Route 
@@ -163,7 +165,7 @@ const App = () => {
             } 
           />
 
-          <Route path="*" element={<Home/>} />
+
         </Routes>
       </BrowserRouter>
     </div>

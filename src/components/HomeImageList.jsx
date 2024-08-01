@@ -40,7 +40,7 @@ const HomeImageList = ({ start, end, additionalClass }) => {
                     const isLargeImage = index === 1;
                     return (
                         <div key={product.id} className={isLargeImage ? "large-image" : ""}>
-                            <Link to="/admin">
+                            <Link to={`/productDetail/${product.id}`}>
                             <img
                                 src={`${API_URL}assets/img/${product.path}`}
                                 alt={product.name}

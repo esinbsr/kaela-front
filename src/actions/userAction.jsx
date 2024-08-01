@@ -3,10 +3,15 @@ import { API_URL } from './serverRequest';
 
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_ERROR = 'LOGIN_ERROR';
+
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 export const LOGOUT_ERROR = 'LOGOUT_ERROR';
+
 export const TOKEN_VERIFY_SUCCESS = 'TOKEN_VERIFY_SUCCESS';
 export const TOKEN_VERIFY_ERROR = 'TOKEN_VERIFY_ERROR';
+
+export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';
+export const SIGNUP_ERROR = 'SIGNUP_ERROR';
 
 export const loginUser = (formData) => {
   return async (dispatch) => {
@@ -44,6 +49,29 @@ export const loginUser = (formData) => {
     }
   };
 };
+
+export const addUser = (formData) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post(`${API_URL}signup`, formData, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+        dispatch({
+          type: SIGNUP_SUCCESS,
+          payload: response.data.userData,
+          message: response.data.message
+        });
+    } catch (error) {
+      dispatch({
+        type: SIGNUP_ERROR,
+        payload: error.message,
+      });
+    }
+  };
+};
+
 
 export const verifyToken = (token) => {
   return async (dispatch) => {

@@ -1,14 +1,14 @@
 import { useState } from "react";
-import axios from "axios";
-import { API_URL } from "../actions/serverRequest";
-import { useNavigate } from "react-router-dom";
+import { addUser } from "../actions/userAction";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from 'react-router-dom';
 
 const SignUp = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [responseMessage, setResponseMessage] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
+
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -21,25 +21,13 @@ const SignUp = () => {
     };
 
     try {
-      const response = await axios.post(`${API_URL}signup`, formData, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      console.log(response.data); // Ajout du console log pour vérifier la réponse de l'API
-
-      if (response.data.message) {
-        setResponseMessage(response.data.message);
-        navigate("/login")
-      } else {
-        setResponseMessage("No message returned");
-      }
+      await dispatch(addUser(formData));
+      navigate('/login');
     } catch (error) {
-      setErrorMessage(error.response?.data?.message || "An error occurred");
-      setResponseMessage(""); 
+      // console.log("error");
     }
-  };
+
+  }
 
   return (
     <div>
@@ -76,8 +64,9 @@ const SignUp = () => {
 
         <button type="submit">Sign Up</button>
       </form>
-      {responseMessage && <p>{responseMessage}</p>}
-      {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
+      <p>Already have an account? <Link to="/login">Log in here </Link></p>
+      {/* {responseMessage && <p>{responseMessage}</p>} */}
+
     </div>
   );
 };

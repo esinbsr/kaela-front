@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { loginUser } from '../actions/userAction';
 
@@ -48,6 +48,7 @@ const Login = () => {
         <button type="submit">Login</button>
       </form>
       {responseMessage && <p>{responseMessage}</p>}
+      <p>No account yet? <Link to="/signup"> Create one here</Link></p>
     </div>
   );
 };

@@ -2,6 +2,7 @@
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { deleteProduct } from '../../../actions/productAction';
+import { API_URL } from '../../../actions/serverRequest';
 
 const AdminProductCard = ({ product }) => {
   const dispatch = useDispatch();
@@ -18,7 +19,7 @@ const AdminProductCard = ({ product }) => {
     <tr>
       <td>
         <img
-          src={`http://localhost:8888/travail-perso/kaela-couture/assets/img/${product.path}`}
+          src={`${API_URL}assets/img/${product.path}`}
           alt={product.name}
           width="100"
         />
