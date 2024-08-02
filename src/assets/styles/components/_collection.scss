@@ -1,7 +1,3 @@
-.collection {
-  @include containerCenter;
-}
-
 .home__collection-image {
   @include flexbox(space-between, null, null, wrap);
   margin: 0 auto;

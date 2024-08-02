@@ -4,7 +4,7 @@ import CommentDisplay from './CommentDisplay';
 
 const Comment = () => {
     return (
-        <div>
+        <div className='comments'>
             <AddComment/>
             <CommentDisplay/>
         </div>

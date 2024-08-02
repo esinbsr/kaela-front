@@ -1,16 +1,10 @@
 .detail-product {
     display: flex;
     justify-content: space-between;
-    @include containerCenter();
 }
 
-.detail-product__description{
-
-   
-}
 
 .detail-product__image img {
-    width: 400px;
-    cursor: pointer;
+    width: 360px;
 }
 

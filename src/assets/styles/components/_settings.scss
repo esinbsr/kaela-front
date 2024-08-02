@@ -3,7 +3,12 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Montserrat';
-    background-color: $background-color;
+   
+}
+
+body {
+  @include containerCenter;
+  background-color: $background-color;
 }
 
 a {
@@ -20,4 +25,8 @@ h1 {
 
   img {
     border-radius: 6px;
+  }
+
+  button {
+    border: none;
   }

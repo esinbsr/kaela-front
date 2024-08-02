@@ -1,3 +1,87 @@
-.test {
-    margin-bottom: 20px;
+.comments {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  
+    h2 {
+      text-align: center;
+    }
+
+  }
+  
+  // Partie ajout de commentaires
+  
+  .comments__input-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 10px;
+    width: 100%;
+  
+    label {
+      margin-bottom: 5px;
+    }
+
+    textarea {
+        resize: none;
+        padding: 10px;
+        height: 15vh;
+        border-radius: 8px;
+        background-color: white;
+        width: 100%;
+        min-width: 800px;
+        border: 1px solid $main-color;
+        outline: none;
+      }
 }
+
+  
+  .comments__button {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  
+    button {
+      @include buttonSuqare(white, $main-color);
+      margin-bottom: 40px;
+      margin-top: 10px;
+    }
+  }
+  
+  // Partie affichage des commentaires
+  
+  .comments__username-content {
+    margin-bottom: 15px;
+    background-color: white;
+    border-radius: 8px;
+    padding: 10px;
+    min-width: 800px;
+    border: 1px solid $main-color;
+    
+  
+    .comments_username {
+      font-family: "Montserrat-Bold";
+      font-size: 1.1vw;
+    }
+  
+    p {
+      text-align: left;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+  }
+  
+  .test {
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ flex-direction: column;
+ margin: 20px 0;
+  }
+
+  .lol {
+    text-decoration: underline;
+    margin-top: 5px;
+   
+  }

@@ -7,18 +7,19 @@ export const GET_COMMENT_ERROR = 'GET_COMMENT_ERROR';
 export const ADD_COMMENT_SUCCESS = 'ADD_COMMENT_SUCCESS';
 export const ADD_COMMENT_ERROR = 'ADD_COMMENT_ERROR';
 
-export const getComment = () => {
+
+export const getComment = (productDetailId) => {
     return async (dispatch) => {
         try {
-            const response = await axios.get(`${API_URL}getComment`);
+            const response = await axios.get(`${API_URL}getCommentsByProduct/${productDetailId}`);
             const message = response.data.message;
 
             if (response.data.success) {
                 dispatch({
                     type: GET_COMMENT_SUCCESS,
-                    payload: response.data.comment,
+                    payload: response.data.comments,
                     message: message
-                })
+                });
             } else {
                 throw new Error(message);
             }
@@ -26,10 +27,12 @@ export const getComment = () => {
             dispatch({
                 type: GET_COMMENT_ERROR,
                 payload: error.response.data.message || "No message returned"
-            })
+            });
         }
     }
 }
+
+
 export const addComment = (formData) => {
     return async (dispatch) => {
         try {

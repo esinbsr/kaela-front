@@ -1,7 +1,7 @@
 .navigation {
   @include flexbox(space-between, center);
   width: 100%;
-  padding: 1rem;
+  padding: 1rem 0;
 
   .navigation_links {
     display: flex;
