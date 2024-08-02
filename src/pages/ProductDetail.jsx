@@ -4,6 +4,8 @@ import { useEffect } from "react";
 import { getProductById } from "../actions/productAction";
 import { useParams } from "react-router-dom";
 import { isEmpty } from "../components/Utils";
+import Comment from "../components/Comment";
+
 
 const ProductDetail = () => {
     const { productDetailId } = useParams();
@@ -17,13 +19,16 @@ const ProductDetail = () => {
     }, [dispatch, productDetailId]);
 
     return (
-        <div>
+        <>
             {!isEmpty(productById) ? (
                 <AdminProductDetailCard key={productById.id} product={productById} />
             ) : (
                 <p>Aucun produit trouvé.</p>
             )}
-        </div>
+
+        <Comment/>
+
+        </>
     );
 };
 

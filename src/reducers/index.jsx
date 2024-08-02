@@ -5,6 +5,7 @@ import categoryReducer from './categoryReducer';
 import sectionReducer from './sectionReducter';
 import socialNetworkReducer from './socialNetworkReducer';
 import userReducer from './userReducer';
+import commentReducer from './commentReducer';
 
 const rootReducer = combineReducers({
     information: informationReducer,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
     section: sectionReducer,
     socialNetwork: socialNetworkReducer,
     user: userReducer,
+    comment: commentReducer,
 });
 
 export default rootReducer;

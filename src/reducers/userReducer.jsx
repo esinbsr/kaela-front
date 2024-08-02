@@ -10,6 +10,7 @@ import {
 const initialState = {
   role: localStorage.getItem('role'), // Initialiser à partir du localStorage
   user_id: localStorage.getItem('user_id'),
+  username: localStorage.getItem('username'),
   token: localStorage.getItem('token'),
   error: '',
 };
@@ -21,6 +22,7 @@ const userReducer = (state = initialState, action) => {
         ...state,
         role: action.payload.role,
         user_id: action.payload.user_id,
+        username: action.payload.username,
         token: action.payload.token,
         error: '',
       };
@@ -30,6 +32,7 @@ const userReducer = (state = initialState, action) => {
         ...state,
         role: null,
         user_id: null,
+        username: null,
         token: null,
         error: '',
       };

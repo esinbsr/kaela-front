@@ -25,6 +25,7 @@ export const loginUser = (formData) => {
       if (response.data.success) {
         localStorage.setItem('role', response.data.role);
         localStorage.setItem('user_id', response.data.user_id);
+        localStorage.setItem('username', response.data.username);
         localStorage.setItem('token', response.data.token);
 
         dispatch({
@@ -32,6 +33,7 @@ export const loginUser = (formData) => {
           payload: {
             role: response.data.role,
             user_id: response.data.user_id,
+            username: response.data.username,
             token: response.data.token,
           },
         });
@@ -112,6 +114,7 @@ export const logoutUser = () => {
     try {
       localStorage.removeItem('role');
       localStorage.removeItem('user_id');
+      localStorage.removeItem('username');
       localStorage.removeItem('token');
 
       dispatch({ type: LOGOUT_SUCCESS });

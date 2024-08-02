@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addCategory } from "../../../actions/categoryAction";
 
 const AdminAddCategory = () => {
+  
   const [categoryName, setCategoryName] = useState("");
   const [categoryDescription, setCategoryDescription] = useState("");
   const [categoryPageTitle, setCategoryPageTitle] = useState("");

@@ -33,7 +33,7 @@ const AdminCategory = () => {
             </tr>
           </thead>
           <tbody>
-            {Array.isArray(categories) && !isEmpty(categories) ? (
+            {!isEmpty(categories) ? (
               categories.map(
                 (category) =>
                   !isEmpty(category) && (

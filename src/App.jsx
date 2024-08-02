@@ -26,6 +26,8 @@ import AdminUpdateSocialNetwork from "./pages/admin/socialNetworks/AdminUpdateSo
 import ProductDetail from "./pages/ProductDetail";
 
 
+
+
 const ProtectedRoute = ({ children }) => {
   const userRole = localStorage.getItem("role");
 
@@ -50,6 +52,8 @@ const App = () => {
           <Route path="/aboutMe" element={<AboutMe />} />
           <Route path="/logout" element={<Logout />} />
           <Route path="/productDetail/:productDetailId" element={<ProductDetail/>} />
+
+      
 
           {/* Routes Admin protégées */}
           <Route 
