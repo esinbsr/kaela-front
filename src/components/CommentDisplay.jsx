@@ -2,15 +2,13 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getComment } from "../actions/commentAction";
 import { isEmpty } from "./Utils";
-import { Link, useParams } from "react-router-dom";
-import UpdateComment from "./UpdateComment";
+import { useParams } from "react-router-dom";
 
 const CommentDisplay = () => {
   const { productDetailId } = useParams();
   const dispatch = useDispatch();
   const comments = useSelector((state) => state.comment.comments);
   const [showAllComments, setShowAllComments] = useState(false);
-  const [editingCommentId, setEditingCommentId] = useState(null);
 
   useEffect(() => {
     if (productDetailId) {
@@ -20,14 +18,6 @@ const CommentDisplay = () => {
 
   const handleToggleComments = () => {
     setShowAllComments(!showAllComments);
-  };
-
-  const handleEditComment = (commentId) => {
-    setEditingCommentId(commentId);
-  };
-
-  const handleCancelEdit = () => {
-    setEditingCommentId(null);
   };
 
   const displayedComments = showAllComments ? comments : comments.slice(0, 5);
@@ -41,21 +31,15 @@ const CommentDisplay = () => {
               <div key={comment.id} className="comments__username-content">
                 <p className="comments_username">{comment.username} </p>
                 <p>{comment.content}</p>
-                <div className="comments_buttons">
-                  <button onClick={() => handleEditComment(comment.id)}>Update</button>
-                </div>
-                {editingCommentId === comment.id && (
-                  <UpdateComment commentId={comment.id} onCancel={handleCancelEdit} />
-                )}
               </div>
             )
         )
       ) : (
-        <p>There are no comments for the moment, be the first to write one!</p>
+        <p>Il n'y a pas de commentaires pour le moment, soyez le premier à en écrire un !</p>
       )}
       {comments.length > 5 && (
         <button onClick={handleToggleComments}>
-          {showAllComments ? "View less" : "View more"}
+          {showAllComments ? "Voir moins" : "Voir plus"}
         </button>
       )}
     </>

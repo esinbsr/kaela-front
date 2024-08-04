@@ -13,6 +13,7 @@ export const TOKEN_VERIFY_ERROR = 'TOKEN_VERIFY_ERROR';
 export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';
 export const SIGNUP_ERROR = 'SIGNUP_ERROR';
 
+
 export const loginUser = (formData) => {
   return async (dispatch) => {
     try {
@@ -88,9 +89,8 @@ export const verifyToken = (token) => {
           type: TOKEN_VERIFY_SUCCESS,
           payload: {
             token: response.data.token,
-            user_id: response.data.user_id, 
-            
-            username: response.data.username 
+            user_id: response.data.user_id,
+            username: response.data.username,
           },
         });
       } else {
