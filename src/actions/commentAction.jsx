@@ -4,9 +4,14 @@ import { API_URL } from "./serverRequest";
 export const GET_COMMENT_SUCCESS = 'GET_COMMENT_SUCCESS';
 export const GET_COMMENT_ERROR = 'GET_COMMENT_ERROR';
 
+export const GET_COMMENT_BY_ID_SUCCESS = 'GET_COMMENT_BY_ID_SUCCESS';
+export const GET_COMMENT_BY_ID_ERROR = 'GET_COMMENT_BY_ID_ERROR';
+
 export const ADD_COMMENT_SUCCESS = 'ADD_COMMENT_SUCCESS';
 export const ADD_COMMENT_ERROR = 'ADD_COMMENT_ERROR';
 
+export const UPDATE_COMMENT_SUCCESS = 'UPDATE_COMMENT_SUCCESS';
+export const UPDATE_COMMENT_ERROR = 'UPDATE_COMMENT_ERROR';
 
 export const getComment = (productDetailId) => {
     return async (dispatch) => {
@@ -32,7 +37,6 @@ export const getComment = (productDetailId) => {
     }
 }
 
-
 export const addComment = (formData) => {
     return async (dispatch) => {
         try {
@@ -56,3 +60,43 @@ export const addComment = (formData) => {
         }
     }
 }
+
+export const getCommentById = (commentId) => {
+    return async (dispatch) => {
+      try {
+        const response = await axios.get(`${API_URL}getCommentById/${commentId}`);
+        dispatch({
+          type: GET_COMMENT_BY_ID_SUCCESS,
+          payload: response.data.comment,
+          message: response.data.message
+        })
+      } catch (error) {
+        dispatch({
+          type: GET_COMMENT_BY_ID_ERROR,
+          payload: error.message,
+        });
+      }
+    }
+  }
+
+  export const updateComment = (formData) => {
+    return async (dispatch) => {
+      try {
+        const response = await axios.post(`${API_URL}updateComment`, formData, {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        dispatch({
+          type: UPDATE_COMMENT_SUCCESS,
+          payload: response.data.comment,
+          message: response.data.message,
+        });
+      } catch (error) {
+        dispatch({
+          type: UPDATE_COMMENT_ERROR,
+          payload: error.message,
+        });
+      }
+    };
+  };

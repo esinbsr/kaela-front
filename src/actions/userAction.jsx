@@ -44,7 +44,7 @@ export const loginUser = (formData) => {
       dispatch({
         type: LOGIN_ERROR,
         payload:
-          error.response?.data?.message ||
+          error.response.data.message ||
           error.message ||
           'No message returned',
       });
@@ -74,7 +74,6 @@ export const addUser = (formData) => {
   };
 };
 
-
 export const verifyToken = (token) => {
   return async (dispatch) => {
     try {
@@ -85,13 +84,13 @@ export const verifyToken = (token) => {
       });
 
       if (response.data.success) {
-        localStorage.setItem('token', response.data.token);
-
         dispatch({
           type: TOKEN_VERIFY_SUCCESS,
           payload: {
             token: response.data.token,
-            updatedToken: response.data.updatedToken,
+            user_id: response.data.user_id, 
+            
+            username: response.data.username 
           },
         });
       } else {

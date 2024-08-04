@@ -24,6 +24,7 @@ import AdminAddSocialNetwork from "./pages/admin/socialNetworks/AdminAddSocialNe
 import Logout from "./components/Logout";
 import AdminUpdateSocialNetwork from "./pages/admin/socialNetworks/AdminUpdateSocialNetwork";
 import ProductDetail from "./pages/ProductDetail";
+import UpdateComment from "./components/UpdateComment";
 
 
 
@@ -52,6 +53,7 @@ const App = () => {
           <Route path="/aboutMe" element={<AboutMe />} />
           <Route path="/logout" element={<Logout />} />
           <Route path="/productDetail/:productDetailId" element={<ProductDetail/>} />
+          <Route path="/updateComment/:commentId" element={<UpdateComment/>} />
 
       
 

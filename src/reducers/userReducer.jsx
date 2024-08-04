@@ -8,12 +8,13 @@ import {
 } from '../actions/userAction';
 
 const initialState = {
-  role: localStorage.getItem('role'), // Initialiser à partir du localStorage
+  role: localStorage.getItem('role'), 
   user_id: localStorage.getItem('user_id'),
   username: localStorage.getItem('username'),
   token: localStorage.getItem('token'),
   error: '',
 };
+
 
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -49,6 +50,8 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         token: action.payload.token,
+        user_id: action.payload.user_id, 
+        username: action.payload.username,
         error: '',
       };
 

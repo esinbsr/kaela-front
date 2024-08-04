@@ -1,13 +1,16 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { loginUser } from '../actions/userAction';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [responseMessage, setResponseMessage] = useState('');
-  
+
+  const userRole = useSelector((state) => state.user.role);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -18,15 +21,24 @@ const Login = () => {
 
     try {
       await dispatch(loginUser(formData));
-      navigate('/admin');
+      setIsLoggedIn(true); // Indique que l'utilisateur est connecté
     } catch (error) {
       setResponseMessage('An error occurred during login');
     }
   };
 
+  useEffect(() => {
+    if (isLoggedIn) {
+      if (userRole === 'admin') {
+        navigate('/admin');
+      } else {
+        navigate('/');
+      }
+    }
+  }, [userRole, isLoggedIn, navigate]);
+
   return (
     <div>
-
       <form onSubmit={handleSubmit}>
         <label htmlFor="email">Email</label>
         <input

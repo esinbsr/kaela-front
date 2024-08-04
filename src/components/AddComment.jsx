@@ -1,11 +1,11 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addComment } from "../actions/commentAction";
 import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 
 const AddComment = () => {
   const [content, setContent] = useState("");
-  const userId = localStorage.getItem("user_id");
+  const userId = useSelector((state)=> state.user.user_id);
   const { productDetailId } = useParams();
 
   const dispatch = useDispatch();
@@ -25,9 +25,9 @@ const AddComment = () => {
 
   if (!userId) {
     return (
-      <div className="test">
+      <div className="comment__login-link">
         <p>Login to write a comment</p>
-        <Link className="lol" to={`/login?redirect=/product/${productDetailId}`}>Login</Link>
+        <Link className="comment__link" to="/login">Login</Link>
       </div>
     );
   }
@@ -45,9 +45,10 @@ const AddComment = () => {
             value={content}
             onChange={(e) => setContent(e.target.value)}
           ></textarea>
+
         </div>
         <div className="comments__button">
-          <button type="submit">send</button>
+          <button type="submit">Send</button>
         </div>
       </form>
     </>

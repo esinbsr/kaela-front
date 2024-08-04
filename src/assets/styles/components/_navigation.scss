@@ -6,7 +6,6 @@
   .navigation_links {
     display: flex;
     gap: 1rem;
-
     .dropdown {
       position: relative;
 
@@ -16,19 +15,15 @@
         position: absolute;
         top: 100%;
         left: 0;
-        background-color: white;
+        background-color: $background-color;
         border: 1px solid #ccc;
-        padding: 0.5rem;
-        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-        z-index: 1;
+        z-index: 100;
 
         a {
           padding: 0.5rem 1rem;
-          text-decoration: none;
-          color: black;
-
+ 
           &:hover {
-            background-color: #f1f1f1;
+            background-color:#d2cfc7;
           }
         }
       }
