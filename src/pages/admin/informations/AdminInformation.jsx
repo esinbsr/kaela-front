@@ -4,7 +4,8 @@ import { deleteInformation, getInformation } from '../../../actions/informationA
 import AdminInformationCard from '../../../components/admin/informations/AdminInformationCard';
 import { isEmpty } from '../../../components/Utils';
 import AdminAddInformation from './AdminAddInformation';
-import Breadcrumb from "../../../components/Breadcrumb";
+import Breadcrumb from '../../../components/utils/Breadcrumb';
+
 
 const AdminInformation = () => {
     const dispatch = useDispatch();

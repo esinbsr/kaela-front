@@ -27,6 +27,8 @@ import ProductDetail from "./pages/ProductDetail";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { verifyToken } from "./actions/userAction";
+import Accessibility from "./components/utils/Accessibility";
+
 
 const ProtectedRoute = ({ children }) => {
   const userRole = localStorage.getItem("role");
@@ -48,6 +50,7 @@ const App = () => {
     <div>
       <BrowserRouter>
         <Navigation />
+        <Accessibility/>
         <Routes>
           <Route path="*" element={<Home />} />
           <Route path="/" element={<Home />} />

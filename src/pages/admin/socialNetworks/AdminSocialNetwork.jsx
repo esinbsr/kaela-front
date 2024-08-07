@@ -1,10 +1,11 @@
 import { useEffect } from 'react';
-import Breadcrumb from '../../../components/Breadcrumb';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { getSocialNetwork } from '../../../actions/socialNetworkAction';
 import { isEmpty } from '../../../components/Utils';
 import AdminSocialNetworkCard from '../../../components/admin/socialNetwork/AdminSocialNetworkCard';
 import AdminAddSocialNetwork from './AdminAddSocialNetwork';
+import Breadcrumb from '../../../components/utils/Breadcrumb';
 
 const AdminSocialNetwork = () => {
     const dispatch = useDispatch();
@@ -18,7 +19,7 @@ const AdminSocialNetwork = () => {
 
     return (
         <div>
-            <Breadcrumb />
+            <Breadcrumb/>
             <AdminAddSocialNetwork/>
             <h1>Social Networks</h1>
             <div className="table-container">

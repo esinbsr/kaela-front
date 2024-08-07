@@ -13,7 +13,6 @@ export const TOKEN_VERIFY_ERROR = 'TOKEN_VERIFY_ERROR';
 export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';
 export const SIGNUP_ERROR = 'SIGNUP_ERROR';
 
-
 export const loginUser = (formData) => {
   return async (dispatch) => {
     try {

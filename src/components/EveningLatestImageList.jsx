@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProduct } from "../actions/productAction";
 import { API_URL } from "../actions/serverRequest";
+import { Link } from "react-router-dom";
 
 const EveningLatestImageList = ({ start, end, additionalClass, section }) => {
     const dispatch = useDispatch();
@@ -31,7 +32,9 @@ const EveningLatestImageList = ({ start, end, additionalClass, section }) => {
 
                     return (
                         <div key={product.id}>
+                             <Link to={`/productDetail/${product.id}`}>
                             <img src={`${API_URL}assets/img/${product.path}`} alt={product.name} className={`${topImage}`}/>
+                            </Link>
                         </div>
                     );
                 })

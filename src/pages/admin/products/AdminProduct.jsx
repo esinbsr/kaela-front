@@ -4,7 +4,8 @@ import { getProduct } from "../../../actions/productAction";
 import AdminProductCard from "../../../components/admin/products/AdminProductCard";
 import { isEmpty } from "../../../components/Utils";
 import AdminAddProduct from "./AdminAddProduct";
-import Breadcrumb from "../../../components/Breadcrumb";
+import Breadcrumb from "../../../components/utils/Breadcrumb";
+
 
 const AdminProduct = () => {
   const dispatch = useDispatch();

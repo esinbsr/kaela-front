@@ -4,7 +4,8 @@ import { isEmpty } from "../../../components/Utils";
 import { getProductCategories } from "../../../actions/categoryAction";
 import AdminCategoryCard from "../../../components/admin/categories/AdminCategoryCard";
 import AdminAddCategory from "./AdminAddCategory";
-import Breadcrumb from "../../../components/Breadcrumb";
+import Breadcrumb from "../../../components/utils/Breadcrumb";
+
 
 const AdminCategory = () => {
   const dispatch = useDispatch();

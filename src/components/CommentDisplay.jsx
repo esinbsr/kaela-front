@@ -35,7 +35,7 @@ const CommentDisplay = () => {
             )
         )
       ) : (
-        <p>Il n'y a pas de commentaires pour le moment, soyez le premier à en écrire un !</p>
+        <p>There are currently no comments, so be the first to write one!</p>
       )}
       {comments.length > 5 && (
         <button onClick={handleToggleComments}>

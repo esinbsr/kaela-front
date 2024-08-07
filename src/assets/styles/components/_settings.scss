@@ -30,3 +30,23 @@ h1 {
   button {
     border: none;
   }
+
+  // .message-error {
+
+  // }
+
+  // .message-succes {
+
+  // }
+
+/* style de focus à tous les éléments interactifs */
+/* Style de focus par défaut */
+:focus {
+  outline: none;
+}
+
+/* Style de focus pour la navigation clavier */
+body.user-is-tabbing :focus {
+  outline: 2px solid #005fcc;
+  outline-offset: 4px;
+}
