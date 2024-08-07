@@ -1,0 +1,32 @@
+.message {
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    font-size: 16px;
+    animation: fade-in-out 3s ease-in-out forwards;
+  }
+  
+  .message.success {
+    background-color: #dff0d8;
+    color: $message-succes;
+  }
+  
+  .message.error {
+    background-color: #f2dede;
+    color: $messgae-error;
+  }
+  
+  @keyframes fade-in-out {
+    0% {
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }

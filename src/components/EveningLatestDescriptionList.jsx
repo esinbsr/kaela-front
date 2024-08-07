@@ -1,34 +1,41 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductCategories } from "../actions/categoryAction";
+import { isEmpty } from './utils/isEmpty'; // Utility function to check if an array is empty
 
-const EveningLatestDescriptionList = ({ categoryIndex }) => {
-  const dispatch = useDispatch();
-  const categories = useSelector((state) => state.category.category);
-  const [loading, setLoading] = useState(true);
+const EveningLatestDescriptionList = ({ categorySlug }) => {
+  const dispatch = useDispatch(); // Hook to dispatch Redux actions
+  const categories = useSelector((state) => state.category.category); // Selector to access categories from the Redux store
+  const [loading, setLoading] = useState(true); // Local state to manage loading
 
   useEffect(() => {
+    // Dispatch action to get categories and update loading state
     dispatch(getProductCategories()).then(() => setLoading(false));
   }, [dispatch]);
 
+  // Display a loading message while the categories are being loaded
   if (loading) return <p>Loading...</p>;
 
-  const category = categories && categories.length > categoryIndex
-    ? categories[categoryIndex]
+// Select the category based on the slug passed in prop
+  const category = !isEmpty(categories)
+    ? categories.find(cat => cat.slug === categorySlug)
     : null;
 
   return (
     <>
       {category ? (
         <>
+        {/* Display the name of the category */}
         <h1>{category.name}</h1>
         <div className="evening-latest__description">
-          <h3>{category.page_title}</h3>
+          {/* Display the page title and description */}
+          <h2>{category.page_title}</h2>
           <p>{category.page_description}</p>
-          </div>
+        </div>
         </>
       ) : (
-        <p>Category description not found.</p>
+        // Message displayed if no category is found
+        <p role="alert" aria-live="assertive">Category description not found.</p>
       )}
     </>
   );

@@ -3,8 +3,9 @@ import AdminProductDetailCard from "../components/admin/products/AdminProductDet
 import { useEffect } from "react";
 import { getProductById } from "../actions/productAction";
 import { useParams } from "react-router-dom";
-import { isEmpty } from "../components/Utils";
-import Comment from "../components/Comment";
+import Comment from "../components/comments/Comment";
+import { isEmpty } from "../components/utils/isEmpty";
+
 
 
 const ProductDetail = () => {

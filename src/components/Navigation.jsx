@@ -2,8 +2,8 @@ import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 const Navigation = () => {
-  const role = useSelector((state) => state.user.role); //permet d'accéder à l'état actuel du store Redux et retourne la valeur de la propriété role de l'utilisateur
-  const isLoggedIn = !!role; // !!converti n'importe quelle valeur en un booléen, il vérifie si role est défini et non nul
+  const role = useSelector((state) => state.user.role); // Allows access to the current state of the Redux store and returns the value of the user's role property
+  const isLoggedIn = !!role; // !! converts any value to a boolean, it checks if role is defined and not null
 
   return (
     <div className="navigation">
@@ -29,8 +29,8 @@ const Navigation = () => {
             <NavLink to="/login">Login</NavLink>
           </>
         )}
-        {isLoggedIn && <NavLink to="/logout">Logout</NavLink>}
-        {role === 'admin' && <NavLink to="/admin">Admin</NavLink>}
+        {isLoggedIn && <NavLink to="/logout">Logout</NavLink>} 
+        {role === 'admin' && <NavLink to="/admin">Admin</NavLink>} 
       </div>
     </div>
   );

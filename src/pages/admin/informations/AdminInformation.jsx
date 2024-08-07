@@ -2,9 +2,10 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteInformation, getInformation } from '../../../actions/informationAction';
 import AdminInformationCard from '../../../components/admin/informations/AdminInformationCard';
-import { isEmpty } from '../../../components/Utils';
+
 import AdminAddInformation from './AdminAddInformation';
 import Breadcrumb from '../../../components/utils/Breadcrumb';
+import { isEmpty } from '../../../components/utils/isEmpty';
 
 
 const AdminInformation = () => {

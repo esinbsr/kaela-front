@@ -4,15 +4,16 @@ import { useDispatch } from 'react-redux';
 import { logoutUser } from '../actions/userAction';
 
 const Logout = () => {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const navigate = useNavigate(); // Hook to navigate programmatically
+  const dispatch = useDispatch(); // Hook to dispatch Redux actions
 
-  useEffect(() => { //s'assure que les actions de déconnexion et de redirection sont exécutées immédiatement après que le composant Logout est monté
-    dispatch(logoutUser());
-    navigate('/login');
-  }, [dispatch, navigate]);
+  useEffect(() => {
+    // Ensures that the logout and redirect actions are executed immediately after the Logout component is mounted
+    dispatch(logoutUser()); // Dispatch the logout action to update the Redux store
+    navigate('/login'); // Navigate to the login page
+  }, [dispatch, navigate]); // Dependencies to ensure the effect runs only once
 
-  return null; //Le composant Logout ne rend rien à l'écran, son seul but est d'exécuter les effets de déconnexion et de redirection
+  return null; // The Logout component does not render anything to the screen; its sole purpose is to execute the logout and redirect effects
 };
 
 export default Logout;

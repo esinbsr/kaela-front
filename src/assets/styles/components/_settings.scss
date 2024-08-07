@@ -31,22 +31,9 @@ h1 {
     border: none;
   }
 
-  // .message-error {
-
-  // }
-
-  // .message-succes {
-
-  // }
-
-/* style de focus à tous les éléments interactifs */
-/* Style de focus par défaut */
-:focus {
-  outline: none;
-}
-
-/* Style de focus pour la navigation clavier */
-body.user-is-tabbing :focus {
+/* Style de focus uniquement pour la navigation clavier */
+:focus-visible {
   outline: 2px solid #005fcc;
   outline-offset: 4px;
 }
+

@@ -2,9 +2,9 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProduct } from "../../../actions/productAction";
 import AdminProductCard from "../../../components/admin/products/AdminProductCard";
-import { isEmpty } from "../../../components/Utils";
 import AdminAddProduct from "./AdminAddProduct";
 import Breadcrumb from "../../../components/utils/Breadcrumb";
+import { isEmpty } from "../../../components/utils/isEmpty";
 
 
 const AdminProduct = () => {

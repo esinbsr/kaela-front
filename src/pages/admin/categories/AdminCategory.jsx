@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { isEmpty } from "../../../components/Utils";
 import { getProductCategories } from "../../../actions/categoryAction";
 import AdminCategoryCard from "../../../components/admin/categories/AdminCategoryCard";
 import AdminAddCategory from "./AdminAddCategory";
 import Breadcrumb from "../../../components/utils/Breadcrumb";
+import { isEmpty } from "../../../components/utils/isEmpty";
 
 
 const AdminCategory = () => {

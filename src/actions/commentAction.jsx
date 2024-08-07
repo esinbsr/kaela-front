@@ -25,10 +25,10 @@ export const getComment = (productDetailId) => {
             } else {
                 throw new Error(message);
             }
-        } catch(error) {
+        } catch (error) {
             dispatch({
                 type: GET_COMMENT_ERROR,
-                payload: error.response.data.message || "No message returned"
+                payload: error.response?.data?.message || "Failed to fetch comments. Please try again."
             });
         }
     }
@@ -49,10 +49,10 @@ export const addComment = (formData) => {
             } else {
                 throw new Error(message);
             }
-        } catch(error) {
+        } catch (error) {
             dispatch({
                 type: ADD_COMMENT_ERROR,
-                payload: error.response?.data?.message || "No message returned"
+                payload: error.response?.data?.message || "Failed to add comment. Please try again."
             });
         }
     }
@@ -74,4 +74,4 @@ export const getCommentById = (commentId) => {
         });
       }
     }
-  }
+}
