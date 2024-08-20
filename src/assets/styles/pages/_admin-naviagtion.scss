@@ -1,12 +1,36 @@
-.admin-navigation {
-  @include flexbox(center, center);
-  gap: 20px;
-  a {
-    font-size: 1.4rem;
-    color: white;
-    background-color: $main-color;
-    padding: 10px 50px;
-    border-radius: 8px;
-    cursor: pointer;
+.admin-container {
+  display: flex;
+  min-height: 100vh;
+  position: relative;
+
+  &__navigation {
+    width: 250px;
+    background-color: #343a40;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 1rem;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
   }
+
+  a {
+    font-size: 1.2rem;
+    color: #ffffff;
+    padding: 1rem 1.5rem;
+    margin-bottom: 1rem;
+    transition:  0.3s;
+
+    &:hover {
+      background-color: #414a52c6;
+    }
+  }
+
+
+
+.admin-content {
+  flex: 1;
+  padding: 2rem;
+  background-color: #ffffff;
+  overflow-y: auto;
 }
+}
+

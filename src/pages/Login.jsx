@@ -1,45 +1,53 @@
-import { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { loginUser } from '../actions/userAction';
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { loginUser, resetMessages } from "../actions/userAction";
+import Message from "../components/utils/Message";
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [responseMessage, setResponseMessage] = useState('');
+  // State variables to handle input values for email and password fields
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
+  // Accessing error and user role from Redux store
   const userRole = useSelector((state) => state.user.role);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const message = useSelector((state) => state.user.message);
+  const error = useSelector((state) => state.user.error);
 
+  // Hooks to dispatch actions and navigate between routes
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const handleSubmit = async (e) => {
+ // Reset messages and states when the component mounts
+  useEffect(() => {
+    dispatch(resetMessages());
+  }, [dispatch]);
+
+  // Handler function for form submission
+  const handleSubmit = (e) => {
     e.preventDefault();
-
-    const formData = { email, password };
-
-    try {
-      await dispatch(loginUser(formData));
-      setIsLoggedIn(true); // Indique que l'utilisateur est connecté
-    } catch (error) {
-      setResponseMessage('An error occurred during login');
-    }
+    dispatch(resetMessages()); // Clear previous messages before submission
+    const formData = { email, password }; // Creating an object with email and password
+    dispatch(loginUser(formData)); // Dispatching the login action with form data
   };
 
+  // Effect that runs when userRole changes; it handles navigation after login
   useEffect(() => {
-    if (isLoggedIn) {
-      if (userRole === 'admin') {
-        navigate('/admin');
+    if (userRole) {
+      // Check if userRole is set (indicating successful login)
+      if (userRole === "admin") {
+        navigate("/admin"); // Navigate to the admin page if the user is an admin
       } else {
-        navigate('/');
+        navigate("/"); // Otherwise, navigate to the home page
       }
     }
-  }, [userRole, isLoggedIn, navigate]);
+  }, [userRole, navigate]);
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      {/* Form for email and password input */}
+      <form onSubmit={handleSubmit} className="signup-login">
+        <h1>Login</h1>
         <label htmlFor="email">Email</label>
         <input
           id="email"
@@ -47,21 +55,32 @@ const Login = () => {
           onChange={(e) => setEmail(e.target.value)}
           name="email"
           value={email}
+          aria-required="true" // Accessibility attribute indicating the field is required
         />
 
         <label htmlFor="password">Password</label>
         <input
           id="password"
           type="password"
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={(e) => setPassword(e.target.value)} // Update password state on change
           name="password"
           value={password}
+          aria-required="true" // Accessibility attribute indicating the field is required
         />
 
         <button type="submit">Login</button>
+
+        <p>
+          No account yet?
+          <Link to="/signup" className="signup-login__link">
+             Sign up here
+          </Link>
+        </p>
       </form>
-      {responseMessage && <p>{responseMessage}</p>}
-      <p>No account yet? <Link to="/signup"> Create one here</Link></p>
+
+      {/* Display success or error messages */}
+      {message && <Message message={message} type="success" />}
+      {error && <Message message={error} type="error" />}
     </div>
   );
 };

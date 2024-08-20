@@ -1,8 +1,16 @@
 import { Link } from 'react-router-dom';
-import AdminDeleteInformation from './AdminDeleteInformation';
+import { deleteInformation } from '../../../actions/informationAction';
+import { useDispatch } from 'react-redux';
 
+const AdminInformationCard = ({ infos }) => {
+    const dispatch = useDispatch();
 
-const AdminInformationCard = ({ infos, onDelete }) => {
+    const handleDelete = () => {
+      if (window.confirm("Are you sure you want to delete this product?")) {
+        dispatch(deleteInformation(infos.id));
+      }
+    };
+  
     return (
         <tr>
             <td>{infos.description}</td>
@@ -11,9 +19,16 @@ const AdminInformationCard = ({ infos, onDelete }) => {
             <td>
                 <Link to={`/adminInformationModify/${infos.id}`}>Modify</Link>
             </td>
+
             <td>
-                <AdminDeleteInformation informationId={infos.id} onDelete={onDelete} />
-                </td>
+                <Link
+                to="#" 
+                onClick={handleDelete} 
+                >
+                Delete 
+                </Link>
+            </td>
+
         </tr>
     );
 };

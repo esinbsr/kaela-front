@@ -1,23 +1,35 @@
+import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { deleteCategory } from "../../../actions/categoryAction";
 
-import { Link } from 'react-router-dom';
-import AdminDeleteCategory from './AdminDeleteCategory';
+const AdminCategoryCard = ({ category }) => {
+  const dispatch = useDispatch();
 
-const AdminCategoryCard = ({category, onDelete}) => {
-    return (
-            <tr>
-                <td>{category.name}</td>
-                <td>{category.description}</td>
-                <td>{category.page_title}</td>
-                <td>{category.page_description}</td>
-                <td>
-                    <Link to={`/adminUpdateCategory/${category.id}`}>Update</Link>
-                </td>
-                <td>
-                    <AdminDeleteCategory categoryId={category.id} onDelete={onDelete} />
-                </td>
-            </tr>
-        
-    );
+  const handleDelete = () => {
+    if (window.confirm("Are you sure you want to delete this category?")) {
+      dispatch(deleteCategory(category.id));
+    }
+  };
+
+  return (
+    <tr>
+      <td>{category.name}</td>
+      <td>{category.description}</td>
+      <td>{category.page_title}</td>
+      <td>{category.page_description}</td>
+      <td>
+        <Link to={`/adminUpdateCategory/${category.id}`}>Update</Link>
+      </td>
+      <td>
+        <Link
+          to="#"
+          onClick={handleDelete}
+        >
+          Delete
+        </Link>
+      </td>
+    </tr>
+  );
 };
 
 export default AdminCategoryCard;

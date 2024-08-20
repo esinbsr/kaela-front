@@ -16,7 +16,10 @@
 }
 
 @mixin buttonRound($color, $bc: null, $border: false) {
-    padding: 6px 40px;
+    // padding: 6px 40px;
+    width: 50%;
+    text-align: center;
+    padding: 8px 0;
     border-radius: 50px;
     color: $color;
     
@@ -30,10 +33,14 @@
 }
 
 @mixin buttonSuqare($color, $bc) {
-    padding: 6px 55px;
+    // padding: 6px 55px;
+    width: 50%;
+    text-align: center;
+    padding: 8px 0;
     border-radius: 6px;
     color: $color;
     background-color: $bc;
+
 }
 
 @mixin containerCenter {

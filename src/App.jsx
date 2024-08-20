@@ -3,7 +3,6 @@ import Home from "./pages/Home";
 import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
 import Contact from "./pages/Contact";
-import AdminDeleteInformation from "./components/admin/informations/AdminDeleteInformation";
 import AdminProduct from "./pages/admin/products/AdminProduct";
 import AdminAddProduct from "./pages/admin/products/AdminAddProduct";
 import AdminUpdateProduct from "./pages/admin/products/AdminUpdateProduct";
@@ -32,8 +31,6 @@ import Accessibility from "./components/utils/Accessibility";
 
 const ProtectedRoute = ({ children }) => {
   const userRole = localStorage.getItem("role");
-
-  console.log("User role:", userRole); // Debug log
   return userRole === "admin" ? children : <Navigate to="/" />; //Si la condition est vraie, le composant retourne children, donc les composants enfants sont rendus
 };
 
@@ -121,14 +118,6 @@ const App = () => {
             element={
               <ProtectedRoute>
                 <AdminInformationModify />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/adminDeleteInformation/:informationId"
-            element={
-              <ProtectedRoute>
-                <AdminDeleteInformation />
               </ProtectedRoute>
             }
           />

@@ -44,6 +44,7 @@ const informationReducer = (state = initialState, action) => {
                 error: '',
             };
 
+
         case UPDATE_INFORMATION_SUCCESS:
             return {
                 ...state,

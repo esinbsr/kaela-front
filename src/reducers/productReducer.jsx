@@ -14,6 +14,8 @@ import {
   DELETE_PRODUCT_SUCCESS,
   DELETE_PRODUCT_ERROR,
 
+  RESET_PRODUCT_MESSAGES
+
 
 
 } from "../actions/productAction";
@@ -62,15 +64,17 @@ const productReducer = (state = initialState, action) => {
         error: "",
       };
 
-    case DELETE_PRODUCT_SUCCESS:
-      return {
-        ...state,
-        products: state.products.filter( // filter() est utilisée pour créer un nouveau tableau contenant uniquement les éléments qui remplissent une certaine condition.
-          (product) => product.id !== action.payload // Si l'id du produit est différent de action.payload, le produit est conservé dans le nouveau tableau. Sinon, il est filtré (supprimé) du tableau
-        ),
-        message: "Product deleted successfully",
-        error: "",
-      };
+      case DELETE_PRODUCT_SUCCESS:
+        return {
+            ...state,
+            products: state.products.filter(
+                (product) => product.id !== action.payload 
+            ),
+            message: action.message, // Stocke le message de succès dans l'état
+            error: "",
+        };
+    
+      
 
       case GET_PRODUCT_ERROR:
         case GET_PRODUCT_BY_ID_ERROR:
@@ -82,6 +86,14 @@ const productReducer = (state = initialState, action) => {
             message: "",
             error: action.payload,
           };
+
+          case RESET_PRODUCT_MESSAGES:
+            return {
+                ...state,
+                message: "",  // Réinitialise le message de succès
+                error: "",    // Réinitialise l'erreur
+            };
+    
 
     default:
       return state;

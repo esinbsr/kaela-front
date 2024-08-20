@@ -1,34 +1,40 @@
-import { useDispatch, useSelector } from "react-redux";
-import AdminProductDetailCard from "../components/admin/products/AdminProductDetailCard";
-import { useEffect } from "react";
-import { getProductById } from "../actions/productAction";
-import { useParams } from "react-router-dom";
-import Comment from "../components/comments/Comment";
+
+import { useDispatch, useSelector } from "react-redux"; 
+import AdminProductDetailCard from "../components/admin/products/ProductDetailCard"; 
+import { useEffect } from "react"; 
+import { getProductById } from "../actions/productAction"; 
+import { useParams } from "react-router-dom"; 
+import Comment from "../components/comments/Comment"; 
 import { isEmpty } from "../components/utils/isEmpty";
 
-
-
 const ProductDetail = () => {
+    // Extract the product ID from the URL parameters
     const { productDetailId } = useParams();
+    
+    // Initialize dispatch and selector hooks
     const dispatch = useDispatch();
     const productById = useSelector((state) => state.product.productById);
 
+    // Use the useEffect hook to dispatch the action to fetch product details when the ID changes
     useEffect(() => {
         if (productDetailId) {
-            dispatch(getProductById(productDetailId));
+            dispatch(getProductById(productDetailId)); // Dispatch the action to get product details
         }
-    }, [dispatch, productDetailId]);
+    }, [dispatch, productDetailId]); // Dependencies of the useEffect: it runs when dispatch or productDetailId changes
 
     return (
         <>
+            {/* Check if the product details are available */}
             {!isEmpty(productById) ? (
-                <AdminProductDetailCard key={productById.id} product={productById} />
+                <AdminProductDetailCard key={productById.id} productDetail={productById} />
+                // Display the AdminProductDetailCard component if product details are not empty
             ) : (
-                <p>Aucun produit trouvé.</p>
+                <p>No products found.</p>
+                // Message displayed when product details are empty
             )}
 
-        <Comment/>
-
+            <Comment/>
+            {/* Display the Comment component for comments associated with the product */}
         </>
     );
 };

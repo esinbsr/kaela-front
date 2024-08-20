@@ -1,0 +1,39 @@
+.signup-login {
+    display: flex;
+    flex-direction: column;
+    align-items: center; // Centers the button horizontally
+    width: 300px; // Fixed width for the form
+    margin: 50px auto; // Centering the form horizontally
+
+  
+    label {
+        align-self: flex-start;
+      margin-bottom: 8px;
+    }
+  
+    input {
+      width: 100%; // Full width input fields
+      padding: 8px; 
+      margin-bottom: 15px; 
+      border: 1px solid $main-color; // Border color for inputs
+      outline: none;
+      border-radius: 5px; // Rounded corners for inputs
+      font-size: 16px; // Larger font size for readability
+    }
+  
+    button {
+    @include buttonSuqare(white, $main-color);
+    }
+
+    p {
+      margin-top: 15px;
+    }
+
+    .signup-login__link{
+      text-decoration: underline;
+      color: $main-color;
+      cursor: pointer;
+
+    }
+  }
+  

@@ -15,6 +15,9 @@ export const UPDATE_PRODUCT_ERROR = 'UPDATE_PRODUCT_ERROR';
 export const DELETE_PRODUCT_SUCCESS = 'DELETE_PRODUCT_SUCCESS';
 export const DELETE_PRODUCT_ERROR = 'DELETE_PRODUCT_ERROR';
 
+export const RESET_PRODUCT_MESSAGES = 'RESET_PRODUCT_MESSAGES';
+
+
 
 import { API_URL } from "./serverRequest";
 
@@ -129,10 +132,12 @@ export const deleteProduct = (productId) => {
     return async (dispatch) => {
         try {
             const response = await axios.post(`${API_URL}deleteProduct`, { productId });
+            const message = response.data.message; // Récupère le message de la réponse
             if (response.data.success) {
                 dispatch({
                     type: DELETE_PRODUCT_SUCCESS,
                     payload: productId,
+                    message: message // Transmet le message au reducer
                 });
             } else {
                 throw new Error(response.data.message || "Failed to delete product");
@@ -145,3 +150,8 @@ export const deleteProduct = (productId) => {
         }
     };
 };
+
+export const resetProductMessages = () => ({
+    type: RESET_PRODUCT_MESSAGES,
+  });
+  

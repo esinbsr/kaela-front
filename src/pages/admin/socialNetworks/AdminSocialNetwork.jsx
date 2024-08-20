@@ -1,12 +1,10 @@
 import { useEffect } from 'react';
-
 import { useDispatch, useSelector } from 'react-redux';
 import { getSocialNetwork } from '../../../actions/socialNetworkAction';
-
 import AdminSocialNetworkCard from '../../../components/admin/socialNetwork/AdminSocialNetworkCard';
 import AdminAddSocialNetwork from './AdminAddSocialNetwork';
-import Breadcrumb from '../../../components/utils/Breadcrumb';
 import { isEmpty } from '../../../components/utils/isEmpty';
+import AdminNavigation from '../AdminNavigation';
 
 const AdminSocialNetwork = () => {
     const dispatch = useDispatch();
@@ -19,43 +17,45 @@ const AdminSocialNetwork = () => {
     }, [dispatch]);
 
     return (
-        <div>
-            <Breadcrumb/>
-            <AdminAddSocialNetwork/>
-            <h1>Social Networks</h1>
-            <div className="table-container">
-                <table className="table">
-                    <thead>
-                        <tr>
-                            <th>Platform</th>
-                            <th>Url</th>
-                            <th className="action-header" colSpan={2}>
-                                Action
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {!isEmpty(socialNetwork) ? (
-                            socialNetwork.map((socialNetwork) =>
-                                !isEmpty(socialNetwork) && (
-                                    <AdminSocialNetworkCard
-                                        key={socialNetwork.id}
-                                        socialNetwork={socialNetwork}
-                                    />
-                                )
-                            )
-                        ) : (
+        <div className="admin-container">
+            <AdminNavigation />
+            <div className="admin-container__content">
+                <h1>Social Networks</h1>
+                <AdminAddSocialNetwork />
+                <div className="table-container">
+                    <table className="table">
+                        <thead>
                             <tr>
-                                <td colSpan="6" style={{ textAlign: 'center' }}>
-                                    There are no social networks
-                                </td>
+                                <th>Platform</th>
+                                <th>Url</th>
+                                <th className="action-header" colSpan={2}>
+                                    Action
+                                </th>
                             </tr>
-                        )}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            {!isEmpty(socialNetwork) ? (
+                                socialNetwork.map((socialNetwork) =>
+                                    !isEmpty(socialNetwork) && (
+                                        <AdminSocialNetworkCard
+                                            key={socialNetwork.id}
+                                            socialNetwork={socialNetwork}
+                                        />
+                                    )
+                                )
+                            ) : (
+                                <tr>
+                                    <td colSpan="6" style={{ textAlign: 'center' }}>
+                                        There are no social networks
+                                    </td>
+                                </tr>
+                            )}
+                        </tbody>
+                    </table>
+                </div>
+                {message && <p>{message}</p>}
+                {error && <p>{error}</p>}
             </div>
-            {message && <p>{message}</p>}
-            {error && <p>{error}</p>}
         </div>
     );
 };

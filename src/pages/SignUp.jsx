@@ -1,9 +1,11 @@
-import { useState } from "react";
-import { addUser } from "../actions/userAction";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from "react-router-dom";
+import { addUser, resetMessages } from "../actions/userAction";
+import Message from "../components/utils/Message";
 
 const SignUp = () => {
+  // State variables for form inputs
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -11,27 +13,36 @@ const SignUp = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  // Access error, success, and message states from Redux store
+  const error = useSelector((state) => state.user.error);
+  const success = useSelector((state) => state.user.success);
+  const message = useSelector((state) => state.user.message);
 
-    const formData = {
-      username,
-      email,
-      password,
-    };
+  // Reset messages and states when the component mounts
+  useEffect(() => {
+    dispatch(resetMessages());
+  }, [dispatch]);
 
-    try {
-      await dispatch(addUser(formData));
-      navigate('/login');
-    } catch (error) {
-      // console.log("error");
+  // Handle form submission
+  const handleSubmit = (e) => {
+    e.preventDefault(); // Prevent default form submission behavior
+    dispatch(resetMessages()); // Clear previous messages before submission
+    dispatch(addUser({ username, email, password })); // Dispatch the addUser action with form data
+  };
+
+  // Redirect to the login page after successful signup
+  useEffect(() => {
+    if (success) {
+      setTimeout(() => {
+        navigate("/login"); // Navigate to the login page after a 2 second delay
+      }, 2000);
     }
-
-  }
+  }, [success, navigate]);
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="signup-login">
+        <h1>Signup</h1>
         <label htmlFor="username">Username</label>
         <input
           id="username"
@@ -39,7 +50,7 @@ const SignUp = () => {
           onChange={(e) => setUsername(e.target.value)}
           name="username"
           value={username}
-          required
+          aria-required="true" // Indicate that this field is required
         />
 
         <label htmlFor="email">Email</label>
@@ -49,7 +60,7 @@ const SignUp = () => {
           onChange={(e) => setEmail(e.target.value)}
           name="email"
           value={email}
-          required
+          aria-required="true"
         />
 
         <label htmlFor="password">Password</label>
@@ -59,14 +70,22 @@ const SignUp = () => {
           onChange={(e) => setPassword(e.target.value)}
           name="password"
           value={password}
-          required
+          aria-required="true"
         />
 
         <button type="submit">Sign Up</button>
-      </form>
-      <p>Already have an account? <Link to="/login">Log in here </Link></p>
-      {/* {responseMessage && <p>{responseMessage}</p>} */}
 
+        <p>
+          Already have an account?
+          <Link to="/login" className="signup-login__link">
+            Login here
+          </Link>
+        </p>
+      </form>
+
+      {/* Display success or error messages */}
+      {success && <Message message={message} type="success" />}
+      {error && <Message message={error} type="error" />}
     </div>
   );
 };
