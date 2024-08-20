@@ -1,0 +1,46 @@
+form {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 1.4rem;
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+    padding: 2rem; 
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); 
+  
+    label {
+      align-self: center;
+    }
+  
+    input,
+    select,
+    textarea {
+      padding: 0.50rem;
+      border: 1px solid #dee2e6;
+      border-radius: 4px;
+      width: 100%;
+      background-color: #ffffff; 
+      transition: border-color 0.3s ease, box-shadow 0.3s ease; // Transition douce pour les interactions
+  
+      &:focus {
+        border-color: $main-color;
+        outline: none;
+      }
+    }
+  
+    textarea {
+      resize: none;
+      min-height: 100px; 
+    }
+  
+    button {
+        @include buttonSuqare(white, $main-color);
+      grid-column: 1 / -1; // Le bouton occupe toute la largeur disponible du formulaire
+      justify-self: center;
+      transition: background-color 0.3s ease, transform 0.3s ease; // Ajout d'une transition pour l'effet de survol
+  
+      &:hover {
+        background-color: #126876;
+      }
+    }
+  }
+  

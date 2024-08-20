@@ -1,25 +1,39 @@
 .table-container {
-  @include flexbox(center, center);
-  }
-  
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+
   .table {
-    width: 80%;
-    max-width: 800px; 
+    width: 100%;
+    max-width: 1000px;
     border-collapse: collapse;
-    font-size: 18px;
-  
+    background-color: #f8f9fa;
+
     th, td {
-      border: 1px solid #dddddd;
-      padding: 8px;
+      border: 1px solid #dee2e6;
+      padding: 12px;
     }
-  
+
     th {
-      background-color: #f2f2f2;
+      background-color: $main-color;
+      color: #ffffff;
     }
-  
-    tr:nth-child(even) {
-      background-color: #f9f9f9;
+
+
+    caption {
+      caption-side: top;
+      text-align: left;
+      font-weight: bold;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
     }
-  
+
+    .action-header {
+      text-align: center;
+    }
+
+    a {
+      color: $main-color;
+    }
   }
-  
+}

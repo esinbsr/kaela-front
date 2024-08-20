@@ -1,11 +1,19 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import AdminProductCard from "../../../components/admin/products/AdminProductCard";
 import AdminAddProduct from "./AdminAddProduct";
 import { isEmpty } from "../../../components/utils/isEmpty";
 import AdminNavigation from "../AdminNavigation";
+import { useEffect } from "react";
+import { getProduct } from "../../../actions/productAction";
 
 const AdminProduct = () => {
+  const dispatch = useDispatch();
   const products = useSelector((state) => state.product.products);
+
+  useEffect(() => {
+    dispatch(getProduct());  // Charger les produits au montage du composant
+  }, [dispatch]);
+
 
   return (
     <div className="admin-container">
