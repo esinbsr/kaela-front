@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getSocialNetworkById, updateSocialNetwork } from "../../../actions/socialNetworkAction";
+import AdminNavigation from "../AdminNavigation";
 
 const AdminUpdateSocialNetwork = () => {
   const { socialNetworkId } = useParams();
@@ -44,32 +45,39 @@ const AdminUpdateSocialNetwork = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="platform">Platform</label>
-        <input
-          type="text"
-          id="platform"
-          name="platform"
-          value={platform}
-          onChange={(e) => setPlatform(e.target.value)}
-        />
-
-        <label htmlFor="url">Url</label>
-        <input
-          type="text"
-          id="url"
-          name="url"
-          value={url}
-          onChange={(e) => setUrl(e.target.value)}
-        />
-        <button type="submit">Update</button>
-      </form>
-      {responseMessage && <p>{responseMessage}</p>}
-      {message && <p>{message}</p>}
-      {error && <p>{error}</p>}
+    <div className="admin-container">
+      <AdminNavigation />
+      <div className="admin-container__content">
+        <h1>Update social network</h1>
+        <div className="form">
+          <form onSubmit={handleSubmit}>
+            <label htmlFor="platform">Platform</label>
+            <input
+              type="text"
+              id="platform"
+              name="platform"
+              value={platform}
+              onChange={(e) => setPlatform(e.target.value)}
+            />
+  
+            <label htmlFor="url">Url</label>
+            <input
+              type="text"
+              id="url"
+              name="url"
+              value={url}
+              onChange={(e) => setUrl(e.target.value)}
+            />
+            <button type="submit">Update</button>
+          </form>
+          {responseMessage && <p>{responseMessage}</p>}
+          {message && <p>{message}</p>}
+          {error && <p>{error}</p>}
+        </div>
+      </div>
     </div>
   );
+  
 };
 
 export default AdminUpdateSocialNetwork;

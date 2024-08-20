@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
 import { addInformation } from '../../../actions/informationAction';
-
 
 const AdminAddInformation = () => {
     const [description, setDescription] = useState('');
@@ -10,7 +8,6 @@ const AdminAddInformation = () => {
     const [address, setAddress] = useState('');
 
     const dispatch = useDispatch();
-
     const responseMessage = useSelector((state) => state.information.message);
     const error = useSelector((state) => state.information.error);
 
@@ -35,8 +32,8 @@ const AdminAddInformation = () => {
       }, [responseMessage, error]);
 
     return (
-        <div>
-            {/* <h1>Add Information</h1> */}
+        <div className='form'>
+            <h3>Add information</h3>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="description">Description</label>
                 <textarea
@@ -64,7 +61,7 @@ const AdminAddInformation = () => {
                     onChange={(e) => setAddress(e.target.value)}
                 />
 
-                <button type="submit">Add</button>
+                <button type="submit">Create</button>
             </form>
             {responseMessage && <p>{responseMessage}</p>}
             {error && <p>{error}</p>}

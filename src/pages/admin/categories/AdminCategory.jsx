@@ -20,29 +20,31 @@ const AdminCategory = () => {
       <div className="admin-container__content">
         <h1>Categories</h1>
         <AdminAddCategory />
-        <div className="table-container">
-          <table className="table">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Page Title</th>
-                <th>Page Description</th>
-                <th className="action-header" colSpan={2}>
-                  Action
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {!isEmpty(categories) ? (
-                categories.map(
-                  (category) =>
-                    !isEmpty(category) && (
-                      <AdminCategoryCard
-                        key={category.id}
-                        category={category}
-                      />
-                    )
+        <div className="table">
+          <h3>List of categories</h3>
+          <div className="table__container">
+            <table className="table__content">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Description</th>
+                  <th>Page Title</th>
+                  <th>Page Description</th>
+                  <th className="action-header" colSpan={2}>
+                    Action
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {!isEmpty(categories) ? (
+                  categories.map(
+                    (category) =>
+                      !isEmpty(category) && (
+                        <AdminCategoryCard
+                          key={category.id}
+                          category={category}
+                        />
+                      )
                 )
               ) : (
                 <tr>
@@ -51,8 +53,9 @@ const AdminCategory = () => {
                   </td>
                 </tr>
               )}
-            </tbody>
-          </table>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>

@@ -25,7 +25,6 @@ const AdminAddCategory = () => {
     };
 
     dispatch(addCategory(formData));
-
   };
 
   useEffect(() => {
@@ -38,8 +37,8 @@ const AdminAddCategory = () => {
   }, [responseMessage, error]);
 
   return (
-    <div>
-      {/* <h1>Add a category</h1> */}
+    <div className='form'>
+      <h3>Add category</h3>
       <form onSubmit={handleSubmit}>
         <label htmlFor="categoryName">Name of category:</label>
         <input
@@ -75,7 +74,7 @@ const AdminAddCategory = () => {
           onChange={(e) => setCategoryPageDescription(e.target.value)}
         ></textarea>
 
-        <button type="submit">Create category</button>
+        <button type="submit">Create</button>
       </form>
       {responseMessage && <p>{responseMessage}</p>}
       {error && <p>{error}</p>}

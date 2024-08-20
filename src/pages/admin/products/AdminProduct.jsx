@@ -11,9 +11,8 @@ const AdminProduct = () => {
   const products = useSelector((state) => state.product.products);
 
   useEffect(() => {
-    dispatch(getProduct());  // Charger les produits au montage du composant
+    dispatch(getProduct()); // Charger les produits au montage du composant
   }, [dispatch]);
-
 
   return (
     <div className="admin-container">
@@ -21,9 +20,10 @@ const AdminProduct = () => {
       <div className="admin-container__content">
         <h1>Products</h1>
         <AdminAddProduct />
-        <div className="table-container">
-          <table className="table">
-            <caption>List of products</caption>
+        <div className="table">
+        <h3>List of products</h3>
+        <div className="table__container">
+          <table className="table__content">
             <thead>
               <tr>
                 <th>Image</th>
@@ -60,6 +60,7 @@ const AdminProduct = () => {
           </table>
         </div>
       </div>
+    </div>
     </div>
   );
 };

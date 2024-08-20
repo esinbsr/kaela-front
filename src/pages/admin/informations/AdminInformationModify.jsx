@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getInformationById, updateInformation } from '../../../actions/informationAction';
+import AdminNavigation from '../AdminNavigation';
 
 const AdminInformationModify = () => {
     const { informationId } = useParams(); //extrait la partie dynamique de l'URL qui est (l'ID) (qui se trouve dans App.jsx)
@@ -47,42 +48,48 @@ const AdminInformationModify = () => {
     };
 
     return (
-        <div>
-            <h1>Update Information</h1>
-            <form onSubmit={handleSubmit}>
+        <div className="admin-container">
+            <AdminNavigation/>
+          <div className="admin-container__content">
+            <h1>Update information</h1>
+            <div className="form">
+              <form onSubmit={handleSubmit}>
                 <label htmlFor="description">Description</label>
                 <textarea
-                    id="description"
-                    name="description"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
+                  id="description"
+                  name="description"
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
                 ></textarea>
-
+      
                 <label htmlFor="mobile">Mobile</label>
                 <input
-                    type="text"
-                    id="mobile"
-                    name="mobile"
-                    value={mobile}
-                    onChange={(e) => setMobile(e.target.value)}
+                  type="text"
+                  id="mobile"
+                  name="mobile"
+                  value={mobile}
+                  onChange={(e) => setMobile(e.target.value)}
                 />
-
+      
                 <label htmlFor="address">Address</label>
                 <input
-                    type="text"
-                    id="address"
-                    name="address"
-                    value={address}
-                    onChange={(e) => setAddress(e.target.value)}
+                  type="text"
+                  id="address"
+                  name="address"
+                  value={address}
+                  onChange={(e) => setAddress(e.target.value)}
                 />
-
-                <button type="submit">Modify</button>
-            </form>
-            {responseMessage && <p>{responseMessage}</p>}
-            {message && <p>{message}</p>}
-            {error && <p>{error}</p>}
+      
+                <button type="submit">Update</button>
+              </form>
+              {responseMessage && <p>{responseMessage}</p>}
+              {message && <p>{message}</p>}
+              {error && <p>{error}</p>}
+            </div>
+          </div>
         </div>
-    );
+      );
+      
 };
 
 export default AdminInformationModify;

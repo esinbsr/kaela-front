@@ -1,4 +1,4 @@
-import {  useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addSocialNetwork } from "../../../actions/socialNetworkAction";
 
@@ -19,9 +19,9 @@ const AdminAddSocialNetwork = () => {
     dispatch(addSocialNetwork(formData));
   };
 
-
   return (
-    <div>
+    <div className='form'>
+      <h3>Add social network</h3>
       <form onSubmit={handleSubmit}>
         <label htmlFor="platform">Platform</label>
         <input

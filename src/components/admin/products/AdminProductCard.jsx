@@ -29,6 +29,7 @@ const AdminProductCard = ({ product }) => {
           <Link
             to={`/adminUpdateProduct/${product.id}`}
             aria-label={`Update ${product.name}`}
+            className='update-color'
           >
             Update
           </Link>
@@ -40,6 +41,7 @@ const AdminProductCard = ({ product }) => {
             to="#"
             onClick={handleDelete}
             aria-label={`Delete ${product.name}`}
+            className="delete-color"
           >
             Delete
           </Link>

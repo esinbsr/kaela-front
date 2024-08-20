@@ -20,37 +20,40 @@ const AdminInformation = () => {
             <div className="admin-container__content">
                 <h1>My Information</h1>
                 <AdminAddInformation />
-                <div className="table-container">
-                    <table className="table">
-                        <thead>
-                            <tr>
-                                <th>Description</th>
-                                <th>Mobile</th>
-                                <th>Address</th>
-                                <th className="action-header" colSpan={2}>
-                                    Action
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {!isEmpty(information) ? (
-                                information.map((info) =>
-                                    !isEmpty(info) && (
-                                        <AdminInformationCard
-                                            key={info.id}
-                                            infos={info}
-                                        />
-                                    )
-                                )
-                            ) : (
+                <div className="table">
+                    <h3>List of information</h3>
+                    <div className="table__container">
+                        <table className="table__content">
+                            <thead>
                                 <tr>
-                                    <td colSpan="6" style={{ textAlign: 'center' }}>
-                                        There are no information
-                                    </td>
+                                    <th>Description</th>
+                                    <th>Mobile</th>
+                                    <th>Address</th>
+                                    <th className="action-header" colSpan={2}>
+                                        Action
+                                    </th>
                                 </tr>
-                            )}
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                {!isEmpty(information) ? (
+                                    information.map((info) =>
+                                        !isEmpty(info) && (
+                                            <AdminInformationCard
+                                                key={info.id}
+                                                infos={info}
+                                            />
+                                        )
+                                    )
+                                ) : (
+                                    <tr>
+                                        <td colSpan="6" style={{ textAlign: 'center' }}>
+                                            There is no information
+                                        </td>
+                                    </tr>
+                                )}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

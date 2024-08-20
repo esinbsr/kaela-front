@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getCategoryById, updateCategory } from "../../../actions/categoryAction";
+import AdminNavigation from "../AdminNavigation";
 
 const AdminUpdateCategory = () => {
   const { categoryId } = useParams();
@@ -49,49 +50,55 @@ const AdminUpdateCategory = () => {
   };
 
   return (
-    <div>
-      <h1>Update category</h1>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="categoryName">Name of category:</label>
-        <input
-          id="categoryName"
-          type="text"
-          name="categoryName"
-          value={categoryName}
-          onChange={(e) => setCategoryName(e.target.value)}
-        />
-
-        <label htmlFor="categoryDescription">Description:</label>
-        <textarea
-          id="categoryDescription"
-          name="categoryDescription"
-          value={categoryDescription}
-          onChange={(e) => setCategoryDescription(e.target.value)}
-        ></textarea>
-
-        <label htmlFor="categoryPageTitle">Page title:</label>
-        <input
-          id="categoryPageTitle"
-          type="text"
-          name="categoryPageTitle"
-          value={categoryPageTitle}
-          onChange={(e) => setCategoryPageTitle(e.target.value)}
-        />
-
-        <label htmlFor="categoryPageDescription">Page description:</label>
-        <textarea
-          id="categoryPageDescription"
-          name="categoryPageDescription"
-          value={categoryPageDescription}
-          onChange={(e) => setCategoryPageDescription(e.target.value)}
-        ></textarea>
-
-        <button type="submit">Update category</button>
-      </form>
-      {responseMessage && <p>{responseMessage}</p>}
-      {error && <p>{error}</p>}
+    <div className="admin-container">
+      <AdminNavigation />
+      <div className="admin-container__content">
+        <h1>Update category</h1>
+        <div className="form">
+          <form onSubmit={handleSubmit}>
+            <label htmlFor="categoryName">Name of category:</label>
+            <input
+              id="categoryName"
+              type="text"
+              name="categoryName"
+              value={categoryName}
+              onChange={(e) => setCategoryName(e.target.value)}
+            />
+  
+            <label htmlFor="categoryDescription">Description:</label>
+            <textarea
+              id="categoryDescription"
+              name="categoryDescription"
+              value={categoryDescription}
+              onChange={(e) => setCategoryDescription(e.target.value)}
+            ></textarea>
+  
+            <label htmlFor="categoryPageTitle">Page title:</label>
+            <input
+              id="categoryPageTitle"
+              type="text"
+              name="categoryPageTitle"
+              value={categoryPageTitle}
+              onChange={(e) => setCategoryPageTitle(e.target.value)}
+            />
+  
+            <label htmlFor="categoryPageDescription">Page description:</label>
+            <textarea
+              id="categoryPageDescription"
+              name="categoryPageDescription"
+              value={categoryPageDescription}
+              onChange={(e) => setCategoryPageDescription(e.target.value)}
+            ></textarea>
+  
+            <button type="submit">Update</button>
+          </form>
+          {responseMessage && <p>{responseMessage}</p>}
+          {error && <p>{error}</p>}
+        </div>
+      </div>
     </div>
   );
+  
 };
 
 export default AdminUpdateCategory;

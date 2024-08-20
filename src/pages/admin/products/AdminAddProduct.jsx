@@ -65,8 +65,8 @@ const AdminAddProduct = () => {
     }, [responseMessage, error, categories, section]);
 
     return (
-        <div>
-            <h3>Add new product</h3>
+        <div className='form'>
+            <h3>Add product</h3>
             <form onSubmit={handleSubmit}>
 
                 <label htmlFor="productName">Name of product:</label>
@@ -123,7 +123,7 @@ const AdminAddProduct = () => {
                     onChange={(e) => setProductImage(e.target.files[0])}
                 />
 
-                <button type="submit">Create product</button>
+                <button type="submit">Create</button>
             </form>
             {responseMessage && <p>{responseMessage}</p>}
             {error && <p>{error}</p>}

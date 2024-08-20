@@ -1,17 +1,27 @@
-.table-container {
+// Table
+.table {
+  h3 {
+    text-align: center;
+    font-size: 1.3rem;
+  }
+.table__container {
   display: flex;
   justify-content: center;
-  margin-top: 2rem;
 
-  .table {
+  .table__content {
     width: 100%;
     max-width: 1000px;
     border-collapse: collapse;
-    background-color: #f8f9fa;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 2rem;
+    margin-bottom: 2rem;
 
-    th, td {
+
+    th,
+    td {
       border: 1px solid #dee2e6;
       padding: 12px;
+      text-align: center;
     }
 
     th {
@@ -19,21 +29,17 @@
       color: #ffffff;
     }
 
-
-    caption {
-      caption-side: top;
-      text-align: left;
-      font-weight: bold;
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
-    }
-
     .action-header {
       text-align: center;
     }
-
-    a {
-      color: $main-color;
-    }
   }
+}
+
+.delete-color {
+  color:red;
+}
+
+.update-color {
+  color:rgb(26, 26, 183);
+}
 }

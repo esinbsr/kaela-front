@@ -22,36 +22,39 @@ const AdminSocialNetwork = () => {
             <div className="admin-container__content">
                 <h1>Social Networks</h1>
                 <AdminAddSocialNetwork />
-                <div className="table-container">
-                    <table className="table">
-                        <thead>
-                            <tr>
-                                <th>Platform</th>
-                                <th>Url</th>
-                                <th className="action-header" colSpan={2}>
-                                    Action
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {!isEmpty(socialNetwork) ? (
-                                socialNetwork.map((socialNetwork) =>
-                                    !isEmpty(socialNetwork) && (
-                                        <AdminSocialNetworkCard
-                                            key={socialNetwork.id}
-                                            socialNetwork={socialNetwork}
-                                        />
-                                    )
-                                )
-                            ) : (
+                <div className="table">
+                    <h3>List of social networks</h3>
+                    <div className="table__container">
+                        <table className="table__content">
+                            <thead>
                                 <tr>
-                                    <td colSpan="6" style={{ textAlign: 'center' }}>
-                                        There are no social networks
-                                    </td>
+                                    <th>Platform</th>
+                                    <th>Url</th>
+                                    <th className="action-header" colSpan={2}>
+                                        Action
+                                    </th>
                                 </tr>
-                            )}
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                {!isEmpty(socialNetwork) ? (
+                                    socialNetwork.map((socialNetwork) =>
+                                        !isEmpty(socialNetwork) && (
+                                            <AdminSocialNetworkCard
+                                                key={socialNetwork.id}
+                                                socialNetwork={socialNetwork}
+                                            />
+                                        )
+                                    )
+                                ) : (
+                                    <tr>
+                                        <td colSpan="6" style={{ textAlign: 'center' }}>
+                                            There are no social networks
+                                        </td>
+                                    </tr>
+                                )}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
                 {message && <p>{message}</p>}
                 {error && <p>{error}</p>}

@@ -1,4 +1,4 @@
-@mixin flexbox($jc, $ai:false, $fd:false, $fw:false) {
+@mixin flexbox($jc:false, $ai:false, $fd:false, $fw:false) {
     display: flex;
     justify-content: $jc;
     align-items: $ai;

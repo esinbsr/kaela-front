@@ -17,13 +17,14 @@ const AdminInformationCard = ({ infos }) => {
             <td>{infos.mobile}</td>
             <td>{infos.address}</td>
             <td>
-                <Link to={`/adminInformationModify/${infos.id}`}>Modify</Link>
+                <Link to={`/adminInformationModify/${infos.id}`} className='update-color'>Update</Link>
             </td>
 
             <td>
                 <Link
                 to="#" 
                 onClick={handleDelete} 
+             className="delete-color"
                 >
                 Delete 
                 </Link>

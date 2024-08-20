@@ -18,10 +18,10 @@ const AdminSocialNetworkCard = ({ socialNetwork }) => {
       <td>{socialNetwork.platform}</td>
       <td>{socialNetwork.url}</td>
       <td>
-        <Link to={`/adminUpdateSocialNetwork/${socialNetwork.id}`}>Modify</Link>
+        <Link to={`/adminUpdateSocialNetwork/${socialNetwork.id}`} className='update-color'>Update</Link>
       </td>
       <td>
-        <Link to="#" onClick={handleDelete}>
+        <Link to="#" onClick={handleDelete}  className="delete-color">
           Delete
         </Link>
       </td>
