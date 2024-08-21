@@ -1,9 +1,11 @@
 .admin-container {
   display: flex;
   min-height: 100vh;
+  position: relative;
 
   &__navigation {
     background-color: $main-color;
+    border-radius: 10px;
     display: flex;
     flex-direction: column;
     width: 250px;
@@ -15,12 +17,22 @@
       font-size: 1.2rem;
       color: #ffffff;
       padding: 1rem 1.5rem;
-      transition:0.3s ease;
+      transition: 0.3s ease;
 
       &:hover {
-        background-color: lighten($main-color, 7%); // Légère éclaircissement de la couleur principale
+        background-color: lighten($main-color, 7%);
+        border-radius:10px;
       }
     }
+  }
+
+ #h1-administration {
+    position: absolute;
+    top: 250px;
+    left: 750px; // Positionnez le titre à droite du menu de navigation
+    transform: translate(-50%, -50%);
+    margin: 0;
+    color: $main-color;
   }
 
   &__content {
@@ -28,9 +40,5 @@
     padding: 2rem;
     flex: 1;
     overflow-y: auto;
-
-    h1 {
-      margin-bottom: 1.5rem;
-    }
   }
 }

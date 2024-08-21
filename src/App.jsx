@@ -28,7 +28,6 @@ import { verifyToken } from "./actions/userAction";
 import Accessibility from "./components/utils/Accessibility";
 import AdminUpdateInformation from "./pages/admin/informations/AdminUpdateInformation";
 
-
 const ProtectedRoute = ({ children }) => {
   const userRole = localStorage.getItem("role");
   return userRole === "admin" ? children : <Navigate to="/" />; //Si la condition est vraie, le composant retourne children, donc les composants enfants sont rendus
@@ -47,7 +46,7 @@ const App = () => {
     <div>
       <BrowserRouter>
         <Navigation />
-        <Accessibility/>
+        <Accessibility />
         <Routes>
           <Route path="*" element={<Home />} />
           <Route path="/" element={<Home />} />
@@ -117,10 +116,11 @@ const App = () => {
             path="/adminUpdateInformation/:informationId"
             element={
               <ProtectedRoute>
-                <AdminUpdateInformation/>
+                <AdminUpdateInformation />
               </ProtectedRoute>
             }
           />
+
           <Route
             path="/adminCategory"
             element={

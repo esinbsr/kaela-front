@@ -41,52 +41,43 @@ const SignUp = () => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit} className="signup-login">
-        <h1>Signup</h1>
-        <label htmlFor="username">Username</label>
-        <input
-          id="username"
-          type="text"
-          onChange={(e) => setUsername(e.target.value)}
-          name="username"
-          value={username}
-          aria-required="true" // Indicate that this field is required
-        />
-
-        <label htmlFor="email">Email</label>
-        <input
-          id="email"
-          type="email"
-          onChange={(e) => setEmail(e.target.value)}
-          name="email"
-          value={email}
-          aria-required="true"
-        />
-
-        <label htmlFor="password">Password</label>
-        <input
-          id="password"
-          type="password"
-          onChange={(e) => setPassword(e.target.value)}
-          name="password"
-          value={password}
-          aria-required="true"
-        />
-
-        <button type="submit">Sign Up</button>
-
-        <p>
-          Already have an account?
-          <Link to="/login" className="signup-login__link">
-            Login here
-          </Link>
-        </p>
-      </form>
-
-      {/* Display success or error messages */}
-      {success && <Message message={message} type="success" />}
-      {error && <Message message={error} type="error" />}
-    </div>
+    <h1>Signup</h1>
+    <form onSubmit={handleSubmit} className="user-form">
+      <label htmlFor="username">Username</label>
+      <input
+        id="username"
+        type="text"
+        onChange={(e) => setUsername(e.target.value)}
+        name="username"
+        value={username}
+        aria-required="true"
+      />
+      <label htmlFor="email">Email</label>
+      <input
+        id="email"
+        type="text"
+        onChange={(e) => setEmail(e.target.value)}
+        name="email"
+        value={email}
+        aria-required="true"
+      />
+      <label htmlFor="password">Password</label>
+      <input
+        id="password"
+        type="password"
+        onChange={(e) => setPassword(e.target.value)}
+        name="password"
+        value={password}
+        aria-required="true"
+      />
+      <button type="submit">Sign Up</button>
+      <p>
+        Already have an account? <Link to="/login" className="form-link">Login here</Link>
+      </p>
+    </form>
+    {error && <Message message={error} type="error" />}
+  </div>
+  
   );
 };
 

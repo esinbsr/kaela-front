@@ -1,50 +1,56 @@
-@mixin flexbox($jc:false, $ai:false, $fd:false, $fw:false) {
-    display: flex;
-    justify-content: $jc;
-    align-items: $ai;
+@mixin flexbox($jc: false, $ai: false, $fd: false, $fw: false) {
+  display: flex;
+  justify-content: $jc;
+  align-items: $ai;
 
-    @if $ai {
-        align-items: $fw;
-    }
-    @if $fd {
-        flex-direction: $fd;
-    }
-    @if $fw {
-        flex-wrap: $fw;
-    }
-   
-}
-
-@mixin buttonRound($color, $bc: null, $border: false) {
-    // padding: 6px 40px;
-    width: 50%;
-    text-align: center;
-    padding: 8px 0;
-    border-radius: 50px;
-    color: $color;
-    
-    @if $bc != null {
-        background-color: $bc;
-    }
-
-    @if $border {
-        border: 2px solid black;
-    }
-}
-
-@mixin buttonSuqare($color, $bc) {
-    // padding: 6px 55px;
-    width: 20%;
-    text-align: center;
-    padding: 8px 0;
-    border-radius: 6px;
-    color: $color;
-    background-color: $bc;
-
+  @if $ai {
+    align-items: $fw;
+  }
+  @if $fd {
+    flex-direction: $fd;
+  }
+  @if $fw {
+    flex-wrap: $fw;
+  }
 }
 
 @mixin containerCenter {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+@mixin buttonRound($color, $bc: null, $border: false) {
+  padding: 8px 40px;
+  border-radius: 50px;
+  text-align: center;
+  color: $color;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: darken($bc, 10%);
+  }
+
+  @if $bc != null {
+    background-color: $bc;
+  }
+
+  @if $border {
+    border: 2px solid black;
+  }
+}
+
+@mixin buttonSuqare($color, $bc) {
+  padding: 8px 40px;
+  border-radius: 6px;
+  text-align: center;
+  color: $color;
+  background-color: $bc;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: darken($bc, 10%);
+  }
 }

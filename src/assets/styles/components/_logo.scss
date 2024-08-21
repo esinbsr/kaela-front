@@ -1,6 +1,62 @@
-.logo_kaela {
-  font-family: "Montserrat-Bold";
-  letter-spacing: 4px;
-  font-size: 1.5rem;
-  font-weight: bold;
+.logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Playfair Display', serif;
+  text-transform: uppercase;
+  color: $navigation-color;
+  animation: fadeIn 1s ease-in-out;
+
+  &__kaela {
+    font-weight: bold;
+    font-size: 1.8rem;
+    letter-spacing: 0.15em;
+    position: relative;
+    animation: slideInFromLeft 1s ease-out;
+  }
+
+  &__couture {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: normal;
+    font-size: 1.2rem;
+    letter-spacing: 0.3em;
+    color: $secondary-color;
+    margin-top: -0.3rem;
+    position: relative;
+    left: 1.9rem;
+    transform: translateY(10px);
+    opacity: 0;
+    animation: slideInFromRight 1.2s ease-out forwards;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-50px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInFromRight {
+  0% {
+    transform: translateX(50px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }

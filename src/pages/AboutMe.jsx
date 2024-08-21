@@ -6,6 +6,7 @@ import { getProduct } from "../actions/productAction";
 import { Link } from "react-router-dom";
 import { getSocialNetwork } from "../actions/socialNetworkAction";
 import { isEmpty } from "../components/utils/isEmpty";
+import SocialNetworkIcon from '../components/utils/SocialNetworkIcon';
 
 // Define section IDs for filtering products
 const SECTIONS = {
@@ -56,6 +57,7 @@ const AboutMe = () => {
 
   return (
     <div className="about-me">
+      <SocialNetworkIcon/>
       <h1>About Me</h1>
 
       <div className="about-me__header">

@@ -63,7 +63,7 @@ const HomeImageList = ({ start, end, additionalClass }) => {
                     return (
                         <div key={product.id} className={isLargeImage ? "large-image" : ""}>
                             {userRole === "admin" ? (
-                                <div onClick={() => handleAdminClick(product)}>
+                                <div onClick={() => handleAdminClick(product)} className='test'>
                                     <img
                                         src={`${API_URL}assets/img/${product.path}`}
                                         alt={product.name}
@@ -88,7 +88,7 @@ const HomeImageList = ({ start, end, additionalClass }) => {
 
             {modalVisible && (
                 <div className="modal">
-                    <div className="modal-content">
+                    <div className="modal__content">
                         <h2>What do you want to do?</h2>
                         <button onClick={() => handleNavigate(`/productDetail/${selectedProduct.id}`)}>
                             View Product Details

@@ -1,11 +1,38 @@
 .navigation {
   @include flexbox(space-between, center);
   width: 100%;
-  padding: 1rem 0;
+  padding: 2rem 0;
 
   .navigation_links {
     display: flex;
     gap: 1rem;
+
+    a {
+      position: relative;
+      padding-bottom: 5px;
+      color: $navigation-color;
+      font-size: 1.1rem;
+
+      &::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        height: 2px;
+        width: 0;
+        background-color: $secondary-color;
+        transition: width 0.3s ease-in-out;
+      }
+
+      &:hover::after {
+        width: 100%;
+      }
+
+      &.active::after {
+        width: 100%;
+      }
+    }
+
     .dropdown {
       position: relative;
 
@@ -21,9 +48,9 @@
 
         a {
           padding: 0.5rem 1rem;
- 
+
           &:hover {
-            background-color:#d2cfc7;
+            background-color: #d2cfc7;
           }
         }
       }

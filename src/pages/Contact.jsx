@@ -1,26 +1,20 @@
 import { useState } from "react";
 import axios from "axios";
+import SocialNetworkIcon from "../components/utils/SocialNetworkIcon";
 
 const Contact = () => {
-  
   const [formData, setFormData] = useState({
     email: "",
     object: "",
     message: "",
-    responseMessage: ""
   });
 
-  const {
-    email,
-    object,
-    message,
-    responseMessage 
-    } = formData; 
+  const { email, object, message } = formData;
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -29,7 +23,8 @@ const Contact = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost/travail-perso/kaela-couture/contact",
+        "http://localhost:8888/travail-perso/kaela-couture/contact",
+        
         formData,
         {
           headers: {
@@ -42,7 +37,7 @@ const Contact = () => {
         email: "",
         object: "",
         message: "",
-        responseMessage: response.data.message || "No message returned"
+        responseMessage: response.data.message || "No message returned",
       });
     } catch (error) {
       console.error("Error submitting form:", error);
@@ -51,39 +46,38 @@ const Contact = () => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit} className="contact-form">
-        <h1>Contact me</h1>
-        <label htmlFor="email">Email</label>
-        <input
-          id="email"
-          type="text"
-          name="email"
-          value={email}
-          onChange={handleChange}
-        />
-
-        <label htmlFor="object">Object</label>
-        <input
-          id="object"
-          type="text"
-          name="object"
-          value={object}
-          onChange={handleChange}
-        />
-
-        <label htmlFor="message">Message</label>
-        <textarea
-          id="message"
-          name="message"
-          value={message}
-          onChange={handleChange}
-        ></textarea>
-
-        <button type="submit">Send</button>
-      </form>
-      {responseMessage && <p>{responseMessage}</p>}
+         <SocialNetworkIcon/>
+    <h1>Contact me</h1>
+    <form onSubmit={handleSubmit} className="user-form">
+      <label htmlFor="email">Email</label>
+      <input
+        id="email"
+        type="text"
+        name="email"
+        value={email}
+        onChange={handleChange}
+      />
+      <label htmlFor="object">Object</label>
+      <input
+        id="object"
+        type="text"
+        name="object"
+        value={object}
+        onChange={handleChange}
+      />
+      <label htmlFor="message">Message</label>
+      <textarea
+        id="message"
+        name="message"
+        value={message}
+        onChange={handleChange}
+      ></textarea>
+      <button type="submit">Send</button>
+    </form>
+    
+    {/* {error && <Message message={error} type="error" />} */}
+  </div>
   
-    </div>
   );
 };
 

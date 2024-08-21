@@ -1,0 +1,52 @@
+.user-form {
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 500px;
+  margin: 50px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  label {
+    align-self: flex-start;
+    margin-bottom: 8px;
+  }
+
+  input,
+  textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid $main-color;
+    outline: none;
+    border-radius: 5px;
+    background-color: #fff;
+
+    &:focus {
+      border-color: $main-color;
+      box-shadow: 0 0 5px rgba(#2c4548, 0.3);
+    }
+  }
+
+  textarea {
+    resize: none;
+    min-height: 100px;
+  }
+
+  button {
+    @include buttonSuqare(white, $main-color);
+  }
+
+  p {
+    margin-top: 15px;
+    text-align: center;
+  }
+
+  .form-link {
+    text-decoration: underline;
+    color: $main-color;
+    cursor: pointer;
+  }
+}

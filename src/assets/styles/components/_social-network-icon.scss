@@ -1,0 +1,20 @@
+.social-icons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;  // Espace entre chaque icône
+    position: fixed;  // Fixe les icônes à une position spécifique de la page
+    top: 50%;  // Centre verticalement les icônes par rapport à la page
+    right: 50px;  // Fixe les icônes à 20px du bord gauche
+    transform: translateY(-50%);  // Centre les icônes verticalement
+  
+    a {
+      font-size: 28px;  
+      color: $navigation-color;
+      transition: color 0.3s ease;
+  
+      &:hover {
+        color: darken($main-color, 10%);
+      }
+    }
+  }
+  
