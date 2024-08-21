@@ -15,7 +15,7 @@ const Contact = () => {
     object,
     message,
     responseMessage 
-    } = formData; //objet à partir duquel j'extrais les valeurs
+    } = formData; 
 
   const handleChange = (e) => {
     setFormData({
@@ -51,8 +51,8 @@ const Contact = () => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <h2>Contact me</h2>
+      <form onSubmit={handleSubmit} className="contact-form">
+        <h1>Contact me</h1>
         <label htmlFor="email">Email</label>
         <input
           id="email"

@@ -29,7 +29,7 @@ const AdminAddProduct = () => {
         if (categories.length > 0) {
             setProductCategory(categories[0].id);
         }
-        if(section.length > 0) {
+        if (section.length > 0) {
             setProductSection(section[0].id);
         }
     }, [categories, section]);
@@ -45,14 +45,6 @@ const AdminAddProduct = () => {
         formData.append('productImage', productImage);
 
         dispatch(addProduct(formData)).then(() => {
-            // Rafraîchir les catégories et produits après l'ajout du produit
-            dispatch(getProductCategories());
-            dispatch(getProduct());
-        });
-    };
-
-    useEffect(() => {
-        if (responseMessage && !error) {
             setProductName("");
             setProductDescription("");
             setProductCategory(categories.length > 0 ? categories[0].id : ""); 
@@ -61,8 +53,9 @@ const AdminAddProduct = () => {
             if (fileInputRef.current) {
                 fileInputRef.current.value = '';
             }
-        }
-    }, [responseMessage, error, categories, section]);
+            dispatch(getProduct()); // Refresh the product list after adding
+        });
+    };
 
     return (
         <div className='form'>

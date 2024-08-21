@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { getInformationById, updateInformation } from '../../../actions/informationAction';
 import AdminNavigation from '../AdminNavigation';
 
-const AdminInformationModify = () => {
+const AdminUpdateInformation = () => {
     const { informationId } = useParams(); //extrait la partie dynamique de l'URL qui est (l'ID) (qui se trouve dans App.jsx)
     const dispatch = useDispatch();
 
@@ -92,4 +92,4 @@ const AdminInformationModify = () => {
       
 };
 
-export default AdminInformationModify;
+export default AdminUpdateInformation;

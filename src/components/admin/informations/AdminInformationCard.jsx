@@ -17,7 +17,7 @@ const AdminInformationCard = ({ infos }) => {
             <td>{infos.mobile}</td>
             <td>{infos.address}</td>
             <td>
-                <Link to={`/adminInformationModify/${infos.id}`} className='update-color'>Update</Link>
+                <Link to={`/adminUpdateInformation/${infos.id}`} className='update-color'>Update</Link>
             </td>
 
             <td>

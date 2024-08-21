@@ -1,0 +1,32 @@
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center; // Centrer le formulaire horizontalement
+    width: 300px; // Largeur fixe du formulaire
+    margin: 50px auto; // Centrer le formulaire horizontalement et ajouter de l'espace en haut
+  
+    label {
+      align-self: flex-start;
+      margin-bottom: 8px;
+    }
+  
+    input,
+    textarea {
+      width: 100%; // Champs de formulaire en pleine largeur
+      padding: 8px; 
+      margin-bottom: 15px; 
+      border: 1px solid $main-color; // Couleur de la bordure
+      outline: none;
+      border-radius: 5px; // Coins arrondis
+      font-size: 16px; // Taille de police plus grande
+    }
+  
+    button {
+      @include buttonSuqare(white, $main-color);
+    }
+  
+    p {
+      margin-top: 15px;
+    }
+  }
+  

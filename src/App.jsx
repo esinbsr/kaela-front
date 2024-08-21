@@ -8,7 +8,6 @@ import AdminAddProduct from "./pages/admin/products/AdminAddProduct";
 import AdminUpdateProduct from "./pages/admin/products/AdminUpdateProduct";
 import AdminInformation from "./pages/admin/informations/AdminInformation";
 import AdminAddInformation from "./pages/admin/informations/AdminAddInformation";
-import AdminInformationModify from "./pages/admin/informations/AdminInformationModify";
 import EveningDresses from "./pages/EveningDresses";
 import LatestCollection from "./pages/LatestCollection";
 import Collection from "./pages/Collection";
@@ -27,6 +26,7 @@ import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { verifyToken } from "./actions/userAction";
 import Accessibility from "./components/utils/Accessibility";
+import AdminUpdateInformation from "./pages/admin/informations/AdminUpdateInformation";
 
 
 const ProtectedRoute = ({ children }) => {
@@ -114,10 +114,10 @@ const App = () => {
             }
           />
           <Route
-            path="/adminInformationModify/:informationId"
+            path="/adminUpdateInformation/:informationId"
             element={
               <ProtectedRoute>
-                <AdminInformationModify />
+                <AdminUpdateInformation/>
               </ProtectedRoute>
             }
           />

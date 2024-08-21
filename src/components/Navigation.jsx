@@ -29,8 +29,8 @@ const Navigation = () => {
             <NavLink to="/login">Login</NavLink>
           </>
         )}
-        {isLoggedIn && <NavLink to="/logout">Logout</NavLink>} 
         {role === 'admin' && <NavLink to="/admin">Admin</NavLink>} 
+        {isLoggedIn && <NavLink to="/logout">Logout</NavLink>} 
       </div>
     </div>
   );
