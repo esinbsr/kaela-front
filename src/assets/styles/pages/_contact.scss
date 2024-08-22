@@ -1,0 +1,45 @@
+.contact {
+    display: flex;
+
+    .contact__form {
+        @extend .user-form; 
+        flex: 1;
+        margin-right: 5rem;
+    }
+  
+    .contact__data {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 2rem;
+        border-radius: 10px;
+        
+        .contact__mobile,
+        .contact__localisation {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.3rem;
+
+            p {
+                margin-left: 1rem;
+                color: $navigation-color;
+            }
+
+            svg {
+                font-size: 1.5rem;
+                color: $navigation-color;
+            }
+        }
+
+        .contact__localisation {
+            border-bottom: 1px solid $navigation-color;
+            padding-bottom: 1.5rem;
+        }
+
+        #map {
+            width: 100%;
+            border-radius: 8px;
+        }
+    }
+}
