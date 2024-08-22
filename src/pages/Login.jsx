@@ -5,40 +5,50 @@ import { loginUser, resetMessages } from "../actions/userAction";
 import Message from "../components/utils/Message";
 
 const Login = () => {
+  // State variables for form inputs
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  // Accessing the user role and error state from Redux store
   const userRole = useSelector((state) => state.user.role);
   const error = useSelector((state) => state.user.error);
 
+  // React Router navigation and Redux dispatch
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  // Reset messages when the component mounts
   useEffect(() => {
     dispatch(resetMessages());
   }, [dispatch]);
 
+  // Handle form submission
   const handleSubmit = (e) => {
-    e.preventDefault();
-    dispatch(resetMessages());
-    const formData = { email, password };
-    dispatch(loginUser(formData));
+    e.preventDefault(); // Prevent default form submission behavior
+    dispatch(resetMessages()); // Clear previous messages before submission
+    const formData = { email, password }; // Create an object with the form data
+    dispatch(loginUser(formData)); // Dispatch the loginUser action with form data
   };
 
+  // Redirect based on user role after successful login
   useEffect(() => {
     if (userRole) {
       if (userRole === "admin") {
-        navigate("/admin");
+        navigate("/admin"); // Navigate to admin page if the user is an admin
       } else {
-        navigate("/");
+        navigate("/"); // Navigate to home page if the user is not an admin
       }
     }
   }, [userRole, navigate]);
 
   return (
-    <div>
-      <h1>Login</h1>
-      <form onSubmit={handleSubmit} className="user-form">
+    // Main container for the login form
+    <section className="user-form">
+      <header className="user-form__header">
+        <h2>Login</h2>
+        <div className="line"></div> {/* Decorative line below the heading */}
+      </header>
+      <form onSubmit={handleSubmit} className="user-form__content">
         <label htmlFor="email">Email</label>
         <input
           id="email"
@@ -46,7 +56,7 @@ const Login = () => {
           onChange={(e) => setEmail(e.target.value)}
           name="email"
           value={email}
-          aria-required="true"
+          aria-required="true" // Indicates that the email field is required
         />
         <label htmlFor="password">Password</label>
         <input
@@ -55,15 +65,18 @@ const Login = () => {
           onChange={(e) => setPassword(e.target.value)}
           name="password"
           value={password}
-          aria-required="true"
+          aria-required="true" // Indicates that the password field is required
         />
-        <button type="submit">Login</button>
+        <button type="submit">Login</button> {/* Submit button for the form */}
         <p>
-          No account yet? <Link to="/signup" className="form-link">Sign up here</Link>
+          No account yet?{" "}
+          <Link to="/signup" className="user-form__link">
+            Sign up here
+          </Link> {/* Link to the signup page */}
         </p>
       </form>
-      {error && <Message message={error} type="error" />}
-    </div>
+      {error && <Message message={error} type="error" />} {/* Display error message if there is one */}
+    </section>
   );
 };
 

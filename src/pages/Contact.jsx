@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import SocialNetworkIcon from "../components/utils/SocialNetworkIcon";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPhone, faLocationDot } from "@fortawesome/free-solid-svg-icons"; 
+import { faPhone, faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { getInformation } from "../actions/informationAction";
 import { isEmpty } from "../components/utils/isEmpty";
 import Map from "../components/utils/Map";
+import SocialNetworkIcon from '../components/utils/SocialNetworkIcon';
 
 const Contact = () => {
   const dispatch = useDispatch();
@@ -60,47 +60,54 @@ const Contact = () => {
 
   return (
     <div className="contact">
-      <SocialNetworkIcon />
-      <form onSubmit={handleSubmit} className="contact__form">
-        <h1>Contact me</h1>
+      <SocialNetworkIcon/>
+      <section className="contact__form">
+        <form onSubmit={handleSubmit}>
+        <header>
+          <h2>Contact Me</h2>
+          <div className="line"></div>
+          </header>
 
-        <label htmlFor="email">Email</label>
-        <input
-          id="email"
-          type="text"
-          name="email"
-          value={email}
-          onChange={handleChange}
-        />
-        <label htmlFor="object">Object</label>
-        <input
-          id="object"
-          type="text"
-          name="object"
-          value={object}
-          onChange={handleChange}
-        />
-        <label htmlFor="message">Message</label>
-        <textarea
-          id="message"
-          name="message"
-          value={message}
-          onChange={handleChange}
-        ></textarea>
-        <button type="submit">Send</button>
-      </form>
-      <div className="contact__data">
+          <label htmlFor="email">Email</label>
+          <input
+            id="email"
+            type="text"
+            name="email"
+            value={email}
+            onChange={handleChange}
+          />
+          <label htmlFor="object">Object</label>
+          <input
+            id="object"
+            type="text"
+            name="object"
+            value={object}
+            onChange={handleChange}
+          />
+          <label htmlFor="message">Message</label>
+          <textarea
+            id="message"
+            name="message"
+            value={message}
+            onChange={handleChange}
+          ></textarea>
+          <button type="submit">Send</button>
+        </form>
+      </section>
+      <address className="contact__data">
+        <h2>Contact Details</h2>
+        <div className="line"></div>
         <div className="contact__mobile">
-          <FontAwesomeIcon icon={faPhone} /> 
+          <FontAwesomeIcon icon={faPhone} />
           {info && <p>+{info.mobile}</p>}
         </div>
 
         <div className="contact__localisation">
-          <FontAwesomeIcon icon={faLocationDot} /> 
+          <FontAwesomeIcon icon={faLocationDot} />
           {info && <p>{info.address}</p>}
         </div>
-      {info && <Map address={info.address} />}
-      </div>
+        {info && <Map address={info.address} />}
+      </address>
     </div>
   );
 };

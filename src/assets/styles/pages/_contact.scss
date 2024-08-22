@@ -1,45 +1,117 @@
 .contact {
+  display: flex;
+  align-items: stretch; // Assure que les deux sections aient la même hauteur
+  justify-content: space-between; 
+
+  h2 {
+    margin-bottom: 10px; // Ajuste l'espacement pour laisser de la place pour le trait
+    position: relative; // Pour gérer la position du trait si nécessaire
+    color: $main-color;
+  }
+
+  .line {
+    @include line(50, $main-color)
+  }
+
+  .contact__form,
+  .contact__data {
+    flex: 1;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin: 50px auto;
+    width: 100%;
     display: flex;
+    flex-direction: column;
+    font-style: normal;
+    background-color: #ffffff;
+  }
 
-    .contact__form {
-        @extend .user-form; 
-        flex: 1;
-        margin-right: 5rem;
+  .contact__form {
+    margin-right: 5rem;
+
+    form {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+
+      label {
+        align-self: flex-start;
+        margin-bottom: 8px;
+      }
+
+      input,
+      textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid $main-color;
+        outline: none;
+        border-radius: 5px;
+        background-color: #fff;
+
+        &:focus {
+          border-color: $main-color;
+          box-shadow: 0 0 5px rgba(#2c4548, 0.3);
+        }
+      }
+
+      textarea {
+        resize: none;
+        min-height: 100px;
+      }
+
+      // Centrer le bouton et lui donner une taille d'origine
+      button {
+        align-self: center; // Centre le bouton horizontalement
+        width: auto; // Permet au bouton de garder sa taille d'origine
+        padding: 10px 20px; // Ajuste le padding du bouton
+        @include buttonSuqare(white, $main-color);
+      }
+
+      p {
+        margin-top: 15px;
+        text-align: center;
+      }
+
+      .form-link {
+        text-decoration: underline;
+        color: $main-color;
+        cursor: pointer;
+      }
     }
-  
-    .contact__data {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        padding: 2rem;
-        border-radius: 10px;
-        
-        .contact__mobile,
-        .contact__localisation {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1.3rem;
+  }
 
-            p {
-                margin-left: 1rem;
-                color: $navigation-color;
-            }
+  .contact__data {
+    padding: 2rem;
+    border-radius: 10px;
 
-            svg {
-                font-size: 1.5rem;
-                color: $navigation-color;
-            }
-        }
+    .contact__mobile,
+    .contact__localisation {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1.3rem;
 
-        .contact__localisation {
-            border-bottom: 1px solid $navigation-color;
-            padding-bottom: 1.5rem;
-        }
+      p {
+        margin-left: 1rem;
+        color: $navigation-color;
+      }
 
-        #map {
-            width: 100%;
-            border-radius: 8px;
-        }
+      svg {
+        font-size: 1.5rem;
+        color: $navigation-color;
+      }
     }
+
+    .contact__localisation {
+      border-bottom: 1px solid $navigation-color;
+      padding-bottom: 1.5rem;
+    }
+
+    #map {
+      width: 100%;
+      height: 200px;
+      border-radius: 8px;
+    }
+  }
 }

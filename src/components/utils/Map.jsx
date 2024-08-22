@@ -34,7 +34,7 @@ const Map = ({ address }) => {
     }
   }, []);
 
-  return <div id="map" style={{ height: '400px', width: '100%' }}></div>;
+  return <div id="map"></div>;
 };
 
 export default Map;

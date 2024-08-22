@@ -4,9 +4,9 @@ import { getInformation } from "../actions/informationAction";
 import { API_URL } from "../actions/serverRequest";
 import { getProduct } from "../actions/productAction";
 import { Link } from "react-router-dom";
-import { getSocialNetwork } from "../actions/socialNetworkAction";
 import { isEmpty } from "../components/utils/isEmpty";
 import SocialNetworkIcon from '../components/utils/SocialNetworkIcon';
+import { getSocialNetwork } from "../actions/socialNetworkAction";
 
 // Define section IDs for filtering products
 const SECTIONS = {
@@ -35,29 +35,10 @@ const AboutMe = () => {
   // Slice the first three information entries
   const threeInformations = !isEmpty(informations) ? informations.slice(1, 4) : [];
 
-  // Find Instagram link from social networks
-  const instagram = !isEmpty(socialNetworks) && socialNetworks.find((network) => network.platform.toLowerCase() === 'instagram');
-
-  // Function to validate if a URL is correct
-  const isValidUrl = (url) => {
-    try {
-      new URL(url); // Try to create a new URL object
-      return true; // Return true if successful
-    } catch (error) {
-      return false; // Return false if an error occurs
-    }
-  };
-
-  // Generate Instagram login URL with redirection to the profile page
-  const generateInstagramLoginUrl = (profileUrl) => {
-    const loginUrl = 'https://www.instagram.com/accounts/login/'; // Instagram login URL
-    const redirectUrl = encodeURIComponent(profileUrl); // Encode profile URL for redirection
-    return `${loginUrl}?next=${redirectUrl}`; // Combine login URL and redirection URL
-  };
-
   return (
     <div className="about-me">
-      <SocialNetworkIcon/>
+      <SocialNetworkIcon/> {/* Integration of the component for displaying social networks */}
+      
       <h1>About Me</h1>
 
       <div className="about-me__header">
@@ -89,10 +70,10 @@ const AboutMe = () => {
       <div className="about-me__footer">
         <h2>Subscribe to my Instagram</h2>
         <div className="about-me__footer-container">
-          {!isEmpty(filteredProducts) && instagram && isValidUrl(instagram.url) ? (
+          {!isEmpty(filteredProducts) && socialNetworks.length > 0 ? (
             filteredProducts.slice(1, 9).map((product) => (
               <div className="about-me__footer-image" key={product.id}>
-                <Link to={generateInstagramLoginUrl(instagram.url)} target="_blank" rel="noopener noreferrer">
+                <Link to={socialNetworks.find((network) => network.platform.toLowerCase() === 'instagram').url} target="_blank" rel="noopener noreferrer">
                   <img
                     src={`${API_URL}assets/img/${product.path}`}
                     alt={product.name}

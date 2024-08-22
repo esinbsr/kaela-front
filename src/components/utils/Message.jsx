@@ -1,9 +1,11 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes } from '@fortawesome/free-solid-svg-icons'; // Import the specific icon
 import { useState } from 'react';
 
 const Message = ({ message, type }) => {
   const [visible, setVisible] = useState(true);
 
-  if (!visible || !message) return null; //Si visible est false, cela signifie que le message ne doit pas être affiché, Si message est vide ou non défini, le composant ne rend rien non plus.
+  if (!visible || !message) return null; // If visible is false or message is empty, do not render anything
 
   return (
     <p
@@ -12,7 +14,9 @@ const Message = ({ message, type }) => {
       className={`message ${type}`}
     >
       {message}
-      <button className="message-close-btn" onClick={() => setVisible(false)}>X</button>
+      <button className="message-close-btn" onClick={() => setVisible(false)}>
+        <FontAwesomeIcon icon={faTimes} />
+      </button>
     </p>
   );
 };

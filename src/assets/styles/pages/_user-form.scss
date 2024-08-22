@@ -1,21 +1,34 @@
-.user-form {
+.user-form{
+  max-width: 500px;
+  margin: 50px auto;
   padding: 2rem;
   border-radius: 10px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 500px;
-  margin: 50px auto;
+  background-color: #ffffff;
+}
+
+.user-form__header{
+
+  h2 {
+    margin-bottom: 10px;
+    color: $main-color;
+  }
+
+  .line {
+    @include line(50, $main-color);
+  }
+}
+
+.user-form__content {
   display: flex;
   flex-direction: column;
-  align-items: center;
 
   label {
     align-self: flex-start;
     margin-bottom: 8px;
   }
 
-  input,
-  textarea {
+  input {
     width: 100%;
     padding: 10px;
     margin-bottom: 15px;
@@ -26,16 +39,14 @@
 
     &:focus {
       border-color: $main-color;
-      box-shadow: 0 0 5px rgba(#2c4548, 0.3);
+      box-shadow: 0 0 5px rgba($main-color, 0.3);
     }
   }
 
-  textarea {
-    resize: none;
-    min-height: 100px;
-  }
-
   button {
+    align-self: center;
+    width: auto;
+    padding: 10px 20px;
     @include buttonSuqare(white, $main-color);
   }
 
@@ -44,7 +55,7 @@
     text-align: center;
   }
 
-  .form-link {
+  .user-form__link{
     text-decoration: underline;
     color: $main-color;
     cursor: pointer;
