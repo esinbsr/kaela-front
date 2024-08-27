@@ -1,62 +1,74 @@
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link } from "react-router-dom";
+import { getSocialNetwork } from "../../actions/socialNetworkAction";
 import {
   faFacebookSquare,
   faInstagram,
   faWhatsapp,
 } from "@fortawesome/free-brands-svg-icons";
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 
-// This component displays social network icons with dynamic links to specific pages
+// Component that renders social media icons with corresponding links
 const SocialNetworkIcon = () => {
-  const socialNetworks =
-    useSelector((state) => state.socialNetwork.socialNetwork) || [];
+  const dispatch = useDispatch(); // Hook to get the dispatch function from Redux
+  
+  // useEffect hook to dispatch the action to fetch social networks when the component mounts
+  useEffect(() => {
+    dispatch(getSocialNetwork()); // Fetch social network data when the component is first rendered
+  }, [dispatch]);
+
+  // Retrieves social network data from the Redux store
+  const socialNetworks = useSelector((state) => state.socialNetwork.socialNetwork) || [];
+  // Retrieves additional information (like phone number) from the Redux store
   const information = useSelector((state) => state.information.information);
 
-  //Function that generates a dynamic URL for a social network
+  // Function to get the appropriate link for each social network based on its name
   const getSocialNetworkLink = (name) => {
+    // Special case for WhatsApp: constructs a URL using a phone number if available
     if (name.toLowerCase() === "whatsapp") {
       const phoneNumber =
-        information && information[0] ? information[0].mobile : null; //Checks whether the information and telephone number are available
+        information && information[0] ? information[0].mobile : null; // Gets the phone number from the information array
       if (phoneNumber) {
-        const formattedPhoneNumber = phoneNumber.replace(/\D/g, ""); //If yes, the phone number is formatted by deleting all non-numeric characters.
-        return `https://wa.me/${formattedPhoneNumber}`; //The WhatsApp URL is then generated as follows
+        const formattedPhoneNumber = phoneNumber.replace(/\D/g, ""); // Removes non-numeric characters from the phone number
+        return `https://wa.me/${formattedPhoneNumber}`; // Returns the WhatsApp link with the phone number
       }
-      return "#"; //If the number is not available, the function returns an inactive link
+      return "#"; // If no phone number is available, returns a placeholder link
     }
 
-    //Determines the URL link to use for a given social network
+    // Finds the URL of the social network based on its name from the socialNetworks array
     const network = socialNetworks.find(
       (network) => network.platform.toLowerCase() === name.toLowerCase()
-    ); //converts character strings to lower case so that the comparison is case insensitive
-    return network ? network.url : "#"; //If network is found, the url property of this object is returned. This is the URL that will be used for the social network link.
+    );
+    return network ? network.url : "#"; // Returns the URL or a placeholder if not found
   };
 
+  // JSX for rendering the social media icons with their respective links
   return (
     <div className="social-icons">
       <Link
-        to={getSocialNetworkLink("facebook")}
+        to={getSocialNetworkLink("facebook")} 
         target="_blank"
         rel="noopener noreferrer"
       >
-        <FontAwesomeIcon icon={faFacebookSquare} />
+        <FontAwesomeIcon icon={faFacebookSquare} /> 
       </Link>
       <Link
-        to={getSocialNetworkLink("instagram")}
+        to={getSocialNetworkLink("instagram")} 
         target="_blank"
         rel="noopener noreferrer"
       >
-        <FontAwesomeIcon icon={faInstagram} />
+        <FontAwesomeIcon icon={faInstagram} /> 
       </Link>
       <a
-        href={getSocialNetworkLink("whatsapp")}
+        href={getSocialNetworkLink("whatsapp")} 
         target="_blank"
         rel="noopener noreferrer"
       >
-        <FontAwesomeIcon icon={faWhatsapp} />
+        <FontAwesomeIcon icon={faWhatsapp} /> 
       </a>
     </div>
   );
 };
 
-export default SocialNetworkIcon;
+export default SocialNetworkIcon; 

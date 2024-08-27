@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addCategory } from "../../../actions/categoryAction";
+import { addCategory, resetCategoryMessages } from "../../../actions/categoryAction";
+import Message from '../../../components/utils/Message';
 
 const AdminAddCategory = () => {
   
@@ -9,10 +10,14 @@ const AdminAddCategory = () => {
   const [categoryPageTitle, setCategoryPageTitle] = useState("");
   const [categoryPageDescription, setCategoryPageDescription] = useState("");
 
-  const responseMessage = useSelector((state) => state.category.message);
+  const message = useSelector((state) => state.category.message);
   const error = useSelector((state) => state.category.error);
-
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(resetCategoryMessages());
+
+  },[])
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -28,13 +33,13 @@ const AdminAddCategory = () => {
   };
 
   useEffect(() => {
-    if (responseMessage && !error) {
+    if (message && !error) {
       setCategoryName("");
       setCategoryDescription("");
       setCategoryPageTitle("");
       setCategoryPageDescription("");
     }
-  }, [responseMessage, error]);
+  }, [message, error]);
 
   return (
     <div className='form'>
@@ -47,6 +52,7 @@ const AdminAddCategory = () => {
           name="categoryName"
           value={categoryName}
           onChange={(e) => setCategoryName(e.target.value)}
+          aria-required="true"
         />
 
         <label htmlFor="categoryDescription">Description:</label>
@@ -55,6 +61,7 @@ const AdminAddCategory = () => {
           name="categoryDescription"
           value={categoryDescription}
           onChange={(e) => setCategoryDescription(e.target.value)}
+          aria-required="true"
         ></textarea>
 
         <label htmlFor="categoryPageTitle">Page title:</label>
@@ -76,8 +83,9 @@ const AdminAddCategory = () => {
 
         <button type="submit">Create</button>
       </form>
-      {responseMessage && <p>{responseMessage}</p>}
-      {error && <p>{error}</p>}
+
+      {message && <Message message={message} type="success"  />}
+      {error && <Message message={error} type="error"  />}
     </div>
   );
 };

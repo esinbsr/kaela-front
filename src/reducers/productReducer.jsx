@@ -16,8 +16,6 @@ import {
 
   RESET_PRODUCT_MESSAGES
 
-
-
 } from "../actions/productAction";
 
 const initialState = {
@@ -73,7 +71,13 @@ const productReducer = (state = initialState, action) => {
             message: action.message, // Stocke le message de succès dans l'état
             error: "",
         };
-    
+      case RESET_PRODUCT_MESSAGES:
+        return {
+          ...state,
+          message: "",
+          error:""
+        }
+
       
 
       case GET_PRODUCT_ERROR:
@@ -86,13 +90,6 @@ const productReducer = (state = initialState, action) => {
             message: "",
             error: action.payload,
           };
-
-          case RESET_PRODUCT_MESSAGES:
-            return {
-                ...state,
-                message: "",  // Réinitialise le message de succès
-                error: "",    // Réinitialise l'erreur
-            };
     
 
     default:

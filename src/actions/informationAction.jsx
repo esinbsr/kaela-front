@@ -16,6 +16,8 @@ export const DELETE_INFORMATION_ERROR = 'DELETE_INFORMATION_ERROR';
 export const FETCH_SINGLE_INFORMATION_SUCCESS = 'FETCH_SINGLE_INFORMATION_SUCCESS';
 export const FETCH_SINGLE_INFORMATION_ERROR = 'FETCH_SINGLE_INFORMATION_ERROR';
 
+export const RESET_INFORMATION_MESSAGES = 'RESET_INFORMATION_MESSAGES';
+
 export const getInformation = () => {
     return async (dispatch) => {
         try {
@@ -62,11 +64,15 @@ export const addInformation = (information) => {
                     'Content-Type': 'application/json',
                 },
             });
-            dispatch({
-                type: ADD_INFORMATION_SUCCESS,
-                payload: response.data.information,
-                message: response.data.message,
-            });
+            if(response.data.success) {
+                dispatch({
+                    type: ADD_INFORMATION_SUCCESS,
+                    payload: response.data.information,
+                    message: response.data.message,
+                });
+            }  else {
+                throw new Error(response.data.message);
+              }
         } catch (error) {
             dispatch({
                 type: ADD_INFORMATION_ERROR,
@@ -120,3 +126,7 @@ export const deleteInformation = (informationId) => {
         }
     };
 };
+
+export const resetInformationMessages = () => ({
+    type: RESET_INFORMATION_MESSAGES,
+});

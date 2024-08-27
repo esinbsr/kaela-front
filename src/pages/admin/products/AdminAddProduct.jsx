@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addProduct, getProduct } from '../../../actions/productAction';
+import { addProduct, getProduct, resetProductMessages } from '../../../actions/productAction';
 import { getProductCategories } from '../../../actions/categoryAction';
 import { getSection } from '../../../actions/sectionAction';
+import Message from '../../../components/utils/Message';
 
 const AdminAddProduct = () => {
     const [productName, setProductName] = useState('');
@@ -17,12 +18,14 @@ const AdminAddProduct = () => {
     
     const categories = useSelector((state) => state.category.category);
     const section = useSelector((state) => state.section.section);
-    const responseMessage = useSelector((state) => state.product.message);
+
+    const message = useSelector((state) => state.product.message);
     const error = useSelector((state) => state.product.error);
 
     useEffect(() => {
         dispatch(getProductCategories());
         dispatch(getSection());
+        dispatch(resetProductMessages());
     }, [dispatch]);
 
     useEffect(() => {
@@ -34,6 +37,20 @@ const AdminAddProduct = () => {
         }
     }, [categories, section]);
 
+    useEffect(() => {
+        if (message && !error) {
+            // Réinitialisation des champs du formulaire après l'ajout réussi du produit
+            setProductName('');
+            setProductDescription('');
+            setProductCategory(categories[0].id || '');
+            setProductSection(section[0].id || '');
+            setProductImage(null);
+            fileInputRef.current.value = ''; // Réinitialisation de l'input file
+
+            dispatch(getProduct()); // Rafraîchissement de la liste des produits
+        }
+    }, [message, error, dispatch, categories, section]);
+
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -44,24 +61,13 @@ const AdminAddProduct = () => {
         formData.append('productSection', productSection);
         formData.append('productImage', productImage);
 
-        dispatch(addProduct(formData)).then(() => {
-            setProductName("");
-            setProductDescription("");
-            setProductCategory(categories.length > 0 ? categories[0].id : ""); 
-            setProductSection(section.length > 0 ? section[0].id : ""); 
-            setProductImage(null);
-            if (fileInputRef.current) {
-                fileInputRef.current.value = '';
-            }
-            dispatch(getProduct()); // Refresh the product list after adding
-        });
+        dispatch(addProduct(formData));
     };
 
     return (
         <div className='form'>
             <h3>Add product</h3>
             <form onSubmit={handleSubmit}>
-
                 <label htmlFor="productName">Name of product:</label>
                 <input
                     id="productName"
@@ -118,8 +124,8 @@ const AdminAddProduct = () => {
 
                 <button type="submit">Create</button>
             </form>
-            {responseMessage && <p>{responseMessage}</p>}
-            {error && <p>{error}</p>}
+            {message && <Message message={message} type="success" />}
+            {error && <Message message={error} type="error" />}
         </div>
     );
 };

@@ -16,6 +16,8 @@ export const UPDATE_CATEGORY_ERROR = 'UPDATE_CATEGORY_ERROR';
 export const DELETE_CATEGORY_SUCCESS = 'DELETE_CATEGORY_SUCCESS';
 export const DELETE_CATEGORY_ERROR = 'DELETE_CATEGORY_ERROR';
 
+export const RESET_CATEGORY_MESSAGES = 'RESET_CATEGORY_MESSAGES';
+
 export const getProductCategories = () => {
   return async (dispatch) => {
     try {
@@ -66,19 +68,25 @@ export const addCategory = (formData) => {
           'Content-Type': 'application/json',
         },
       });
-      dispatch({
-        type: ADD_CATEGORIES_SUCCESS,
-        payload: response.data.category,
-        message: response.data.message,
-      });
+
+      if (response.data.success && response.data.category) {
+        dispatch({
+          type: ADD_CATEGORIES_SUCCESS,
+          payload: response.data.category,
+          message: response.data.message,
+        });
+      } else {
+        throw new Error(response.data.message);
+      }
     } catch (error) {
       dispatch({
         type: ADD_CATEGORIES_ERROR,
-        payload: error.message,
+        payload: error.message
       });
     }
   };
 };
+
 
 export const updateCategory = (category) => {
     return async (dispatch) => {
@@ -116,6 +124,7 @@ export const deleteCategory = (categoryId) => {
               payload: categoryId,
               message: response.data.message,
           });
+
       } catch (error) {
           dispatch({
               type: DELETE_CATEGORY_ERROR,
@@ -124,3 +133,7 @@ export const deleteCategory = (categoryId) => {
       }
   };
 };
+
+export const resetCategoryMessages = () => ({
+  type: RESET_CATEGORY_MESSAGES,
+})

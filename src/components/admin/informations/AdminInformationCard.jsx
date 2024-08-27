@@ -1,35 +1,25 @@
 import { Link } from 'react-router-dom';
-import { deleteInformation } from '../../../actions/informationAction';
-import { useDispatch } from 'react-redux';
 
-const AdminInformationCard = ({ infos }) => {
-    const dispatch = useDispatch();
-
-    const handleDelete = () => {
-      if (window.confirm("Are you sure you want to delete this product?")) {
-        dispatch(deleteInformation(infos.id));
-      }
-    };
-  
+const AdminInformationCard = ({ infos, onDelete }) => {
     return (
         <tr>
             <td>{infos.description}</td>
             <td>{infos.mobile}</td>
             <td>{infos.address}</td>
             <td>
-                <Link to={`/adminUpdateInformation/${infos.id}`} className='update-color'>Update</Link>
-            </td>
-
-            <td>
-                <Link
-                to="#" 
-                onClick={handleDelete} 
-             className="delete-color"
-                >
-                Delete 
+                <Link to={`/adminUpdateInformation/${infos.id}`} className='update-color' aria-label={`Update information ${infos.description}`}>
+                    Update
                 </Link>
             </td>
-
+            <td>
+                <button
+                    onClick={onDelete}
+                    className="delete-color"
+                    aria-label={`Delete information ${infos.description}`}
+                >
+                    Delete
+                </button>
+            </td>
         </tr>
     );
 };

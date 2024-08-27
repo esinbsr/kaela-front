@@ -1,29 +1,27 @@
 import { Link } from "react-router-dom";
 
-import { useDispatch } from "react-redux";
-import { deleteSocialNetwork } from "../../../actions/socialNetworkAction";
-
-const AdminSocialNetworkCard = ({ socialNetwork }) => {
-  const dispatch = useDispatch();
-
-  const handleDelete = () => {
-    if (
-      window.confirm("Are you sure you want to delete this social network?")
-    ) {
-      dispatch(deleteSocialNetwork(socialNetwork.id));
-    }
-  };
+const AdminSocialNetworkCard = ({ socialNetwork, onDelete }) => {
   return (
     <tr>
       <td>{socialNetwork.platform}</td>
       <td>{socialNetwork.url}</td>
       <td>
-        <Link to={`/adminUpdateSocialNetwork/${socialNetwork.id}`} className='update-color'>Update</Link>
+        <Link 
+          to={`/adminUpdateSocialNetwork/${socialNetwork.id}`} 
+          className='update-color'
+          aria-label={`Update ${socialNetwork.platform} network`}
+        >
+          Update
+        </Link>
       </td>
       <td>
-        <Link to="#" onClick={handleDelete}  className="delete-color">
+        <button
+          onClick={onDelete}  
+          className="delete-color"
+          aria-label={`Delete ${socialNetwork.platform} network`}
+        >
           Delete
-        </Link>
+        </button>
       </td>
     </tr>
   );

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductCategories } from "../actions/categoryAction";
 import { isEmpty } from './utils/isEmpty'; // Utility function to check if an array is empty
@@ -6,15 +6,11 @@ import { isEmpty } from './utils/isEmpty'; // Utility function to check if an ar
 const EveningLatestDescriptionList = ({ categorySlug }) => {
   const dispatch = useDispatch(); // Hook to dispatch Redux actions
   const categories = useSelector((state) => state.category.category); // Selector to access categories from the Redux store
-  const [loading, setLoading] = useState(true); // Local state to manage loading
 
   useEffect(() => {
     // Dispatch action to get categories and update loading state
-    dispatch(getProductCategories()).then(() => setLoading(false));
+    dispatch(getProductCategories());
   }, [dispatch]);
-
-  // Display a loading message while the categories are being loaded
-  if (loading) return <p>Loading...</p>;
 
 // Select the category based on the slug passed in prop
   const category = !isEmpty(categories)

@@ -8,7 +8,6 @@ import { isEmpty } from "./utils/isEmpty";
 const HomeDescriptionList = () => {
   const dispatch = useDispatch();
   const description = useSelector((state) => state.information.information);
-  const error = useSelector((state) => state.information.error);
   const userRole = useSelector((state) => state.user.role);
 
   const navigate = useNavigate();
@@ -17,38 +16,38 @@ const HomeDescriptionList = () => {
     dispatch(getInformation());
   }, [dispatch]);
 
-  if (error) {
-    return <p>Error loading description: {error}</p>;
-  }
 
   if (isEmpty(description)) {
-    return <p>Loading...</p>;
+    return <p>Loading descriptions...</p>;
   }
 
   const handleAdminClick = (desc) => {
     navigate(`/adminUpdateInformation/${desc.id}`);
   };
 
+
   return (
     <div className="home__description">
       {!isEmpty(description) ? (
-        description.slice(0, 1).map((desc) => (
+        <>
           <div
-            key={desc.id}
-            onClick={userRole === "admin" ? () => handleAdminClick(desc) : null}
+            key={description[0].id}
+            onClick={userRole === "admin" ? () => handleAdminClick(description[0]) : null}
             className={userRole === "admin" ? "clickable" : ""}
           >
             <p id="description">
-              {desc.description}
+              {description[0].description}
               {userRole === "admin" && (
                 <span className="edit-tooltip">Edit description</span>
               )}
             </p>
-            <Link to="/aboutMe" aria-labelledby="description" className="home__button">
+          </div>
+          <div className="home__button-container">
+            <Link to="/aboutMe" className="home__button">
               About me
             </Link>
           </div>
-        ))
+        </>
       ) : (
         <p>Description not found.</p>
       )}

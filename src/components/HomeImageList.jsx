@@ -13,7 +13,6 @@ const SECTIONS = {
 const HomeImageList = ({ start, end, additionalClass }) => {
     const dispatch = useDispatch(); // Hook pour dispatcher les actions Redux
     const products = useSelector((state) => state.product.products); // Sélection des produits depuis le store Redux
-    const error = useSelector((state) => state.product.error); // Sélection de l'état d'erreur depuis le store Redux
     const userRole = useSelector((state) => state.user.role); // Sélection du rôle de l'utilisateur depuis le store Redux
 
     const navigate = useNavigate(); // Hook pour naviguer entre les routes
@@ -24,12 +23,9 @@ const HomeImageList = ({ start, end, additionalClass }) => {
         dispatch(getProduct()); // Dispatcher l'action pour récupérer les produits
     }, [dispatch]);
 
-    if (error) {
-        return <p>Error loading products: {error}</p>; // Afficher un message d'erreur en cas de problème
-    }
 
     if (isEmpty(products)) {
-        return <p>Loading...</p>; // Afficher un message de chargement si les produits ne sont pas encore disponibles
+        return <p>Loading products...</p>; // Afficher un message de chargement si les produits ne sont pas encore disponibles
     }
 
     // Filtrer les produits par ID de section et les découper selon les indices de début et de fin

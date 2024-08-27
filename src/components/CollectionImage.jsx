@@ -49,61 +49,58 @@ const CollectionImage = ({ start, end, additionalClass }) => {
         .slice(start, end)
     : [];
 
-  return (
-    <div className={`${additionalClass || ""}`}>
-      {error ? (
-        <p role="alert" aria-live="assertive">
-          Error loading products: {error}
-        </p>
-      ) : !isEmpty(filteredProducts) ? (
-        filteredProducts.map((product) => {
-          // Find the corresponding category for each product
-          const category = categories.find(
-            (cat) => cat.id === product.categorie_id
-          );
-          const description = category
-            ? category.description
-            : "No category description"; // Fallback if no category is found
-          const title = category ? category.name : "Default Title"; // Fallback title
-          const slug = category ? category.slug : "";
-          const linkPath = CATEGORY_LINKS[slug] || "";
-          const ariaLabel = `Explore ${CATEGORY_NAMES[slug] || "this collection"}`;
-
-          return (
-            <div key={product.id}>
-              {userRole === "admin" ? (
-                // If the user is an admin, make the image clickable and link to update page
-                <Link to={`/adminUpdateProduct/${product.id}`}>
+    return (
+      <section className={`${additionalClass || ""}`}>
+        {error ? (
+          <p role="alert" aria-live="assertive">
+            Loading products...
+          </p>
+        ) : !isEmpty(filteredProducts) ? (
+          filteredProducts.map((product) => {
+            const category = categories.find(
+              (cat) => cat.id === product.categorie_id
+            );
+            const description = category
+              ? category.description
+              : "No category description";
+            const title = category ? category.name : "Default Title";
+            const slug = category ? category.slug : "";
+            const linkPath = CATEGORY_LINKS[slug] || "";
+            const ariaLabel = `Explore ${CATEGORY_NAMES[slug] || "this collection"}`;
+  
+            return (
+              <article key={product.id}>
+                {userRole === "admin" ? (
+                  <Link to={`/adminUpdateProduct/${product.id}`}>
+                    <img
+                      src={`${API_URL}assets/img/${product.path}`}
+                      alt={`Image of ${product.name}`}
+                    />
+                  </Link>
+                ) : (
                   <img
                     src={`${API_URL}assets/img/${product.path}`}
-                    alt={product.name}
+                    alt={`Image of ${product.name}`}
                   />
-                </Link>
-              ) : (
-                // If not admin, just display the image
-                <img
-                  src={`${API_URL}assets/img/${product.path}`}
-                  alt={product.name}
-                />
-              )}
-
-              <div className="home__collection-description">
-                <h3>{title}</h3>
-                <p>{description}</p>
-                <Link to={linkPath} aria-label={ariaLabel}>
-                  Explore
-                </Link>
-              </div>
-            </div>
-          );
-        })
-      ) : (
-        <p role="alert" aria-live="assertive">
-          No products found for the collection.
-        </p>
-      )}
-    </div>
-  );
+                )}
+  
+                <div className="home__collection-description">
+                  <h3>{title}</h3>
+                  <p>{description}</p>
+                  <Link to={linkPath} aria-label={ariaLabel}>
+                    Explore
+                  </Link>
+                </div>
+              </article>
+            );
+          })
+        ) : (
+          <p role="alert" aria-live="assertive">
+            No products found for the collection.
+          </p>
+        )}
+      </section>
+    );
 };
 
 export default CollectionImage;

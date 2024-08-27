@@ -151,7 +151,8 @@ export const deleteProduct = (productId) => {
     };
 };
 
+
 export const resetProductMessages = () => ({
-    type: RESET_PRODUCT_MESSAGES,
-  });
-  
+    type: RESET_PRODUCT_MESSAGES
+
+})

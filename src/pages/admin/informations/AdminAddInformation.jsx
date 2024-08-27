@@ -1,72 +1,81 @@
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { addInformation } from '../../../actions/informationAction';
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addInformation,
+  resetInformationMessages,
+} from "../../../actions/informationAction";
+import Message from "../../../components/utils/Message";
 
 const AdminAddInformation = () => {
-    const [description, setDescription] = useState('');
-    const [mobile, setMobile] = useState('');
-    const [address, setAddress] = useState('');
+  const [description, setDescription] = useState("");
+  const [mobile, setMobile] = useState("");
+  const [address, setAddress] = useState("");
 
-    const dispatch = useDispatch();
-    const responseMessage = useSelector((state) => state.information.message);
-    const error = useSelector((state) => state.information.error);
+  const dispatch = useDispatch();
+  const message = useSelector((state) => state.information.message);
+  const error = useSelector((state) => state.information.error);
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+  // Reset messages when the component mounts
+  useEffect(() => {
+    dispatch(resetInformationMessages());
+  }, [dispatch]);
 
-        const formData = {
-            description,
-            mobile,
-            address,
-        };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-        dispatch(addInformation(formData));
+    const formData = {
+      description,
+      mobile,
+      address,
     };
 
-    useEffect(() => {
-        if (responseMessage && !error) {
-            setDescription("");
-            setMobile("");
-            setAddress("");
-        }
-      }, [responseMessage, error]);
+    dispatch(addInformation(formData));
+  };
 
-    return (
-        <div className='form'>
-            <h3>Add information</h3>
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="description">Description</label>
-                <textarea
-                    id="description"
-                    name="description"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                ></textarea>
+  useEffect(() => {
+    if (message && !error) {
+      setDescription("");
+      setMobile("");
+      setAddress("");
+    }
+  }, [message, error]);
 
-                <label htmlFor="mobile">Mobile</label>
-                <input
-                    type="text"
-                    id="mobile"
-                    name="mobile"
-                    value={mobile}
-                    onChange={(e) => setMobile(e.target.value)}
-                />
+  return (
+    <div className="form">
+      <h3>Add information</h3>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="description">Description</label>
+        <textarea
+          id="description"
+          name="description"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+        ></textarea>
 
-                <label htmlFor="address">Address</label>
-                <input
-                    type="text"
-                    id="address"
-                    name="address"
-                    value={address}
-                    onChange={(e) => setAddress(e.target.value)}
-                />
+        <label htmlFor="mobile">Mobile</label>
+        <input
+          type="text"
+          id="mobile"
+          name="mobile"
+          value={mobile}
+          onChange={(e) => setMobile(e.target.value)}
+        />
 
-                <button type="submit">Create</button>
-            </form>
-            {responseMessage && <p>{responseMessage}</p>}
-            {error && <p>{error}</p>}
-        </div>
-    );
+        <label htmlFor="address">Address</label>
+        <input
+          type="text"
+          id="address"
+          name="address"
+          value={address}
+          onChange={(e) => setAddress(e.target.value)}
+        />
+
+        <button type="submit">Create</button>
+      </form>
+      {message && <Message message={message} type="success" />}
+      {error && <Message message={error} type="error" />}
+    </div>
+  );
 };
 
 export default AdminAddInformation;

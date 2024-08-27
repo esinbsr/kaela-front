@@ -1,12 +1,21 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { addSocialNetwork } from "../../../actions/socialNetworkAction";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addSocialNetwork, resetSocialNetworkMessages } from "../../../actions/socialNetworkAction";
+import Message from "../../../components/utils/Message";
 
 const AdminAddSocialNetwork = () => {
   const [platform, setPlatform] = useState("");
   const [url, setUrl] = useState("");
 
   const dispatch = useDispatch();
+
+  const message = useSelector((state) => state.socialNetwork.message);
+  const error = useSelector((state) => state.socialNetwork.error);
+
+  // Reset messages only on initial mount
+  useEffect(() => {
+    dispatch(resetSocialNetworkMessages());
+  }, [dispatch]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -18,6 +27,13 @@ const AdminAddSocialNetwork = () => {
 
     dispatch(addSocialNetwork(formData));
   };
+
+  useEffect(() => {
+    if (message && !error) {
+      setPlatform("");
+      setUrl("");
+    }
+  }, [message, error]);
 
   return (
     <div className='form'>
@@ -42,6 +58,8 @@ const AdminAddSocialNetwork = () => {
         />
         <button type="submit">Create</button>
       </form>
+      {message && <Message message={message} type="success" />}
+      {error && <Message message={error} type="error" />}
     </div>
   );
 };

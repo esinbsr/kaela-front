@@ -10,7 +10,7 @@ const SECTIONS = {
 // This component displays evening dresses
 const EveningDresses = () => {
   return (
-    <div className="evening-latest">
+    <main className="evening-latest">
       {/* Component to display the description of the evening dresses */}
       <EveningLatestDescriptionList categorySlug="evening-dresses" />
         {/* Component to display images of the evening dresses */}
@@ -20,7 +20,7 @@ const EveningDresses = () => {
         additionalClass="evening-latest__image"
         section={SECTIONS.EVENING_DRESSES}
       />
-    </div>
+    </main>
   );
 };
 

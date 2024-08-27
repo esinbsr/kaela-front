@@ -1,45 +1,50 @@
 // Table
 .table {
-  h3 {
+  h2 {
     text-align: center;
     font-size: 1.3rem;
   }
-.table__container {
-  display: flex;
-  justify-content: center;
+  .table__container {
+    display: flex;
+    justify-content: center;
 
-  .table__content {
-    width: 100%;
-    max-width: 1000px;
-    border-collapse: collapse;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+    .table__content {
+      width: 100%;
+      max-width: 1000px;
+      border-collapse: collapse;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      margin-top: 2rem;
+      margin-bottom: 2rem;
 
+      th,
+      td {
+        border: 1px solid #dee2e6;
+        padding: 12px;
+        text-align: center;
+      }
 
-    th,
-    td {
-      border: 1px solid #dee2e6;
-      padding: 12px;
-      text-align: center;
-    }
+      th {
+        background-color: $main-color;
+        color: #ffffff;
+      }
 
-    th {
-      background-color: $main-color;
-      color: #ffffff;
-    }
-
-    .action-header {
-      text-align: center;
+      .action-header {
+        text-align: center;
+      }
     }
   }
-}
 
-.delete-color {
-  color:red;
-}
+  .delete-color {
+    color: red;
+  }
 
-.update-color {
-  color:rgb(26, 26, 183);
-}
+  .update-color {
+    color: rgb(26, 26, 183);
+  }
+  button {
+    font-size: 1rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
 }

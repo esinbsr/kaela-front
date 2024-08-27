@@ -11,12 +11,19 @@ import SocialNetworkIcon from '../components/utils/SocialNetworkIcon';
 const Contact = () => {
   const dispatch = useDispatch();
   const information = useSelector((state) => state.information.information);
+  const [loading, setLoading] = useState(true); 
 
   useEffect(() => {
     dispatch(getInformation());
   }, [dispatch]);
 
   const info = !isEmpty(information) ? information[0] : null;
+
+  useEffect(() => {
+    if (info) {
+      setLoading(false); // Les données (tel, adresse, carte) sont prêtes à être affichées, donc on arrête le chargement
+    }
+  }, [info]);
 
   const [formData, setFormData] = useState({
     email: "",
@@ -63,9 +70,9 @@ const Contact = () => {
       <SocialNetworkIcon/>
       <section className="contact__form">
         <form onSubmit={handleSubmit}>
-        <header>
-          <h2>Contact Me</h2>
-          <div className="line"></div>
+          <header>
+            <h2>Contact Me</h2>
+            <div className="line"></div>
           </header>
 
           <label htmlFor="email">Email</label>
@@ -99,14 +106,16 @@ const Contact = () => {
         <div className="line"></div>
         <div className="contact__mobile">
           <FontAwesomeIcon icon={faPhone} />
-          {info && <p>+{info.mobile}</p>}
+          {loading ? <p role="alert" aria-live="assertive">Loading the phone number...</p> : <p>+{info.mobile}</p>}
         </div>
 
         <div className="contact__localisation">
           <FontAwesomeIcon icon={faLocationDot} />
-          {info && <p>{info.address}</p>}
+          {loading ? <p role="alert" aria-live="assertive">Loading the address...</p> : <p>{info.address}</p>}
         </div>
-        {info && <Map address={info.address} />}
+
+        {loading ?  <p role="alert" aria-live="assertive">Loading map...</p> : info && <Map address={info.address} />}
+
       </address>
     </div>
   );

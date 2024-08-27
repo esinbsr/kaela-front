@@ -3,8 +3,8 @@ import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
 const Map = ({ address }) => {
-  const mapRef = useRef(null); // Utilisation d'un ref pour stocker l'instance de la carte
-  const coordinatesRef = useRef([51.505, -0.09]); // Coordonnées par défaut
+  const mapRef = useRef(null); 
+  const coordinatesRef = useRef([51.505, -0.09]); 
 
   useEffect(() => {
     if (address) {

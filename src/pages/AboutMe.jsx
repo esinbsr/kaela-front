@@ -82,7 +82,7 @@ const AboutMe = () => {
               </div>
             ))
           ) : (
-            <p role="alert" aria-live="assertive">Loading drawing images...</p> // Accessibility: Loading message
+            <p role="alert" aria-live="assertive">Loading images...</p> // Accessibility: Loading message
           )}
         </div>
       </div>

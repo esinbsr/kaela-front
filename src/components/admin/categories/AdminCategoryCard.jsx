@@ -1,16 +1,6 @@
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { deleteCategory } from "../../../actions/categoryAction";
 
-const AdminCategoryCard = ({ category }) => {
-  const dispatch = useDispatch();
-
-  const handleDelete = () => {
-    if (window.confirm("Are you sure you want to delete this category?")) {
-      dispatch(deleteCategory(category.id));
-    }
-  };
-
+const AdminCategoryCard = ({ category, onDelete }) => {
   return (
     <tr>
       <td>{category.name}</td>
@@ -18,16 +8,15 @@ const AdminCategoryCard = ({ category }) => {
       <td>{category.page_title}</td>
       <td>{category.page_description}</td>
       <td>
-        <Link to={`/adminUpdateCategory/${category.id}`} className='update-color'>Update</Link>
+        <Link to={`/adminUpdateCategory/${category.id}`} className='update-color' aria-label={`Update category ${category.name}`}>Update</Link>
       </td>
       <td>
-        <Link
-          to="#"
-          onClick={handleDelete}
+        <button
+          onClick={onDelete}
           className="delete-color"
         >
           Delete
-        </Link>
+        </button>
       </td>
     </tr>
   );

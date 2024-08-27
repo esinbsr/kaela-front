@@ -16,6 +16,8 @@ export const UPDATE_SOCIAL_NETWORK_ERROR = 'UPDATE_SOCIAL_NETWORK_ERROR';
 export const DELETE_SOCIAL_NETWORK_SUCCESS = 'DELETE_SOCIAL_NETWORK_SUCCESS';
 export const DELETE_SOCIAL_NETWORK_ERROR = 'DELETE_SOCIAL_NETWORK_ERROR';
 
+export const RESET_SOCIAL_NETWORK_MESSAGES = 'RESET_SOCIAL_NETWORK_MESSAGES';
+
 export const getSocialNetwork = () => {
     return async (dispatch) => {
         try {
@@ -60,11 +62,16 @@ export const addSocialNetwork = (socialNetwork) => {
                     'Content-Type': 'application/json',
                 },
             });
-            dispatch({
-                type: ADD_SOCIAL_NETWORK_SUCCESS,
-                payload: response.data.socialNetwork,
-                message: response.data.message,
-            });
+            if (response.data.success  && response.data.socialNetwork) {
+                dispatch({
+                    type: ADD_SOCIAL_NETWORK_SUCCESS,
+                    payload: response.data.socialNetwork,
+                    message: response.data.message,
+                });
+            }
+            else {
+                throw new Error(response.data.message);
+              }
         } catch (error) {
             dispatch({
                 type: ADD_SOCIAL_NETWORK_ERROR,
@@ -117,3 +124,7 @@ export const deleteSocialNetwork = (socialNetworkId) => {
         }
     };
 };
+
+export const resetSocialNetworkMessages = () => ({
+    type: RESET_SOCIAL_NETWORK_MESSAGES
+});
