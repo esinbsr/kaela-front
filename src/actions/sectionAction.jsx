@@ -22,7 +22,7 @@ export const getSection = () => {
         } catch(error) {
             dispatch({
                 type: GET_SECTION_ERROR,
-                payload: error.response.data.message || "No message returned"
+                payload: error.response?.data?.message || error.message || "No message returned",
             })
         }
     }

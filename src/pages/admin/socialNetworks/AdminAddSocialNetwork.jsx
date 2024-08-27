@@ -36,32 +36,45 @@ const AdminAddSocialNetwork = () => {
   }, [message, error]);
 
   return (
-    <div className='form'>
-      <h3>Add social network</h3>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="platform">Platform</label>
-        <input
-          type="text"
-          id="platform"
-          name="platform"
-          value={platform}
-          onChange={(e) => setPlatform(e.target.value)}
-        />
+    <div className="form">
+        <form onSubmit={handleSubmit}>
+            <fieldset>
+                <legend>Add Social Network</legend>
 
-        <label htmlFor="url">Url</label>
-        <input
-          type="text"
-          id="url"
-          name="url"
-          value={url}
-          onChange={(e) => setUrl(e.target.value)}
-        />
-        <button type="submit">Create</button>
-      </form>
-      {message && <Message message={message} type="success" />}
-      {error && <Message message={error} type="error" />}
+                <div className="form__group">
+                    <label htmlFor="platform">Platform</label>
+                    <input
+                        type="text"
+                        id="platform"
+                        name="platform"
+                        value={platform}
+                        onChange={(e) => setPlatform(e.target.value)}
+                        aria-required="true"
+                    />
+                </div>
+
+                <div className="form__group">
+                    <label htmlFor="url">Url</label>
+                    <input
+                        type="text"
+                        id="url"
+                        name="url"
+                        value={url}
+                        onChange={(e) => setUrl(e.target.value)}
+                        aria-required="true"
+                    />
+                </div>
+
+                <div className="form__button">
+                    <button type="submit">Create</button>
+                </div>
+            </fieldset>
+        </form>
+        {message && <Message message={message} type="success" />}
+        {error && <Message message={error} type="error" />}
     </div>
-  );
+);
+
 };
 
 export default AdminAddSocialNetwork;

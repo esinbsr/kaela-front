@@ -1,133 +1,158 @@
-import { useState, useEffect, useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { addProduct, getProduct, resetProductMessages } from '../../../actions/productAction';
-import { getProductCategories } from '../../../actions/categoryAction';
-import { getSection } from '../../../actions/sectionAction';
-import Message from '../../../components/utils/Message';
+import { useState, useEffect, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addProduct,
+  getProduct,
+  resetProductMessages,
+} from "../../../actions/productAction";
+import { getProductCategories } from "../../../actions/categoryAction";
+import { getSection } from "../../../actions/sectionAction";
+import Message from "../../../components/utils/Message";
 
 const AdminAddProduct = () => {
-    const [productName, setProductName] = useState('');
-    const [productDescription, setProductDescription] = useState('');
-    const [productCategory, setProductCategory] = useState('');
-    const [productSection, setProductSection] = useState('');
-    const [productImage, setProductImage] = useState(null);
+  const [productName, setProductName] = useState("");
+  const [productDescription, setProductDescription] = useState("");
+  const [productCategory, setProductCategory] = useState("");
+  const [productSection, setProductSection] = useState("");
+  const [productImage, setProductImage] = useState(null);
 
-    const fileInputRef = useRef(null);
+  const fileInputRef = useRef(null);
 
-    const dispatch = useDispatch();
-    
-    const categories = useSelector((state) => state.category.category);
-    const section = useSelector((state) => state.section.section);
+  const dispatch = useDispatch();
 
-    const message = useSelector((state) => state.product.message);
-    const error = useSelector((state) => state.product.error);
+  const categories = useSelector((state) => state.category.category);
+  const section = useSelector((state) => state.section.section);
 
-    useEffect(() => {
-        dispatch(getProductCategories());
-        dispatch(getSection());
-        dispatch(resetProductMessages());
-    }, [dispatch]);
+  const message = useSelector((state) => state.product.message);
+  const error = useSelector((state) => state.product.error);
 
-    useEffect(() => {
-        if (categories.length > 0) {
-            setProductCategory(categories[0].id);
-        }
-        if (section.length > 0) {
-            setProductSection(section[0].id);
-        }
-    }, [categories, section]);
+  useEffect(() => {
+    dispatch(getProductCategories());
+    dispatch(getSection());
+    dispatch(resetProductMessages());
+  }, [dispatch]);
 
-    useEffect(() => {
-        if (message && !error) {
-            // Réinitialisation des champs du formulaire après l'ajout réussi du produit
-            setProductName('');
-            setProductDescription('');
-            setProductCategory(categories[0].id || '');
-            setProductSection(section[0].id || '');
-            setProductImage(null);
-            fileInputRef.current.value = ''; // Réinitialisation de l'input file
+  useEffect(() => {
+    if (categories.length > 0) {
+      setProductCategory(categories[0].id);
+    }
+    if (section.length > 0) {
+      setProductSection(section[0].id);
+    }
+  }, [categories, section]);
 
-            dispatch(getProduct()); // Rafraîchissement de la liste des produits
-        }
-    }, [message, error, dispatch, categories, section]);
+  useEffect(() => {
+    if (message && !error) {
+      // Réinitialisation des champs du formulaire après l'ajout réussi du produit
+      setProductName("");
+      setProductDescription("");
+      setProductCategory(categories[0].id || "");
+      setProductSection(section[0].id || "");
+      setProductImage(null);
+      fileInputRef.current.value = ""; // Réinitialisation de l'input file
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+      dispatch(getProduct()); // Rafraîchissement de la liste des produits
+    }
+  }, [message, error, dispatch, categories, section]);
 
-        const formData = new FormData();
-        formData.append('productName', productName);
-        formData.append('productDescription', productDescription);
-        formData.append('productCategory', productCategory);
-        formData.append('productSection', productSection);
-        formData.append('productImage', productImage);
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-        dispatch(addProduct(formData));
-    };
+    const formData = new FormData();
+    formData.append("productName", productName);
+    formData.append("productDescription", productDescription);
+    formData.append("productCategory", productCategory);
+    formData.append("productSection", productSection);
+    formData.append("productImage", productImage);
 
-    return (
-        <div className='form'>
-            <h3>Add product</h3>
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="productName">Name of product:</label>
-                <input
-                    id="productName"
-                    type="text"
-                    name="productName"
-                    value={productName}
-                    onChange={(e) => setProductName(e.target.value)}
-                />
+    dispatch(addProduct(formData));
+  };
 
-                <label htmlFor="productDescription">Description:</label>
-                <textarea
-                    id="productDescription"
-                    name="productDescription"
-                    value={productDescription}
-                    onChange={(e) => setProductDescription(e.target.value)}
-                ></textarea>
+  return (
+    <>
+      <form onSubmit={handleSubmit} className="form">
+        <fieldset>
+          <legend>Product Details</legend>
 
-                <label htmlFor="productCategory">Category:</label>
-                <select
-                    id="productCategory"
-                    name="productCategory"
-                    value={productCategory}
-                    onChange={(e) => setProductCategory(e.target.value)}
-                >
-                    {categories.map((category) => (
-                        <option key={category.id} value={category.id}>
-                            {category.name}
-                        </option>
-                    ))}
-                </select>
+          <div className="form__group">
+            <label htmlFor="productName">Name of product:</label>
+            <input
+              id="productName"
+              type="text"
+              name="productName"
+              value={productName}
+              onChange={(e) => setProductName(e.target.value)}
+              aria-required="true"
+            />
+          </div>
 
-                <label htmlFor="productSection">Section:</label>
-                <select
-                    id="productSection"
-                    name="productSection"
-                    value={productSection}
-                    onChange={(e) => setProductSection(e.target.value)}
-                >
-                    {section.map((section) => (
-                        <option key={section.id} value={section.id}>
-                            {section.name}
-                        </option>
-                    ))}
-                </select>
+          <div className="form__group">
+            <label htmlFor="productDescription">Description:</label>
+            <textarea
+              id="productDescription"
+              name="productDescription"
+              value={productDescription}
+              onChange={(e) => setProductDescription(e.target.value)}
+              aria-required="true"
+            ></textarea>
+          </div>
 
-                <label htmlFor="productImage">Image:</label>
-                <input
-                    type="file"
-                    id="productImage"
-                    name="productImage"
-                    ref={fileInputRef}
-                    onChange={(e) => setProductImage(e.target.files[0])}
-                />
+          <div className="form__group">
+            <label htmlFor="productCategory">Category:</label>
+            <select
+              id="productCategory"
+              name="productCategory"
+              value={productCategory}
+              onChange={(e) => setProductCategory(e.target.value)}
+              aria-required="true"
+            >
+              {categories.map((category) => (
+                <option key={category.id} value={category.id}>
+                  {category.name}
+                </option>
+              ))}
+            </select>
+          </div>
 
-                <button type="submit">Create</button>
-            </form>
-            {message && <Message message={message} type="success" />}
-            {error && <Message message={error} type="error" />}
-        </div>
-    );
+          <div className="form__group">
+            <label htmlFor="productSection">Section:</label>
+            <select
+              id="productSection"
+              name="productSection"
+              value={productSection}
+              onChange={(e) => setProductSection(e.target.value)}
+              aria-required="true"
+            >
+              {section.map((section) => (
+                <option key={section.id} value={section.id}>
+                  {section.name}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="form__group">
+            <label htmlFor="productImage">Image:</label>
+            <input
+              type="file"
+              id="productImage"
+              name="productImage"
+              ref={fileInputRef}
+              onChange={(e) => setProductImage(e.target.files[0])}
+              aria-required="true"
+            />
+          </div>
+
+          <div className="form__button">
+            <button type="submit">Create</button>
+          </div>
+        </fieldset>
+      </form>
+
+      {message && <Message message={message} type="success" />}
+      {error && <Message message={error} type="error" />}
+    </>
+  );
 };
 
 export default AdminAddProduct;

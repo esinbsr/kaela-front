@@ -46,15 +46,21 @@ export const getCategoryById = (categoryId) => {
   return async (dispatch) => {
     try {
       const response = await axios.get(`${API_URL}getCategoryById/${categoryId}`);
+      const message = response.data.message;
+
+      if (response.data.success) {
       dispatch({
         type: GET_CATEGORY_BY_ID_SUCCESS,
         payload: response.data.categoryById,
-        message: response.data.message,
+        message: message,
       });
+    } else {
+      throw new Error(message);
+  }
     } catch (error) {
       dispatch({
         type: GET_CATEGORY_BY_ID_ERROR,
-        payload: error.message,
+        payload: error.response?.data?.message || error.message || "No message returned",
       });
     }
   };
@@ -68,20 +74,21 @@ export const addCategory = (formData) => {
           'Content-Type': 'application/json',
         },
       });
+      const message = response.data.message;
 
-      if (response.data.success && response.data.category) {
+      if (response.data.success) {
         dispatch({
           type: ADD_CATEGORIES_SUCCESS,
           payload: response.data.category,
-          message: response.data.message,
+          message: message,
         });
       } else {
-        throw new Error(response.data.message);
+        throw new Error(message);
       }
     } catch (error) {
       dispatch({
         type: ADD_CATEGORIES_ERROR,
-        payload: error.message
+        payload: error.response?.data?.message || error.message || "No message returned",
       });
     }
   };
@@ -96,15 +103,21 @@ export const updateCategory = (category) => {
             'Content-Type': 'application/json',
           },
         });
+        const message = response.data.message;
+
+        if (response.data.success) {
         dispatch({
           type: UPDATE_CATEGORY_SUCCESS,
           payload: response.data.categoryUpdate,
-          message: response.data.message,
+          message: message,
         });
+      } else {
+        throw new Error(message);
+    }
       } catch (error) {
         dispatch({
           type: UPDATE_CATEGORY_ERROR,
-          payload: error.message,
+          payload: error.response?.data?.message || error.message || "No message returned",
         });
       }
     };
@@ -119,16 +132,20 @@ export const deleteCategory = (categoryId) => {
                   'Content-Type': 'application/json',
               },
           });
+          const message = response.data.message; 
+          if (response.data.success) {
           dispatch({
               type: DELETE_CATEGORY_SUCCESS,
               payload: categoryId,
-              message: response.data.message,
+              message: message,
           });
-
+        } else {
+          throw new Error(message);
+      }
       } catch (error) {
           dispatch({
               type: DELETE_CATEGORY_ERROR,
-              payload: error.message,
+              payload: error.response?.data?.message || error.message || "No message returned",
           });
       }
   };

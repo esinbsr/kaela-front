@@ -22,16 +22,21 @@ export const getInformation = () => {
     return async (dispatch) => {
         try {
             const response = await axios.get(`${API_URL}getInformation`);
+            const message = response.data.message;
             
+            if (response.data.success) {
             dispatch({
                 type: GET_INFORMATION_SUCCESS,
                 payload: response.data.information,
-                message: response.data.message, 
+                message: message, 
             });
+        } else {
+            throw new Error(message);
+        }
         } catch (error) {
             dispatch({
                 type: GET_INFORMATION_ERROR,
-                payload: error.message,
+                payload: error.response?.data?.message || error.message || "No message returned",
             });
         }
     };
@@ -41,15 +46,21 @@ export const getInformationById = (informationId) => {
     return async (dispatch) => {
         try {
             const response = await axios.get(`${API_URL}getInformationById/${informationId}`); // ${informationId} passe l'ID spécifique de l'information que je veux récupérer du serveur. j'utilises l'ID pour déclencher l'action getInformationById lorsque le composant est monté ou lorsque l'ID change
+            const message = response.data.message;
+
+            if (response.data.success) {
             dispatch({
                 type: FETCH_SINGLE_INFORMATION_SUCCESS,
                 payload: response.data.information,
-                message: response.data.message,
+                message: message,
             });
+        } else {
+            throw new Error(message);
+        }
         } catch (error) {
             dispatch({
                 type: FETCH_SINGLE_INFORMATION_ERROR,
-                payload: error.message,
+                payload: error.response?.data?.message || error.message || "No message returned",
             });
         }
     };
@@ -64,19 +75,21 @@ export const addInformation = (information) => {
                     'Content-Type': 'application/json',
                 },
             });
+            const message = response.data.message;
+
             if(response.data.success) {
                 dispatch({
                     type: ADD_INFORMATION_SUCCESS,
                     payload: response.data.information,
-                    message: response.data.message,
+                    message: message,
                 });
             }  else {
-                throw new Error(response.data.message);
+                throw new Error(message);
               }
         } catch (error) {
             dispatch({
                 type: ADD_INFORMATION_ERROR,
-                payload: error.message,
+                payload: error.response?.data?.message || error.message || "No message returned"
             });
         }
     };
@@ -91,15 +104,20 @@ export const updateInformation = (information) => {
                     'Content-Type': 'application/json',
                 },
             });
+            const message = response.data.message;
+            if (response.data.success) {
             dispatch({
                 type: UPDATE_INFORMATION_SUCCESS,
                 payload: response.data.information,
                 message: response.data.message,
             });
+        } else {
+            throw new Error(message);
+        }
         } catch (error) {
             dispatch({
                 type: UPDATE_INFORMATION_ERROR,
-                payload: error.message,
+                payload: error.response?.data?.message || error.message || "No message returned"
             });
         }
     };
@@ -113,15 +131,20 @@ export const deleteInformation = (informationId) => {
                     'Content-Type': 'application/json',
                 },
             });
+            const message = response.data.message; 
+            if (response.data.success) {
             dispatch({
                 type: DELETE_INFORMATION_SUCCESS,
                 payload: informationId,
-                message: response.data.message,
+                message: message,
             });
+        } else {
+            throw new Error(message);
+        }
         } catch (error) {
             dispatch({
                 type: DELETE_INFORMATION_ERROR,
-                payload: error.message,
+                payload: error.response?.data?.message || error.message || "No message returned"
             });
         }
     };

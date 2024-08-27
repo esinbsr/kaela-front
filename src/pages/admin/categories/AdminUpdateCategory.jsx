@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getCategoryById, updateCategory } from "../../../actions/categoryAction";
 import AdminNavigation from "../AdminNavigation";
+import Message from "../../../components/utils/Message";
 
 const AdminUpdateCategory = () => {
   const { categoryId } = useParams();
@@ -15,23 +16,21 @@ const AdminUpdateCategory = () => {
   const [categoryPageTitle, setCategoryPageTitle] = useState("");
   const [categoryPageDescription, setCategoryPageDescription] = useState("");
 
-  const responseMessage = useSelector((state) => state.category.message);
+  const message = useSelector((state) => state.category.message);
   const error = useSelector((state) => state.category.error);
 
   useEffect(() => {
     if (categoryId) {
       dispatch(getCategoryById(categoryId));
-    } else {
-      console.log('Category ID is missing');
-    }
+    } 
   }, [dispatch, categoryId]);
 
   useEffect(() => {
     if (categoryById) {
-      setCategoryName(categoryById.name || "");
-      setCategoryDescription(categoryById.description || "");
-      setCategoryPageTitle(categoryById.page_title || "");
-      setCategoryPageDescription(categoryById.page_description || "");
+      setCategoryName(categoryById.name);
+      setCategoryDescription(categoryById.description);
+      setCategoryPageTitle(categoryById.page_title);
+      setCategoryPageDescription(categoryById.page_description);
     }
   }, [categoryById]);
 
@@ -40,10 +39,10 @@ const AdminUpdateCategory = () => {
 
     const formData = {
       id: categoryId,
-      name: categoryName || categoryById.name,
-      description: categoryDescription || categoryById.description,
-      page_title: categoryPageTitle || categoryById.page_title,
-      page_description: categoryPageDescription || categoryById.page_description
+      name: categoryName,
+      description: categoryDescription,
+      page_title: categoryPageTitle ,
+      page_description: categoryPageDescription
     };
 
     dispatch(updateCategory(formData));
@@ -53,51 +52,64 @@ const AdminUpdateCategory = () => {
     <div className="admin-container">
       <AdminNavigation />
       <div className="admin-container__content">
-        <h1>Update category</h1>
-        <div className="form">
-          <form onSubmit={handleSubmit}>
-            <label htmlFor="categoryName">Name of category:</label>
-            <input
-              id="categoryName"
-              type="text"
-              name="categoryName"
-              value={categoryName}
-              onChange={(e) => setCategoryName(e.target.value)}
-            />
+
+          <form onSubmit={handleSubmit} className="form">
+            <fieldset>
+              <legend>Update Category</legend>
   
-            <label htmlFor="categoryDescription">Description:</label>
-            <textarea
-              id="categoryDescription"
-              name="categoryDescription"
-              value={categoryDescription}
-              onChange={(e) => setCategoryDescription(e.target.value)}
-            ></textarea>
+              <div className="form__group">
+                <label htmlFor="categoryName">Name of category:</label>
+                <input
+                  id="categoryName"
+                  type="text"
+                  name="categoryName"
+                  value={categoryName}
+                  onChange={(e) => setCategoryName(e.target.value)}
+                />
+              </div>
   
-            <label htmlFor="categoryPageTitle">Page title:</label>
-            <input
-              id="categoryPageTitle"
-              type="text"
-              name="categoryPageTitle"
-              value={categoryPageTitle}
-              onChange={(e) => setCategoryPageTitle(e.target.value)}
-            />
+              <div className="form__group">
+                <label htmlFor="categoryDescription">Description:</label>
+                <textarea
+                  id="categoryDescription"
+                  name="categoryDescription"
+                  value={categoryDescription}
+                  onChange={(e) => setCategoryDescription(e.target.value)}
+                ></textarea>
+              </div>
   
-            <label htmlFor="categoryPageDescription">Page description:</label>
-            <textarea
-              id="categoryPageDescription"
-              name="categoryPageDescription"
-              value={categoryPageDescription}
-              onChange={(e) => setCategoryPageDescription(e.target.value)}
-            ></textarea>
+              <div className="form__group">
+                <label htmlFor="categoryPageTitle">Page title:</label>
+                <input
+                  id="categoryPageTitle"
+                  type="text"
+                  name="categoryPageTitle"
+                  value={categoryPageTitle}
+                  onChange={(e) => setCategoryPageTitle(e.target.value)}
+                />
+              </div>
   
-            <button type="submit">Update</button>
+              <div className="form__group">
+                <label htmlFor="categoryPageDescription">Page description:</label>
+                <textarea
+                  id="categoryPageDescription"
+                  name="categoryPageDescription"
+                  value={categoryPageDescription}
+                  onChange={(e) => setCategoryPageDescription(e.target.value)}
+                ></textarea>
+              </div>
+  
+              <div className="form__button">
+                <button type="submit">Update</button>
+              </div>
+            </fieldset>
           </form>
-          {responseMessage && <p>{responseMessage}</p>}
-          {error && <p>{error}</p>}
+          {message && <Message message={message} type="success" />}
+          {error && <Message message={error} type="error" />}
         </div>
       </div>
-    </div>
   );
+  
   
 };
 

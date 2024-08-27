@@ -35,7 +35,7 @@ const HomeDescriptionList = () => {
             onClick={userRole === "admin" ? () => handleAdminClick(description[0]) : null}
             className={userRole === "admin" ? "clickable" : ""}
           >
-            <p id="description">
+            <p>
               {description[0].description}
               {userRole === "admin" && (
                 <span className="edit-tooltip">Edit description</span>
@@ -43,7 +43,7 @@ const HomeDescriptionList = () => {
             </p>
           </div>
           <div className="home__button-container">
-            <Link to="/aboutMe" className="home__button">
+            <Link to="/aboutMe" aria-label="Learn more about me" className="home__button">
               About me
             </Link>
           </div>

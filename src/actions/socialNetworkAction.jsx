@@ -22,15 +22,21 @@ export const getSocialNetwork = () => {
     return async (dispatch) => {
         try {
             const response = await axios.get(`${API_URL}getSocialNetwork`);
+            const message = response.data.message;
+
+            if (response.data.success) {
             dispatch({
                 type: GET_SOCIAL_NETWORK_SUCCESS,
                 payload: response.data.socialNetwork,
-                message: response.data.message,
+                message: message,
             });
+        } else {
+            throw new Error(message);
+        }
         } catch (error) {
             dispatch({
                 type: GET_SOCIAL_NETWORK_ERROR,
-                payload: error.message,
+                payload: error.response?.data?.message || error.message || "No message returned"
             });
         }
     };
@@ -40,15 +46,21 @@ export const getSocialNetworkById = (socialNetworkId) => {
     return async (dispatch) => {
         try {
             const response = await axios.get(`${API_URL}getSocialNetworkById/${socialNetworkId}`);
+            const message = response.data.message;
+
+            if (response.data.success) {
             dispatch({
                 type: GET_SOCIAL_NETWORK_BY_ID_SUCCESS,
                 payload: response.data.socialNetwork,
-                message: response.data.message,
+                message: message,
             });
+        } else {
+            throw new Error(message);
+        }
         } catch (error) {
             dispatch({
                 type: GET_SOCIAL_NETWORK_BY_ID_ERROR,
-                payload: error.message,
+                payload: error.response?.data?.message || error.message || "No message returned",
             });
         }
     };
@@ -62,20 +74,21 @@ export const addSocialNetwork = (socialNetwork) => {
                     'Content-Type': 'application/json',
                 },
             });
+            const message = response.data.message;
             if (response.data.success  && response.data.socialNetwork) {
                 dispatch({
                     type: ADD_SOCIAL_NETWORK_SUCCESS,
                     payload: response.data.socialNetwork,
-                    message: response.data.message,
+                    message: message,
                 });
             }
             else {
-                throw new Error(response.data.message);
+                throw new Error(message);
               }
         } catch (error) {
             dispatch({
                 type: ADD_SOCIAL_NETWORK_ERROR,
-                payload: error.message,
+                payload: error.response?.data?.message || error.message || "No message returned"
             });
         }
     };
@@ -89,15 +102,20 @@ export const updateSocialNetwork = (socialNetwork) => {
                     'Content-Type': 'application/json',
                 },
             });
+            const message = response.data.message;
+            if (response.data.success) {
             dispatch({
                 type: UPDATE_SOCIAL_NETWORK_SUCCESS,
                 payload: response.data.socialNetwork,
-                message: response.data.message,
+                message: message,
             });
+        } else {
+            throw new Error(message);
+        }
         } catch (error) {
             dispatch({
                 type: UPDATE_SOCIAL_NETWORK_ERROR,
-                payload: error.message,
+                payload: error.response?.data?.message || error.message || "No message returned"
             });
         }
     };
@@ -111,15 +129,20 @@ export const deleteSocialNetwork = (socialNetworkId) => {
                     'Content-Type': 'application/json',
                 },
             });
+            const message = response.data.message; 
+            if (response.data.success) {
             dispatch({
                 type: DELETE_SOCIAL_NETWORK_SUCCESS,
                 payload: socialNetworkId,
-                message: response.data.message,
+                message: message,
             });
+        } else {
+            throw new Error(message);
+        }
         } catch (error) {
             dispatch({
                 type: DELETE_SOCIAL_NETWORK_ERROR,
-                payload: error.message,
+                payload: error.response?.data?.message || error.message || "No message returned"
             });
         }
     };

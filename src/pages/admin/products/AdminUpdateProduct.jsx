@@ -4,6 +4,9 @@ import { useParams } from "react-router-dom";
 import { getProductById, updateProduct } from "../../../actions/productAction";
 import AdminNavigation from "../AdminNavigation";
 import { API_URL } from "../../../actions/serverRequest";
+import Message from "../../../components/utils/Message";
+import { getProductCategories } from "../../../actions/categoryAction";
+import { getSection } from "../../../actions/sectionAction";
 
 const AdminUpdateProduct = () => {
   const [productName, setProductName] = useState("");
@@ -11,7 +14,7 @@ const AdminUpdateProduct = () => {
   const [productCategory, setProductCategory] = useState("");
   const [productSection, setProductSection] = useState("");
   const [productImage, setProductImage] = useState(null);
-  const [currentImage, setCurrentImage] = useState(""); // Ajoutez un état pour stocker l'image actuelle
+  const [currentImage, setCurrentImage] = useState(""); 
 
   const { productId } = useParams();
   const dispatch = useDispatch();
@@ -20,14 +23,17 @@ const AdminUpdateProduct = () => {
   const categories = useSelector((state) => state.category.category);
   const section = useSelector((state) => state.section.section);
 
-  const responseMessage = useSelector((state) => state.product.message);
-  const errorMessage = useSelector((state) => state.product.error);
+  const message = useSelector((state) => state.product.message);
+  const error = useSelector((state) => state.product.error);
 
   useEffect(() => {
     if (productId) {
       dispatch(getProductById(productId));
     }
+    dispatch(getProductCategories()); 
+    dispatch(getSection()); 
   }, [dispatch, productId]);
+
 
   useEffect(() => {
     if (productById) {
@@ -57,62 +63,72 @@ const AdminUpdateProduct = () => {
     <div className="admin-container">
       <AdminNavigation />
       <div className="admin-container__content">
-        <h1>Update product</h1>
-        <div className="form">
-          <form onSubmit={handleSubmit}>
-            <label htmlFor="productName">Name of product:</label>
-            <input
-              id="productName"
-              type="text"
-              name="productName"
-              value={productName}
-              onChange={(e) => setProductName(e.target.value)}
-            />
-
-            <label htmlFor="productDescription">Description:</label>
-            <textarea
-              id="productDescription"
-              name="productDescription"
-              value={productDescription}
-              onChange={(e) => setProductDescription(e.target.value)}
-            ></textarea>
-
-            <label htmlFor="productCategory">Category:</label>
-            <select
-              id="productCategory"
-              name="productCategory"
-              value={productCategory}
-              onChange={(e) => setProductCategory(e.target.value)}
-            >
-              {categories.map((category) => (
-                <option key={category.id} value={category.id}>
-                  {category.name}
-                </option>
-              ))}
-            </select>
-
-            <label htmlFor="productSection">Section:</label>
-            <select
-              id="productSection"
-              name="productSection"
-              value={productSection}
-              onChange={(e) => setProductSection(e.target.value)}
-            >
-              {section.map((section) => (
-                <option key={section.id} value={section.id}>
-                  {section.name}
-                </option>
-              ))}
-            </select>
-
-            <label htmlFor="productImage">Current image:</label>
-            {currentImage && (
-              <div>
-                <img
-                  src={`${API_URL}assets/img/${currentImage}`}
-                  alt="Current Product"
-                  style={{ width: "150px", marginBottom: "10px" }}
-                />
+        <form onSubmit={handleSubmit} className="form">
+          <fieldset>
+            <legend>Update Product</legend>
+  
+            <div className="form__group">
+              <label htmlFor="productName">Name of product:</label>
+              <input
+                id="productName"
+                type="text"
+                name="productName"
+                value={productName}
+                onChange={(e) => setProductName(e.target.value)}
+              />
+            </div>
+  
+            <div className="form__group">
+              <label htmlFor="productDescription">Description:</label>
+              <textarea
+                id="productDescription"
+                name="productDescription"
+                value={productDescription}
+                onChange={(e) => setProductDescription(e.target.value)}
+              ></textarea>
+            </div>
+  
+            <div className="form__group">
+              <label htmlFor="productCategory">Category:</label>
+              <select
+                id="productCategory"
+                name="productCategory"
+                value={productCategory}
+                onChange={(e) => setProductCategory(e.target.value)}
+              >
+                {categories.map((category) => (
+                  <option key={category.id} value={category.id}>
+                    {category.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+  
+            <div className="form__group">
+              <label htmlFor="productSection">Section:</label>
+              <select
+                id="productSection"
+                name="productSection"
+                value={productSection}
+                onChange={(e) => setProductSection(e.target.value)}
+              >
+                {section.map((section) => (
+                  <option key={section.id} value={section.id}>
+                    {section.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+  
+            <div className="form__group">
+              <label htmlFor="productImage">Current image:</label>
+              <div className="form__image-upload">
+                {currentImage && (
+                  <img
+                    src={`${API_URL}assets/img/${currentImage}`}
+                    alt={`Image of ${productById.name}`}
+                  />
+                )}
                 <input
                   type="file"
                   id="productImage"
@@ -120,16 +136,21 @@ const AdminUpdateProduct = () => {
                   onChange={(e) => setProductImage(e.target.files[0])}
                 />
               </div>
-            )}
-
-            <button type="submit">Update</button>
-          </form>
-          {responseMessage && <p>{responseMessage}</p>}
-          {errorMessage && <p>{errorMessage}</p>}
-        </div>
+            </div>
+  
+            <div className="form__button">
+              <button type="submit">Update</button>
+            </div>
+  
+          </fieldset>
+        </form>
+    
+        {message && <Message message={message} type="success" />}
+      {error && <Message message={error} type="error" />}
       </div>
     </div>
   );
+  
 };
 
 export default AdminUpdateProduct;

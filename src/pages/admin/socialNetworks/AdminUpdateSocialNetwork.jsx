@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getSocialNetworkById, updateSocialNetwork } from "../../../actions/socialNetworkAction";
 import AdminNavigation from "../AdminNavigation";
+import Message from "../../../components/utils/Message";
 
 const AdminUpdateSocialNetwork = () => {
   const { socialNetworkId } = useParams();
@@ -12,7 +13,6 @@ const AdminUpdateSocialNetwork = () => {
 
   const [platform, setPlatform] = useState("");
   const [url, setUrl] = useState("");
-  const [responseMessage, setResponseMessage] = useState("");
 
   const message = useSelector((state) => state.socialNetwork.message);
   const error = useSelector((state) => state.socialNetwork.error);
@@ -20,8 +20,6 @@ const AdminUpdateSocialNetwork = () => {
   useEffect(() => {
     if (socialNetworkId) {
       dispatch(getSocialNetworkById(socialNetworkId));
-    } else {
-      setResponseMessage("Social network ID missing in URL");
     }
   }, [dispatch, socialNetworkId]);
 
@@ -48,35 +46,45 @@ const AdminUpdateSocialNetwork = () => {
     <div className="admin-container">
       <AdminNavigation />
       <div className="admin-container__content">
-        <h1>Update social network</h1>
         <div className="form">
           <form onSubmit={handleSubmit}>
-            <label htmlFor="platform">Platform</label>
-            <input
-              type="text"
-              id="platform"
-              name="platform"
-              value={platform}
-              onChange={(e) => setPlatform(e.target.value)}
-            />
+            <fieldset>
+              <legend>Update Social Network</legend>
   
-            <label htmlFor="url">Url</label>
-            <input
-              type="text"
-              id="url"
-              name="url"
-              value={url}
-              onChange={(e) => setUrl(e.target.value)}
-            />
-            <button type="submit">Update</button>
+              <div className="form__group">
+                <label htmlFor="platform">Platform</label>
+                <input
+                  type="text"
+                  id="platform"
+                  name="platform"
+                  value={platform}
+                  onChange={(e) => setPlatform(e.target.value)}
+                />
+              </div>
+  
+              <div className="form__group">
+                <label htmlFor="url">Url</label>
+                <input
+                  type="text"
+                  id="url"
+                  name="url"
+                  value={url}
+                  onChange={(e) => setUrl(e.target.value)}
+                />
+              </div>
+  
+              <div className="form__button">
+                <button type="submit">Update</button>
+              </div>
+            </fieldset>
           </form>
-          {responseMessage && <p>{responseMessage}</p>}
-          {message && <p>{message}</p>}
-          {error && <p>{error}</p>}
+          {message && <Message message={message} type="success" />}
+          {error && <Message message={error} type="error" />}
         </div>
       </div>
     </div>
   );
+  
   
 };
 

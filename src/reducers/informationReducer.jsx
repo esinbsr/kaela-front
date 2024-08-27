@@ -1,14 +1,19 @@
 import {
     ADD_INFORMATION_SUCCESS,
     ADD_INFORMATION_ERROR,
+
     GET_INFORMATION_SUCCESS,
     GET_INFORMATION_ERROR,
+
     UPDATE_INFORMATION_SUCCESS,
     UPDATE_INFORMATION_ERROR,
+
     DELETE_INFORMATION_SUCCESS,
     DELETE_INFORMATION_ERROR,
+
     FETCH_SINGLE_INFORMATION_SUCCESS,
     FETCH_SINGLE_INFORMATION_ERROR,
+
     RESET_INFORMATION_MESSAGES,
 } from '../actions/informationAction';
 
@@ -21,6 +26,7 @@ const initialState = {
 
 const informationReducer = (state = initialState, action) => {
     switch (action.type) {
+        
         case GET_INFORMATION_SUCCESS:
             return {
                 ...state,

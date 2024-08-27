@@ -19,10 +19,13 @@
       padding: 1rem 1.5rem;
       transition: 0.3s ease;
 
-      &:hover {
+      &:hover,
+      &:focus,
+      &.active-link { // Classe active pour conserver le style
         background-color: lighten($main-color, 7%);
-        border-radius:10px;
+        border-radius: 10px;
       }
+  
     }
   }
 

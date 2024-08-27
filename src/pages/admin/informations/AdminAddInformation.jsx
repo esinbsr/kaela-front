@@ -41,41 +41,56 @@ const AdminAddInformation = () => {
   }, [message, error]);
 
   return (
-    <div className="form">
-      <h3>Add information</h3>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="description">Description</label>
-        <textarea
-          id="description"
-          name="description"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        ></textarea>
+    <>
+      <form onSubmit={handleSubmit} className="form">
+        <fieldset>
+          <legend>Information Details</legend>
+          
+          <div className="form__group">
+            <label htmlFor="description">Description</label>
+            <textarea
+              id="description"
+              name="description"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            ></textarea>
+          </div>
+  
+          <div className="form__group">
+            <label htmlFor="mobile">Mobile</label>
+            <input
+              type="text"
+              id="mobile"
+              name="mobile"
+              value={mobile}
+              onChange={(e) => setMobile(e.target.value)}
+            />
+          </div>
+  
+          <div className="form__group">
+            <label htmlFor="address">Address</label>
+            <input
+              type="text"
+              id="address"
+              name="address"
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+            />
+          </div>
+  
+          <div className="form__button">
+          <button type="submit">Create</button>
+          </div>
 
-        <label htmlFor="mobile">Mobile</label>
-        <input
-          type="text"
-          id="mobile"
-          name="mobile"
-          value={mobile}
-          onChange={(e) => setMobile(e.target.value)}
-        />
 
-        <label htmlFor="address">Address</label>
-        <input
-          type="text"
-          id="address"
-          name="address"
-          value={address}
-          onChange={(e) => setAddress(e.target.value)}
-        />
-
-        <button type="submit">Create</button>
+        </fieldset>
       </form>
+      
       {message && <Message message={message} type="success" />}
       {error && <Message message={error} type="error" />}
-    </div>
+    </>
   );
+  
 };
 
 export default AdminAddInformation;

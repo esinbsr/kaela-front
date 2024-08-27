@@ -23,13 +23,13 @@ import { API_URL } from "./serverRequest";
 
 
 export const getProduct = () => {
-    return async (dispatch) => { //getProduct est une fonction qui retourne une autre fonction. Cette fonction retournée est une action asynchrone (thunk), la fonction retournée prend dispatch comme argument. dispatch est utilisé pour envoyer des actions.
+    return async (dispatch) => { 
         try {
             const response = await axios.get(`${API_URL}getProduct`);
             const message = response.data.message;
 
             if (response.data.success) {
-                dispatch({ // Les données passées à dispatch sont envoyées au reducer 
+                dispatch({  
                     type: GET_PRODUCT_SUCCESS,
                     payload: response.data.product,
                     message: message
@@ -132,15 +132,15 @@ export const deleteProduct = (productId) => {
     return async (dispatch) => {
         try {
             const response = await axios.post(`${API_URL}deleteProduct`, { productId });
-            const message = response.data.message; // Récupère le message de la réponse
+            const message = response.data.message; 
             if (response.data.success) {
                 dispatch({
                     type: DELETE_PRODUCT_SUCCESS,
                     payload: productId,
-                    message: message // Transmet le message au reducer
+                    message: message
                 });
             } else {
-                throw new Error(response.data.message || "Failed to delete product");
+                throw new Error(message);
             }
         } catch (error) {
             dispatch({

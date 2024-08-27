@@ -44,14 +44,12 @@ export const loginUser = (formData) => {
           message: message,
         });
       } else {
-        throw new Error(response.data.message); // En cas d'échec, une exception est levée
+        throw new Error(message); 
       }
     } catch (error) {
-      // Dispatch de l'action LOGIN_ERROR en cas d'erreur
       dispatch({
         type: LOGIN_ERROR,
-        payload:
-          error.response?.data?.message || error.message || 'No message returned',
+        payload: error.response?.data?.message || error.message || "No message returned",
       });
     }
   };
@@ -66,24 +64,22 @@ export const addUser = (formData) => {
           'Content-Type': 'application/json',
         },
       });
+      const message = response.data.message;
+  
       if (response.data.success) {
         dispatch({
           type: SIGNUP_SUCCESS,
-          message: response.data.message, // Utiliser le message du serveur
+          message: message,
         });
       } else {
-        dispatch({
-          type: SIGNUP_ERROR,
-          payload: response.data.message, // Utiliser le message d'erreur du serveur
-        });
+        throw new Error(message);
       }
     } catch (error) {
-      dispatch({
-        type: SIGNUP_ERROR,
-        payload:
-          error.response?.data?.message || error.message || 'An error occurred',
-      });
-    }
+        dispatch({
+          type: SIGNUP_ERROR,
+             payload: error.response?.data?.message || error.message || "No message returned"
+        });
+      }
   };
 };
 

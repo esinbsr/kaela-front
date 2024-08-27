@@ -1,48 +1,62 @@
 .form {
-    h3 {
-        text-align: center;
-        font-size: 1.3rem;
+  padding: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+
+  fieldset {
+    border: none;
+  }
+
+  legend {
+    text-align: center;
+    font-size: 1.3rem;
+    margin-bottom: 40px;
+  }
+
+  .form__group {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    margin-bottom: 1.5rem;
+
+    label {
+      align-self: center;
     }
 
-    form {
-        display: grid;
-        grid-template-columns: 1fr 2fr;
-        gap: 1.4rem;
-        padding: 2rem;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        margin-top: 2rem;
-        margin-bottom: 2rem;
-
-        label {
-            align-self: center;
-            font-size: 1.1rem;
-        }
-
-        input,
-        select,
-        textarea {
-            padding: 0.5rem;
-            border: 1px solid rgb(153, 153, 153);
-            border-radius: 4px;
-            width: 100%;
-            background-color: #ffffff;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
-
-            &:focus {
-                border-color: #2c4548;
-                outline: none;
-            }
-        }
-
-        textarea {
-            resize: none;
-            min-height: 100px;
-        }
-
-        button {
-            @include buttonSuqare(white, #2c4548);
-            grid-column: 2 / 3; // Positionne le bouton sur la deuxième colonne pour l'aligner avec les champs
-            justify-self: start; // Centre le bouton par rapport au début de la deuxième colonne
-        }
+    input,
+    textarea,
+    select {
+      background-color: #ffffff;
+      padding: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      width: 100%;
+      outline: none;
+      &:focus {
+        border-color: $main-color;
+      }
     }
+
+    textarea {
+      resize: none;
+      min-height: 100px;
+    }
+  }
+
+  .form__button {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+
+    button {
+      @include buttonSuqare(white, #2c4548);
+      grid-column: 2 / 3; /* Positionne le bouton dans la deuxième colonne */
+      justify-self: start; /* Aligne le bouton au début de la colonne */
+      cursor: pointer;
+    }
+  }
+
+  img {
+    width: 150px;
+    margin-bottom: 1rem;
+  }
 }

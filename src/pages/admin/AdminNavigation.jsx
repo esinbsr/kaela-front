@@ -1,36 +1,52 @@
 import { useEffect, useState } from "react";
-import { useNavigate, Link, useLocation } from "react-router-dom";
+import { NavLink, useNavigate, useLocation } from "react-router-dom";
 
 const AdminNavigation = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const [showTitle, setShowTitle] = useState(true);
+  // const [showTitle, setShowTitle] = useState(true);
 
   useEffect(() => {
     const role = localStorage.getItem("role");
     if (role !== "admin") {
       navigate("/");
     }
-
-    // Masquer le titre si l'utilisateur n'est pas sur la route "/admin"
-    if (location.pathname !== "/admin") {
-      setShowTitle(false);
-    }
   }, [navigate, location.pathname]);
 
-  const handleLinkClick = () => {
-    setShowTitle(false);
-  };
+    // Masquer le titre si l'utilisateur n'est pas sur la route "/admin"
+  //   if (location.pathname !== "/admin") {
+  //     setShowTitle(false);
+  //   }
 
   return (
     <div className="admin-container">
-      {showTitle && <h1 id="h1-administration">Administration</h1>}
-      <div className="admin-container__navigation">
-        <Link to="/adminProduct" onClick={handleLinkClick}>Product</Link>
-        <Link to="/adminInformation" onClick={handleLinkClick}>Information about me</Link>
-        <Link to="/adminCategory" onClick={handleLinkClick}>Category</Link>
-        <Link to="/adminSocialNetwork" onClick={handleLinkClick}>Social network</Link>
-      </div>
+      {/* {showTitle && <h1 id="h1-administration">Administration</h1>} */}
+      <aside className="admin-container__navigation">
+        <NavLink
+          to="/adminProduct"
+          className={({ isActive }) => (isActive ? "active-link" : "")}
+        >
+          Product
+        </NavLink>
+        <NavLink
+          to="/adminInformation"
+          className={({ isActive }) => (isActive ? "active-link" : "")}
+        >
+          Information about me
+        </NavLink>
+        <NavLink
+          to="/adminCategory"
+          className={({ isActive }) => (isActive ? "active-link" : "")}
+        >
+          Category
+        </NavLink>
+        <NavLink
+          to="/adminSocialNetwork"
+          className={({ isActive }) => (isActive ? "active-link" : "")}
+        >
+          Social network
+        </NavLink>
+      </aside>
     </div>
   );
 };

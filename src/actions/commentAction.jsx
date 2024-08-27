@@ -28,7 +28,7 @@ export const getComment = (productDetailId) => {
         } catch (error) {
             dispatch({
                 type: GET_COMMENT_ERROR,
-                payload: error.response?.data?.message || "Failed to fetch comments. Please try again."
+                payload: error.response?.data?.message || error.message || "No message returned",
             });
         }
     }
@@ -52,7 +52,7 @@ export const addComment = (formData) => {
         } catch (error) {
             dispatch({
                 type: ADD_COMMENT_ERROR,
-                payload: error.response?.data?.message || "Failed to add comment. Please try again."
+                payload: error.response?.data?.message || error.message || "No message returned"
             });
         }
     }
@@ -62,15 +62,21 @@ export const getCommentById = (commentId) => {
     return async (dispatch) => {
       try {
         const response = await axios.get(`${API_URL}getCommentById/${commentId}`);
+        const message = response.data.message;
+
+        if (response.data.success) {
         dispatch({
           type: GET_COMMENT_BY_ID_SUCCESS,
           payload: response.data.comment,
-          message: response.data.message
+          message: message
         })
+    } else {
+        throw new Error(message);
+    }
       } catch (error) {
         dispatch({
           type: GET_COMMENT_BY_ID_ERROR,
-          payload: error.message,
+          payload: error.response?.data?.message || error.message || "No message returned",
         });
       }
     }
