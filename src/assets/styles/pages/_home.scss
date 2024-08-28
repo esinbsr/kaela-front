@@ -3,6 +3,7 @@
     letter-spacing: 3px;
     font-family: 'Great Vibes';
     font-size: 4rem;
+    color:$navigation-color;
  
   }
 
@@ -55,8 +56,6 @@
       left: 50%;
       visibility: hidden;
       text-align: center;
-      border-radius: 5px;
-      padding: 8px;
       z-index: 1;
       margin-left: -60px;
       opacity: 0;

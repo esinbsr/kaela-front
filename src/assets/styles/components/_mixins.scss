@@ -59,7 +59,7 @@
   width: 0; // Initially, the width is set to 0 for the animation
   height: 2px; // Thickness of the line
   background-color: $bc; // Color of the line
-  margin-bottom: 20px; // Spacing below the line
+  margin-bottom: 15px; // Spacing below the line
   border-radius: 4px;
   animation: expand-width-#{$w} 1s ease-out forwards; // Applies the animation on load
 

@@ -3,7 +3,7 @@ const Logo = () => {
   return (
     <div className="logo">
       <h2 className="logo__kaela">KAELA</h2>
-      <p className="logo__couture">COUTURE</p>
+      <span className="logo__couture">COUTURE</span>
     </div>
   );
 };

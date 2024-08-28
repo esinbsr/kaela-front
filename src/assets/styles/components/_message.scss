@@ -11,12 +11,12 @@
 
 .message.success {
   background-color: #dff0d8;
-  color: #3c763d;
+  color: $message-success;
 }
 
 .message.error {
   background-color: #f2dede;
-  color: #a94442;
+  color: $message-error;
 }
 
 .message-close-btn {

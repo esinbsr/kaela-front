@@ -27,6 +27,7 @@ import { useEffect } from "react";
 import { verifyToken } from "./actions/userAction";
 import Accessibility from "./components/utils/Accessibility";
 import AdminUpdateInformation from "./pages/admin/informations/AdminUpdateInformation";
+import Footer from "./components/Footer";
 
 const ProtectedRoute = ({ children }) => {
   const userRole = localStorage.getItem("role");
@@ -46,6 +47,7 @@ const App = () => {
     <div>
       <BrowserRouter>
         <Navigation />
+      
         <Accessibility />
         <Routes>
           <Route path="*" element={<Home />} />
@@ -170,6 +172,7 @@ const App = () => {
             }
           />
         </Routes>
+      <Footer/>
       </BrowserRouter>
     </div>
   );
