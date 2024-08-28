@@ -4,6 +4,8 @@ import App from './App.jsx'
 import "./assets/styles/index.scss"
 import { Provider } from 'react-redux' // Importing the Provider component from react-redux to connect Redux with React
 import store from './store.jsx'
+// import 'path/to/icofont/css/icofont.min.css';
+
 
 // Rendering the root component of the React app
 ReactDOM.createRoot(document.getElementById('root')).render(

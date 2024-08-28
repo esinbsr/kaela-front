@@ -41,10 +41,8 @@ const SignUp = () => {
   return (
     // Main container for the signup form
     <section className="user-form">
-      <header className="user-form__header">
-        <h2>Sign Up</h2>
-        <div className="line"></div> {/* Decorative line below the heading */}
-      </header>
+      <h2>Sign Up</h2>
+      <div className="line"></div> {/* Decorative line below the heading */}
       <form onSubmit={handleSubmit} className="user-form__content">
         <label htmlFor="username">Username</label>
         <input
@@ -53,6 +51,7 @@ const SignUp = () => {
           onChange={(e) => setUsername(e.target.value)}
           name="username"
           value={username}
+          placeholder="Choose a unique username" // Placeholder example for username
           aria-required="true" // Indicates that the username field is required
         />
         <label htmlFor="email">Email</label>
@@ -62,6 +61,7 @@ const SignUp = () => {
           onChange={(e) => setEmail(e.target.value)}
           name="email"
           value={email}
+          placeholder="example@domain.com" // Placeholder example for email
           aria-required="true" // Indicates that the email field is required
         />
         <label htmlFor="password">Password</label>
@@ -71,19 +71,21 @@ const SignUp = () => {
           onChange={(e) => setPassword(e.target.value)}
           name="password"
           value={password}
+          placeholder="Create a strong password" // Placeholder example for password
           aria-required="true" // Indicates that the password field is required
         />
-        <button type="submit">Sign Up</button> {/* Submit button for the form */}
+        <button type="submit">Sign Up</button>
         <p>
-          Already have an account?{" "}
+          Already have an account?
           <Link to="/login" className="user-form__link">
             Login here
-          </Link> {/* Link to the login page */}
+          </Link>
         </p>
       </form>
-      {error && <Message message={error} type="error" />} {/* Display error message if there is one */}
+      {error && <Message message={error} type="error" />}
     </section>
   );
+
 };
 
 export default SignUp;

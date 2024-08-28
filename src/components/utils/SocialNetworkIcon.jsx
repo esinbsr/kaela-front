@@ -9,6 +9,7 @@ import {
   faWhatsapp,
 } from "@fortawesome/free-brands-svg-icons";
 
+
 // Component that renders social media icons with corresponding links
 const SocialNetworkIcon = () => {
   const dispatch = useDispatch(); // Hook to get the dispatch function from Redux
@@ -51,21 +52,21 @@ const SocialNetworkIcon = () => {
         target="_blank"
         rel="noopener noreferrer"
       >
-        <FontAwesomeIcon icon={faFacebookSquare} /> 
+        <FontAwesomeIcon icon={faFacebookSquare}  id="facebook"/> 
       </Link>
       <Link
         to={getSocialNetworkLink("instagram")} 
         target="_blank"
         rel="noopener noreferrer"
       >
-        <FontAwesomeIcon icon={faInstagram} /> 
+        <FontAwesomeIcon icon={faInstagram} id="instagram" /> 
       </Link>
       <a
         href={getSocialNetworkLink("whatsapp")} 
         target="_blank"
         rel="noopener noreferrer"
       >
-        <FontAwesomeIcon icon={faWhatsapp} /> 
+        <FontAwesomeIcon icon={faWhatsapp} id="whatsapp"/> 
       </a>
     </div>
   );

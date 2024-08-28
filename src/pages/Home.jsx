@@ -8,7 +8,7 @@ const Home = () => {
     return (
         <div className='home'>
             <SocialNetworkIcon/>
-            <h1>KAELA COUTURE</h1>
+            <h1>Kaela Couture</h1>
             {/* Renders a list of home header images with a custom CSS class */}
             <HomeImageList start={0} end={3} additionalClass="home__header-image" />
             {/* Renders a list of descriptions for the home page */}

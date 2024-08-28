@@ -6,12 +6,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { getInformation } from "../actions/informationAction";
 import { isEmpty } from "../components/utils/isEmpty";
 import Map from "../components/utils/Map";
-import SocialNetworkIcon from '../components/utils/SocialNetworkIcon';
+import SocialNetworkIcon from "../components/utils/SocialNetworkIcon";
 
 const Contact = () => {
   const dispatch = useDispatch();
   const information = useSelector((state) => state.information.information);
-  const [loading, setLoading] = useState(true); 
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     dispatch(getInformation());
@@ -67,58 +67,83 @@ const Contact = () => {
 
   return (
     <div className="contact">
-      <SocialNetworkIcon/>
+      <SocialNetworkIcon />
       <section className="contact__form">
         <form onSubmit={handleSubmit}>
-          <header>
+          <fieldset>
             <h2>Contact Me</h2>
             <div className="line"></div>
-          </header>
 
-          <label htmlFor="email">Email</label>
-          <input
-            id="email"
-            type="text"
-            name="email"
-            value={email}
-            onChange={handleChange}
-          />
-          <label htmlFor="object">Object</label>
-          <input
-            id="object"
-            type="text"
-            name="object"
-            value={object}
-            onChange={handleChange}
-          />
-          <label htmlFor="message">Message</label>
-          <textarea
-            id="message"
-            name="message"
-            value={message}
-            onChange={handleChange}
-          ></textarea>
-          <button type="submit">Send</button>
+            <label htmlFor="email">Email</label>
+            <input
+              id="email"
+              type="text"
+              name="email"
+              value={email}
+              onChange={handleChange}
+              placeholder="example@domain.com"
+            />
+            <label htmlFor="object">Object</label>
+            <input
+              id="object"
+              type="text"
+              name="object"
+              value={object}
+              onChange={handleChange}
+              placeholder="Subject of your inquiry"
+            />
+            <label htmlFor="message">Message</label>
+            <textarea
+              id="message"
+              name="message"
+              value={message}
+              onChange={handleChange}
+              placeholder="Hello, I would like to inquire about..."
+            ></textarea>
+            <div className="form__button-container">
+              <button type="submit">Send</button>
+            </div>
+          </fieldset>
         </form>
       </section>
+
       <address className="contact__data">
         <h2>Contact Details</h2>
         <div className="line"></div>
         <div className="contact__mobile">
           <FontAwesomeIcon icon={faPhone} />
-          {loading ? <p role="alert" aria-live="assertive">Loading the phone number...</p> : <p>+{info.mobile}</p>}
+          {loading ? (
+            <p role="alert" aria-live="assertive">
+              Loading the phone number...
+            </p>
+          ) : (
+            <p>+{info.mobile}</p>
+          )}
         </div>
 
         <div className="contact__localisation">
           <FontAwesomeIcon icon={faLocationDot} />
-          {loading ? <p role="alert" aria-live="assertive">Loading the address...</p> : <p>{info.address}</p>}
+          {loading ? (
+            <p role="alert" aria-live="assertive">
+              Loading the address...
+            </p>
+          ) : (
+            <p>{info.address}</p>
+          )}
         </div>
 
-        {loading ?  <p role="alert" aria-live="assertive">Loading map...</p> : info && <Map address={info.address} />}
-
+        {loading ? (
+          <p role="alert" aria-live="assertive">
+            Loading map...
+          </p>
+        ) : (
+          info && <Map address={info.address} />
+        )}
       </address>
     </div>
   );
+
+
 };
 
 export default Contact;

@@ -7,8 +7,6 @@
   background-color: #ffffff;
 }
 
-.user-form__header{
-
   h2 {
     margin-bottom: 10px;
     color: $main-color;
@@ -17,7 +15,7 @@
   .line {
     @include line(50, $main-color);
   }
-}
+
 
 .user-form__content {
   display: flex;

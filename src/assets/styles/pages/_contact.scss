@@ -9,20 +9,27 @@
     color: $main-color;
   }
 
+  fieldset {
+    border: none;
+  }
+
+  legend {
+    font-size: 1.3rem;
+  }
+
   .line {
     @include line(50, $main-color)
   }
 
   .contact__form,
   .contact__data {
-    flex: 1;
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    margin: 50px auto;
-    width: 100%;
     display: flex;
     flex-direction: column;
+    flex: 1;
+    padding: 2rem;
+    border-radius: 8px;
+    margin: 50px auto;
+    width: 100%;
     font-style: normal;
     background-color: #ffffff;
   }
@@ -36,19 +43,19 @@
       flex-direction: column;
 
       label {
-        align-self: flex-start;
+        display: block; 
         margin-bottom: 8px;
       }
 
       input,
       textarea {
         width: 100%;
-        padding: 10px;
+        padding: 8px;
         margin-bottom: 15px;
-        border: 1px solid #ccc color;
+        border: 1px solid #939393cc;
         outline: none;
-        border-radius: 5px;
         background-color: #fff;
+        border-radius: 4px;
 
         &:focus {
           border-color: $main-color;
@@ -60,31 +67,19 @@
         min-height: 100px;
       }
 
-      // Centrer le bouton et lui donner une taille d'origine
-      button {
-        align-self: center; // Centre le bouton horizontalement
-        width: auto; // Permet au bouton de garder sa taille d'origine
-        padding: 10px 20px; // Ajuste le padding du bouton
-        @include buttonSuqare(white, $main-color);
-      }
+      .form__button-container {
+        width: 100%;
+        display: flex;
+        justify-content: center; 
 
-      p {
-        margin-top: 15px;
-        text-align: center;
-      }
-
-      .form-link {
-        text-decoration: underline;
-        color: $main-color;
-        cursor: pointer;
+        button {
+          @include buttonSuqare(white, $main-color);
+        }
       }
     }
   }
 
   .contact__data {
-    padding: 2rem;
-    border-radius: 10px;
-
     .contact__mobile,
     .contact__localisation {
       display: flex;
@@ -110,7 +105,7 @@
     #map {
       width: 100%;
       height: 200px;
-      border-radius: 8px;
+      border-radius: 4px;
     }
   }
 }

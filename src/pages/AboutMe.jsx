@@ -1,9 +1,9 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getInformation } from "../actions/informationAction";
 import { API_URL } from "../actions/serverRequest";
 import { getProduct } from "../actions/productAction";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { isEmpty } from "../components/utils/isEmpty";
 import SocialNetworkIcon from '../components/utils/SocialNetworkIcon';
 import { getSocialNetwork } from "../actions/socialNetworkAction";
@@ -14,13 +14,18 @@ const SECTIONS = {
 };
 
 const AboutMe = () => {
-  // Select data from Redux store or fallback to empty array if not available
+  // Retrieve data from Redux store or default to empty array if not available
   const informations = useSelector((state) => state.information.information) || [];
   const products = useSelector((state) => state.product.products) || [];
   const socialNetworks = useSelector((state) => state.socialNetwork.socialNetwork) || [];
+  const userRole = useSelector((state) => state.user.role); // Get the role of the current user
 
-  // Initialize dispatch to trigger actions
-  const dispatch = useDispatch();
+  const dispatch = useDispatch(); // Initialize dispatch to trigger actions
+  const navigate = useNavigate(); // Hook for navigation between routes
+
+  const [modalVisible, setModalVisible] = useState(false); // State to control the visibility of the modal
+  const [selectedProduct, setSelectedProduct] = useState(null); // State to track the selected product for the modal
+  const [instagramLink, setInstagramLink] = useState(""); // State to store the Instagram link
 
   // useEffect to fetch data when the component mounts
   useEffect(() => {
@@ -32,8 +37,29 @@ const AboutMe = () => {
   // Filter products related to the "About Me" section
   const filteredProducts = !isEmpty(products) ? products.filter((product) => product.section_id === SECTIONS.ABOUT_ME) : [];
   
-  // Slice the first three information entries
+  // Get the first three information entries
   const threeInformations = !isEmpty(informations) ? informations.slice(1, 4) : [];
+
+  // Handle click event for admin users
+  const handleAdminClick = (product) => {
+    const instagramUrl = socialNetworks.find((network) => network.platform.toLowerCase() === 'instagram').url;
+    setInstagramLink(instagramUrl); // Set the Instagram link
+    setSelectedProduct(product); // Set the selected product
+    setModalVisible(true); // Show the modal
+  };
+
+  // Function to close the modal
+  const closeModal = () => {
+    setModalVisible(false); // Hide the modal
+    setSelectedProduct(null); // Reset the selected product
+    setInstagramLink(""); // Reset the Instagram link
+  };
+
+  // Function to navigate to the desired page from the modal
+  const handleNavigate = (path) => {
+    navigate(path); // Navigate to the specified path
+    closeModal(); // Close the modal after navigation
+  };
 
   return (
     <div className="about-me">
@@ -51,18 +77,27 @@ const AboutMe = () => {
               </div>
             ))
           ) : (
-            <p role="alert" aria-live="assertive">Loading descriptions...</p> // Accessibility: Loading message
+            <p role="alert" aria-live="assertive">Loading descriptions...</p> 
           )}
         </div>
 
         <div className="about-me__image">
           {!isEmpty(filteredProducts) ? (
-            <img
-              src={`${API_URL}assets/img/${filteredProducts[0].path}`}
-              alt={filteredProducts[0].name}
-            />
+            userRole === "admin" ? ( // If the user is an admin, allow editing the product image
+              <Link to={`/adminUpdateProduct/${filteredProducts[0].id}`}>
+                <img
+                  src={`${API_URL}assets/img/${filteredProducts[0].path}`}
+                  alt={filteredProducts[0].name}
+                />
+              </Link>
+            ) : ( // Otherwise, just display the image
+              <img
+                src={`${API_URL}assets/img/${filteredProducts[0].path}`}
+                alt={filteredProducts[0].name}
+              />
+            )
           ) : (
-            <p role="alert" aria-live="assertive">Loading image...</p> // Accessibility: Loading message
+            <p role="alert" aria-live="assertive">Loading image...</p> 
           )}
         </div>
       </div>
@@ -73,19 +108,43 @@ const AboutMe = () => {
           {!isEmpty(filteredProducts) && socialNetworks.length > 0 ? (
             filteredProducts.slice(1, 9).map((product) => (
               <div className="about-me__footer-image" key={product.id}>
-                <Link to={socialNetworks.find((network) => network.platform.toLowerCase() === 'instagram').url} target="_blank" rel="noopener noreferrer">
-                  <img
-                    src={`${API_URL}assets/img/${product.path}`}
-                    alt={product.name}
-                  />
-                </Link>
+                {userRole === "admin" ? ( // If the user is an admin, show the modal with options
+                  <div onClick={() => handleAdminClick(product)}>
+                    <img
+                      src={`${API_URL}assets/img/${product.path}`}
+                      alt={product.name}
+                    />
+                  </div>
+                ) : ( // Otherwise, link directly to Instagram
+                  <Link to={socialNetworks.find((network) => network.platform.toLowerCase() === 'instagram').url} target="_blank" rel="noopener noreferrer">
+                    <img
+                      src={`${API_URL}assets/img/${product.path}`}
+                      alt={product.name}
+                    />
+                  </Link>
+                )}
               </div>
             ))
           ) : (
-            <p role="alert" aria-live="assertive">Loading images...</p> // Accessibility: Loading message
+            <p role="alert" aria-live="assertive">Loading images...</p> 
           )}
         </div>
       </div>
+
+      {modalVisible && ( // Display the modal if modalVisible is true
+        <div className="modal">
+          <div className="modal__content">
+            <h2>What do you want to do?</h2>
+            <button onClick={() => handleNavigate(`/adminUpdateProduct/${selectedProduct.id}`)}>
+              Edit Image
+            </button>
+            <button onClick={() => window.open(instagramLink, "_blank")}>
+              Go to Instagram
+            </button>
+            <button onClick={closeModal}>Cancel</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

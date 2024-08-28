@@ -9,7 +9,7 @@
   
     a {
       font-size: 28px;  
-      color: $navigation-color;
+      // color: $navigation-color;
       transition: color 0.3s ease;
   
       &:hover {
@@ -17,4 +17,16 @@
       }
     }
   }
-  
+
+#facebook {
+  color: #1877F2;
+  }
+
+  #instagram {
+    color: #b42e77;
+}
+
+
+#whatsapp {
+    color: #25D366;
+}

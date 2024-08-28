@@ -14,7 +14,7 @@ const AdminUpdateProduct = () => {
   const [productCategory, setProductCategory] = useState("");
   const [productSection, setProductSection] = useState("");
   const [productImage, setProductImage] = useState(null);
-  const [currentImage, setCurrentImage] = useState(""); 
+  const [currentImage, setCurrentImage] = useState("");
 
   const { productId } = useParams();
   const dispatch = useDispatch();
@@ -30,18 +30,17 @@ const AdminUpdateProduct = () => {
     if (productId) {
       dispatch(getProductById(productId));
     }
-    dispatch(getProductCategories()); 
-    dispatch(getSection()); 
+    dispatch(getProductCategories());
+    dispatch(getSection());
   }, [dispatch, productId]);
-
 
   useEffect(() => {
     if (productById) {
-      setProductName(productById.name);
-      setProductDescription(productById.description);
-      setProductCategory(productById.categorie_id);
-      setProductSection(productById.section_id);
-      setCurrentImage(productById.path); // Récupérez et stockez le chemin de l'image actuelle
+      setProductName(productById.name || "");
+      setProductDescription(productById.description || "");
+      setProductCategory(productById.categorie_id || "");
+      setProductSection(productById.section_id || "");
+      setCurrentImage(productById.path || "");
     }
   }, [productById]);
 
@@ -54,7 +53,9 @@ const AdminUpdateProduct = () => {
     formData.append("productDescription", productDescription);
     formData.append("productCategory", productCategory);
     formData.append("productSection", productSection);
-    formData.append("productImage", productImage);
+    if (productImage) {
+      formData.append("productImage", productImage);
+    }
 
     dispatch(updateProduct(formData));
   };
@@ -66,7 +67,7 @@ const AdminUpdateProduct = () => {
         <form onSubmit={handleSubmit} className="form">
           <fieldset>
             <legend>Update Product</legend>
-  
+
             <div className="form__group">
               <label htmlFor="productName">Name of product:</label>
               <input
@@ -77,7 +78,7 @@ const AdminUpdateProduct = () => {
                 onChange={(e) => setProductName(e.target.value)}
               />
             </div>
-  
+
             <div className="form__group">
               <label htmlFor="productDescription">Description:</label>
               <textarea
@@ -87,7 +88,7 @@ const AdminUpdateProduct = () => {
                 onChange={(e) => setProductDescription(e.target.value)}
               ></textarea>
             </div>
-  
+
             <div className="form__group">
               <label htmlFor="productCategory">Category:</label>
               <select
@@ -103,7 +104,7 @@ const AdminUpdateProduct = () => {
                 ))}
               </select>
             </div>
-  
+
             <div className="form__group">
               <label htmlFor="productSection">Section:</label>
               <select
@@ -119,7 +120,7 @@ const AdminUpdateProduct = () => {
                 ))}
               </select>
             </div>
-  
+
             <div className="form__group">
               <label htmlFor="productImage">Current image:</label>
               <div className="form__image-upload">
@@ -137,20 +138,18 @@ const AdminUpdateProduct = () => {
                 />
               </div>
             </div>
-  
+
             <div className="form__button">
               <button type="submit">Update</button>
             </div>
-  
           </fieldset>
         </form>
-    
+
         {message && <Message message={message} type="success" />}
-      {error && <Message message={error} type="error" />}
+        {error && <Message message={error} type="error" />}
       </div>
     </div>
   );
-  
 };
 
 export default AdminUpdateProduct;

@@ -1,26 +1,21 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
 
 const AdminNavigation = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  // const [showTitle, setShowTitle] = useState(true);
 
   useEffect(() => {
     const role = localStorage.getItem("role");
     if (role !== "admin") {
       navigate("/");
+    } else if (location.pathname === "/admin") {
+      navigate("/adminProduct"); // Redirige vers /adminProduct si l'utilisateur est sur /admin
     }
   }, [navigate, location.pathname]);
 
-    // Masquer le titre si l'utilisateur n'est pas sur la route "/admin"
-  //   if (location.pathname !== "/admin") {
-  //     setShowTitle(false);
-  //   }
-
   return (
     <div className="admin-container">
-      {/* {showTitle && <h1 id="h1-administration">Administration</h1>} */}
       <aside className="admin-container__navigation">
         <NavLink
           to="/adminProduct"

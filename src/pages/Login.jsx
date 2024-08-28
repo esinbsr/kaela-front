@@ -44,10 +44,8 @@ const Login = () => {
   return (
     // Main container for the login form
     <section className="user-form">
-      <header className="user-form__header">
-        <h2>Login</h2>
-        <div className="line"></div> {/* Decorative line below the heading */}
-      </header>
+      <h2>Login</h2>
+      <div className="line"></div> {/* Decorative line below the heading */}
       <form onSubmit={handleSubmit} className="user-form__content">
         <label htmlFor="email">Email</label>
         <input
@@ -56,6 +54,7 @@ const Login = () => {
           onChange={(e) => setEmail(e.target.value)}
           name="email"
           value={email}
+          placeholder="example@domain.com" // Placeholder example for email
           aria-required="true" // Indicates that the email field is required
         />
         <label htmlFor="password">Password</label>
@@ -65,6 +64,7 @@ const Login = () => {
           onChange={(e) => setPassword(e.target.value)}
           name="password"
           value={password}
+          placeholder="Enter your password" // Placeholder example for password
           aria-required="true" // Indicates that the password field is required
         />
         <button type="submit">Login</button> {/* Submit button for the form */}
@@ -72,12 +72,15 @@ const Login = () => {
           No account yet?{" "}
           <Link to="/signup" className="user-form__link">
             Sign up here
-          </Link> {/* Link to the signup page */}
+          </Link>{" "}
+          {/* Link to the signup page */}
         </p>
       </form>
-      {error && <Message message={error} type="error" />} {/* Display error message if there is one */}
+      {error && <Message message={error} type="error" />}{" "}
+      {/* Display error message if there is one */}
     </section>
   );
+
 };
 
 export default Login;
