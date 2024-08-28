@@ -2,6 +2,7 @@ import CollectionImage from '../components/CollectionImage';
 import HomeDescriptionList from '../components/HomeDescriptionList';
 import HomeImageList from '../components/HomeImageList';
 import SocialNetworkIcon from '../components/utils/SocialNetworkIcon';
+import Footer from "../components/Footer";
 
 // This component serves as the main container for combining 3 sub-components
 const Home = () => {
@@ -15,6 +16,7 @@ const Home = () => {
             <HomeDescriptionList />
             {/* Renders a collection of images with a custom CSS class */}
             <CollectionImage start={0} end={2} additionalClass="home__collection-image"/>
+            <Footer/>
         </div>
     );
 };

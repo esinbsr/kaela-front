@@ -1,8 +1,9 @@
 .footer {
     margin-top: 40px;
+    margin-bottom: 20px;
     display: flex;
     justify-content: space-between; 
-    padding: 30px;
+    padding: 45px;
     background-color: $navigation-color;
     color: rgb(221, 221, 221);
     border-radius: 8px 8px 0 0 ;
@@ -58,6 +59,11 @@
       .logo h2, span {
         color: white;
       }
+    }
+
+    #copyright {
+      font-size: 0.8rem;
+      color: rgb(221, 221, 221);
     }
   }
   

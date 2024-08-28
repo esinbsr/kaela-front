@@ -4,7 +4,11 @@ import { getInformation } from "../actions/informationAction";
 import { isEmpty } from "./utils/isEmpty";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPhone, faLocationDot } from "@fortawesome/free-solid-svg-icons";
+import {
+  faPhone,
+  faLocationDot,
+  faEnvelope,
+} from "@fortawesome/free-solid-svg-icons";
 import Logo from "./Logo";
 
 const Footer = () => {
@@ -20,16 +24,23 @@ const Footer = () => {
   return (
     <footer className="footer">
       <div className="footer__column footer__logo">
-    <Logo/>
+        <Logo />
       </div>
 
       <div className="footer__column footer__contact">
         <h3>Contact Details</h3>
         <div className="line"></div>
+
         <div className="footer__contact-item">
           <FontAwesomeIcon icon={faPhone} />
-          {info && <p>{info.mobile}</p>}
+          {info && <p>+{info.mobile}</p>}
         </div>
+
+        <div className="footer__contact-item">
+          <FontAwesomeIcon icon={faEnvelope} />
+          {info && <p>{info.email}</p>}
+        </div>
+
         <div className="footer__contact-item">
           <FontAwesomeIcon icon={faLocationDot} />
           {info && <p>{info.address}</p>}
@@ -48,12 +59,12 @@ const Footer = () => {
       <div className="footer__column footer__legal">
         <h3>Legal Information</h3>
         <div className="line"></div>
-        <Link to="#">Privacy policy</Link>
-        <Link to="#">Legal notice</Link>
+        <Link to="/privacyPolicy">Privacy policy</Link>
+        <Link to="/legalNotice">Legal notice</Link>
+        <p id="copyright"> Copyright © 2024 Kaela Couture. All rights reserved.</p>
       </div>
     </footer>
   );
-  
 };
 
 export default Footer;

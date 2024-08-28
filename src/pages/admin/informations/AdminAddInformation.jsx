@@ -9,6 +9,7 @@ import Message from "../../../components/utils/Message";
 const AdminAddInformation = () => {
   const [description, setDescription] = useState("");
   const [mobile, setMobile] = useState("");
+  const [email, setEmail] = useState("");
   const [address, setAddress] = useState("");
 
   const dispatch = useDispatch();
@@ -26,6 +27,7 @@ const AdminAddInformation = () => {
     const formData = {
       description,
       mobile,
+      email,
       address,
     };
 
@@ -36,6 +38,7 @@ const AdminAddInformation = () => {
     if (message && !error) {
       setDescription("");
       setMobile("");
+      setEmail("");
       setAddress("");
     }
   }, [message, error]);
@@ -64,6 +67,17 @@ const AdminAddInformation = () => {
               name="mobile"
               value={mobile}
               onChange={(e) => setMobile(e.target.value)}
+            />
+          </div>
+
+          <div className="form__group">
+            <label htmlFor="email">Email</label>
+            <input
+              type="text"
+              id="email"
+              name="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
   

@@ -22,7 +22,7 @@
   }
 
   .contact__form,
-  .contact__data {
+  .contact__content {
     display: flex;
     flex-direction: column;
     flex: 1;
@@ -79,9 +79,8 @@
     }
   }
 
-  .contact__data {
-    .contact__mobile,
-    .contact__localisation {
+  .contact__content {
+    .contact__data {
       display: flex;
       align-items: center;
       margin-bottom: 1.3rem;
@@ -97,7 +96,7 @@
       }
     }
 
-    .contact__localisation {
+    .contact__data.localisation {
       border-bottom: 1px solid $navigation-color;
       padding-bottom: 1.5rem;
     }

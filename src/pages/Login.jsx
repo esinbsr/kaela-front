@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { loginUser, resetMessages } from "../actions/userAction";
 import Message from "../components/utils/Message";
+import Footer from "../components/Footer";
 
 const Login = () => {
   // State variables for form inputs
@@ -20,6 +21,7 @@ const Login = () => {
   // Reset messages when the component mounts
   useEffect(() => {
     dispatch(resetMessages());
+    window.scrollTo(0, 0);
   }, [dispatch]);
 
   // Handle form submission
@@ -43,6 +45,7 @@ const Login = () => {
 
   return (
     // Main container for the login form
+    <>
     <section className="user-form">
       <h2>Login</h2>
       <div className="line"></div> {/* Decorative line below the heading */}
@@ -77,8 +80,9 @@ const Login = () => {
         </p>
       </form>
       {error && <Message message={error} type="error" />}{" "}
-      {/* Display error message if there is one */}
     </section>
+    <Footer/>
+    </>
   );
 
 };

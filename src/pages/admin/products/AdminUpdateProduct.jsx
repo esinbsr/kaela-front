@@ -32,6 +32,7 @@ const AdminUpdateProduct = () => {
     }
     dispatch(getProductCategories());
     dispatch(getSection());
+    window.scrollTo(0, 0);
   }, [dispatch, productId]);
 
   useEffect(() => {

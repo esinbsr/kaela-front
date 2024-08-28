@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { API_URL } from "../../../actions/serverRequest";
 
 // This component displays the details of clicked images
@@ -15,6 +16,9 @@ const ProductDetailCard = ({ productDetail }) => {
           loading="lazy" 
         />
       </div>
+
+      <p>Do you have a question? <Link to="/contact" className="detail-product__contact">Contact me!</Link></p>
+
     </article>
   );
 };

@@ -7,6 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { isEmpty } from "../components/utils/isEmpty";
 import SocialNetworkIcon from '../components/utils/SocialNetworkIcon';
 import { getSocialNetwork } from "../actions/socialNetworkAction";
+import Footer from "../components/Footer";
 
 // Define section IDs for filtering products
 const SECTIONS = {
@@ -32,6 +33,7 @@ const AboutMe = () => {
     dispatch(getInformation()); // Fetch information data
     dispatch(getProduct()); // Fetch product data
     dispatch(getSocialNetwork()); // Fetch social network data
+    window.scrollTo(0, 0);
   }, [dispatch]);
 
   // Filter products related to the "About Me" section
@@ -145,6 +147,7 @@ const AboutMe = () => {
           </div>
         </div>
       )}
+      <Footer/>
     </div>
   );
 };

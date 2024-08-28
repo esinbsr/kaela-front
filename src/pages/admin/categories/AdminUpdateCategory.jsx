@@ -23,6 +23,7 @@ const AdminUpdateCategory = () => {
     if (categoryId) {
       dispatch(getCategoryById(categoryId));
     } 
+    window.scrollTo(0, 0);
   }, [dispatch, categoryId]);
 
   useEffect(() => {

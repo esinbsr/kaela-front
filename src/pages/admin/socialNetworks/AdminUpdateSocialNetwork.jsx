@@ -21,6 +21,7 @@ const AdminUpdateSocialNetwork = () => {
     if (socialNetworkId) {
       dispatch(getSocialNetworkById(socialNetworkId));
     }
+    window.scrollTo(0, 0);
   }, [dispatch, socialNetworkId]);
 
   useEffect(() => {

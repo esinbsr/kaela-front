@@ -60,6 +60,7 @@ const AdminInformation = () => {
                 <tr>
                   <th scope="col">Description</th>
                   <th scope="col">Mobile</th>
+                  <th scope="col">Email</th>
                   <th scope="col">Address</th>
                   <th scope="col" className="action-header" colSpan={2}>
                     Action

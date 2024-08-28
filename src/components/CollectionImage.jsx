@@ -40,6 +40,7 @@ const CollectionImage = ({ start, end, additionalClass }) => {
   useEffect(() => {
     dispatch(getProduct());
     dispatch(getProductCategories());
+    window.scrollTo(0, 0);
   }, [dispatch]);
 
   // Filter products by the collection section and slice based on start/end props

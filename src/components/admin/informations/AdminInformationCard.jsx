@@ -5,6 +5,7 @@ const AdminInformationCard = ({ infos, onDelete }) => {
         <tr>
             <td>{infos.description}</td>
             <td>{infos.mobile}</td>
+            <td>{infos.email}</td>
             <td>{infos.address}</td>
             <td>
                 <Link to={`/adminUpdateInformation/${infos.id}`} className='update-color' aria-label={`Update information ${infos.description}`}>

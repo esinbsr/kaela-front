@@ -18,6 +18,7 @@ const AdminUpdateInformation = () => {
 
   const [description, setDescription] = useState("");
   const [mobile, setMobile] = useState("");
+  const [email, setEmail] = useState("");
   const [address, setAddress] = useState("");
 
   const message = useSelector((state) => state.information.message);
@@ -27,12 +28,14 @@ const AdminUpdateInformation = () => {
     if (informationId) {
       dispatch(getInformationById(informationId));
     }
+    window.scrollTo(0, 0);
   }, [dispatch, informationId]);
 
   useEffect(() => {
     if (informationById) {
       setDescription(informationById.description);
       setMobile(informationById.mobile);
+      setEmail(informationById.email);
       setAddress(informationById.address);
     }
   }, [informationById]);
@@ -44,6 +47,7 @@ const AdminUpdateInformation = () => {
       id: informationId,
       description,
       mobile,
+      email,
       address,
     };
 
@@ -77,6 +81,17 @@ const AdminUpdateInformation = () => {
                   name="mobile"
                   value={mobile}
                   onChange={(e) => setMobile(e.target.value)}
+                />
+              </div>
+
+              <div className="form__group">
+                <label htmlFor="email">Email</label>
+                <input
+                  type="text"
+                  id="email"
+                  name="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
 

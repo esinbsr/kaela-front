@@ -1,0 +1,53 @@
+.legal-information{
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  address {
+    font-style: normal;
+  }
+
+  h1 {
+    color: $main-color;
+    // font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  h2 {
+    color: $main-color;
+    font-size: 1.5rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid $main-color;
+    padding-bottom: 0.5rem;
+  }
+
+  p {
+    color: $main-color;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+
+  ul {
+    margin: 1rem 0;
+    padding-left: 1.5rem;
+    list-style-type: disc;
+
+    li {
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  a {
+    color: $secondary-color;
+    border-bottom: 1px dashed $secondary-color;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: darken($secondary-color, 20%);
+    }
+  }
+}
