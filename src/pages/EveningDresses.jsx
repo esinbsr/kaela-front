@@ -1,5 +1,6 @@
 import EveningLatestDescriptionList from "../components/EveningLatestDescriptionList";
 import EveningLatestImageList from "../components/EveningLatestImageList";
+import Footer from "../components/Footer";
 
 // Define section identifiers to display only images in that section
 const SECTIONS = {
@@ -10,6 +11,7 @@ const SECTIONS = {
 // This component displays evening dresses
 const EveningDresses = () => {
   return (
+    <>
     <main className="evening-latest">
       {/* Component to display the description of the evening dresses */}
       <EveningLatestDescriptionList categorySlug="evening-dresses" />
@@ -21,6 +23,8 @@ const EveningDresses = () => {
         section={SECTIONS.EVENING_DRESSES}
       />
     </main>
+    <Footer/>
+    </>
   );
 };
 
