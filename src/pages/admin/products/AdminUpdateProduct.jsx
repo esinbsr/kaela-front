@@ -37,11 +37,11 @@ const AdminUpdateProduct = () => {
 
   useEffect(() => {
     if (productById) {
-      setProductName(productById.name || "");
-      setProductDescription(productById.description || "");
-      setProductCategory(productById.categorie_id || "");
-      setProductSection(productById.section_id || "");
-      setCurrentImage(productById.path || "");
+      setProductName(productById.name ?? "" );
+      setProductDescription(productById.description ?? "");
+      setProductCategory(productById.categorie_id ?? "");
+      setProductSection(productById.section_id ?? "");
+      setCurrentImage(productById.path ?? "");
     }
   }, [productById]);
 

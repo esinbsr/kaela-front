@@ -33,10 +33,10 @@ const AdminUpdateInformation = () => {
 
   useEffect(() => {
     if (informationById) {
-      setDescription(informationById.description);
-      setMobile(informationById.mobile);
-      setEmail(informationById.email);
-      setAddress(informationById.address);
+      setDescription(informationById.description ?? ""); 
+      setMobile(informationById.mobile ?? "");
+      setEmail(informationById.email ?? "");
+      setAddress(informationById.address ?? "");
     }
   }, [informationById]);
 

@@ -28,10 +28,10 @@ const AdminUpdateCategory = () => {
 
   useEffect(() => {
     if (categoryById) {
-      setCategoryName(categoryById.name);
-      setCategoryDescription(categoryById.description);
-      setCategoryPageTitle(categoryById.page_title);
-      setCategoryPageDescription(categoryById.page_description);
+      setCategoryName(categoryById.name ?? "");
+      setCategoryDescription(categoryById.description ?? "");
+      setCategoryPageTitle(categoryById.page_title ?? "");
+      setCategoryPageDescription(categoryById.page_description ?? "");
     }
   }, [categoryById]);
 
