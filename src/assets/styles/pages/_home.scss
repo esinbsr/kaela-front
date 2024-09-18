@@ -12,10 +12,10 @@
     img {
       width: 360px;
       cursor: pointer;
-      transition: transform 0.3s ease-in-out; // Transition for smooth scaling
+      transition: transform 0.3s ease-in-out;
 
       &:hover {
-        transform: scale(1.04); // Slightly enlarge the image on hover
+        transform: scale(1.04);
       }
     }
   }
@@ -31,14 +31,14 @@
       transition: transform 0.3s ease-in-out;
 
       &:hover {
-        transform: scale(1.04); // Slightly enlarge the image on hover
+        transform: scale(1.04);
       }
     }
   }
 
   .home__description {
     display: flex;
-    flex-direction: column; /* Assure que le bouton est en dessous de la description */
+    flex-direction: column;
     margin: 60px 0;
 
     p {

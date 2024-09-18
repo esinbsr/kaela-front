@@ -1,32 +1,30 @@
 .social-icons {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;  // Espace entre chaque icône
-    position: fixed;  // Fixe les icônes à une position spécifique de la page
-    top: 50%;  // Centre verticalement les icônes par rapport à la page
-    right: 40px;  // Fixe les icônes à 20px du bord gauche
-    transform: translateY(-50%);  // Centre les icônes verticalement
-  
-    a {
-      font-size: 28px;  
-      // color: $navigation-color;
-      transition: color 0.3s ease;
-  
-      &:hover {
-        color: darken($main-color, 10%);
-      }
+  display: flex;
+  flex-direction: column;
+  gap: 15px; // Espace entre chaque icône
+  position: fixed; // Fixe les icônes à une position spécifique de la page
+  top: 50%; // Centre verticalement les icônes par rapport à la page
+  right: 40px; // Fixe les icônes à 40px du bord droit
+  transform: translateY(-50%); // Centre les icônes verticalement
+
+  a {
+    font-size: 28px;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: darken($main-color, 10%);
     }
   }
-
-#facebook {
-  color: #1877F2;
-  }
-
-  #instagram {
-    color: #b42e77;
 }
 
+#facebook {
+  color: #1877f2;
+}
+
+#instagram {
+  color: #b42e77;
+}
 
 #whatsapp {
-    color: #25D366;
+  color: #25d366;
 }

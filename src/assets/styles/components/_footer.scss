@@ -1,69 +1,69 @@
 .footer {
-    margin-top: 40px;
-    margin-bottom: 20px;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  padding: 45px;
+  background-color: $main-color;
+  color: rgb(221, 221, 221);
+  border-radius: 8px 8px 0 0;
+
+  // Style commun pour les colonnes
+  .footer__column {
+    flex: 1;
     display: flex;
-    justify-content: space-between; 
-    padding: 45px;
-    background-color:$main-color;
-    color: rgb(221, 221, 221);
-    border-radius: 8px 8px 0 0 ;
-  
-    // Style commun pour les colonnes
-    .footer__column {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 10px; 
-  
-      h3 {
-        font-size: 1.2rem;
-        color: white;
-      }
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
 
-      .line {
-        @include line(50, white)
-      }
-  
-      a {
-        color: rgb(221, 221, 221);
-        text-align: left; 
-  
-        &:hover {
-          text-decoration: underline;
-        }
-      }
-  
-      p {
-        margin: 5px 0;
-        text-align: left;
-      }
-  
-      svg {
-        margin-right: 10px;
-        font-size: 1.2rem;
-      }
-  
-      .footer__contact-item {
-        display: flex;
-        align-items: center;
-        justify-content: flex-start; 
-      }
-    }
-  
-    // Colonne du Logo
-    .footer__logo {
-      justify-content: center; 
-      display: flex; 
-     
-      .logo h2, span {
-        color: white;
-      }
+    h3 {
+      font-size: 1.2rem;
+      color: white;
     }
 
-    #copyright {
-      font-size: 0.8rem;
+    .line {
+      @include line(50, white);
+    }
+
+    a {
       color: rgb(221, 221, 221);
+      text-align: left;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    p {
+      margin: 5px 0;
+      text-align: left;
+    }
+
+    svg {
+      margin-right: 10px;
+      font-size: 1.2rem;
+    }
+
+    .footer__contact-item {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
     }
   }
-  
+
+  // Colonne du Logo
+  .footer__logo {
+    justify-content: center;
+    display: flex;
+
+    .logo h2,
+    span {
+      color: white;
+    }
+  }
+
+  #copyright {
+    font-size: 0.8rem;
+    color: rgb(221, 221, 221);
+  }
+}

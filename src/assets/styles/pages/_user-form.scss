@@ -56,8 +56,8 @@
       @include buttonSuqare(white, $main-color);
 
       @media screen and (max-width: 480px) {
-        width: 100%; // Le bouton prend toute la largeur sur très petits écrans
-        padding: 10px; // Ajustement du padding pour les petits écrans
+        width: 100%;
+        padding: 10px;
       }
     }
 

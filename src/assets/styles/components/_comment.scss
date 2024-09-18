@@ -9,8 +9,6 @@
   }
 }
 
-// Partie ajout de commentaires
-
 .comments__input-container {
   display: flex;
   flex-direction: column;
@@ -42,12 +40,13 @@
 
   button {
     @include buttonSuqare(white, $main-color);
-    margin-bottom: 40px;
-    margin-top: 10px;
+
+    & {
+      margin-bottom: 40px;
+      margin-top: 10px;
+    }
   }
 }
-
-// Partie affichage des commentaires
 
 .comments__username-content {
   margin-bottom: 15px;
@@ -63,9 +62,11 @@
   }
 
   p {
-    text-align: left;
-    width: 100%;
-    margin-bottom: 10px;
+    & {
+      text-align: left;
+      width: 100%;
+      margin-bottom: 10px;
+    }
   }
 }
 
@@ -83,9 +84,6 @@
   color: $main-color;
 }
 
-
-// buton
-
 .comments_buttons {
   display: flex;
   justify-content: end;
@@ -96,7 +94,10 @@
     border-radius: 6px;
     background-color: $main-color;
     color: white;
-   
+
+    & {
+      margin: 0; // If needed
+    }
   }
 }
 
@@ -108,7 +109,7 @@
   padding: 0;
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
-  border: 0; 
+  border: 0;
 }
 
 .comment__content {

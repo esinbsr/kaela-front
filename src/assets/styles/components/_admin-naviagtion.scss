@@ -21,18 +21,17 @@
 
       &:hover,
       &:focus,
-      &.active-link { // Classe active pour conserver le style
+      &.active-link {
         background-color: lighten($main-color, 7%);
         border-radius: 10px;
       }
-  
     }
   }
 
- #h1-administration {
+  #h1-administration {
     position: absolute;
     top: 250px;
-    left: 750px; // Positionnez le titre à droite du menu de navigation
+    left: 750px;
     transform: translate(-50%, -50%);
     margin: 0;
     color: $main-color;

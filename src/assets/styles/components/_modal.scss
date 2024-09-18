@@ -7,7 +7,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.6); 
+  background-color: rgba(0, 0, 0, 0.6);
   z-index: 1000;
 
   .modal__content {
@@ -20,12 +20,15 @@
 
     h2 {
       margin-bottom: 1.2rem;
-    } 
+    }
 
     button {
       @include buttonSuqare(white, $main-color);
-      display: block;
-      margin: 10px auto;
+
+      & {
+        display: block;
+        margin: 10px auto;
+      }
     }
   }
 }

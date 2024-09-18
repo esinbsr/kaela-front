@@ -32,6 +32,7 @@
       border-radius: 4px;
       width: 100%;
       outline: none;
+
       &:focus {
         border-color: $main-color;
       }
@@ -49,9 +50,16 @@
 
     button {
       @include buttonSuqare(white, #2c4548);
-      grid-column: 2 / 3; /* Positionne le bouton dans la deuxième colonne */
-      justify-self: start; /* Aligne le bouton au début de la colonne */
-      cursor: pointer;
+
+      & {
+        grid-column: 2 / 3;
+        justify-self: start;
+        cursor: pointer;
+      }
+
+      &:hover {
+        background-color: darken(#2c4548, 10%);
+      }
     }
   }
 

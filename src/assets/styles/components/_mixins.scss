@@ -3,8 +3,11 @@
   justify-content: $jc;
   align-items: $ai;
 
+  @if $jc {
+    justify-content: $jc;
+  }
   @if $ai {
-    align-items: $fw;
+    align-items: $ai;
   }
   @if $fd {
     flex-direction: $fd;
@@ -49,8 +52,6 @@
   }
 }
 
-
-
 @mixin buttonRound($color, $bc: null, $border: false) {
   padding: 8px 40px;
   border-radius: 50px;
@@ -59,12 +60,12 @@
   cursor: pointer;
   transition: background-color 0.2s ease;
 
-  &:hover {
-    background-color: darken($bc, 10%);
-  }
-
-  @if $bc != null {
+  @if $bc {
     background-color: $bc;
+
+    &:hover {
+      background-color: darken($bc, 10%);
+    }
   }
 
   @if $border {
@@ -87,21 +88,19 @@
 }
 
 @mixin line($w, $bc) {
-  width: 0; // Initially, the width is set to 0 for the animation
-  height: 2px; // Thickness of the line
-  background-color: $bc; // Color of the line
-  margin-bottom: 15px; // Spacing below the line
+  width: 0;
+  height: 2px;
+  background-color: $bc;
+  margin-bottom: 15px;
   border-radius: 4px;
-  animation: expand-width-#{$w} 1s ease-out forwards; // Applies the animation on load
+  animation: expand-width-#{$w} 1s ease-out forwards;
 
-  // Generate keyframes dynamically with the specific width
   @keyframes expand-width-#{$w} {
     from {
-      width: 0; // Starts at 0
+      width: 0;
     }
     to {
-      width: #{$w}px; // Expands to the specified width in pixels
+      width: #{$w}px;
     }
   }
 }
-
