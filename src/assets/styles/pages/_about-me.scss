@@ -4,6 +4,11 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 100px;
+
+    @media screen and (max-width: 1024px) {
+      flex-direction: column;
+      align-items: flex-start;
+    }
   }
 
   .about-me__description {
@@ -11,11 +16,17 @@
 
     h2 {
       margin-bottom: 20px;
-      text-align: center;
+      text-align: left;
     }
+
     p {
       margin-bottom: 30px;
       text-align: justify;
+    }
+
+    @media screen and (max-width: 1024px) {
+      width: 100%;
+      margin-bottom: 20px;
     }
   }
 
@@ -24,6 +35,17 @@
       width: 450px;
       height: 450px;
       object-fit: cover;
+
+      @media screen and (max-width: 768px) {
+        width: 100%;
+        height: auto;
+        margin-bottom: 20px;
+      }
+    }
+
+    @media screen and (max-width: 1024px) {
+      width: 100%;
+      text-align: center;
     }
   }
 
@@ -33,15 +55,26 @@
       text-align: center;
     }
 
-    .about-me__footer-container{
+    .about-me__footer-container {
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
-      
 
       .about-me__footer-image {
         flex: 0 1 calc(25% - 20px); // 4 images par ligne avec un espace de 20px entre elles
         margin-bottom: 20px;
+
+        @media screen and (max-width: 1024px) {
+          flex: 0 1 calc(33.33% - 20px); // 3 images par ligne
+        }
+
+        @media screen and (max-width: 768px) {
+          flex: 0 1 calc(50% - 20px); // 2 images par ligne
+        }
+
+        @media screen and (max-width: 480px) {
+          flex: 0 1 calc(100% - 20px); // 1 image par ligne
+        }
       }
 
       img {
@@ -50,6 +83,10 @@
         object-fit: cover;
         object-position: top;
         cursor: pointer;
+
+        @media screen and (max-width: 768px) {
+          height: auto; // Ajuster la hauteur automatiquement sur petits écrans
+        }
       }
     }
   }

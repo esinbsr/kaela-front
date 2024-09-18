@@ -44,7 +44,6 @@ const Login = () => {
   }, [userRole, navigate]);
 
   return (
-    // Main container for the login form
     <>
     <section className="user-form">
       <h2>Login</h2>
@@ -57,8 +56,8 @@ const Login = () => {
           onChange={(e) => setEmail(e.target.value)}
           name="email"
           value={email}
-          placeholder="example@domain.com" // Placeholder example for email
-          aria-required="true" // Indicates that the email field is required
+          placeholder="example@domain.com" 
+          aria-required="true" 
         />
         <label htmlFor="password">Password</label>
         <input
@@ -67,19 +66,18 @@ const Login = () => {
           onChange={(e) => setPassword(e.target.value)}
           name="password"
           value={password}
-          placeholder="Enter your password" // Placeholder example for password
-          aria-required="true" // Indicates that the password field is required
+          placeholder="Enter your password"
+          aria-required="true" 
         />
-        <button type="submit">Login</button> {/* Submit button for the form */}
+        <button type="submit">Login</button>
         <p>
-          No account yet?{" "}
+          No account yet?
           <Link to="/signup" className="user-form__link">
             Sign up here
-          </Link>{" "}
-          {/* Link to the signup page */}
+          </Link>
         </p>
       </form>
-      {error && <Message message={error} type="error" />}{" "}
+      {error && <Message message={error} type="error" />}
     </section>
     <Footer/>
     </>

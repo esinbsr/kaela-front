@@ -26,8 +26,8 @@ const AdminUpdateSocialNetwork = () => {
 
   useEffect(() => {
     if (socialNetworkById) {
-      setPlatform(socialNetworkById.platform ?? "");
-      setUrl(socialNetworkById.url ?? "");
+      setPlatform(socialNetworkById.platform || "");
+      setUrl(socialNetworkById.url || "");
     }
   }, [socialNetworkById]);
 

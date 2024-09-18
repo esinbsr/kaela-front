@@ -13,12 +13,43 @@
     flex-wrap: $fw;
   }
 }
-
 @mixin containerCenter {
   width: 100%;
-  max-width: 1250px;
+  max-width: 1200px;
   margin: 0 auto;
+  padding: 0 20px; // Ajout de padding de 20px par défaut
+
+  @media (max-width: 1100px) {
+    max-width: 1100px;
+  }
+
+  @media (max-width: 1000px) {
+    max-width: 900px;
+  }
+
+  @media (max-width: 900px) {
+    max-width: 800px;
+  }
+
+  @media (max-width: 800px) {
+    max-width: 700px;
+  }
+
+  @media (max-width: 700px) {
+    max-width: 600px;
+  }
+
+  @media (max-width: 600px) {
+    max-width: 500px;
+  }
+
+  @media (max-width: 500px) {
+    max-width: 100%;
+    padding: 0 20px; // Conserver le padding de 20px même sur les très petits écrans
+  }
 }
+
+
 
 @mixin buttonRound($color, $bc: null, $border: false) {
   padding: 8px 40px;
