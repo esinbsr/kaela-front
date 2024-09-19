@@ -13,107 +13,120 @@ const Navigation = () => {
   };
 
   return (
-    <nav className="navigation">
-      <NavLink to="/" className="logo_kaela">
-        <Logo />
-      </NavLink>
-
-      {/* Icone Burger pour mobile */}
-      <div className="burger-icon" onClick={toggleMenu}>
-        <div className={`bar ${menuOpen ? "open" : ""}`}></div>
-        <div className={`bar ${menuOpen ? "open" : ""}`}></div>
-        <div className={`bar ${menuOpen ? "open" : ""}`}></div>
-      </div>
-
-      {/* Ajout de la classe 'open' si menuOpen est true */}
-      <div className={`navigation_links ${menuOpen ? "open" : ""}`}>
-        <NavLink
-          to="/"
-          className={({ isActive }) => (isActive ? "active" : "")}
-          onClick={() => setMenuOpen(false)} // Ferme le menu lors d'un clic sur un lien
-        >
-          Home
+    <header>
+      <nav className="navigation">
+        {/* Logo */}
+        <NavLink to="/" className="logo_kaela">
+          <Logo />
         </NavLink>
 
-        <div className="dropdown">
+        {/* Icône Burger pour mobile */}
+        <button
+          className="burger-icon"
+          aria-label="Toggle navigation menu"
+          onClick={toggleMenu}
+        >
+          <div className={`bar ${menuOpen ? "open" : ""}`}></div>
+          <div className={`bar ${menuOpen ? "open" : ""}`}></div>
+          <div className={`bar ${menuOpen ? "open" : ""}`}></div>
+        </button>
+
+        {/* Menu de navigation */}
+        <section className={`navigation_links ${menuOpen ? "open" : ""}`}>
           <NavLink
-            to="/collection"
+            to="/"
             className={({ isActive }) => (isActive ? "active" : "")}
             onClick={() => setMenuOpen(false)}
           >
-            Collection
+            Home
           </NavLink>
-          <div className="dropdown-content">
+
+          {/* Menu déroulant pour la collection */}
+          <div className="dropdown">
             <NavLink
-              to="/eveningDresses"
+              to="/collection"
               className={({ isActive }) => (isActive ? "active" : "")}
               onClick={() => setMenuOpen(false)}
             >
-              Evening dresses
+              Collection
             </NavLink>
-            <NavLink
-              to="/latestCollection"
-              className={({ isActive }) => (isActive ? "active" : "")}
-              onClick={() => setMenuOpen(false)}
-            >
-              Latest collection
-            </NavLink>
+            <div className="dropdown-content">
+              <NavLink
+                to="/eveningDresses"
+                className={({ isActive }) => (isActive ? "active" : "")}
+                onClick={() => setMenuOpen(false)}
+              >
+                Evening dresses
+              </NavLink>
+              <NavLink
+                to="/latestCollection"
+                className={({ isActive }) => (isActive ? "active" : "")}
+                onClick={() => setMenuOpen(false)}
+              >
+                Latest collection
+              </NavLink>
+            </div>
           </div>
-        </div>
 
-        <NavLink
-          to="/aboutMe"
-          className={({ isActive }) => (isActive ? "active" : "")}
-          onClick={() => setMenuOpen(false)}
-        >
-          About me
-        </NavLink>
-        <NavLink
-          to="/contact"
-          className={({ isActive }) => (isActive ? "active" : "")}
-          onClick={() => setMenuOpen(false)}
-        >
-          Contact
-        </NavLink>
-
-        {!isLoggedIn && (
-          <>
-            <NavLink
-              to="/signup"
-              className={({ isActive }) => (isActive ? "active" : "")}
-              onClick={() => setMenuOpen(false)}
-            >
-              Signup
-            </NavLink>
-            <NavLink
-              to="/login"
-              className={({ isActive }) => (isActive ? "active" : "")}
-              onClick={() => setMenuOpen(false)}
-            >
-              Login
-            </NavLink>
-          </>
-        )}
-        {role === "admin" && (
           <NavLink
-            to="/admin"
+            to="/aboutMe"
             className={({ isActive }) => (isActive ? "active" : "")}
             onClick={() => setMenuOpen(false)}
           >
-            Admin
+            About me
           </NavLink>
-        )}
-        {isLoggedIn && (
           <NavLink
-            to="/logout"
+            to="/contact"
             className={({ isActive }) => (isActive ? "active" : "")}
             onClick={() => setMenuOpen(false)}
           >
-            Logout
+            Contact
           </NavLink>
-        )}
-      </div>
-    </nav>
+
+          {/* Liens pour l'inscription et la connexion */}
+          {!isLoggedIn && (
+            <>
+              <NavLink
+                to="/signup"
+                className={({ isActive }) => (isActive ? "active" : "")}
+                onClick={() => setMenuOpen(false)}
+              >
+                Signup
+              </NavLink>
+              <NavLink
+                to="/login"
+                className={({ isActive }) => (isActive ? "active" : "")}
+                onClick={() => setMenuOpen(false)}
+              >
+                Login
+              </NavLink>
+            </>
+          )}
+
+          {/* Lien Admin pour les administrateurs */}
+          {role === "admin" && (
+            <NavLink
+              to="/admin"
+              className={({ isActive }) => (isActive ? "active" : "")}
+              onClick={() => setMenuOpen(false)}
+            >
+              Admin
+            </NavLink>
+          )}
+
+          {/* Lien de déconnexion pour les utilisateurs connectés */}
+          {isLoggedIn && (
+            <NavLink
+              to="/logout"
+              className={({ isActive }) => (isActive ? "active" : "")}
+              onClick={() => setMenuOpen(false)}
+            >
+              Logout
+            </NavLink>
+          )}
+        </section>
+      </nav>
+    </header>
   );
 };
 

@@ -9,6 +9,7 @@
     display: none;
     flex-direction: column;
     cursor: pointer;
+    padding: 0;
     gap: 5px;
 
     .bar {
@@ -89,7 +90,7 @@
     }
 
     // Styles pour mobile
-    @media screen and (max-width: 927px) {
+    @media screen and (max-width: 890px) {
       display: none; // Cache les liens par défaut sur mobile
 
       &.open {
@@ -107,7 +108,7 @@
     }
   }
 
-  @media screen and (max-width: 927px) {
+  @media screen and (max-width: 890px) {
     .burger-icon {
       display: flex; // Affiche l'icône burger sur mobile
     }

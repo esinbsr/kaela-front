@@ -6,11 +6,15 @@
     color: $navigation-color;
   }
 
-
 .home__header-image {
   @include flexbox(space-between, center, row, wrap);
   width: 100%; 
   margin: 0 auto; 
+
+  .large-image {
+    width: 34%; 
+  }
+  
 }
 
 .home__header-image img {
@@ -33,11 +37,57 @@
   .home__header-image {
     @include flexbox(center, center, column, wrap); 
     margin: 0 auto; 
+
+    .large-image {
+      width: 80%;
+      margin: 10px auto;
+    }
   }
 
   .home__header-image img {
     width: 80%;
-    margin: 10px auto;
+    margin: 0px auto;
+    &:hover {
+      transform: none; 
+    }
+  }
+
+}
+}
+
+
+.home__description {
+  display: flex;
+  flex-direction: column;
+  margin: 60px 0;
+
+  p {
+    position: relative;
+    cursor: pointer;
+    margin-bottom: 10px;
+    max-width: 50%;
+  }
+
+  a {
+    @include buttonRound(rgb(255, 255, 255), $main-color);
+    width: auto;
+    align-self: flex-start;
   }
 }
+
+@media screen and (max-width: 768px) {
+  .home__description {
+    margin: 40px 0;
+    align-items: center;
+    text-align: center;  
+
+    a {
+      align-self: center;
+    }
+
+    p {
+      max-width: 80%;
+      margin-bottom: 15px;
+    }
+  }
 }

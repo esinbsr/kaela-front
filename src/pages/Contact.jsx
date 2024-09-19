@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getInformation } from "../actions/informationAction";
 import { isEmpty } from "../components/utils/isEmpty";
 import Map from "../components/utils/Map";
-import SocialNetworkIcon from "../components/utils/SocialNetworkIcon";
+// import SocialNetworkIcon from "../components/utils/SocialNetworkIcon";
 import Footer from "../components/Footer";
 
 const Contact = () => {
@@ -70,7 +70,7 @@ const Contact = () => {
   return (
     <>
       <div className="contact">
-        <SocialNetworkIcon />
+        {/* <SocialNetworkIcon /> */}
         <section className="contact__form">
           <form onSubmit={handleSubmit}>
             <fieldset>

@@ -1,7 +1,5 @@
 .logo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  @include flexbox(null, center, column);
   color: $navigation-color;
   animation: fadeIn 1s ease-in-out;
 
@@ -14,8 +12,6 @@
   }
 
   &__couture {
-    font-family: "Montserrat", sans-serif;
-    font-weight: normal;
     font-size: 1.2rem;
     letter-spacing: 0.4em;
     color: $secondary-color;
@@ -55,5 +51,16 @@
   100% {
     transform: translateX(0);
     opacity: 1;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .logo {
+    &__kaela {
+      font-size: 1.4rem;
+    }
+      &__couture {
+        font-size: 1.1rem;
+    }
   }
 }
