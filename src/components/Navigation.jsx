@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Logo from "./Logo";
@@ -5,16 +6,31 @@ import Logo from "./Logo";
 const Navigation = () => {
   const role = useSelector((state) => state.user.role);
   const isLoggedIn = !!role;
+  const [menuOpen, setMenuOpen] = useState(false); // État pour ouvrir/fermer le menu
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen); // Inverse l'état d'ouverture du menu
+  };
 
   return (
-    <div className="navigation">
+    <nav className="navigation">
       <NavLink to="/" className="logo_kaela">
         <Logo />
       </NavLink>
-      <div className="navigation_links">
+
+      {/* Icone Burger pour mobile */}
+      <div className="burger-icon" onClick={toggleMenu}>
+        <div className={`bar ${menuOpen ? "open" : ""}`}></div>
+        <div className={`bar ${menuOpen ? "open" : ""}`}></div>
+        <div className={`bar ${menuOpen ? "open" : ""}`}></div>
+      </div>
+
+      {/* Ajout de la classe 'open' si menuOpen est true */}
+      <div className={`navigation_links ${menuOpen ? "open" : ""}`}>
         <NavLink
           to="/"
           className={({ isActive }) => (isActive ? "active" : "")}
+          onClick={() => setMenuOpen(false)} // Ferme le menu lors d'un clic sur un lien
         >
           Home
         </NavLink>
@@ -23,6 +39,7 @@ const Navigation = () => {
           <NavLink
             to="/collection"
             className={({ isActive }) => (isActive ? "active" : "")}
+            onClick={() => setMenuOpen(false)}
           >
             Collection
           </NavLink>
@@ -30,12 +47,14 @@ const Navigation = () => {
             <NavLink
               to="/eveningDresses"
               className={({ isActive }) => (isActive ? "active" : "")}
+              onClick={() => setMenuOpen(false)}
             >
               Evening dresses
             </NavLink>
             <NavLink
               to="/latestCollection"
               className={({ isActive }) => (isActive ? "active" : "")}
+              onClick={() => setMenuOpen(false)}
             >
               Latest collection
             </NavLink>
@@ -45,12 +64,14 @@ const Navigation = () => {
         <NavLink
           to="/aboutMe"
           className={({ isActive }) => (isActive ? "active" : "")}
+          onClick={() => setMenuOpen(false)}
         >
           About me
         </NavLink>
         <NavLink
           to="/contact"
           className={({ isActive }) => (isActive ? "active" : "")}
+          onClick={() => setMenuOpen(false)}
         >
           Contact
         </NavLink>
@@ -60,12 +81,14 @@ const Navigation = () => {
             <NavLink
               to="/signup"
               className={({ isActive }) => (isActive ? "active" : "")}
+              onClick={() => setMenuOpen(false)}
             >
               Signup
             </NavLink>
             <NavLink
               to="/login"
               className={({ isActive }) => (isActive ? "active" : "")}
+              onClick={() => setMenuOpen(false)}
             >
               Login
             </NavLink>
@@ -75,6 +98,7 @@ const Navigation = () => {
           <NavLink
             to="/admin"
             className={({ isActive }) => (isActive ? "active" : "")}
+            onClick={() => setMenuOpen(false)}
           >
             Admin
           </NavLink>
@@ -83,12 +107,13 @@ const Navigation = () => {
           <NavLink
             to="/logout"
             className={({ isActive }) => (isActive ? "active" : "")}
+            onClick={() => setMenuOpen(false)}
           >
             Logout
           </NavLink>
         )}
       </div>
-    </div>
+    </nav>
   );
 };
 

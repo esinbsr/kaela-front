@@ -26,8 +26,7 @@ const Footer = () => {
       <div className="footer__column footer__logo">
         <Logo />
       </div>
-
-      <div className="footer__column footer__contact">
+      <div className="footer__column">
         <h3>Contact Details</h3>
         <div className="line"></div>
 
@@ -47,7 +46,7 @@ const Footer = () => {
         </div>
       </div>
 
-      <div className="footer__column footer__navigation">
+      <div className="footer__column">
         <h3>Navigation</h3>
         <div className="line"></div>
         <Link to="/">Home</Link>
@@ -56,7 +55,7 @@ const Footer = () => {
         <Link to="/contact">Contact</Link>
       </div>
 
-      <div className="footer__column footer__legal">
+      <div className="footer__column">
         <h3>Legal Information</h3>
         <div className="line"></div>
         <Link to="/privacyPolicy">Privacy policy</Link>

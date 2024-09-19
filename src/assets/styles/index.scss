@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @import "./components/colors";
 @import "./components/mixins";
 @import "./components/font";
@@ -21,3 +25,4 @@
 @import "./pages/contact";
 @import "./components/footer";
 @import "./pages/legal-information";
+@import "./components/home-description"

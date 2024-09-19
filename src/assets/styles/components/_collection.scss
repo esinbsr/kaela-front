@@ -1,30 +1,59 @@
 .home__collection-image {
-  @include flexbox(space-between, null, null, wrap);
+  @include flexbox(space-between, center, row, wrap); // Alignement en ligne pour les grands écrans
   margin: 0 auto;
 
-  img {
-    width: 450px;
-    height: 400px;
-    object-fit: cover;
-    object-position: top;
+  .collection-item {
+    width: 30%; // Chaque item prend 30% de la largeur du conteneur
+    position: relative;
+
+    img {
+      width: 100%; // L'image prend toute la largeur de son conteneur
+      aspect-ratio: 9/8;
+      object-fit: cover;
+      object-position: top;
+    }
   }
 
   .home__collection-description {
     @include flexbox(center, center, column, wrap);
+    text-align: center;
 
     h3 {
       margin-top: 10px;
-      font-size: 1.3rem;
+      font-family: 'Montserrat-Bold';
     }
 
     p {
-      text-align: center;
-      width: 400px;
       margin: 10px 0;
     }
 
     a {
       @include buttonRound(white, $main-color);
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .home__collection-image {
+    @include flexbox(center, center, column, wrap);
+    margin: 0 auto;
+
+    .collection-item {
+      width: 100%;
+      margin-bottom: 40px;
+
+      img {
+        width: 80%;
+        margin: 0 auto;
+      }
+    }
+    .home__collection-description {
+      h3 {
+        margin-top: 20px;
+      }
+     p {
+        max-width: 90%; 
+      }
     }
   }
 }

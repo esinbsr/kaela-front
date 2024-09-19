@@ -2,6 +2,34 @@
   @include flexbox(space-between, center);
   width: 100%;
   padding: 2rem 0;
+  position: relative;
+
+  // Icone Burger visible uniquement sur mobile
+  .burger-icon {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 5px;
+
+    .bar {
+      width: 25px;
+      height: 3px;
+      background-color: $navigation-color;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    &.open .bar:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    &.open .bar:nth-child(2) {
+      opacity: 0;
+    }
+
+    &.open .bar:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+  }
 
   .navigation_links {
     display: flex;
@@ -58,6 +86,30 @@
       &:hover .dropdown-content {
         display: flex;
       }
+    }
+
+    // Styles pour mobile
+    @media screen and (max-width: 927px) {
+      display: none; // Cache les liens par défaut sur mobile
+
+      &.open {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        background-color: $background-color;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        padding: 1rem;
+        z-index: 99;
+      }
+    }
+  }
+
+  @media screen and (max-width: 927px) {
+    .burger-icon {
+      display: flex; // Affiche l'icône burger sur mobile
     }
   }
 }

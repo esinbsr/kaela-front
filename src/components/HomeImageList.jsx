@@ -1,51 +1,46 @@
-import { useState } from 'react';
-import { useEffect } from 'react';
+// HomeImageList.js
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProduct } from '../actions/productAction';
-import { API_URL } from '../actions/serverRequest';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { isEmpty } from './utils/isEmpty';
+import HomeHeaderImageCard from './HomeHeaderImageCard';
 
 const SECTIONS = {
     HOME_HEADER: 2, // Constant pour l'ID de la section du header de la page d'accueil
 };
 
 const HomeImageList = ({ start, end, additionalClass }) => {
-    const dispatch = useDispatch(); // Hook pour dispatcher les actions Redux
-    const products = useSelector((state) => state.product.products); // Sélection des produits depuis le store Redux
-    const userRole = useSelector((state) => state.user.role); // Sélection du rôle de l'utilisateur depuis le store Redux
+    const dispatch = useDispatch();
+    const products = useSelector((state) => state.product.products);
+    const userRole = useSelector((state) => state.user.role);
 
-    const navigate = useNavigate(); // Hook pour naviguer entre les routes
-    const [modalVisible, setModalVisible] = useState(false); // État pour la visibilité de la modale
-    const [selectedProduct, setSelectedProduct] = useState(null); // Produit sélectionné pour la modale
+    const navigate = useNavigate();
+    const [modalVisible, setModalVisible] = useState(false);
+    const [selectedProduct, setSelectedProduct] = useState(null);
 
     useEffect(() => {
-        dispatch(getProduct()); // Dispatcher l'action pour récupérer les produits
+        dispatch(getProduct());
     }, [dispatch]);
 
-
     if (isEmpty(products)) {
-        return <p>Loading products...</p>; // Afficher un message de chargement si les produits ne sont pas encore disponibles
+        return <p>Loading products...</p>;
     }
 
-    // Filtrer les produits par ID de section et les découper selon les indices de début et de fin
-    const filteredProducts = 
-        products.length > 0 ? 
-        products.filter((product) => product.section_id === SECTIONS.HOME_HEADER).slice(start, end) : [];
+    const filteredProducts = products
+        .filter((product) => product.section_id === SECTIONS.HOME_HEADER)
+        .slice(start, end);
 
-    // Fonction pour gérer le clic pour les admins
     const handleAdminClick = (product) => {
         setSelectedProduct(product);
-        setModalVisible(true); // Affiche la modale
+        setModalVisible(true);
     };
 
-    // Fonction pour fermer la modale
     const closeModal = () => {
         setModalVisible(false);
         setSelectedProduct(null);
     };
 
-    // Fonction pour naviguer vers la page souhaitée depuis la modale
     const handleNavigate = (path) => {
         navigate(path);
         closeModal();
@@ -54,32 +49,17 @@ const HomeImageList = ({ start, end, additionalClass }) => {
     return (
         <div className={`${additionalClass || ''}`}>
             {!isEmpty(filteredProducts) ? (
-                filteredProducts.map((product, index) => {
-                    const isLargeImage = index === 1; // Rendre la deuxième image plus grande
-                    return (
-                        <div key={product.id} className={isLargeImage ? "large-image" : ""}>
-                            {userRole === "admin" ? (
-                                <div onClick={() => handleAdminClick(product)} className='test'>
-                                    <img
-                                        src={`${API_URL}assets/img/${product.path}`}
-                                        alt={product.name}
-                                        loading="lazy" // Ajoute le lazy loading pour une meilleure performance
-                                    />
-                                </div>
-                            ) : (
-                                <Link to={`/productDetail/${product.id}`}>
-                                    <img
-                                        src={`${API_URL}assets/img/${product.path}`}
-                                        alt={product.name}
-                                        loading="lazy"
-                                    />
-                                </Link>
-                            )}
-                        </div>
-                    );
-                })
+                filteredProducts.map((product, index) => (
+                    <HomeHeaderImageCard
+                        key={product.id}
+                        product={product}
+                        isLargeImage={index === 1}
+                        userRole={userRole}
+                        onAdminClick={handleAdminClick}
+                    />
+                ))
             ) : (
-                <p>No products found for the home header.</p> // Afficher un message si aucun produit n'est trouvé
+                <p>No products found for the home header.</p>
             )}
 
             {modalVisible && (

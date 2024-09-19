@@ -2,7 +2,7 @@
   margin-top: 40px;
   margin-bottom: 20px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between; 
   padding: 45px;
   background-color: $main-color;
   color: rgb(221, 221, 221);
@@ -56,8 +56,7 @@
     justify-content: center;
     display: flex;
 
-    .logo h2,
-    span {
+    .logo h2, span {
       color: white;
     }
   }
@@ -65,5 +64,29 @@
   #copyright {
     font-size: 0.8rem;
     color: rgb(221, 221, 221);
+  }
+
+  // Media query pour mobile (moins de 768px)
+  @media screen and (max-width: 768px) {
+    flex-direction: column; // Les colonnes s'empilent sur mobile
+    align-items: center; // Centre les colonnes
+
+    .footer__column {
+      align-items: center; // Centre les éléments dans chaque colonne
+      text-align: center; // Centre le texte
+
+      a, p {
+        text-align: center; // Centre les liens et le texte
+      }
+
+      h3 {
+        margin-top: 20px;
+        text-align: center; // Centre les titres
+      }
+    }
+
+    .footer__logo {
+      margin-bottom: 20px; // Ajoute un espacement entre le logo et les colonnes sur mobile
+    }
   }
 }
