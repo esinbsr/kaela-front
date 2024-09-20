@@ -1,4 +1,3 @@
-// HomeImageList.js
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProduct } from '../actions/productAction';
@@ -7,25 +6,21 @@ import { isEmpty } from './utils/isEmpty';
 import HomeHeaderImageCard from './HomeHeaderImageCard';
 
 const SECTIONS = {
-    HOME_HEADER: 2, // Constant pour l'ID de la section du header de la page d'accueil
+    HOME_HEADER: 2,
 };
 
 const HomeImageList = ({ start, end, additionalClass }) => {
     const dispatch = useDispatch();
     const products = useSelector((state) => state.product.products);
     const userRole = useSelector((state) => state.user.role);
-
     const navigate = useNavigate();
+    
     const [modalVisible, setModalVisible] = useState(false);
     const [selectedProduct, setSelectedProduct] = useState(null);
 
     useEffect(() => {
         dispatch(getProduct());
     }, [dispatch]);
-
-    if (isEmpty(products)) {
-        return <p>Loading products...</p>;
-    }
 
     const filteredProducts = products
         .filter((product) => product.section_id === SECTIONS.HOME_HEADER)

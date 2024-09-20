@@ -4,7 +4,6 @@
   padding: 2rem 0;
   position: relative;
 
-  // Icone Burger visible uniquement sur mobile
   .burger-icon {
     display: none;
     flex-direction: column;
@@ -62,55 +61,53 @@
       }
     }
 
-    .dropdown {
-      position: relative;
-
-      .dropdown-content {
-        display: none;
-        flex-direction: column;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        background-color: $background-color;
-        border: 1px solid #ccc;
-        z-index: 100;
-
-        a {
-          padding: 0.5rem 1rem;
-
-          &:hover {
-            background-color: #d2cfc7;
-          }
-        }
-      }
-
-      &:hover .dropdown-content {
-        display: flex;
-      }
-    }
 
     // Styles pour mobile
-    @media screen and (max-width: 890px) {
+    @media screen and (max-width: 768px) {
       display: none; // Cache les liens par défaut sur mobile
 
       &.open {
         display: flex;
         flex-direction: column;
         gap: 1.5rem;
-        background-color: $background-color;
+        background-color: $navigation-color;
+        border-radius: 4px;
+
         position: absolute;
         top: 100%;
         left: 0;
         width: 100%;
         padding: 1rem;
         z-index: 99;
+
+        // Lorsque le menu burger est ouvert, les liens du dropdown deviennent noirs
+        .dropdown-content a {
+          color: black;
+        }
       }
     }
   }
 
-  @media screen and (max-width: 890px) {
+  @media screen and (max-width: 768px) {
+    .navigation_links {
+      a {
+        color: white;
+        &::after {
+          background-color: white;
+        }
+      }
+    }
+
     .burger-icon {
       display: flex; // Affiche l'icône burger sur mobile
+    }
+  }
+}
+
+@media screen and (max-width: 890px) {
+  .navigation_links {
+    a {
+      font-size: 1rem !important;
     }
   }
 }

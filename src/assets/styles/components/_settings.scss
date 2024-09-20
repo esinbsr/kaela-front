@@ -23,7 +23,12 @@ h1 {
   margin-bottom: 3rem;
   margin-top: 1rem;
   font-family: "Montserrat-Bold";
-  font-size: 3vw;
+  font-size: 2.5vw;
+
+  // @media screen and (max-width: 768px) {
+  //   font-size: 6vw;
+  //   }
+
 }
 
 h3 {

@@ -1,92 +1,83 @@
 .footer {
-  margin-top: 40px;
-  margin-bottom: 20px;
-  display: flex;
-  justify-content: space-between; 
+  margin-top: 20px;
+  margin-bottom: 10px;
   padding: 45px;
   background-color: $main-color;
-  color: rgb(221, 221, 221);
+  color: white;
   border-radius: 8px 8px 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
 
-  // Style commun pour les colonnes
   .footer__column {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
+    flex: 1 1 250px;
+    max-width: 100%;
 
     h3 {
-      font-size: 1.2rem;
+      margin-bottom: 1rem;
       color: white;
     }
 
-    .line {
-      @include line(50, white);
-    }
-
     a {
-      color: rgb(221, 221, 221);
-      text-align: left;
+      margin-top: 1rem;
+      display: block;
+      color: white;
 
       &:hover {
         text-decoration: underline;
       }
     }
 
-    p {
-      margin: 5px 0;
-      text-align: left;
+    .line {
+      @include line(50, white);
     }
+  }
+
+  // Section contact avec icônes
+  .footer__contact-item {
+    display: flex;
+    margin-top: 1rem;
 
     svg {
       margin-right: 10px;
       font-size: 1.2rem;
-    }
-
-    .footer__contact-item {
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-    }
-  }
-
-  // Colonne du Logo
-  .footer__logo {
-    justify-content: center;
-    display: flex;
-
-    .logo h2, span {
       color: white;
     }
   }
 
-  #copyright {
-    font-size: 0.8rem;
-    color: rgb(221, 221, 221);
+
+  .footer__line {
+    width: 100%;
+    height: 1px; 
+    background-color: white;
+    margin-top: 20px;
+  }
+}
+
+
+.footer__copyright {
+  display: flex;
+  flex-direction: column;
+    @include flexbox(center, center, null);
+  p {
+    margin-bottom: 1rem;
+    color: white;
   }
 
-  // Media query pour mobile (moins de 768px)
-  @media screen and (max-width: 768px) {
-    flex-direction: column; // Les colonnes s'empilent sur mobile
-    align-items: center; // Centre les colonnes
 
-    .footer__column {
-      align-items: center; // Centre les éléments dans chaque colonne
-      text-align: center; // Centre le texte
+  .logo {
+    animation: none !important;
 
-      a, p {
-        text-align: center; // Centre les liens et le texte
-      }
-
-      h3 {
-        margin-top: 20px;
-        text-align: center; // Centre les titres
-      }
+    &__kaela {
+      animation: none !important;
+      color: white;
+      font-size: 1.4rem;
     }
 
-    .footer__logo {
-      margin-bottom: 20px; // Ajoute un espacement entre le logo et les colonnes sur mobile
+    &__couture {
+      font-size: 1rem;
+      color: white;
     }
   }
 }

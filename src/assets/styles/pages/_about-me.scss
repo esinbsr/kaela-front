@@ -1,53 +1,16 @@
 .about-me {
-  .about-me__header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 100px;
-
-    @media screen and (max-width: 1024px) {
-      flex-direction: column;
-      align-items: flex-start;
-    }
+  h2 {
+    margin-bottom: 1rem;
   }
+  .about-me__header {
 
-  .about-me__description {
-    width: 50%;
-
-    h2 {
-      margin-bottom: 20px;
-      text-align: left;
-    }
-
+    @include flexbox(space-between, null, column, null);
+ 
     p {
-      margin-bottom: 30px;
+      margin-bottom: 2rem;
       text-align: justify;
     }
-
-    @media screen and (max-width: 1024px) {
-      width: 100%;
-      margin-bottom: 20px;
     }
-  }
-
-  .about-me__image {
-    img {
-      width: 450px;
-      height: 450px;
-      object-fit: cover;
-
-      @media screen and (max-width: 768px) {
-        width: 100%;
-        height: auto;
-        margin-bottom: 20px;
-      }
-    }
-
-    @media screen and (max-width: 1024px) {
-      width: 100%;
-      text-align: center;
-    }
-  }
 
   .about-me__footer {
     h2 {
@@ -56,9 +19,7 @@
     }
 
     .about-me__footer-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
+      @include flexbox(space-between, null, null, wrap);
 
       .about-me__footer-image {
         flex: 0 1 calc(25% - 20px); // 4 images par ligne avec un espace de 20px entre elles
@@ -70,22 +31,33 @@
 
         @media screen and (max-width: 768px) {
           flex: 0 1 calc(50% - 20px); // 2 images par ligne
+          @include flexbox(center, center, null, null);
+          margin: 0 auto;
+          margin-bottom: 10px;
         }
 
         @media screen and (max-width: 480px) {
-          flex: 0 1 calc(100% - 20px); // 1 image par ligne
+          flex: 0 1 calc(90% - 20px); // 1 image par ligne
         }
       }
 
       img {
-        width: 100%;
-        height: 350px;
+        width: 100%; // L'image prend toute la largeur de son conteneur
+        aspect-ratio: 7/8;
         object-fit: cover;
-        object-position: top;
+        object-position: 50% 50%;
         cursor: pointer;
+        transition: transform 0.3s ease-in-out; 
+
+      &:hover {
+        transform: scale(1.05);
+      }
 
         @media screen and (max-width: 768px) {
           height: auto; // Ajuster la hauteur automatiquement sur petits écrans
+          &:hover {
+            transform: none;
+          }
         }
       }
     }

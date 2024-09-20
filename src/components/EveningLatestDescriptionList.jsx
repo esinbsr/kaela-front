@@ -25,7 +25,7 @@ const EveningLatestDescriptionList = ({ categorySlug }) => {
         <h1>{category.name}</h1>
         <div className="evening-latest__description">
           {/* Display the page title and description */}
-          <h2>{category.page_title}</h2>
+          <h3>{category.page_title}</h3>
           <p>{category.page_description}</p>
         </div>
         </>

@@ -2,29 +2,93 @@
   position: relative;
 
   .evening-latest__image {
-    @include flexbox(space-between, null, null, wrap);
+    @include flexbox(space-between, center, row, wrap); 
     margin: 0 auto;
 
+    .evening-latest__item {
+      width: 23%; // Chaque item occupe environ 48% pour avoir 2 images par ligne avec un petit espace
+    }
+
     .top-image {
-      margin-top: 10rem;
+      margin-top: 8rem; // La marge spécifique pour les images avec la classe top-image
     }
 
     img {
-      width: 100%;
+      width: 100%; // L'image prend toute la largeur de son conteneur
       height: auto;
-      max-width: 450px;
+      max-width: 100%; // Empêche les images de dépasser leur conteneur
+      transition: transform 0.3s ease-in-out;
+      object-fit: cover;
+
+      &:hover {
+        transform: scale(1.05);
+      }
     }
   }
 
   .evening-latest__description {
-    max-width: 35%;
-    position: absolute;
-    top: 120px;
-    left: 0;
+    @include flexbox(start, null, column, wrap);
+    h3 {
+      margin-bottom: 0.8rem;
+      font-family: "Montserrat-Bold";
+    }
+    p {
+      max-width: 40%;
+    }
   }
+}
 
-  h3 {
-    margin-bottom: 8px;
-    font-family: "Montserrat-Bold";
+// Media query pour les écrans entre 480px et 768px
+@media screen and (max-width: 768px) {
+  .evening-latest {
+    .evening-latest__image {
+      @include flexbox(space-between, center, row, wrap); 
+      .evening-latest__item {
+        width: 45%; // Garde 2 images par ligne
+      }
+    }
+    .evening-latest__description {
+      text-align: center;
+      @include flexbox(center, center, column, null);
+
+      p {
+        max-width: 90%;
+        margin-bottom: 2rem;
+      }
+    }
+  }
+}
+
+// Media query pour les écrans en dessous de 480px
+@media screen and (max-width: 480px) {
+  .evening-latest {
+    .evening-latest__image {
+      @include flexbox(center, center, column, null); 
+      
+      .top-image {
+        margin-top: 0;
+      }
+
+      .evening-latest__item {
+        width: 80%; // Sur mobile, une seule image par ligne
+        margin-bottom: 1rem;
+      }
+
+      img {
+        &:hover {
+          transform: none;
+        }
+      }
+    }
+
+    .evening-latest__description {
+      text-align: center;
+      @include flexbox(center, center, column, null);
+
+      p {
+        max-width: 90%;
+        margin-bottom: 2rem;
+      }
+    }
   }
 }

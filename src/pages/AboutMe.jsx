@@ -5,7 +5,6 @@ import { API_URL } from "../actions/serverRequest";
 import { getProduct } from "../actions/productAction";
 import { Link, useNavigate } from "react-router-dom";
 import { isEmpty } from "../components/utils/isEmpty";
-import SocialNetworkIcon from '../components/utils/SocialNetworkIcon';
 import { getSocialNetwork } from "../actions/socialNetworkAction";
 import Footer from "../components/Footer";
 
@@ -65,43 +64,16 @@ const AboutMe = () => {
 
   return (
     <div className="about-me">
-      <SocialNetworkIcon/> {/* Integration of the component for displaying social networks */}
       
       <h1>About Me</h1>
 
-      <div className="about-me__header">
-        <div className="about-me__description">
           <h2>Who am I?</h2>
+          <div className="about-me__header">
           {!isEmpty(threeInformations) ? (
-            threeInformations.map((info) => (
-              <div key={info.id}>
-                <p>{info.description}</p>
-              </div>
-            ))
+            threeInformations.map((info) => <p key={info.id}>{info.description}</p>)
           ) : (
             <p role="alert" aria-live="assertive">Loading descriptions...</p> 
           )}
-        </div>
-
-        <div className="about-me__image">
-          {!isEmpty(filteredProducts) ? (
-            userRole === "admin" ? ( // If the user is an admin, allow editing the product image
-              <Link to={`/adminUpdateProduct/${filteredProducts[0].id}`}>
-                <img
-                  src={`${API_URL}assets/img/${filteredProducts[0].path}`}
-                  alt={filteredProducts[0].name}
-                />
-              </Link>
-            ) : ( // Otherwise, just display the image
-              <img
-                src={`${API_URL}assets/img/${filteredProducts[0].path}`}
-                alt={filteredProducts[0].name}
-              />
-            )
-          ) : (
-            <p role="alert" aria-live="assertive">Loading image...</p> 
-          )}
-        </div>
       </div>
 
       <div className="about-me__footer">
@@ -110,14 +82,14 @@ const AboutMe = () => {
           {!isEmpty(filteredProducts) && socialNetworks.length > 0 ? (
             filteredProducts.slice(1, 9).map((product) => (
               <div className="about-me__footer-image" key={product.id}>
-                {userRole === "admin" ? ( // If the user is an admin, show the modal with options
+                {userRole === "admin" ? ( 
                   <div onClick={() => handleAdminClick(product)}>
                     <img
                       src={`${API_URL}assets/img/${product.path}`}
                       alt={product.name}
                     />
                   </div>
-                ) : ( // Otherwise, link directly to Instagram
+                ) : ( 
                   <Link to={socialNetworks.find((network) => network.platform.toLowerCase() === 'instagram').url} target="_blank" rel="noopener noreferrer">
                     <img
                       src={`${API_URL}assets/img/${product.path}`}

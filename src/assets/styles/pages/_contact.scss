@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: row; // Affichage côte à côte par défaut
   align-items: stretch; // Assure que les deux sections aient la même hauteur
-  justify-content: space-between; 
+  justify-content: space-between;
 
   h2 {
     margin-bottom: 10px; // Ajuste l'espacement pour laisser de la place pour le trait
@@ -44,7 +44,7 @@
       flex-direction: column;
 
       label {
-        display: block; 
+        display: block;
         margin-bottom: 8px;
       }
 
@@ -71,10 +71,16 @@
       .form__button-container {
         width: 100%;
         display: flex;
-        justify-content: center; 
+        justify-content: center;
 
         button {
           @include buttonSuqare(white, $main-color);
+          width: auto;
+
+          @media screen and (max-width: 480px) {
+            width: 100%;
+            padding: 10px 0;
+          }
         }
       }
     }
@@ -110,7 +116,7 @@
   }
 
   @media screen and (max-width: 1024px) {
-    flex-direction: column; // Empile les sections en colonne sur les écrans de taille moyenne
+    flex-direction: column;
     .contact__form {
       margin-right: 0;
       margin-bottom: 2rem;
@@ -118,54 +124,32 @@
   }
 
   @media screen and (max-width: 768px) {
-    padding: 1rem; // Réduction du padding pour les petits écrans
-
-    .contact__form,
-    .contact__content {
-      padding: 1.5rem;
-    }
-
-    .contact__form {
-      margin-bottom: 1.5rem;
-    }
-
     .contact__data {
       flex-direction: column;
-      align-items: flex-start;
 
       p {
         margin-left: 0;
-        margin-top: 0.5rem;
       }
 
       svg {
-        margin-bottom: 0.5rem;
+        margin-bottom: 1rem;
       }
-    }
-
-    #map {
-      height: 150px; // Réduction de la taille de la carte sur petits écrans
     }
   }
+}
 
-  @media screen and (max-width: 480px) {
-    .contact__form,
-    .contact__content {
-      padding: 1rem;
+@media screen and (max-width: 768px) {
+  .contact {
+    h2 {
+      font-size: 1.4rem;
+    }
+    input::placeholder,
+    textarea::placeholder {
+      font-size: 0.8rem;
     }
 
-    .contact__data {
-      p {
-        font-size: 0.9rem; // Réduction de la taille de la police pour les très petits écrans
-      }
-
-      svg {
-        font-size: 1.2rem;
-      }
-    }
-
-    #map {
-      height: 120px; // Réduction supplémentaire de la taille de la carte
+    .contact__form form input {
+      padding: 12px !important;
     }
   }
 }

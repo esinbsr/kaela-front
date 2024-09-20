@@ -1,9 +1,8 @@
 .home__collection-image {
-  @include flexbox(space-between, center, row, wrap); // Alignement en ligne pour les grands écrans
-  margin: 0 auto;
+  @include flexbox(space-between, center, row, wrap);
 
   .collection-item {
-    width: 30%; // Chaque item prend 30% de la largeur du conteneur
+    width: 35%; // Chaque item prend 30% de la largeur du conteneur
     position: relative;
 
     img {
@@ -20,13 +19,12 @@
 
     h3 {
       margin-top: 10px;
-      font-family: 'Montserrat-Bold';
     }
 
     p {
-      margin: 10px 0;
+      margin: 10px 0 15px 0;
+      max-width: 100%;
     }
-
 
     a {
       @include buttonRound(white, $main-color);
@@ -36,25 +34,33 @@
 
 @media screen and (max-width: 768px) {
   .home__collection-image {
-    @include flexbox(center, center, column, wrap);
-    margin: 0 auto;
-
-    .collection-item {
-      width: 100%;
-      margin-bottom: 40px;
-
-      img {
-        width: 80%;
-        margin: 0 auto;
-      }
+    @include flexbox(null, center, column, null);
+    .collection-item  {
+      width: 50%; 
+      margin-bottom: 50px;
     }
+
     .home__collection-description {
       h3 {
-        margin-top: 20px;
+        margin-top: 15px;
+        // font-size:3rem ;
       }
-     p {
-        max-width: 90%; 
+
+      p {
+       margin: 10px 0 15px 0;
+      }
+      a {
+        align-self: center;
       }
     }
   }
+}
+@media screen and (max-width: 480px) {
+  .home__collection-image {
+    .collection-item {
+      width: 80%; 
+    }
+
+  }
+
 }

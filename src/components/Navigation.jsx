@@ -40,9 +40,7 @@ const Navigation = () => {
           >
             Home
           </NavLink>
-
-          {/* Menu déroulant pour la collection */}
-          <div className="dropdown">
+       
             <NavLink
               to="/collection"
               className={({ isActive }) => (isActive ? "active" : "")}
@@ -50,23 +48,6 @@ const Navigation = () => {
             >
               Collection
             </NavLink>
-            <div className="dropdown-content">
-              <NavLink
-                to="/eveningDresses"
-                className={({ isActive }) => (isActive ? "active" : "")}
-                onClick={() => setMenuOpen(false)}
-              >
-                Evening dresses
-              </NavLink>
-              <NavLink
-                to="/latestCollection"
-                className={({ isActive }) => (isActive ? "active" : "")}
-                onClick={() => setMenuOpen(false)}
-              >
-                Latest collection
-              </NavLink>
-            </div>
-          </div>
 
           <NavLink
             to="/aboutMe"
