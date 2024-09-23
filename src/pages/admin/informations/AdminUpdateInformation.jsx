@@ -6,7 +6,8 @@ import {
   updateInformation,
 } from "../../../actions/informationAction";
 import AdminNavigation from "../AdminNavigation";
-import Message from "../../../components/utils/Message";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const AdminUpdateInformation = () => {
   const { informationId } = useParams();
@@ -53,6 +54,15 @@ const AdminUpdateInformation = () => {
 
     dispatch(updateInformation(formData));
   };
+
+  useEffect(() => {
+    if (message) {
+      toast.success(message);
+    }
+    if (error) {
+      toast.error(error);
+    }
+  }, [message, error]);
 
   return (
     <div className="admin-container">
@@ -111,8 +121,8 @@ const AdminUpdateInformation = () => {
               </div>
             </fieldset>
           </form>
-          {message && <Message message={message} type="success" />}
-          {error && <Message message={error} type="error" />}
+
+          <ToastContainer />
         </div>
       </div>
     </div>

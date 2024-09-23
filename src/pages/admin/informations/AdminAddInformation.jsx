@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  addInformation,
-  resetInformationMessages,
-} from "../../../actions/informationAction";
-import Message from "../../../components/utils/Message";
+import { addInformation, resetInformationMessages } from "../../../actions/informationAction";
+import { toast, ToastContainer } from "react-toastify"; 
+import "react-toastify/dist/ReactToastify.css"; 
 
 const AdminAddInformation = () => {
   const [description, setDescription] = useState("");
@@ -16,7 +14,7 @@ const AdminAddInformation = () => {
   const message = useSelector((state) => state.information.message);
   const error = useSelector((state) => state.information.error);
 
-  // Reset messages when the component mounts
+
   useEffect(() => {
     dispatch(resetInformationMessages());
   }, [dispatch]);
@@ -34,12 +32,16 @@ const AdminAddInformation = () => {
     dispatch(addInformation(formData));
   };
 
+
   useEffect(() => {
     if (message && !error) {
+      toast.success(message); 
       setDescription("");
       setMobile("");
       setEmail("");
       setAddress("");
+    } else if (error) {
+      toast.error(error); 
     }
   }, [message, error]);
 
@@ -47,7 +49,7 @@ const AdminAddInformation = () => {
     <>
       <form onSubmit={handleSubmit} className="form">
         <fieldset>
-          <legend>Information Details</legend>
+          <legend>Add new information</legend>
           
           <div className="form__group">
             <label htmlFor="description">Description</label>
@@ -93,18 +95,14 @@ const AdminAddInformation = () => {
           </div>
   
           <div className="form__button">
-          <button type="submit">Create</button>
+            <button type="submit">Create</button>
           </div>
-
-
         </fieldset>
       </form>
       
-      {message && <Message message={message} type="success" />}
-      {error && <Message message={error} type="error" />}
+      <ToastContainer />
     </>
   );
-  
 };
 
 export default AdminAddInformation;

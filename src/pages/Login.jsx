@@ -2,11 +2,11 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { loginUser, resetMessages } from "../actions/userAction";
-import Message from "../components/utils/Message";
+import { toast, ToastContainer } from "react-toastify"; 
+import 'react-toastify/dist/ReactToastify.css'; 
 import Footer from "../components/Footer";
 
 const Login = () => {
-  // State variables for form inputs
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -14,7 +14,6 @@ const Login = () => {
   const userRole = useSelector((state) => state.user.role);
   const error = useSelector((state) => state.user.error);
 
-  // React Router navigation and Redux dispatch
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -26,22 +25,28 @@ const Login = () => {
 
   // Handle form submission
   const handleSubmit = (e) => {
-    e.preventDefault(); // Prevent default form submission behavior
+    e.preventDefault(); 
     dispatch(resetMessages()); // Clear previous messages before submission
-    const formData = { email, password }; // Create an object with the form data
-    dispatch(loginUser(formData)); // Dispatch the loginUser action with form data
+    const formData = { email, password }; 
+    dispatch(loginUser(formData)); 
   };
 
   // Redirect based on user role after successful login
   useEffect(() => {
     if (userRole) {
       if (userRole === "admin") {
-        navigate("/admin"); // Navigate to admin page if the user is an admin
+        navigate("/admin"); 
       } else {
-        navigate("/"); // Navigate to home page if the user is not an admin
+        navigate("/"); 
       }
     }
   }, [userRole, navigate]);
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+    }
+  }, [error]);
 
   return (
     <>
@@ -77,12 +82,12 @@ const Login = () => {
           </Link>
         </p>
       </form>
-      {error && <Message message={error} type="error" />}
+
+      <ToastContainer />
     </section>
     <Footer/>
     </>
   );
-
 };
 
 export default Login;

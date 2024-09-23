@@ -23,7 +23,10 @@ const Footer = () => {
 
   return (
     <footer className="footer">
-      <div className="footer__column">
+
+      <div className="footer__container">
+
+      <div className="footer__column testo">
         <h3>Contact Details</h3>
         <div className="line"></div>
 
@@ -58,11 +61,12 @@ const Footer = () => {
         <Link to="/privacyPolicy">Privacy policy</Link>
         <Link to="/legalNotice">Legal notice</Link>
       </div>
+      </div>
 
-      <span className="footer__line"></span>
+      <div className="footer__line"></div>
       <div className="footer__copyright">
-        <p> Copyright © 2024 Kaela Couture. All rights reserved.</p>
         <Logo/>
+        <p> Copyright © 2024 Kaela Couture. All rights reserved.</p>
         </div>
     </footer>
   );

@@ -63,3 +63,33 @@
     }
   }
 }
+
+
+@media screen and (max-width: 480px) {
+  .about-me {
+
+    h2 {
+      text-align: left; // Assure que le titre est aligné à gauche
+    }
+
+    .about-me__header {
+      p {
+        text-align: start; // Assure que le texte est aligné à gauche
+        width: 100%; // Prend toute la largeur du conteneur
+      }
+    }
+
+    .about-me__footer-container {
+      @include flexbox(start, null, column, null); 
+      
+      .about-me__footer-image {
+        flex: 0 1 calc(100% - 20px);
+        margin-bottom: 10px;
+      }
+    }
+
+    img {
+      width: 100%;
+    }
+  }
+}

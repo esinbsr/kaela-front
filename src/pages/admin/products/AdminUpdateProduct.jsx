@@ -4,9 +4,10 @@ import { useParams } from "react-router-dom";
 import { getProductById, updateProduct } from "../../../actions/productAction";
 import AdminNavigation from "../AdminNavigation";
 import { API_URL } from "../../../actions/serverRequest";
-import Message from "../../../components/utils/Message";
 import { getProductCategories } from "../../../actions/categoryAction";
 import { getSection } from "../../../actions/sectionAction";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const AdminUpdateProduct = () => {
   const [productName, setProductName] = useState("");
@@ -37,7 +38,7 @@ const AdminUpdateProduct = () => {
 
   useEffect(() => {
     if (productById) {
-      setProductName(productById.name ?? "" );
+      setProductName(productById.name ?? "");
       setProductDescription(productById.description ?? "");
       setProductCategory(productById.categorie_id ?? "");
       setProductSection(productById.section_id ?? "");
@@ -60,6 +61,15 @@ const AdminUpdateProduct = () => {
 
     dispatch(updateProduct(formData));
   };
+
+  useEffect(() => {
+    if (message) {
+      toast.success(message);
+    }
+    if (error) {
+      toast.error(error);
+    }
+  }, [message, error]);
 
   return (
     <div className="admin-container">
@@ -146,8 +156,7 @@ const AdminUpdateProduct = () => {
           </fieldset>
         </form>
 
-        {message && <Message message={message} type="success" />}
-        {error && <Message message={error} type="error" />}
+        <ToastContainer />
       </div>
     </div>
   );

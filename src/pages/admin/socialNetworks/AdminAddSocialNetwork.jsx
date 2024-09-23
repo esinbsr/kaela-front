@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addSocialNetwork, resetSocialNetworkMessages } from "../../../actions/socialNetworkAction";
-import Message from "../../../components/utils/Message";
+import { toast, ToastContainer } from "react-toastify"; 
+import "react-toastify/dist/ReactToastify.css"; 
 
 const AdminAddSocialNetwork = () => {
   const [platform, setPlatform] = useState("");
@@ -12,7 +13,7 @@ const AdminAddSocialNetwork = () => {
   const message = useSelector((state) => state.socialNetwork.message);
   const error = useSelector((state) => state.socialNetwork.error);
 
-  // Reset messages only on initial mount
+
   useEffect(() => {
     dispatch(resetSocialNetworkMessages());
   }, [dispatch]);
@@ -28,10 +29,14 @@ const AdminAddSocialNetwork = () => {
     dispatch(addSocialNetwork(formData));
   };
 
+
   useEffect(() => {
     if (message && !error) {
+      toast.success(message); 
       setPlatform("");
       setUrl("");
+    } else if (error) {
+      toast.error(error);
     }
   }, [message, error]);
 
@@ -39,7 +44,7 @@ const AdminAddSocialNetwork = () => {
     <div className="form">
         <form onSubmit={handleSubmit}>
             <fieldset>
-                <legend>Add Social Network</legend>
+                <legend>Add a new social network</legend>
 
                 <div className="form__group">
                     <label htmlFor="platform">Platform</label>
@@ -70,11 +75,9 @@ const AdminAddSocialNetwork = () => {
                 </div>
             </fieldset>
         </form>
-        {message && <Message message={message} type="success" />}
-        {error && <Message message={error} type="error" />}
+        <ToastContainer />
     </div>
-);
-
+  );
 };
 
 export default AdminAddSocialNetwork;

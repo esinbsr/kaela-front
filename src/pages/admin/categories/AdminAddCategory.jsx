@@ -4,7 +4,8 @@ import {
   addCategory,
   resetCategoryMessages,
 } from "../../../actions/categoryAction";
-import Message from "../../../components/utils/Message";
+import { toast, ToastContainer } from "react-toastify"; 
+import "react-toastify/dist/ReactToastify.css"; 
 
 const AdminAddCategory = () => {
   const [categoryName, setCategoryName] = useState("");
@@ -33,12 +34,16 @@ const AdminAddCategory = () => {
     dispatch(addCategory(formData));
   };
 
+ 
   useEffect(() => {
     if (message && !error) {
+      toast.success(message); 
       setCategoryName("");
       setCategoryDescription("");
       setCategoryPageTitle("");
       setCategoryPageDescription("");
+    } else if (error) {
+      toast.error(error); 
     }
   }, [message, error]);
 
@@ -46,9 +51,9 @@ const AdminAddCategory = () => {
     <>
       <form onSubmit={handleSubmit} className="form">
         <fieldset>
-          <legend>Category Details</legend>
+          <legend>Add a new category </legend>
           <div className="form__group">
-            <label htmlFor="categoryName">Name of category:</label>
+            <label htmlFor="categoryName">Name of category</label>
             <input
               id="categoryName"
               type="text"
@@ -60,7 +65,7 @@ const AdminAddCategory = () => {
           </div>
 
           <div className="form__group">
-            <label htmlFor="categoryDescription">Description:</label>
+            <label htmlFor="categoryDescription">Description</label>
             <textarea
               id="categoryDescription"
               name="categoryDescription"
@@ -71,7 +76,7 @@ const AdminAddCategory = () => {
           </div>
 
           <div className="form__group">
-            <label htmlFor="categoryPageTitle">Page title:</label>
+            <label htmlFor="categoryPageTitle">Page title</label>
             <input
               id="categoryPageTitle"
               type="text"
@@ -83,7 +88,7 @@ const AdminAddCategory = () => {
           </div>
 
           <div className="form__group">
-            <label htmlFor="categoryPageDescription">Page description:</label>
+            <label htmlFor="categoryPageDescription">Page description</label>
             <textarea
               id="categoryPageDescription"
               name="categoryPageDescription"
@@ -94,14 +99,12 @@ const AdminAddCategory = () => {
           </div>
 
           <div className="form__button">
-          <button type="submit">Create</button>
+            <button type="submit">Create</button>
           </div>
-
         </fieldset>
       </form>
 
-      {message && <Message message={message} type="success" />}
-      {error && <Message message={error} type="error" />}
+      <ToastContainer />
     </>
   );
 };

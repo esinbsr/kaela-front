@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getSocialNetworkById, updateSocialNetwork } from "../../../actions/socialNetworkAction";
 import AdminNavigation from "../AdminNavigation";
-import Message from "../../../components/utils/Message";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const AdminUpdateSocialNetwork = () => {
   const { socialNetworkId } = useParams();
@@ -43,6 +44,15 @@ const AdminUpdateSocialNetwork = () => {
     dispatch(updateSocialNetwork(formData));
   };
 
+  useEffect(() => {
+    if (message) {
+      toast.success(message);
+    }
+    if (error) {
+      toast.error(error);
+    }
+  }, [message, error]);
+
   return (
     <div className="admin-container">
       <AdminNavigation />
@@ -79,14 +89,12 @@ const AdminUpdateSocialNetwork = () => {
               </div>
             </fieldset>
           </form>
-          {message && <Message message={message} type="success" />}
-          {error && <Message message={error} type="error" />}
+
+          <ToastContainer />
         </div>
       </div>
     </div>
   );
-  
-  
 };
 
 export default AdminUpdateSocialNetwork;

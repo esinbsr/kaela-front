@@ -2,9 +2,14 @@
   max-width: 500px;
   margin: 50px auto;
   padding: 2rem;
-  border-radius: 10px;
+  border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   background-color: #ffffff;
+
+
+  input::placeholder{
+   font-size: 0.9rem;
+  }
 
   h2 {
     margin-bottom: 10px;
@@ -26,17 +31,18 @@
 
     input {
       width: 100%;
-      padding: 10px;
-      margin-bottom: 15px;
-      border: 1px solid #939393cc;
+      padding: 0.7rem;
+      margin-bottom: 1rem;
+      border: 1px solid $main-color;
       outline: none;
-      border-radius: 5px;
+      border-radius: 4px;
       background-color: #fff;
+      font-size: 1rem;
 
       &:focus {
-        border-color: $main-color;
         box-shadow: 0 0 5px rgba($main-color, 0.3);
       }
+   
     }
 
     button {
@@ -74,7 +80,8 @@
   }}
   input::placeholder,
   textarea::placeholder {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
+    color:rgb(113, 113, 113)
   }
 }
   

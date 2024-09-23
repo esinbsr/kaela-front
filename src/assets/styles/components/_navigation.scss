@@ -10,6 +10,8 @@
     cursor: pointer;
     padding: 0;
     gap: 5px;
+    border:none;
+    background: none;
 
     .bar {
       width: 25px;
@@ -60,11 +62,34 @@
         width: 100%;
       }
     }
+  }
+}
 
 
-    // Styles pour mobile
-    @media screen and (max-width: 768px) {
-      display: none; // Cache les liens par défaut sur mobile
+
+@media screen and (max-width: 890px) {
+  .navigation {
+    .navigation_links {
+      a {
+        font-size: 1rem !important;
+      }
+    }
+
+  }
+  
+}
+
+@media screen and (max-width: 768px) {
+  .navigation {
+    .navigation_links {
+      a {
+        color: white;
+        &::after {
+          background-color: white;
+        }
+      }
+
+      display: none;
 
       &.open {
         display: flex;
@@ -80,34 +105,13 @@
         padding: 1rem;
         z-index: 99;
 
-        // Lorsque le menu burger est ouvert, les liens du dropdown deviennent noirs
         .dropdown-content a {
           color: black;
         }
       }
     }
-  }
-
-  @media screen and (max-width: 768px) {
-    .navigation_links {
-      a {
-        color: white;
-        &::after {
-          background-color: white;
-        }
-      }
-    }
-
     .burger-icon {
-      display: flex; // Affiche l'icône burger sur mobile
-    }
-  }
-}
-
-@media screen and (max-width: 890px) {
-  .navigation_links {
-    a {
-      font-size: 1rem !important;
+      display: flex;
     }
   }
 }

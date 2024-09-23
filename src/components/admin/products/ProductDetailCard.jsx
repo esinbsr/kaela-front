@@ -5,6 +5,7 @@ import { API_URL } from "../../../actions/serverRequest";
 const ProductDetailCard = ({ productDetail }) => {
   return (
     <article className="detail-product">
+      <h1>Product Details</h1>
       <div className="detail-product__description">
         <h2>{productDetail.name}</h2>
         <p>{productDetail.description}</p>

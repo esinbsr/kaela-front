@@ -1,12 +1,17 @@
 .contact {
   display: flex;
-  flex-direction: row; // Affichage côte à côte par défaut
-  align-items: stretch; // Assure que les deux sections aient la même hauteur
+  flex-direction: row;
+  align-items: stretch;
   justify-content: space-between;
 
+  input::placeholder,
+  textarea::placeholder {
+    font-size: 0.9rem;
+  }
+  
   h2 {
-    margin-bottom: 10px; // Ajuste l'espacement pour laisser de la place pour le trait
-    position: relative; // Pour gérer la position du trait si nécessaire
+    margin-bottom: 10px;
+    position: relative;
     color: $main-color;
   }
 
@@ -29,7 +34,7 @@
     flex: 1;
     padding: 2rem;
     border-radius: 8px;
-    margin: 50px auto;
+    margin-top: 50px;
     width: 100%;
     font-style: normal;
     background-color: #ffffff;
@@ -51,15 +56,14 @@
       input,
       textarea {
         width: 100%;
-        padding: 8px;
-        margin-bottom: 15px;
-        border: 1px solid #939393cc;
+        padding: 0.7rem;
+        margin-bottom: 1.5rem;
+        border: 1px solid $main-color;
         outline: none;
         background-color: #fff;
         border-radius: 4px;
-
         &:focus {
-          border-color: $main-color;
+          box-shadow: 0 0 5px rgba($main-color, 0.3);
         }
       }
 
@@ -74,8 +78,8 @@
         justify-content: center;
 
         button {
+          width: auto; // Déplacement avant la règle imbriquée pour éviter l'avertissement
           @include buttonSuqare(white, $main-color);
-          width: auto;
 
           @media screen and (max-width: 480px) {
             width: 100%;
@@ -119,7 +123,6 @@
     flex-direction: column;
     .contact__form {
       margin-right: 0;
-      margin-bottom: 2rem;
     }
   }
 
@@ -140,16 +143,14 @@
 
 @media screen and (max-width: 768px) {
   .contact {
-    h2 {
-      font-size: 1.4rem;
-    }
     input::placeholder,
     textarea::placeholder {
-      font-size: 0.8rem;
+      font-size: 0.9rem;
+      color: rgb(113, 113, 113);
     }
 
     .contact__form form input {
-      padding: 12px !important;
+      padding: 0.8rem !important;
     }
   }
 }

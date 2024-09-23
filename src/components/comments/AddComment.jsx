@@ -2,29 +2,25 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addComment } from '../../actions/commentAction';
 import { useParams, Link } from 'react-router-dom';
-import Message from '../utils/Message'; // Import the reusable message component
+import { toast, ToastContainer } from 'react-toastify'; 
+import 'react-toastify/dist/ReactToastify.css'; 
 
 const AddComment = () => {
-  // Local state for the comment content
   const [content, setContent] = useState('');
-  const [showMessage, setShowMessage] = useState(false); // State to manage message visibility
+  const [showMessage, setShowMessage] = useState(false); 
 
-  // Retrieve the user ID from the Redux store
   const userId = useSelector((state) => state.user.user_id);
 
-  // Retrieve the product ID from the URL parameters
   const { productDetailId } = useParams();
 
-  // Retrieve error and success messages from the Redux store
   const error = useSelector((state) => state.comment.error);
   const message = useSelector((state) => state.comment.message);
 
-  // Hook to dispatch Redux actions
   const dispatch = useDispatch();
 
   // Form submission handler
   const handleSubmit = (e) => {
-    e.preventDefault(); // Prevent the default form submission behavior
+    e.preventDefault();
 
     // Prepare the form data object to be sent to the server
     const formData = {
@@ -36,10 +32,7 @@ const AddComment = () => {
     // Dispatch the action to add a comment
     dispatch(addComment(formData));
 
-    // Reset the textarea content after submission
     setContent('');
-
-    // Show the message after submission
     setShowMessage(true);
   };
 
@@ -51,9 +44,15 @@ const AddComment = () => {
     }
   };
 
-  // Effect to hide the message after 3 seconds
+  // Effect to show notifications for message or error
   useEffect(() => {
     if (showMessage) {
+      if (message) {
+        toast.success(message); 
+      } else if (error) {
+        toast.error(error); 
+      }
+      
       const timer = setTimeout(() => {
         setShowMessage(false);
       }, 3000);
@@ -61,7 +60,7 @@ const AddComment = () => {
       // Cleanup the timer on component unmount
       return () => clearTimeout(timer);
     }
-  }, [showMessage]);
+  }, [showMessage, message, error]);
 
   // If the user is not logged in, display a login link
   if (!userId) {
@@ -76,14 +75,9 @@ const AddComment = () => {
   // Render the comment form
   return (
     <>
-      <h2>Give your opinion</h2>
-
-      {/* Display the success or error message if available */}
-      {showMessage && message && <Message message={message} type="success" />}
-      {showMessage && error && <Message message={error} type="error" />}
+      <h3>Give your opinion</h3>
 
       <form onSubmit={handleSubmit}>
-        {/* Hidden field for the product ID */}
         <input type="hidden" value={productDetailId} />
 
         <div className="comments__input-container">
@@ -93,7 +87,7 @@ const AddComment = () => {
             id="content"
             value={content}
             onChange={(e) => setContent(e.target.value)}
-            onKeyDown={handleKeyPress} // Key press event listener for the Enter key
+            onKeyDown={handleKeyPress} 
             aria-required="true"
             aria-describedby="content-desc"
           ></textarea>
@@ -107,6 +101,7 @@ const AddComment = () => {
           <button type="submit">Send</button>
         </div>
       </form>
+      <ToastContainer />
     </>
   );
 };

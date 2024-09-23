@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getCategoryById, updateCategory } from "../../../actions/categoryAction";
 import AdminNavigation from "../AdminNavigation";
-import Message from "../../../components/utils/Message";
+import { toast, ToastContainer } from "react-toastify"; 
+import 'react-toastify/dist/ReactToastify.css'; 
 
 const AdminUpdateCategory = () => {
   const { categoryId } = useParams();
@@ -42,76 +43,81 @@ const AdminUpdateCategory = () => {
       id: categoryId,
       name: categoryName,
       description: categoryDescription,
-      page_title: categoryPageTitle ,
+      page_title: categoryPageTitle,
       page_description: categoryPageDescription
     };
 
     dispatch(updateCategory(formData));
   };
 
+  useEffect(() => {
+    if (message) {
+      toast.success(message);
+    }
+    if (error) {
+      toast.error(error); 
+    }
+  }, [message, error]);
+
   return (
     <div className="admin-container">
       <AdminNavigation />
       <div className="admin-container__content">
+        <form onSubmit={handleSubmit} className="form">
+          <fieldset>
+            <legend>Update Category</legend>
 
-          <form onSubmit={handleSubmit} className="form">
-            <fieldset>
-              <legend>Update Category</legend>
-  
-              <div className="form__group">
-                <label htmlFor="categoryName">Name of category:</label>
-                <input
-                  id="categoryName"
-                  type="text"
-                  name="categoryName"
-                  value={categoryName}
-                  onChange={(e) => setCategoryName(e.target.value)}
-                />
-              </div>
-  
-              <div className="form__group">
-                <label htmlFor="categoryDescription">Description:</label>
-                <textarea
-                  id="categoryDescription"
-                  name="categoryDescription"
-                  value={categoryDescription}
-                  onChange={(e) => setCategoryDescription(e.target.value)}
-                ></textarea>
-              </div>
-  
-              <div className="form__group">
-                <label htmlFor="categoryPageTitle">Page title:</label>
-                <input
-                  id="categoryPageTitle"
-                  type="text"
-                  name="categoryPageTitle"
-                  value={categoryPageTitle}
-                  onChange={(e) => setCategoryPageTitle(e.target.value)}
-                />
-              </div>
-  
-              <div className="form__group">
-                <label htmlFor="categoryPageDescription">Page description:</label>
-                <textarea
-                  id="categoryPageDescription"
-                  name="categoryPageDescription"
-                  value={categoryPageDescription}
-                  onChange={(e) => setCategoryPageDescription(e.target.value)}
-                ></textarea>
-              </div>
-  
-              <div className="form__button">
-                <button type="submit">Update</button>
-              </div>
-            </fieldset>
-          </form>
-          {message && <Message message={message} type="success" />}
-          {error && <Message message={error} type="error" />}
-        </div>
+            <div className="form__group">
+              <label htmlFor="categoryName">Name of category:</label>
+              <input
+                id="categoryName"
+                type="text"
+                name="categoryName"
+                value={categoryName}
+                onChange={(e) => setCategoryName(e.target.value)}
+              />
+            </div>
+
+            <div className="form__group">
+              <label htmlFor="categoryDescription">Description:</label>
+              <textarea
+                id="categoryDescription"
+                name="categoryDescription"
+                value={categoryDescription}
+                onChange={(e) => setCategoryDescription(e.target.value)}
+              ></textarea>
+            </div>
+
+            <div className="form__group">
+              <label htmlFor="categoryPageTitle">Page title:</label>
+              <input
+                id="categoryPageTitle"
+                type="text"
+                name="categoryPageTitle"
+                value={categoryPageTitle}
+                onChange={(e) => setCategoryPageTitle(e.target.value)}
+              />
+            </div>
+
+            <div className="form__group">
+              <label htmlFor="categoryPageDescription">Page description:</label>
+              <textarea
+                id="categoryPageDescription"
+                name="categoryPageDescription"
+                value={categoryPageDescription}
+                onChange={(e) => setCategoryPageDescription(e.target.value)}
+              ></textarea>
+            </div>
+
+            <div className="form__button">
+              <button type="submit">Update</button>
+            </div>
+          </fieldset>
+        </form>
+        <ToastContainer />
       </div>
+    </div>
   );
-  
-  
 };
 
 export default AdminUpdateCategory;

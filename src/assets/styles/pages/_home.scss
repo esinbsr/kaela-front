@@ -2,19 +2,24 @@
   h1 {
     letter-spacing: 3px;
     font-family: "Great Vibes";
-    font-size: 4vw;
+    font-size: 3rem;
     color: $navigation-color;
   }
 
   .home__header-image {
-    @include flexbox(space-between, center, row, wrap); // 3 images sur une ligne pour les écrans plus larges
+    @include flexbox(
+      space-between,
+      center,
+      row,
+      wrap
+    ); // 3 images sur une ligne pour les écrans plus larges
 
     a {
       width: 30%; // Chaque image occupe 30% de la largeur en grand écran
     }
 
     img {
-      width: 100%; 
+      width: 100%;
       height: auto;
       object-fit: cover;
       transition: transform 0.3s ease-in-out;
@@ -25,50 +30,59 @@
     }
   }
 
-  /* Styles pour les écrans de moins de 768px */
   @media screen and (max-width: 768px) {
     h1 {
-      font-size: 8vw;
+      font-size: 2.7rem;
     }
 
     .home__header-image {
-      @include flexbox(center, center, row, wrap); // Deux images sur une ligne, la troisième en dessous
+      @include flexbox(
+        center,
+        center,
+        row,
+        wrap
+      );
       gap: 10px;
 
       a {
-        width: 48%; // Deux images sur une ligne prennent chacune 48% (pour espace entre elles)
+        width: 48%;
       }
+
       a:nth-child(3) {
-        width: 48%; // Elle prend la même largeur que les autres
+        width: 48%;
       }
 
       img {
         width: 100%;
-        &:hover {
-          transform: none;
+        & {
+          &:hover {
+            transform: none;
+          }
         }
       }
     }
   }
 
-  /* Styles pour les petits écrans (max-width: 480px) */
   @media screen and (max-width: 480px) {
     h1 {
-      font-size: 10vw; 
+      font-size: 2.5rem;
     }
 
     .home__header-image {
-      @include flexbox(center, center, column, null); // Les images passent en colonne les unes sous les autres
+      @include flexbox(
+        center,
+        center,
+        column,
+        null
+      );
       gap: 10px;
 
-      a, a:nth-child(3)  {
-        width: 80%; 
+      a,
+      a:nth-child(3) {
+        width: 80%;
       }
-    
     }
   }
-
-
 
   .home__description {
     @include flexbox(null, null, column, null);
@@ -81,35 +95,49 @@
     }
 
     a {
-      @include buttonRound(white, $navigation-color);
       width: auto;
       align-self: flex-start;
+      & {
+        @include buttonRound(white, $navigation-color);
+      }
     }
   }
-    // Media query pour tablette (max-width: 768px)
-    @media screen and (max-width: 768px) {
-      .home__description {
-        margin: 40px 0;
-        @include flexbox(center, center, null, null);
-        text-align: center;
 
-        p {
-          max-width: 70%;
-        }
-        a {
-          align-self: center; // Centre le bouton au lieu de l'aligner à gauche
-        }
+  @media screen and (max-width: 768px) {
+    .home__description {
+      margin: 40px 0;
+      @include flexbox(center, center, null, null);
+      text-align: center;
+
+      p {
+        max-width: 70%;
       }
-      
-    }
 
-    // Media query pour mobile (max-width: 480px)
-    @media screen and (max-width: 480px) {
-      .home__description {
-        p {
-          max-width: 90%;
-        }
+      a {
+        align-self: center;
       }
     }
+  }
 
+  @media screen and (max-width: 480px) {
+    .home__header-image {
+      @include flexbox(
+        center,
+        center,
+        column,
+        null
+      );
+
+      a,
+      a:nth-child(3) {
+        width: 100%;
+      }
+    }
+
+    .home__description {
+      p {
+        max-width: 100%;
+      }
+    }
+  }
 }

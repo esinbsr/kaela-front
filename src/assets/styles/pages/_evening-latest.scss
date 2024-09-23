@@ -6,7 +6,7 @@
     margin: 0 auto;
 
     .evening-latest__item {
-      width: 23%; // Chaque item occupe environ 48% pour avoir 2 images par ligne avec un petit espace
+      width: 23%; // Chaque item occupe 23% de la largeur sur les grands écrans
     }
 
     .top-image {
@@ -30,7 +30,6 @@
     @include flexbox(start, null, column, wrap);
     h3 {
       margin-bottom: 0.8rem;
-      font-family: "Montserrat-Bold";
     }
     p {
       max-width: 40%;
@@ -44,7 +43,7 @@
     .evening-latest__image {
       @include flexbox(space-between, center, row, wrap); 
       .evening-latest__item {
-        width: 45%; // Garde 2 images par ligne
+        width: 45%; // 2 images par ligne sur les écrans de taille moyenne
       }
     }
     .evening-latest__description {
@@ -59,36 +58,34 @@
   }
 }
 
-// Media query pour les écrans en dessous de 480px
+// Media query pour les écrans en dessous de 480px (mobile)
 @media screen and (max-width: 480px) {
   .evening-latest {
     .evening-latest__image {
       @include flexbox(center, center, column, null); 
-      
+      width: 100%; // Le conteneur prend toute la largeur de l'écran
+
       .top-image {
         margin-top: 0;
       }
 
       .evening-latest__item {
-        width: 80%; // Sur mobile, une seule image par ligne
+        width: 100%; // Les images prennent toute la largeur de la page sur mobile
         margin-bottom: 1rem;
       }
 
       img {
+        width: 100%; // Les images prennent toute la largeur de leur conteneur
+        max-width: 100%;
         &:hover {
-          transform: none;
+          transform: none; // Désactive l'effet de zoom sur mobile
         }
       }
     }
 
     .evening-latest__description {
-      text-align: center;
-      @include flexbox(center, center, column, null);
-
-      p {
-        max-width: 90%;
-        margin-bottom: 2rem;
-      }
+      text-align: left; // Aligne tout à gauche par défaut
+      @include flexbox(start, start, column, null);
     }
   }
 }

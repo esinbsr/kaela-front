@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
+// import Footer from "../../components/Footer";
 
 const AdminNavigation = () => {
   const navigate = useNavigate();
@@ -9,12 +10,11 @@ const AdminNavigation = () => {
     const role = localStorage.getItem("role");
     if (role !== "admin") {
       navigate("/");
-    } else if (location.pathname === "/admin") {
-      navigate("/adminProduct"); // Redirige vers /adminProduct si l'utilisateur est sur /admin
-    }
+    } 
   }, [navigate, location.pathname]);
 
   return (
+    <>
     <div className="admin-container">
       <aside className="admin-container__navigation">
         <NavLink
@@ -43,6 +43,8 @@ const AdminNavigation = () => {
         </NavLink>
       </aside>
     </div>
+    {/* <Footer/> */}
+    </>
   );
 };
 

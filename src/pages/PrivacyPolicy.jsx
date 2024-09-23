@@ -1,131 +1,175 @@
-import { useEffect } from 'react';
-import Footer from '../components/Footer';
-import { useDispatch, useSelector } from 'react-redux';
-import { getInformation } from '../actions/informationAction';
-import { isEmpty } from '../components/utils/isEmpty';
-import { Link } from 'react-router-dom';
+import { useEffect } from "react";
+import Footer from "../components/Footer";
+import { useDispatch, useSelector } from "react-redux";
+import { getInformation } from "../actions/informationAction";
+import { isEmpty } from "../components/utils/isEmpty";
+import { Link } from "react-router-dom";
 
 const PrivacyPolicy = () => {
+  const information = useSelector((state) => state.information.information);
+  const dispatch = useDispatch();
 
-    const information = useSelector((state) => state.information.information);
-    const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getInformation());
+    window.scrollTo(0, 0);
+  }, [dispatch]);
 
-    useEffect(() => {
-        dispatch(getInformation());
-        window.scrollTo(0, 0);
-    }, [dispatch]);
+  const info = !isEmpty(information) ? information[0] : null;
 
-    const info = !isEmpty(information) ? information[0] : null;
+  return (
+    <>
+      <main className="legal-information">
+        <header>
+          <h1>Privacy Policy</h1>
+        </header>
 
-    return (
-        <>
-            <main className="legal-information">
-                <header>
-                    <h1>Politique de Confidentialité</h1>
-                </header>
+        <article>
+          <section>
+            <h2>1. Introduction</h2>
+            <p>
+              <strong>Kaela Couture</strong> is committed to protecting your privacy. This
+              privacy policy explains what <strong>personal data</strong> we collect, how we
+              use it, and the measures we take to protect it.
+            </p>
+          </section>
 
-                <article>
-                    <section>
-                        <h2>1. Introduction</h2>
-                        <p>
-                            Kaela Couture s'engage à protéger votre vie privée. Cette politique de confidentialité explique quelles données personnelles nous collectons, comment nous les utilisons, et les mesures que nous prenons pour les protéger.
-                        </p>
-                    </section>
+          <section>
+            <h2>2. Data Collected</h2>
+            <p>
+              When you register on our site, we collect the following
+              information:
+            </p>
+            <ul>
+              <li>
+                <strong>Username:</strong> Used to identify you on our site.
+              </li>
+              <li>
+                <strong>Email:</strong> Used for managing your account and
+                contacting you if necessary.
+              </li>
+              <li>
+                <strong>Password:</strong> Stored securely to protect your
+                account.
+              </li>
+            </ul>
+            <p>
+              We also generate a <strong>login token</strong> valid for 30 days, in order to
+              keep your session open and secure.
+            </p>
+          </section>
 
-                    <section>
-                        <h2>2. Données collectées</h2>
-                        <p>
-                            Lorsque vous vous inscrivez sur notre site, nous collectons les informations suivantes :
-                        </p>
-                        <ul>
-                            <li><strong>Pseudo :</strong> Utilisé pour vous identifier sur notre site.</li>
-                            <li><strong>Email :</strong> Utilisé pour la gestion de votre compte et pour vous contacter si nécessaire.</li>
-                            <li><strong>Mot de passe :</strong> Stocké de manière sécurisée pour protéger votre compte.</li>
-                        </ul>
-                        <p>
-                            Nous générons également un <strong>token de connexion</strong> valable 30 jours, afin de maintenir votre session ouverte et sécurisée.
-                        </p>
-                    </section>
+          <section>
+            <h2>3. Data Collected During Site Usage</h2>
+            <p>
+              When you interact with our site, we also collect the following
+              information:
+            </p>
+            <ul>
+              <li>
+                <strong>Comments:</strong> When you leave a comment on a product,
+                we store your username and the message you posted.
+              </li>
+              <li>
+                <strong>Contact Messages:</strong> When you contact us via our
+                form, we collect your email address and the message you send us.
+              </li>
+            </ul>
+          </section>
 
-                    <section>
-                        <h2>3. Données collectées lors de l'utilisation du site</h2>
-                        <p>
-                            Lorsque vous interagissez avec notre site, nous collectons également les informations suivantes :
-                        </p>
-                        <ul>
-                            <li><strong>Commentaires :</strong> Lorsque vous laissez un commentaire sur un produit, nous stockons votre pseudo et le message que vous avez publié.</li>
-                            <li><strong>Messages de contact :</strong> Lorsque vous nous contactez via notre formulaire, nous collectons votre adresse email et le message que vous nous envoyez.</li>
-                        </ul>
-                    </section>
+          <section>
+            <h2>4. Data Usage</h2>
+            <p>The data we collect is used to:</p>
+            <ul>
+              <li>Manage and secure your user account.</li>
+              <li>
+                Allow you to post comments on products.
+              </li>
+              <li>Respond to your messages when you contact us.</li>
+              <li>Improve the user experience on our site.</li>
+            </ul>
+          </section>
 
-                    <section>
-                        <h2>4. Utilisation des données</h2>
-                        <p>
-                            Les données que nous collectons sont utilisées pour :
-                        </p>
-                        <ul>
-                            <li>Gérer et sécuriser votre compte utilisateur.</li>
-                            <li>Vous permettre de publier des commentaires sur les produits.</li>
-                            <li>Répondre à vos messages lorsque vous nous contactez.</li>
-                            <li>Améliorer l'expérience utilisateur sur notre site.</li>
-                        </ul>
-                    </section>
+          <section>
+            <h2>5. Data Retention</h2>
+            <ul>
+              <li>
+                We retain your personal data for as long as necessary to achieve
+                the purposes for which they were collected or to meet our legal
+                obligations.
+              </li>
+              <li>
+                <strong>User accounts inactive for more than 3 years</strong> are
+                automatically deleted, and <strong>comments left by these users are
+                anonymized</strong> to preserve their confidentiality.
+              </li>
+              <li>
+                Data related to user accounts is therefore deleted or anonymized
+                3 years after the last activity. Likewise, sessions and other
+                technical data related to these accounts are deleted.
+              </li>
+            </ul>
+          </section>
 
-                    <section>
-                        <h2>5. Conservation des données</h2>
-                        <p>
-                            Nous conservons vos données personnelles aussi longtemps que nécessaire pour atteindre les objectifs pour lesquels elles ont été collectées ou pour satisfaire à nos obligations légales. Après cette période, vos données personnelles seront supprimées de manière sécurisée. Si une suppression complète n'est pas possible pour des raisons techniques, nous mettrons en œuvre des mesures appropriées pour empêcher toute utilisation ultérieure de ces données.
-                        </p>
-                    </section>
+          <section>
+            <h2>6. Data Security</h2>
+            <p>
+              We take the <strong>security of your data</strong> very seriously and implement
+              appropriate technical and organizational measures to protect your
+              <strong>personal data</strong> against loss, misuse, unauthorized access,
+              disclosure, alteration, or destruction.
+            </p>
+          </section>
 
-                    <section>
-                        <h2>6. Sécurité des données</h2>
-                        <p>
-                            Nous prenons la sécurité de vos données très au sérieux et mettons en place des mesures techniques et organisationnelles appropriées pour protéger vos données personnelles contre toute perte, utilisation abusive, accès non autorisé, divulgation, altération ou destruction.
-                        </p>
-                    </section>
+          <section>
+            <h2>7. Your Rights</h2>
+            <p>
+              In accordance with the <strong>General Data Protection Regulation (GDPR)</strong>,
+              you have the following rights:
+            </p>
+            <ul>
+              <li>
+                <strong>Access</strong> to the personal data we hold about you.
+              </li>
+              <li>
+                Request the <strong>rectification</strong> of your personal data if it is
+                incorrect.
+              </li>
+              <li>Request the <strong>deletion</strong> of your personal data.</li>
+              <li>Object to the <strong>processing</strong> of your personal data.</li>
+            </ul>
+            <p>
+              To exercise these rights, please contact us at the following email
+              address:
+              {info && (
+                <Link to="mailto:kaelacouture@gmail.com"> {info.email} </Link>
+              )}
+            </p>
+          </section>
 
-                    <section>
-                        <h2>7. Vos droits</h2>
-                        <p>
-                            Conformément au Règlement Général sur la Protection des Données (RGPD), vous disposez des droits suivants :
-                        </p>
-                        <ul>
-                            <li>Accéder aux données personnelles que nous détenons sur vous.</li>
-                            <li>Demander la rectification de vos données personnelles si elles sont incorrectes.</li>
-                            <li>Demander la suppression de vos données personnelles.</li>
-                            <li>Vous opposer au traitement de vos données personnelles.</li>
-                        </ul>
-                        <p>
-                            Pour exercer ces droits, veuillez nous contacter à l'adresse email suivante : 
-                            {info && 
-                            <Link to="mailto:kaelacouture@gmail.com"> {info.email} </Link>
-                            }
-                        </p>
-                    </section>
+          <section>
+            <h2>8. Modifications to the Privacy Policy</h2>
+            <p>
+              Kaela Couture reserves the right to modify this privacy policy at
+              any time. We will inform you of any changes via our website or
+              other appropriate means.
+            </p>
+          </section>
 
-                    <section>
-                        <h2>8. Modifications de la politique de confidentialité</h2>
-                        <p>
-                            Kaela Couture se réserve le droit de modifier cette politique de confidentialité à tout moment. Nous vous informerons de toute modification par le biais de notre site web ou par d'autres moyens appropriés.
-                        </p>
-                    </section>
-
-                    <section>
-                        <h2>9. Contact</h2>
-                        <p>
-                            Pour toute question concernant cette politique de confidentialité, vous pouvez nous contacter à l'adresse email suivante : 
-                            {info && 
-                            <Link to="mailto:kaelacouture@gmail.com"> {info.email} </Link>
-                            }
-                        </p>
-                    </section>
-                </article>
-
-            </main>
-            <Footer />
-        </>
-    );
+          <section>
+            <h2>9. Contact</h2>
+            <p>
+              For any questions regarding this privacy policy, you can contact
+              us at the following email address:
+              {info && (
+                <Link to="mailto:kaelacouture@gmail.com"> {info.email} </Link>
+              )}
+            </p>
+          </section>
+        </article>
+      </main>
+      <Footer />
+    </>
+  );
 };
 
 export default PrivacyPolicy;

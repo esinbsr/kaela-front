@@ -2,11 +2,11 @@
   @include flexbox(space-between, center, row, wrap);
 
   .collection-item {
-    width: 35%; // Chaque item prend 30% de la largeur du conteneur
+    width: 35%; 
     position: relative;
 
     img {
-      width: 100%; // L'image prend toute la largeur de son conteneur
+      width: 100%;
       aspect-ratio: 9/8;
       object-fit: cover;
       object-position: top;
@@ -32,10 +32,11 @@
   }
 }
 
+/* Responsive - Tablet */
 @media screen and (max-width: 768px) {
   .home__collection-image {
     @include flexbox(null, center, column, null);
-    .collection-item  {
+    .collection-item {
       width: 50%; 
       margin-bottom: 50px;
     }
@@ -43,24 +44,26 @@
     .home__collection-description {
       h3 {
         margin-top: 15px;
-        // font-size:3rem ;
       }
 
       p {
-       margin: 10px 0 15px 0;
+        margin: 10px 0 15px 0;
       }
+
       a {
         align-self: center;
       }
     }
   }
 }
+
+/* Responsive - Mobile */
 @media screen and (max-width: 480px) {
   .home__collection-image {
+    @include flexbox(center, center, column, null);
+
     .collection-item {
-      width: 80%; 
+      width: 100%;
     }
-
   }
-
 }

@@ -7,7 +7,8 @@ import {
 } from "../../../actions/productAction";
 import { getProductCategories } from "../../../actions/categoryAction";
 import { getSection } from "../../../actions/sectionAction";
-import Message from "../../../components/utils/Message";
+import { toast, ToastContainer } from "react-toastify"; 
+import "react-toastify/dist/ReactToastify.css"; 
 
 const AdminAddProduct = () => {
   const [productName, setProductName] = useState("");
@@ -43,15 +44,18 @@ const AdminAddProduct = () => {
 
   useEffect(() => {
     if (message && !error) {
-      // Réinitialisation des champs du formulaire après l'ajout réussi du produit
+      toast.success(message);
+
       setProductName("");
       setProductDescription("");
       setProductCategory(categories[0].id || "");
       setProductSection(section[0].id || "");
       setProductImage(null);
-      fileInputRef.current.value = ""; // Réinitialisation de l'input file
+      fileInputRef.current.value = "";
 
-      dispatch(getProduct()); // Rafraîchissement de la liste des produits
+      dispatch(getProduct()); 
+    } else if (error) {
+      toast.error(error);
     }
   }, [message, error, dispatch, categories, section]);
 
@@ -72,10 +76,10 @@ const AdminAddProduct = () => {
     <>
       <form onSubmit={handleSubmit} className="form">
         <fieldset>
-          <legend>Product Details</legend>
+          <legend> Add a new product</legend>
 
           <div className="form__group">
-            <label htmlFor="productName">Name of product:</label>
+            <label htmlFor="productName">Name of product</label>
             <input
               id="productName"
               type="text"
@@ -87,7 +91,7 @@ const AdminAddProduct = () => {
           </div>
 
           <div className="form__group">
-            <label htmlFor="productDescription">Description:</label>
+            <label htmlFor="productDescription">Description</label>
             <textarea
               id="productDescription"
               name="productDescription"
@@ -98,7 +102,7 @@ const AdminAddProduct = () => {
           </div>
 
           <div className="form__group">
-            <label htmlFor="productCategory">Category:</label>
+            <label htmlFor="productCategory">Category</label>
             <select
               id="productCategory"
               name="productCategory"
@@ -115,7 +119,7 @@ const AdminAddProduct = () => {
           </div>
 
           <div className="form__group">
-            <label htmlFor="productSection">Section:</label>
+            <label htmlFor="productSection">Section</label>
             <select
               id="productSection"
               name="productSection"
@@ -132,7 +136,7 @@ const AdminAddProduct = () => {
           </div>
 
           <div className="form__group">
-            <label htmlFor="productImage">Image:</label>
+            <label htmlFor="productImage">Image</label>
             <input
               type="file"
               id="productImage"
@@ -149,8 +153,7 @@ const AdminAddProduct = () => {
         </fieldset>
       </form>
 
-      {message && <Message message={message} type="success" />}
-      {error && <Message message={error} type="error" />}
+      <ToastContainer />
     </>
   );
 };

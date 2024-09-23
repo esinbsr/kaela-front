@@ -8,16 +8,9 @@
   address {
     font-style: normal;
   }
-
-  h1 {
-    color: $main-color;
-    // font-size: 2rem;
-    margin-bottom: 1.5rem;
-  }
   
   h2 {
     color: $main-color;
-    font-size: 1.5rem;
     margin-top: 2rem;
     margin-bottom: 1rem;
     border-bottom: 2px solid $main-color;
@@ -26,15 +19,13 @@
 
   p {
     color: $main-color;
-    font-size: 1rem;
     line-height: 1.6;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.2rem;
   }
 
   ul {
     margin: 1rem 0;
     padding-left: 1.5rem;
-    list-style-type: disc;
 
     li {
       margin-bottom: 0.5rem;

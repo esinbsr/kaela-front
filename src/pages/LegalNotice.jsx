@@ -21,73 +21,71 @@ const LegalNotice = () => {
     return (
         <>
             <main className="legal-information">
-                    <h1>Mentions Légales</h1>
+                    <h1>Legal Notice</h1>
                 <article>
                     <section>
-                        <h2>1. Éditeur du site</h2>
-                        <p><strong>Nom de l'entreprise :</strong> Kaela Couture</p>
-                        <p><strong>Adresse :</strong> {info &&info.address}</p>
-                      
-                        <p><strong>Téléphone :</strong>+{info &&info.mobile}</p>
-                        <p><strong>Email :</strong>{info &&info.email}</p>
-                        <p><strong>Directrice de la publication :</strong> Esin Baser</p>
-
+                        <h2>1. Website Publisher</h2>
+                        <p><strong>Company Name:</strong> Kaela Couture</p>
+                        <p><strong>Address:</strong> {info && info.address}</p>
+                        <p><strong>Phone:</strong> +{info && info.mobile}</p>
+                        <p><strong>Email:</strong> {info && info.email}</p>
+                        <p><strong>Publication Director:</strong> Esin Baser</p>
                     </section>
 
                     <section>
-                        <h2>2. Hébergement du site</h2>
-                        <p><strong>Nom de l'hébergeur :</strong> Netlify</p>
+                        <h2>2. Website Hosting</h2>
+                        <p><strong>Hosting Provider:</strong> Netlify</p>
                         <address>
-                            <p><strong>Adresse :</strong> 2325 3rd Street, Suite 296, San Francisco, CA 94107, USA</p>
-                            <p><strong>Téléphone :</strong> Non applicable</p>
-                            <p><strong>Email :</strong> <a href="mailto:support@netlify.com">support@netlify.com</a></p>
+                            <p><strong>Address:</strong> 2325 3rd Street, Suite 296, San Francisco, CA 94107, USA</p>
+                            <p><strong>Phone:</strong> Not applicable</p>
+                            <p><strong>Email:</strong> <a href="mailto:support@netlify.com">support@netlify.com</a></p>
                         </address>
                     </section>
 
                     <section>
-                        <h2>3. Propriété intellectuelle</h2>
+                        <h2>3. Intellectual Property</h2>
                         <p>
-                            Le site et chacun des éléments qui le composent, notamment mais non exclusivement, les textes, images, vidéos, photographies, marques, logos, sont la propriété exclusive de Kaela Couture. Toute reproduction, représentation, diffusion ou rediffusion, totale ou partielle, du contenu de ce site sur quelque support ou par tout procédé que ce soit sans l’autorisation expresse et préalable de Kaela Couture est interdite.
+                            The website and each of its elements, including but not limited to texts, images, videos, photographs, <strong>trademarks</strong>, and <strong>logos</strong>, are the exclusive property of <strong>Kaela Couture</strong>. Any reproduction, representation, distribution, or redistribution, in whole or in part, of the content of this site on any medium or by any process whatsoever, without the express prior authorization of Kaela Couture, is prohibited.
                         </p>
                     </section>
 
                     <section>
-                        <h2>4. Protection des données personnelles</h2>
-                        <p><strong>Responsable du traitement des données :</strong> Kaela Demirci</p>
-                        <p><strong>Email :</strong> { info && info.email}</p>
+                        <h2>4. Personal Data Protection</h2>
+                        <p><strong>Data Controller:</strong> <strong>Kaela Demirci</strong></p>
+                        <p><strong>Email:</strong> {info && <strong>{info.email}</strong>}</p>
                         <p>
-                            Lorsque vous créez un compte auprès de Kaela Couture, nous collectons des informations qui vous identifient, telles que votre nom, votre nom d'utilisateur, votre adresse e-mail et votre mot de passe. Ces données sont collectées et traitées conformément aux lois en vigueur. Pour plus de détails sur la gestion de vos données, veuillez consulter notre <Link to="https://www.notion.so/lien-vers-politique">Politique de Confidentialité</Link>.
+                            When you create an account with Kaela Couture, we collect information that identifies you, such as your name, username, email address, and password. These data are collected and processed in accordance with applicable laws. For more details on how we manage your data, please consult our <Link to="/privacyPolicy">Privacy Policy</Link>.
                         </p>
                         <p>
-                            Conformément au Règlement Général sur la Protection des Données (RGPD), vous disposez d'un droit d'accès, de rectification, d'opposition et de suppression des données personnelles vous concernant. Pour exercer ces droits, veuillez contacter Kaela Couture à l'adresse email mentionnée ci-dessus. Pour plus d'informations sur la protection de vos données personnelles, vous pouvez consulter le site officiel de la CNIL : <a href="https://www.cnil.fr">www.cnil.fr</a>.
-                        </p>
-                    </section>
-
-                    <section>
-                        <h2>5. Conditions d'utilisation</h2>
-                        <p>
-                            L'utilisation de ce site est régie par les lois en vigueur en France. En accédant à ce site, l'utilisateur accepte les présentes conditions d'utilisation. Kaela Couture se réserve le droit de modifier ces conditions à tout moment sans préavis.
+                            In accordance with the General Data Protection Regulation (GDPR), you have the right to access, rectify, oppose, and delete <strong>personal data</strong> concerning you. To exercise these rights, please contact Kaela Couture at the email address mentioned above. For more information on the protection of your personal data, you can visit the official CNIL website: <a href="https://www.cnil.fr">www.cnil.fr</a>.
                         </p>
                     </section>
 
                     <section>
-                        <h2>6. Limitation de responsabilité</h2>
+                        <h2>5. Terms of Use</h2>
                         <p>
-                            Les informations contenues sur ce site sont aussi précises que possible et le site est périodiquement remis à jour, mais peut toutefois contenir des inexactitudes, des omissions ou des lacunes. Si vous constatez une lacune, erreur ou ce qui paraît être un dysfonctionnement, merci de bien vouloir le signaler par email, à l'adresse <Link to="mailto:kaelacouture@gmail.com"> {info &&info.email}</Link>.
+                            The use of this site is governed by the laws in force in France. By accessing this site, the user accepts the present terms of use. <strong>Kaela Couture</strong> reserves the right to modify these conditions at any time without notice.
                         </p>
                     </section>
 
                     <section>
-                        <h2>7. Conservation des données</h2>
+                        <h2>6. Limitation of Liability</h2>
                         <p>
-                            Nous conservons vos données personnelles pendant une période nécessaire pour atteindre les objectifs pour lesquels elles ont été collectées ou pour satisfaire à nos obligations légales. La durée de conservation est déterminée en fonction de la nature des données, des besoins opérationnels, et des exigences légales applicables. Après l'expiration de cette période, vos données personnelles seront supprimées de manière sécurisée. Si une suppression complète n'est pas possible pour des raisons techniques, nous mettrons en œuvre des mesures appropriées pour empêcher toute utilisation ultérieure de ces données.
+                            The information contained on this site is as accurate as possible, and the site is periodically updated, but it may still contain inaccuracies, omissions, or gaps. If you notice any missing information, error, or what appears to be a malfunction, please report it by email to <Link to="mailto:kaelacouture@gmail.com"> {info && info.email}</Link>.
+                        </p>
+                    </section>
+
+                    <section>
+                        <h2>7. Data Retention</h2>
+                        <p>
+                            We retain your personal data for as long as necessary to achieve the purposes for which they were collected or to meet our legal obligations. The retention period is determined based on the nature of the data, operational needs, and applicable legal requirements. After the expiration of this period, your personal data will be securely deleted. If complete deletion is not technically possible, we will implement appropriate measures to prevent any further use of this data.
                         </p>
                     </section>
 
                     <section>
                         <h2>8. Contact</h2>
                         <p>
-                            Pour toute question concernant les mentions légales du site, vous pouvez nous contacter à : <Link to="mailto:kaelacouture@gmail.com">{info &&info.email}</Link>.
+                            For any questions regarding the legal notices of the site, you can contact us at: <Link to="mailto:kaelacouture@gmail.com">{info && info.email}</Link>.
                         </p>
                     </section>
                 </article>

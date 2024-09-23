@@ -44,11 +44,10 @@ const HomeImageList = ({ start, end, additionalClass }) => {
     return (
         <div className={`${additionalClass || ''}`}>
             {!isEmpty(filteredProducts) ? (
-                filteredProducts.map((product, index) => (
+                filteredProducts.map((product) => (
                     <HomeHeaderImageCard
                         key={product.id}
                         product={product}
-                        isLargeImage={index === 1}
                         userRole={userRole}
                         onAdminClick={handleAdminClick}
                     />

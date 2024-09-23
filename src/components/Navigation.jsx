@@ -15,7 +15,6 @@ const Navigation = () => {
   return (
     <header>
       <nav className="navigation">
-        {/* Logo */}
         <NavLink to="/" className="logo_kaela">
           <Logo />
         </NavLink>

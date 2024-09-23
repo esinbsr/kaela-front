@@ -1,18 +1,29 @@
 .footer {
-  margin-top: 20px;
-  margin-bottom: 10px;
+  margin-top: 3rem;
+  margin-bottom: 1rem;
   padding: 45px;
   background-color: $main-color;
   color: white;
   border-radius: 8px 8px 0 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2rem;
-  justify-content: center;
+
+  .footer__container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+
+  .testo {
+    p {
+      margin-bottom: 0.9rem;
+    }
+  }
 
   .footer__column {
-    flex: 1 1 250px;
-    max-width: 100%;
+    flex: 1 1 30%;
+    @include flexbox(null,flex-start, column);
+
+    text-align: left;
 
     h3 {
       margin-bottom: 1rem;
@@ -20,13 +31,10 @@
     }
 
     a {
-      margin-top: 1rem;
-      display: block;
+      margin-bottom: 1rem;
       color: white;
-
-      &:hover {
-        text-decoration: underline;
-      }
+      text-align: left;
+      text-decoration: underline;
     }
 
     .line {
@@ -34,50 +42,95 @@
     }
   }
 
-  // Section contact avec icônes
   .footer__contact-item {
     display: flex;
-    margin-top: 1rem;
+    margin-bottom: 1rem;
 
     svg {
-      margin-right: 10px;
+      margin-right: 0.8rem;
       font-size: 1.2rem;
       color: white;
     }
   }
 
-
   .footer__line {
     width: 100%;
-    height: 1px; 
-    background-color: white;
-    margin-top: 20px;
+    height: 1px;
+    background-color: rgb(207, 205, 205);
+    margin-top: 2rem;
   }
 }
 
-
 .footer__copyright {
   display: flex;
-  flex-direction: column;
-    @include flexbox(center, center, null);
+  margin-top: 2rem;
+  @include flexbox(space-around, center);
+
   p {
-    margin-bottom: 1rem;
-    color: white;
+    font-size: 0.9rem;
   }
 
-
   .logo {
+    align-items: center; 
     animation: none !important;
+    display: block;
 
     &__kaela {
-      animation: none !important;
       color: white;
       font-size: 1.4rem;
+      animation: none !important;
     }
 
     &__couture {
-      font-size: 1rem;
+      font-size: 0.9rem;
       color: white;
+      animation: none !important;
+      opacity: 1 !important;
+    }
+  }
+}
+
+/* Responsive - Tablet */
+@media screen and (max-width: 768px) {
+  .footer {
+    max-width: 80%;
+    margin: 0 auto;
+    padding: 30px;
+  }
+
+  .footer__container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer__column {
+    width: 100%;
+    margin-bottom: 0.9rem;
+    text-align: left;
+  }
+
+  .footer__copyright {
+    align-items: center; 
+    .logo {
+      margin-bottom: 1.5rem;
+    }
+    flex-direction: column;
+  }
+}
+
+/* Responsive - Mobile */
+@media screen and (max-width: 480px) {
+  .footer {
+    max-width: 100%;
+  }
+
+  .footer__column {
+    margin-bottom: 0rem;
+  }
+
+  .footer__copyright {
+    p {
+      text-align: center;
     }
   }
 }

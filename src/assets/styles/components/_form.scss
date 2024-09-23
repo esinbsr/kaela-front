@@ -1,8 +1,10 @@
 .form {
+  background-color: white;
   padding: 2rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  margin-top: 2rem;
-  margin-bottom: 2rem;
+  border-radius: 8px;
+  margin: 2rem auto;
+  max-width: 100%;
+  overflow-x: auto;
 
   fieldset {
     border: none;
@@ -10,8 +12,8 @@
 
   legend {
     text-align: center;
-    font-size: 1.3rem;
     margin-bottom: 40px;
+    font-family: 'Montserrat SemiBold';
   }
 
   .form__group {
@@ -21,6 +23,7 @@
 
     label {
       align-self: center;
+      font-size: 1.1rem;
     }
 
     input,
@@ -28,14 +31,10 @@
     select {
       background-color: #ffffff;
       padding: 0.5rem;
-      border: 1px solid #ccc;
+      border: 1px solid $main-color;
       border-radius: 4px;
       width: 100%;
       outline: none;
-
-      &:focus {
-        border-color: $main-color;
-      }
     }
 
     textarea {
@@ -49,13 +48,10 @@
     grid-template-columns: 1fr 2fr;
 
     button {
-      @include buttonSuqare(white, #2c4548);
-
-      & {
-        grid-column: 2 / 3;
-        justify-self: start;
-        cursor: pointer;
-      }
+      grid-column: 2 / 3;
+      justify-self: start;
+      cursor: pointer;
+      @include buttonSuqare(white, $main-color);
 
       &:hover {
         background-color: darken(#2c4548, 10%);
@@ -66,5 +62,62 @@
   img {
     width: 150px;
     margin-bottom: 1rem;
+  }
+}
+
+/* Responsive - Tablet */
+@media (max-width: 1024px) {
+  .form {
+    .form__group {
+      grid-template-columns: 1fr;
+    }
+
+    .form__button {
+      grid-template-columns: 1fr;
+      justify-items: center;
+    }
+  }
+
+  .form__group {
+    label {
+      margin-bottom: 0.4rem;
+    }
+  }
+
+  .form__button {
+    button {
+      grid-column: 1 !important;
+      justify-self: center !important;
+    }
+  }
+}
+
+/* Responsive - Mobile */
+@media (max-width: 768px) {
+  .form {
+    padding: 1rem;
+
+    .form__group {
+      margin-bottom: 1rem;
+    }
+  }
+}
+
+/* Responsive - Small Mobile */
+@media (max-width: 480px) {
+  .form {
+    padding: 1.5em;
+
+    .form__group {
+      select {
+        color: black;
+      }
+    }
+
+    input,
+    textarea,
+    select {
+      border: 1px solid $main-color !important;
+    }
   }
 }

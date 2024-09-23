@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { addUser, resetMessages } from "../actions/userAction";
-import Message from "../components/utils/Message";
+import { toast, ToastContainer } from "react-toastify"; 
+import 'react-toastify/dist/ReactToastify.css'; 
 import Footer from "../components/Footer";
 
 const SignUp = () => {
@@ -26,19 +27,27 @@ const SignUp = () => {
 
   // Handle form submission
   const handleSubmit = (e) => {
-    e.preventDefault(); // Prevent default form submission behavior
-    dispatch(resetMessages()); // Clear previous messages before submission
-    dispatch(addUser({ username, email, password })); // Dispatch the addUser action with form data
+    e.preventDefault(); 
+    dispatch(resetMessages()); 
+    dispatch(addUser({ username, email, password }));
   };
 
   // Redirect to the login page after successful signup
   useEffect(() => {
     if (success) {
+      toast.success("Sign up successful! Redirecting to login...");
       setTimeout(() => {
-        navigate("/login"); // Navigate to the login page after a 2 second delay
+        navigate("/login"); 
       }, 2000);
     }
   }, [success, navigate]);
+
+  // Show error notification if sign up fails
+  useEffect(() => {
+    if (error) {
+      toast.error(error); 
+    }
+  }, [error]);
 
   return (
     // Main container for the signup form
@@ -54,8 +63,8 @@ const SignUp = () => {
           onChange={(e) => setUsername(e.target.value)}
           name="username"
           value={username}
-          placeholder="Choose a unique username" // Placeholder example for username
-          aria-required="true" // Indicates that the username field is required
+          placeholder="Choose a unique username" 
+          aria-required="true" 
         />
         <label htmlFor="email">Email</label>
         <input
@@ -64,8 +73,8 @@ const SignUp = () => {
           onChange={(e) => setEmail(e.target.value)}
           name="email"
           value={email}
-          placeholder="example@domain.com" // Placeholder example for email
-          aria-required="true" // Indicates that the email field is required
+          placeholder="example@domain.com"
+          aria-required="true"
         />
         <label htmlFor="password">Password</label>
         <input
@@ -74,8 +83,8 @@ const SignUp = () => {
           onChange={(e) => setPassword(e.target.value)}
           name="password"
           value={password}
-          placeholder="Create a strong password" // Placeholder example for password
-          aria-required="true" // Indicates that the password field is required
+          placeholder="Create a strong password" 
+          aria-required="true"
         />
         <button type="submit">Sign Up</button>
         <p>
@@ -85,12 +94,11 @@ const SignUp = () => {
           </Link>
         </p>
       </form>
-      {error && <Message message={error} type="error" />}
+      <ToastContainer />
     </section>
     <Footer/>
     </>
   );
-
 };
 
 export default SignUp;
