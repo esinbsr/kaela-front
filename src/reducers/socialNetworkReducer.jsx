@@ -8,8 +8,7 @@ import {
   GET_SOCIAL_NETWORK_ERROR,
   GET_SOCIAL_NETWORK_SUCCESS,
   UPDATE_SOCIAL_NETWORK_ERROR,
-  UPDATE_SOCIAL_NETWORK_SUCCESS,
-  RESET_SOCIAL_NETWORK_MESSAGES,
+  UPDATE_SOCIAL_NETWORK_SUCCESS
 } from "../actions/socialNetworkAction";
 
 const initialState = {
@@ -66,13 +65,6 @@ const socialNetworkReducer = (state = initialState, action) => {
         message: action.message,
         error: "",
       };
-    case RESET_SOCIAL_NETWORK_MESSAGES:
-      return {
-        ...state,
-        message: "",
-        error: "",
-      };
-
     case GET_SOCIAL_NETWORK_ERROR:
     case GET_SOCIAL_NETWORK_BY_ID_ERROR:
     case ADD_SOCIAL_NETWORK_ERROR:

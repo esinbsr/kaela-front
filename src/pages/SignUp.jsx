@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { addUser, resetMessages } from "../actions/userAction";
+import { addUser } from "../actions/userAction";
 import { toast, ToastContainer } from "react-toastify"; 
 import 'react-toastify/dist/ReactToastify.css'; 
 import Footer from "../components/Footer";
@@ -21,14 +21,12 @@ const SignUp = () => {
 
   // Reset messages and states when the component mounts
   useEffect(() => {
-    dispatch(resetMessages());
     window.scrollTo(0, 0);
   }, [dispatch]);
 
   // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault(); 
-    dispatch(resetMessages()); 
     dispatch(addUser({ username, email, password }));
   };
 

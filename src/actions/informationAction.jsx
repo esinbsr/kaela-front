@@ -1,5 +1,4 @@
-import axios from 'axios';
-import { API_URL } from './serverRequest';
+import apiClient from "./api/apiClient";
 
 export const ADD_INFORMATION_SUCCESS = 'ADD_INFORMATION_SUCCESS';
 export const ADD_INFORMATION_ERROR = 'ADD_INFORMATION_ERROR';
@@ -16,12 +15,10 @@ export const DELETE_INFORMATION_ERROR = 'DELETE_INFORMATION_ERROR';
 export const FETCH_SINGLE_INFORMATION_SUCCESS = 'FETCH_SINGLE_INFORMATION_SUCCESS';
 export const FETCH_SINGLE_INFORMATION_ERROR = 'FETCH_SINGLE_INFORMATION_ERROR';
 
-export const RESET_INFORMATION_MESSAGES = 'RESET_INFORMATION_MESSAGES';
-
 export const getInformation = () => {
     return async (dispatch) => {
         try {
-            const response = await axios.get(`${API_URL}getInformation`);
+            const response = await apiClient.get("getInformation");
             const message = response.data.message;
             
             if (response.data.success) {
@@ -45,7 +42,7 @@ export const getInformation = () => {
 export const getInformationById = (informationId) => {
     return async (dispatch) => {
         try {
-            const response = await axios.get(`${API_URL}getInformationById/${informationId}`); // ${informationId} passe l'ID spécifique de l'information que je veux récupérer du serveur. j'utilises l'ID pour déclencher l'action getInformationById lorsque le composant est monté ou lorsque l'ID change
+            const response = await apiClient.get(`getInformationById/${informationId}`); // ${informationId} passe l'ID spécifique de l'information que je veux récupérer du serveur. j'utilises l'ID pour déclencher l'action getInformationById lorsque le composant est monté ou lorsque l'ID change
             const message = response.data.message;
 
             if (response.data.success) {
@@ -70,11 +67,7 @@ export const getInformationById = (informationId) => {
 export const addInformation = (information) => {
     return async (dispatch) => {
         try {
-            const response = await axios.post(`${API_URL}addInformation`, information, {
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            });
+            const response = await apiClient.post(`addInformation`, information);
             const message = response.data.message;
 
             if(response.data.success) {
@@ -99,11 +92,7 @@ export const addInformation = (information) => {
 export const updateInformation = (information) => {
     return async (dispatch) => {
         try {
-            const response = await axios.post(`${API_URL}updateInformation`, information, {
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            });
+            const response = await apiClient.post(`updateInformation`, information);
             const message = response.data.message;
             if (response.data.success) {
             dispatch({
@@ -126,11 +115,7 @@ export const updateInformation = (information) => {
 export const deleteInformation = (informationId) => {
     return async (dispatch) => {
         try {
-            const response = await axios.post(`${API_URL}deleteInformation`, { informationId }, {
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            });
+            const response = await apiClient.post(`deleteInformation`, { informationId });
             const message = response.data.message; 
             if (response.data.success) {
             dispatch({
@@ -149,7 +134,3 @@ export const deleteInformation = (informationId) => {
         }
     };
 };
-
-export const resetInformationMessages = () => ({
-    type: RESET_INFORMATION_MESSAGES,
-});

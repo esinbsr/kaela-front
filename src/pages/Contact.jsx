@@ -1,17 +1,20 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPhone, faLocationDot, faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { getInformation } from "../actions/informationAction";
-import { isEmpty } from "../components/utils/isEmpty";
+import { contact } from "../actions/contactAction";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPhone, faLocationDot, faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import Map from "../components/utils/Map";
-// import SocialNetworkIcon from "../components/utils/SocialNetworkIcon";
 import Footer from "../components/Footer";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Contact = () => {
   const dispatch = useDispatch();
   const information = useSelector((state) => state.information.information);
+  const success = useSelector((state) => state.contact.message); // Message de succès
+  const error = useSelector((state) => state.contact.error);     // Message d'erreur
+
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -19,11 +22,11 @@ const Contact = () => {
     window.scrollTo(0, 0);
   }, [dispatch]);
 
-  const info = !isEmpty(information) ? information[0] : null;
+  const info = information.length > 0 ? information[0] : null;
 
   useEffect(() => {
     if (info) {
-      setLoading(false); // Les données (tel, adresse, carte) sont prêtes à être affichées, donc on arrête le chargement
+      setLoading(false);
     }
   }, [info]);
 
@@ -42,35 +45,27 @@ const Contact = () => {
     });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-
-    try {
-      const response = await axios.post(
-        "http://localhost:8888/travail-perso/kaela-couture/contact",
-        formData,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      setFormData({
-        email: "",
-        object: "",
-        message: "",
-        responseMessage: response.data.message || "No message returned",
-      });
-    } catch (error) {
-      console.error("Error submitting form:", error);
-    }
+    dispatch(contact(formData));
   };
+
+  // Affichage des messages de succès ou d'erreur avec Toastify et réinitialisation des champs
+  useEffect(() => {
+    if (success) {
+      toast.success(success); // Afficher le toast de succès
+      setFormData({ email: "", object: "", message: "" }); // Réinitialiser les champs
+    }
+
+    if (error) {
+      toast.error(error); // Afficher le toast d'erreur
+    }
+  }, [success, error]);
 
   return (
     <>
+      <ToastContainer />
       <div className="contact">
-        {/* <SocialNetworkIcon /> */}
         <section className="contact__form">
           <form onSubmit={handleSubmit}>
             <fieldset>
@@ -80,7 +75,7 @@ const Contact = () => {
               <label htmlFor="email">Email</label>
               <input
                 id="email"
-                type="text"
+                type="email"
                 name="email"
                 value={email}
                 onChange={handleChange}
@@ -114,8 +109,6 @@ const Contact = () => {
           <h2>Contact Details</h2>
           <div className="line"></div>
 
-          
-
           <div className="contact__data">
             <FontAwesomeIcon icon={faPhone} />
             {loading ? (
@@ -123,7 +116,7 @@ const Contact = () => {
                 Loading the phone number...
               </p>
             ) : (
-              <p>+{info.mobile}</p>
+              <p>+{info?.mobile}</p>
             )}
           </div>
 
@@ -134,21 +127,20 @@ const Contact = () => {
                 Loading email...
               </p>
             ) : (
-              <p>{info.email}</p>
+              <p>{info?.email}</p>
             )}
           </div>
 
           <div className="contact__data localisation">
-          <FontAwesomeIcon icon={faLocationDot} />
+            <FontAwesomeIcon icon={faLocationDot} />
             {loading ? (
               <p role="alert" aria-live="assertive">
-               Loading the address...
+                Loading the address...
               </p>
             ) : (
-              <p>{info.address}</p>
+              <p>{info?.address}</p>
             )}
           </div>
-
 
           {loading ? (
             <p role="alert" aria-live="assertive">

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addInformation, resetInformationMessages } from "../../../actions/informationAction";
+import { addInformation} from "../../../actions/informationAction";
 import { toast, ToastContainer } from "react-toastify"; 
 import "react-toastify/dist/ReactToastify.css"; 
 
@@ -13,11 +13,6 @@ const AdminAddInformation = () => {
   const dispatch = useDispatch();
   const message = useSelector((state) => state.information.message);
   const error = useSelector((state) => state.information.error);
-
-
-  useEffect(() => {
-    dispatch(resetInformationMessages());
-  }, [dispatch]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

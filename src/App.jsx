@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
@@ -19,160 +19,141 @@ import AdminAddCategory from "./pages/admin/categories/AdminAddCategory";
 import AdminUpdateCategory from "./pages/admin/categories/AdminUpdateCategory";
 import AdminSocialNetwork from "./pages/admin/socialNetworks/AdminSocialNetwork";
 import AdminAddSocialNetwork from "./pages/admin/socialNetworks/AdminAddSocialNetwork";
-import Logout from "./components/Logout";
 import AdminUpdateSocialNetwork from "./pages/admin/socialNetworks/AdminUpdateSocialNetwork";
 import ProductDetail from "./pages/ProductDetail";
-import { useDispatch } from "react-redux";
-import { useEffect } from "react";
-import { verifyToken } from "./actions/userAction";
 import Accessibility from "./components/utils/Accessibility";
 import AdminUpdateInformation from "./pages/admin/informations/AdminUpdateInformation";
 import LegalNotice from "./pages/LegalNotice";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
+import ProtectedRoutes from "./components/ProtectedRoutes";
+import Logout from "./components/Logout";
 
-const ProtectedRoute = ({ children }) => {
-  const userRole = localStorage.getItem("role");
-  return userRole === "admin" ? children : <Navigate to="/" />; //Si la condition est vraie, le composant retourne children, donc les composants enfants sont rendus
-};
 
 const App = () => {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    
-    if (token) {
-      dispatch(verifyToken(token));
-    }
-  }, [dispatch]);
   return (
     <div>
       <BrowserRouter>
         <Navigation />
-      
         <Accessibility />
         <Routes>
           <Route path="*" element={<Home />} />
           <Route path="/" element={<Home />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/logout" element={<Logout />} /> 
           <Route path="/contact" element={<Contact />} />
           <Route path="/collection" element={<Collection />} />
           <Route path="/eveningDresses" element={<EveningDresses />} />
           <Route path="/latestCollection" element={<LatestCollection />} />
           <Route path="/aboutMe" element={<AboutMe />} />
-          <Route path="/logout" element={<Logout />} />
           <Route path="/legalNotice" element={<LegalNotice />} />
           <Route path="/privacyPolicy" element={<PrivacyPolicy />} />
-          <Route
-            path="/productDetail/:productDetailId"
-            element={<ProductDetail />}
-          />
+          <Route path="/productDetail/:productDetailId" element={<ProductDetail />}/>
 
           {/* Routes Admin protégées */}
           <Route
             path="/admin"
             element={
-              <ProtectedRoute>
+              <ProtectedRoutes>
                 <AdminNavigation />
-              </ProtectedRoute>
+               </ProtectedRoutes>
             }
           />
           <Route
-            path="/adminProduct"
+            path="/product"
             element={
-              <ProtectedRoute>
+              <ProtectedRoutes>
                 <AdminProduct />
-              </ProtectedRoute>
+              </ProtectedRoutes>
             }
           />
           <Route
-            path="/adminAddProduct"
+            path="/addProduct"
             element={
-              <ProtectedRoute>
+              <ProtectedRoutes>
                 <AdminAddProduct />
-              </ProtectedRoute>
+              </ProtectedRoutes>
             }
           />
           <Route
-            path="/adminUpdateProduct/:productId"
+            path="/updateProduct/:productId"
             element={
-              <ProtectedRoute>
+              <ProtectedRoutes>
                 <AdminUpdateProduct />
-              </ProtectedRoute>
+              </ProtectedRoutes>
             }
           />
           <Route
             path="/adminInformation"
             element={
-              <ProtectedRoute>
+              <ProtectedRoutes>
                 <AdminInformation />
-              </ProtectedRoute>
+              </ProtectedRoutes>
             }
           />
           <Route
             path="/adminAddInformation"
             element={
-              <ProtectedRoute>
+              <ProtectedRoutes>
                 <AdminAddInformation />
-              </ProtectedRoute>
+              </ProtectedRoutes>
             }
           />
           <Route
             path="/adminUpdateInformation/:informationId"
             element={
-              <ProtectedRoute>
+              <ProtectedRoutes>
                 <AdminUpdateInformation />
-              </ProtectedRoute>
+              </ProtectedRoutes>
             }
           />
 
           <Route
             path="/adminCategory"
             element={
-              <ProtectedRoute>
+              <ProtectedRoutes>
                 <AdminCategory />
-              </ProtectedRoute>
+              </ProtectedRoutes>
             }
           />
           <Route
             path="/adminAddCategory"
             element={
-              <ProtectedRoute>
+              <ProtectedRoutes>
                 <AdminAddCategory />
-              </ProtectedRoute>
+               </ProtectedRoutes>
             }
           />
           <Route
             path="/adminUpdateCategory/:categoryId"
             element={
-              <ProtectedRoute>
+              <ProtectedRoutes>
                 <AdminUpdateCategory />
-              </ProtectedRoute>
+              </ProtectedRoutes>
             }
           />
           <Route
             path="/adminSocialNetwork"
             element={
-              <ProtectedRoute>
+              <ProtectedRoutes>
                 <AdminSocialNetwork />
-              </ProtectedRoute>
+              </ProtectedRoutes>
             }
           />
           <Route
             path="/adminAddSocialNetwork"
             element={
-              <ProtectedRoute>
+              <ProtectedRoutes>
                 <AdminAddSocialNetwork />
-              </ProtectedRoute>
+              </ProtectedRoutes>
             }
           />
           <Route
             path="/adminUpdateSocialNetwork/:socialNetworkId"
             element={
-              <ProtectedRoute>
+              <ProtectedRoutes>
                 <AdminUpdateSocialNetwork />
-              </ProtectedRoute>
+              </ProtectedRoutes>
             }
           />
         </Routes>

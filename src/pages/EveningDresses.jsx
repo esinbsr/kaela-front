@@ -2,6 +2,7 @@ import EveningLatestDescriptionList from "../components/EveningLatestDescription
 import EveningLatestImageList from "../components/EveningLatestImageList";
 import Footer from "../components/Footer";
 import { useEffect } from "react";
+import { Helmet } from "react-helmet-async";
 
 // Define section identifiers to display only images in that section
 const SECTIONS = {
@@ -19,6 +20,11 @@ const EveningDresses = () => {
 }, [])
   return (
     <>
+    <Helmet>
+    <title>Elegant Evening Dresses | Kaela Couture</title>
+    <meta name="description" content="Discover our exclusive collection of evening dresses at Kaela Couture. Elegant and refined designs for all your special occasions." />
+
+    </Helmet>
     <main className="evening-latest">
       {/* Component to display the description of the evening dresses */}
       <EveningLatestDescriptionList categorySlug="evening-dresses" />

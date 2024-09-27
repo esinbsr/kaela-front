@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addSocialNetwork, resetSocialNetworkMessages } from "../../../actions/socialNetworkAction";
+import { addSocialNetwork } from "../../../actions/socialNetworkAction";
 import { toast, ToastContainer } from "react-toastify"; 
 import "react-toastify/dist/ReactToastify.css"; 
 
@@ -12,11 +12,6 @@ const AdminAddSocialNetwork = () => {
 
   const message = useSelector((state) => state.socialNetwork.message);
   const error = useSelector((state) => state.socialNetwork.error);
-
-
-  useEffect(() => {
-    dispatch(resetSocialNetworkMessages());
-  }, [dispatch]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

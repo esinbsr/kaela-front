@@ -1,4 +1,5 @@
 import axios from 'axios';
+import apiClient from "./api/apiClient";
 
 export const GET_PRODUCT_SUCCESS = 'GET_PRODUCT_SUCCESS';
 export const GET_PRODUCT_ERROR = 'GET_PRODUCT_ERROR';
@@ -14,10 +15,6 @@ export const UPDATE_PRODUCT_ERROR = 'UPDATE_PRODUCT_ERROR';
 
 export const DELETE_PRODUCT_SUCCESS = 'DELETE_PRODUCT_SUCCESS';
 export const DELETE_PRODUCT_ERROR = 'DELETE_PRODUCT_ERROR';
-
-export const RESET_PRODUCT_MESSAGES = 'RESET_PRODUCT_MESSAGES';
-
-
 
 import { API_URL } from "./serverRequest";
 
@@ -74,7 +71,7 @@ export const getProductById = (productId) => {
 export const addProduct = (formData) => {
     return async (dispatch) => {
         try {
-            const response = await axios.post(`${API_URL}addProduct`, formData, {
+            const response = await apiClient.post(`addProduct`, formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                 },
@@ -102,7 +99,7 @@ export const addProduct = (formData) => {
 export const updateProduct = (formData) => {
     return async (dispatch) => {
         try {
-            const response = await axios.post(`${API_URL}updateProduct`, formData, {
+            const response = await apiClient.post(`updateProduct`, formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                 },
@@ -131,7 +128,7 @@ export const updateProduct = (formData) => {
 export const deleteProduct = (productId) => {
     return async (dispatch) => {
         try {
-            const response = await axios.post(`${API_URL}deleteProduct`, { productId });
+            const response = await apiClient.post(`deleteProduct`, { productId });
             const message = response.data.message; 
             if (response.data.success) {
                 dispatch({
@@ -150,9 +147,3 @@ export const deleteProduct = (productId) => {
         }
     };
 };
-
-
-export const resetProductMessages = () => ({
-    type: RESET_PRODUCT_MESSAGES
-
-})

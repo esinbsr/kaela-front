@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getInformation } from "../actions/informationAction";
 import { isEmpty } from "../components/utils/isEmpty";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const PrivacyPolicy = () => {
   const information = useSelector((state) => state.information.information);
@@ -18,6 +19,13 @@ const PrivacyPolicy = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Privacy Policy | Kaela Couture</title>
+        <meta
+          name="description"
+          content="Learn how Kaela Couture collects, uses, and protects your personal information. Read our privacy policy for detailed information about data protection."
+        />
+      </Helmet>
       <main className="legal-information">
         <header>
           <h1>Privacy Policy</h1>
@@ -27,9 +35,10 @@ const PrivacyPolicy = () => {
           <section>
             <h2>1. Introduction</h2>
             <p>
-              <strong>Kaela Couture</strong> is committed to protecting your privacy. This
-              privacy policy explains what <strong>personal data</strong> we collect, how we
-              use it, and the measures we take to protect it.
+              <strong>Kaela Couture</strong> is committed to protecting your
+              privacy. This privacy policy explains what{" "}
+              <strong>personal data</strong> we collect, how we use it, and the
+              measures we take to protect it.
             </p>
           </section>
 
@@ -53,8 +62,8 @@ const PrivacyPolicy = () => {
               </li>
             </ul>
             <p>
-              We also generate a <strong>login token</strong> valid for 30 days, in order to
-              keep your session open and secure.
+              We also generate a <strong>login token</strong> valid for 30 days,
+              in order to keep your session open and secure.
             </p>
           </section>
 
@@ -66,8 +75,8 @@ const PrivacyPolicy = () => {
             </p>
             <ul>
               <li>
-                <strong>Comments:</strong> When you leave a comment on a product,
-                we store your username and the message you posted.
+                <strong>Comments:</strong> When you leave a comment on a
+                product, we store your username and the message you posted.
               </li>
               <li>
                 <strong>Contact Messages:</strong> When you contact us via our
@@ -81,9 +90,7 @@ const PrivacyPolicy = () => {
             <p>The data we collect is used to:</p>
             <ul>
               <li>Manage and secure your user account.</li>
-              <li>
-                Allow you to post comments on products.
-              </li>
+              <li>Allow you to post comments on products.</li>
               <li>Respond to your messages when you contact us.</li>
               <li>Improve the user experience on our site.</li>
             </ul>
@@ -98,9 +105,10 @@ const PrivacyPolicy = () => {
                 obligations.
               </li>
               <li>
-                <strong>User accounts inactive for more than 3 years</strong> are
-                automatically deleted, and <strong>comments left by these users are
-                anonymized</strong> to preserve their confidentiality.
+                <strong>User accounts inactive for more than 3 years</strong>{" "}
+                are automatically deleted, and{" "}
+                <strong>comments left by these users are anonymized</strong> to
+                preserve their confidentiality.
               </li>
               <li>
                 Data related to user accounts is therefore deleted or anonymized
@@ -113,29 +121,35 @@ const PrivacyPolicy = () => {
           <section>
             <h2>6. Data Security</h2>
             <p>
-              We take the <strong>security of your data</strong> very seriously and implement
-              appropriate technical and organizational measures to protect your
-              <strong>personal data</strong> against loss, misuse, unauthorized access,
-              disclosure, alteration, or destruction.
+              We take the <strong>security of your data</strong> very seriously
+              and implement appropriate technical and organizational measures to
+              protect your
+              <strong>personal data</strong> against loss, misuse, unauthorized
+              access, disclosure, alteration, or destruction.
             </p>
           </section>
 
           <section>
             <h2>7. Your Rights</h2>
             <p>
-              In accordance with the <strong>General Data Protection Regulation (GDPR)</strong>,
-              you have the following rights:
+              In accordance with the{" "}
+              <strong>General Data Protection Regulation (GDPR)</strong>, you
+              have the following rights:
             </p>
             <ul>
               <li>
                 <strong>Access</strong> to the personal data we hold about you.
               </li>
               <li>
-                Request the <strong>rectification</strong> of your personal data if it is
-                incorrect.
+                Request the <strong>rectification</strong> of your personal data
+                if it is incorrect.
               </li>
-              <li>Request the <strong>deletion</strong> of your personal data.</li>
-              <li>Object to the <strong>processing</strong> of your personal data.</li>
+              <li>
+                Request the <strong>deletion</strong> of your personal data.
+              </li>
+              <li>
+                Object to the <strong>processing</strong> of your personal data.
+              </li>
             </ul>
             <p>
               To exercise these rights, please contact us at the following email

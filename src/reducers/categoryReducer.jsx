@@ -9,7 +9,6 @@ import {
     UPDATE_CATEGORY_ERROR,
     DELETE_CATEGORY_SUCCESS,
     DELETE_CATEGORY_ERROR,
-    RESET_CATEGORY_MESSAGES,
 } from "../actions/categoryAction";
 
 const initialState = {
@@ -64,15 +63,6 @@ const categoryReducer = (state = initialState, action) => {
                     message: action.message,
                     error: '',
                 };
-            case RESET_CATEGORY_MESSAGES :
-                return {
-                    ...state,
-                    message: "",
-                    error: "",
-                }
-
-
-
 
         case GET_CATEGORIES_ERROR:
         case GET_CATEGORY_BY_ID_ERROR:

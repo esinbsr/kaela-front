@@ -7,6 +7,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { isEmpty } from "../components/utils/isEmpty";
 import { getSocialNetwork } from "../actions/socialNetworkAction";
 import Footer from "../components/Footer";
+import { Helmet } from "react-helmet-async";
+
 
 // Define section IDs for filtering products
 const SECTIONS = {
@@ -15,9 +17,11 @@ const SECTIONS = {
 
 const AboutMe = () => {
   // Retrieve data from Redux store or default to empty array if not available
-  const informations = useSelector((state) => state.information.information) || [];
+  const informations =
+    useSelector((state) => state.information.information) || [];
   const products = useSelector((state) => state.product.products) || [];
-  const socialNetworks = useSelector((state) => state.socialNetwork.socialNetwork) || [];
+  const socialNetworks =
+    useSelector((state) => state.socialNetwork.socialNetwork) || [];
   const userRole = useSelector((state) => state.user.role); // Get the role of the current user
 
   const dispatch = useDispatch(); // Initialize dispatch to trigger actions
@@ -36,14 +40,20 @@ const AboutMe = () => {
   }, [dispatch]);
 
   // Filter products related to the "About Me" section
-  const filteredProducts = !isEmpty(products) ? products.filter((product) => product.section_id === SECTIONS.ABOUT_ME) : [];
-  
+  const filteredProducts = !isEmpty(products)
+    ? products.filter((product) => product.section_id === SECTIONS.ABOUT_ME)
+    : [];
+
   // Get the first three information entries
-  const threeInformations = !isEmpty(informations) ? informations.slice(1, 4) : [];
+  const threeInformations = !isEmpty(informations)
+    ? informations.slice(1, 4)
+    : [];
 
   // Handle click event for admin users
   const handleAdminClick = (product) => {
-    const instagramUrl = socialNetworks.find((network) => network.platform.toLowerCase() === 'instagram').url;
+    const instagramUrl = socialNetworks.find(
+      (network) => network.platform.toLowerCase() === "instagram"
+    ).url;
     setInstagramLink(instagramUrl); // Set the Instagram link
     setSelectedProduct(product); // Set the selected product
     setModalVisible(true); // Show the modal
@@ -64,16 +74,27 @@ const AboutMe = () => {
 
   return (
     <div className="about-me">
-      
+      <Helmet>
+        <title>About Kaela Couture | Our Vision & Story </title>
+        <meta
+          name="description"
+          content="Learn more about Kaela Couture, a luxury fashion brand dedicated to timeless elegance and craftsmanship. Discover the vision behind our unique women's collections."
+        />
+      </Helmet>
+
       <h1>About Me</h1>
 
-          <h2>Who am I?</h2>
-          <div className="about-me__header">
-          {!isEmpty(threeInformations) ? (
-            threeInformations.map((info) => <p key={info.id}>{info.description}</p>)
-          ) : (
-            <p role="alert" aria-live="assertive">Loading descriptions...</p> 
-          )}
+      <h2>Who am I?</h2>
+      <div className="about-me__header">
+        {!isEmpty(threeInformations) ? (
+          threeInformations.map((info) => (
+            <p key={info.id}>{info.description}</p>
+          ))
+        ) : (
+          <p role="alert" aria-live="assertive">
+            Loading descriptions...
+          </p>
+        )}
       </div>
 
       <div className="about-me__footer">
@@ -82,15 +103,24 @@ const AboutMe = () => {
           {!isEmpty(filteredProducts) && socialNetworks.length > 0 ? (
             filteredProducts.slice(1, 9).map((product) => (
               <div className="about-me__footer-image" key={product.id}>
-                {userRole === "admin" ? ( 
+                {userRole === "admin" ? (
                   <div onClick={() => handleAdminClick(product)}>
                     <img
                       src={`${API_URL}assets/img/${product.path}`}
                       alt={product.name}
                     />
                   </div>
-                ) : ( 
-                  <Link to={socialNetworks.find((network) => network.platform.toLowerCase() === 'instagram').url} target="_blank" rel="noopener noreferrer">
+                ) : (
+                  <Link
+                    to={
+                      socialNetworks.find(
+                        (network) =>
+                          network.platform.toLowerCase() === "instagram"
+                      ).url
+                    }
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     <img
                       src={`${API_URL}assets/img/${product.path}`}
                       alt={product.name}
@@ -100,7 +130,9 @@ const AboutMe = () => {
               </div>
             ))
           ) : (
-            <p role="alert" aria-live="assertive">Loading images...</p> 
+            <p role="alert" aria-live="assertive">
+              Loading images...
+            </p>
           )}
         </div>
       </div>
@@ -109,7 +141,11 @@ const AboutMe = () => {
         <div className="modal">
           <div className="modal__content">
             <h2>What do you want to do?</h2>
-            <button onClick={() => handleNavigate(`/adminUpdateProduct/${selectedProduct.id}`)}>
+            <button
+              onClick={() =>
+                handleNavigate(`/adminUpdateProduct/${selectedProduct.id}`)
+              }
+            >
               Edit Image
             </button>
             <button onClick={() => window.open(instagramLink, "_blank")}>
@@ -119,7 +155,7 @@ const AboutMe = () => {
           </div>
         </div>
       )}
-      <Footer/>
+      <Footer />
     </div>
   );
 };

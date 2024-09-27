@@ -1,5 +1,4 @@
-import axios from 'axios';
-import { API_URL } from './serverRequest';
+import apiClient from "./api/apiClient";
 
 export const GET_SOCIAL_NETWORK_SUCCESS = 'GET_SOCIAL_NETWORK_SUCCESS';
 export const GET_SOCIAL_NETWORK_ERROR = 'GET_SOCIAL_NETWORK_ERROR';
@@ -16,12 +15,10 @@ export const UPDATE_SOCIAL_NETWORK_ERROR = 'UPDATE_SOCIAL_NETWORK_ERROR';
 export const DELETE_SOCIAL_NETWORK_SUCCESS = 'DELETE_SOCIAL_NETWORK_SUCCESS';
 export const DELETE_SOCIAL_NETWORK_ERROR = 'DELETE_SOCIAL_NETWORK_ERROR';
 
-export const RESET_SOCIAL_NETWORK_MESSAGES = 'RESET_SOCIAL_NETWORK_MESSAGES';
-
 export const getSocialNetwork = () => {
     return async (dispatch) => {
         try {
-            const response = await axios.get(`${API_URL}getSocialNetwork`);
+            const response = await apiClient.get("getSocialNetwork");
             const message = response.data.message;
 
             if (response.data.success) {
@@ -45,7 +42,7 @@ export const getSocialNetwork = () => {
 export const getSocialNetworkById = (socialNetworkId) => {
     return async (dispatch) => {
         try {
-            const response = await axios.get(`${API_URL}getSocialNetworkById/${socialNetworkId}`);
+            const response = await apiClient.get(`getSocialNetworkById/${socialNetworkId}`);
             const message = response.data.message;
 
             if (response.data.success) {
@@ -69,11 +66,7 @@ export const getSocialNetworkById = (socialNetworkId) => {
 export const addSocialNetwork = (socialNetwork) => {
     return async (dispatch) => {
         try {
-            const response = await axios.post(`${API_URL}addSocialNetwork`, socialNetwork, {
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            });
+            const response = await apiClient.post(`addSocialNetwork`, socialNetwork);
             const message = response.data.message;
             if (response.data.success  && response.data.socialNetwork) {
                 dispatch({
@@ -97,11 +90,7 @@ export const addSocialNetwork = (socialNetwork) => {
 export const updateSocialNetwork = (socialNetwork) => {
     return async (dispatch) => {
         try {
-            const response = await axios.post(`${API_URL}updateSocialNetwork`, socialNetwork, {
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            });
+            const response = await apiClient.post(`updateSocialNetwork`, socialNetwork);
             const message = response.data.message;
             if (response.data.success) {
             dispatch({
@@ -124,11 +113,7 @@ export const updateSocialNetwork = (socialNetwork) => {
 export const deleteSocialNetwork = (socialNetworkId) => {
     return async (dispatch) => {
         try {
-            const response = await axios.post(`${API_URL}deleteSocialNetwork`, { socialNetworkId }, {
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            });
+            const response = await apiClient.post(`deleteSocialNetwork`, { socialNetworkId });
             const message = response.data.message; 
             if (response.data.success) {
             dispatch({
@@ -147,7 +132,3 @@ export const deleteSocialNetwork = (socialNetworkId) => {
         }
     };
 };
-
-export const resetSocialNetworkMessages = () => ({
-    type: RESET_SOCIAL_NETWORK_MESSAGES
-});

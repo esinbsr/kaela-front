@@ -1,5 +1,4 @@
-import axios from "axios";
-import { API_URL } from "./serverRequest";
+import apiClient from "./api/apiClient";
 
 export const GET_CATEGORIES_SUCCESS = 'GET_CATEGORIES_SUCCESS';
 export const GET_CATEGORIES_ERROR = 'GET_CATEGORIES_ERROR';
@@ -16,12 +15,10 @@ export const UPDATE_CATEGORY_ERROR = 'UPDATE_CATEGORY_ERROR';
 export const DELETE_CATEGORY_SUCCESS = 'DELETE_CATEGORY_SUCCESS';
 export const DELETE_CATEGORY_ERROR = 'DELETE_CATEGORY_ERROR';
 
-export const RESET_CATEGORY_MESSAGES = 'RESET_CATEGORY_MESSAGES';
-
 export const getProductCategories = () => {
   return async (dispatch) => {
     try {
-      const response = await axios.get(`${API_URL}getProductCategory`);
+      const response = await apiClient.get("getProductCategory");
       const message = response.data.message;
 
       if (response.data.success) {
@@ -45,7 +42,7 @@ export const getProductCategories = () => {
 export const getCategoryById = (categoryId) => {
   return async (dispatch) => {
     try {
-      const response = await axios.get(`${API_URL}getCategoryById/${categoryId}`);
+      const response = await apiClient.get(`getCategoryById/${categoryId}`);
       const message = response.data.message;
 
       if (response.data.success) {
@@ -69,11 +66,7 @@ export const getCategoryById = (categoryId) => {
 export const addCategory = (formData) => {
   return async (dispatch) => {
     try {
-      const response = await axios.post(`${API_URL}addCategory`, formData, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+      const response = await apiClient.post(`addCategory`, formData);
       const message = response.data.message;
 
       if (response.data.success) {
@@ -98,11 +91,7 @@ export const addCategory = (formData) => {
 export const updateCategory = (category) => {
     return async (dispatch) => {
       try {
-        const response = await axios.post(`${API_URL}updateCategory`, category, {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        });
+        const response = await apiClient.post(`updateCategory`, category);
         const message = response.data.message;
 
         if (response.data.success) {
@@ -127,11 +116,7 @@ export const updateCategory = (category) => {
 export const deleteCategory = (categoryId) => {
   return async (dispatch) => {
       try {
-          const response = await axios.post(`${API_URL}deleteCategory`, { categoryId }, {
-              headers: {
-                  'Content-Type': 'application/json',
-              },
-          });
+          const response = await apiClient.post(`deleteCategory`, { categoryId });
           const message = response.data.message; 
           if (response.data.success) {
           dispatch({
@@ -150,7 +135,3 @@ export const deleteCategory = (categoryId) => {
       }
   };
 };
-
-export const resetCategoryMessages = () => ({
-  type: RESET_CATEGORY_MESSAGES,
-})

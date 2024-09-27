@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  addCategory,
-  resetCategoryMessages,
+  addCategory
 } from "../../../actions/categoryAction";
 import { toast, ToastContainer } from "react-toastify"; 
 import "react-toastify/dist/ReactToastify.css"; 
@@ -16,10 +15,6 @@ const AdminAddCategory = () => {
   const message = useSelector((state) => state.category.message);
   const error = useSelector((state) => state.category.error);
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(resetCategoryMessages());
-  }, [dispatch]);
 
   const handleSubmit = (e) => {
     e.preventDefault();

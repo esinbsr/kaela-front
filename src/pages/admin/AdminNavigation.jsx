@@ -1,24 +1,21 @@
-import { useEffect } from "react";
-import { NavLink, useNavigate, useLocation } from "react-router-dom";
-// import Footer from "../../components/Footer";
+// import { useEffect } from "react";
+import { NavLink} from "react-router-dom";
 
 const AdminNavigation = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
+  // const navigate = useNavigate();
 
-  useEffect(() => {
-    const role = localStorage.getItem("role");
-    if (role !== "admin") {
-      navigate("/");
-    } 
-  }, [navigate, location.pathname]);
+  // useEffect(() => {
+  //   const role = localStorage.getItem("role");
+  //   if (role !== "admin") {
+  //     navigate("/");
+  //   } 
+  // }, [navigate]);
 
   return (
-    <>
     <div className="admin-container">
       <aside className="admin-container__navigation">
         <NavLink
-          to="/adminProduct"
+          to="/product"
           className={({ isActive }) => (isActive ? "active-link" : "")}
         >
           Product
@@ -43,8 +40,6 @@ const AdminNavigation = () => {
         </NavLink>
       </aside>
     </div>
-    {/* <Footer/> */}
-    </>
   );
 };
 

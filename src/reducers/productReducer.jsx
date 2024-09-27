@@ -14,8 +14,6 @@ import {
   DELETE_PRODUCT_SUCCESS,
   DELETE_PRODUCT_ERROR,
 
-  RESET_PRODUCT_MESSAGES
-
 } from "../actions/productAction";
 
 const initialState = {
@@ -71,14 +69,6 @@ const productReducer = (state = initialState, action) => {
             message: action.message, // Stocke le message de succès dans l'état
             error: "",
         };
-      case RESET_PRODUCT_MESSAGES:
-        return {
-          ...state,
-          message: "",
-          error:""
-        }
-
-      
 
       case GET_PRODUCT_ERROR:
         case GET_PRODUCT_BY_ID_ERROR:

@@ -6,6 +6,7 @@ import sectionReducer from './sectionReducter';
 import socialNetworkReducer from './socialNetworkReducer';
 import userReducer from './userReducer';
 import commentReducer from './commentReducer';
+import contactReducer from './contactReducer';
 
 const rootReducer = combineReducers({
     information: informationReducer,
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
     socialNetwork: socialNetworkReducer,
     user: userReducer,
     comment: commentReducer,
+    contact: contactReducer
 });
 
 export default rootReducer;

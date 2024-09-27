@@ -1,12 +1,13 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
 import Logo from "./Logo";
 
 const Navigation = () => {
-  const role = useSelector((state) => state.user.role);
-  const isLoggedIn = !!role;
   const [menuOpen, setMenuOpen] = useState(false); // État pour ouvrir/fermer le menu
+
+  // Récupérer les informations utilisateur depuis Redux
+  const { token, role } = useSelector((state) => state.user);
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen); // Inverse l'état d'ouverture du menu
@@ -39,14 +40,14 @@ const Navigation = () => {
           >
             Home
           </NavLink>
-       
-            <NavLink
-              to="/collection"
-              className={({ isActive }) => (isActive ? "active" : "")}
-              onClick={() => setMenuOpen(false)}
-            >
-              Collection
-            </NavLink>
+
+          <NavLink
+            to="/collection"
+            className={({ isActive }) => (isActive ? "active" : "")}
+            onClick={() => setMenuOpen(false)}
+          >
+            Collection
+          </NavLink>
 
           <NavLink
             to="/aboutMe"
@@ -55,6 +56,7 @@ const Navigation = () => {
           >
             About me
           </NavLink>
+
           <NavLink
             to="/contact"
             className={({ isActive }) => (isActive ? "active" : "")}
@@ -63,9 +65,32 @@ const Navigation = () => {
             Contact
           </NavLink>
 
-          {/* Liens pour l'inscription et la connexion */}
-          {!isLoggedIn && (
+          {/* Afficher les liens en fonction de l'état de connexion */}
+          {token ? (
             <>
+              {/* Si l'utilisateur est connecté et admin, afficher le lien admin */}
+              {role === 'admin' && (
+                <NavLink
+                  to="/admin"
+                  className={({ isActive }) => (isActive ? "active" : "")}
+                  onClick={() => setMenuOpen(false)}
+                >
+                  Admin
+                </NavLink>
+              )}
+
+              {/* Lien pour la déconnexion */}
+              <NavLink
+                to="/logout"
+                className={({ isActive }) => (isActive ? "active" : "")}
+                onClick={() => setMenuOpen(false)}
+              >
+                Logout
+              </NavLink>
+            </>
+          ) : (
+            <>
+              {/* Si l'utilisateur n'est pas connecté, afficher Login et Signup */}
               <NavLink
                 to="/signup"
                 className={({ isActive }) => (isActive ? "active" : "")}
@@ -81,28 +106,6 @@ const Navigation = () => {
                 Login
               </NavLink>
             </>
-          )}
-
-          {/* Lien Admin pour les administrateurs */}
-          {role === "admin" && (
-            <NavLink
-              to="/admin"
-              className={({ isActive }) => (isActive ? "active" : "")}
-              onClick={() => setMenuOpen(false)}
-            >
-              Admin
-            </NavLink>
-          )}
-
-          {/* Lien de déconnexion pour les utilisateurs connectés */}
-          {isLoggedIn && (
-            <NavLink
-              to="/logout"
-              className={({ isActive }) => (isActive ? "active" : "")}
-              onClick={() => setMenuOpen(false)}
-            >
-              Logout
-            </NavLink>
           )}
         </section>
       </nav>

@@ -15,8 +15,6 @@ const AdminSocialNetwork = () => {
   const socialNetwork = useSelector(
     (state) => state.socialNetwork.socialNetwork
   ); // Select the social networks from the Redux store
-  const message = useSelector((state) => state.socialNetwork.message); // Select any success message from the Redux store
-  const error = useSelector((state) => state.socialNetwork.error); // Select any error message from the Redux store
 
   const [modalShow, setModalShow] = useState(false); // State to control the visibility of the modal
   const [selectedSocialNetwork, setSelectedSocialNetwork] = useState(null); // State to track the selected social network for deletion

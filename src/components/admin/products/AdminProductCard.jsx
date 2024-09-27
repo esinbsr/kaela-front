@@ -17,7 +17,7 @@ const AdminProductCard = ({ product, onDelete }) => {
       <td>{product.section}</td>
       <td>
         <Link
-          to={`/adminUpdateProduct/${product.id}`}
+          to={`/updateProduct/${product.id}`}
           aria-label={`Update ${product.name}`}
           className='update-color'
         >

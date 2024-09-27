@@ -2,8 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addProduct,
-  getProduct,
-  resetProductMessages,
+  getProduct
 } from "../../../actions/productAction";
 import { getProductCategories } from "../../../actions/categoryAction";
 import { getSection } from "../../../actions/sectionAction";
@@ -30,7 +29,6 @@ const AdminAddProduct = () => {
   useEffect(() => {
     dispatch(getProductCategories());
     dispatch(getSection());
-    dispatch(resetProductMessages());
   }, [dispatch]);
 
   useEffect(() => {
