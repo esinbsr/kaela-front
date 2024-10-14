@@ -1,11 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
-import AdminProductCard from "../../../components/admin/products/AdminProductCard";
 import AdminAddProduct from "./AdminAddProduct";
 import { isEmpty } from "../../../components/utils/isEmpty";
 import AdminNavigation from "../AdminNavigation";
 import { useEffect, useState } from "react";
 import { getProduct, deleteProduct } from "../../../actions/productAction";
 import ModalAdmin from "../../../components/utils/ModalAdmin";
+import ProductCard from "../../../components/admin/ProductCard"
 
 
 const AdminProduct = () => {
@@ -73,7 +73,7 @@ const AdminProduct = () => {
                     .map(
                       (product) =>
                         !isEmpty(product) && (
-                          <AdminProductCard
+                          <ProductCard
                             key={product.id}
                             product={product}
                             onDelete={() => handleDelete(product)} 

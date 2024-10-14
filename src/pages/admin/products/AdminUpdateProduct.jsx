@@ -139,6 +139,7 @@ const AdminUpdateProduct = () => {
                   <img
                     src={`${API_URL}assets/img/${currentImage}`}
                     alt={`Image of ${productById.name}`}
+                    loading="lazy" 
                   />
                 )}
                 <input

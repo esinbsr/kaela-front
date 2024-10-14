@@ -30,6 +30,7 @@ const EveningLatestImageList = ({ start, end, additionalClass = '', section }) =
                                     src={`${API_URL}assets/img/${product.path}`}
                                     alt={`Product ${product.name}`}
                                     className={topImageClass}
+                                    loading="lazy" 
                                 />
                             </Link>
                         </div>

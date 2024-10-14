@@ -108,6 +108,7 @@ const AboutMe = () => {
                     <img
                       src={`${API_URL}assets/img/${product.path}`}
                       alt={product.name}
+                      loading="lazy" 
                     />
                   </div>
                 ) : (
@@ -124,6 +125,7 @@ const AboutMe = () => {
                     <img
                       src={`${API_URL}assets/img/${product.path}`}
                       alt={product.name}
+                      loading="lazy" 
                     />
                   </Link>
                 )}

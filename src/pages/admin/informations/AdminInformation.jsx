@@ -4,7 +4,7 @@ import {
   deleteInformation,
   getInformation,
 } from "../../../actions/informationAction";
-import AdminInformationCard from "../../../components/admin/informations/AdminInformationCard";
+import InformationCard from "../../../components/admin/InformationCard";
 import AdminAddInformation from "./AdminAddInformation";
 import { isEmpty } from "../../../components/utils/isEmpty";
 import AdminNavigation from "../AdminNavigation";
@@ -71,7 +71,7 @@ const AdminInformation = () => {
                 {!isEmpty(information) ? (
                   // Map through the information array and render a row for each item
                   information.map((info) => (
-                    <AdminInformationCard
+                    <InformationCard
                       key={info.id}
                       infos={info}
                       onDelete={() => handleDelete(info)} // Pass the delete handler to the card component

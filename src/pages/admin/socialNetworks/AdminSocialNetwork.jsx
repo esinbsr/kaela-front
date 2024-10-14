@@ -4,7 +4,7 @@ import {
   getSocialNetwork,
   deleteSocialNetwork,
 } from "../../../actions/socialNetworkAction";
-import AdminSocialNetworkCard from "../../../components/admin/socialNetwork/AdminSocialNetworkCard";
+import SocialNetworkCard from "../../../components/admin/SocialNetworkCard";
 import AdminAddSocialNetwork from "./AdminAddSocialNetwork";
 import { isEmpty } from "../../../components/utils/isEmpty";
 import AdminNavigation from "../AdminNavigation";
@@ -70,7 +70,7 @@ const AdminSocialNetwork = () => {
                 {!isEmpty(socialNetwork) ? (
                   socialNetwork.map(
                     (socialNetwork) => (
-                        <AdminSocialNetworkCard
+                        <SocialNetworkCard
                           key={socialNetwork.id}
                           socialNetwork={socialNetwork}
                           onDelete={() => handleDelete(socialNetwork)} // Pass the delete handler to the card component

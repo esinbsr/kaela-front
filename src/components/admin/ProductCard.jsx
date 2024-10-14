@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import { API_URL } from "../../../actions/serverRequest";
+import { API_URL } from "../../actions/serverRequest";
 
-const AdminProductCard = ({ product, onDelete }) => {
+const ProductCard = ({ product, onDelete }) => {
   return (
     <tr>
       <td>
@@ -9,6 +9,7 @@ const AdminProductCard = ({ product, onDelete }) => {
           src={`${API_URL}assets/img/${product.path}`}
           alt={`Image of ${product.name}`}
           width="100"
+          loading="lazy" 
         />
       </td>
       <td>{product.name}</td>
@@ -37,4 +38,4 @@ const AdminProductCard = ({ product, onDelete }) => {
   );
 };
 
-export default AdminProductCard;
+export default ProductCard;

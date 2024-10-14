@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-const AdminInformationCard = ({ infos, onDelete }) => {
+const InformationCard = ({ infos, onDelete }) => {
     return (
         <tr>
             <td>{infos.description}</td>
@@ -25,4 +25,4 @@ const AdminInformationCard = ({ infos, onDelete }) => {
     );
 };
 
-export default AdminInformationCard;
+export default InformationCard;

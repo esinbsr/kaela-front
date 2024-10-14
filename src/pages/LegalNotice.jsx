@@ -46,26 +46,25 @@ const LegalNotice = () => {
               <strong>Email:</strong> {info && info.email}
             </p>
             <p>
-              <strong>Publication Director:</strong> Esin Baser
+              <strong>Publication Director:</strong> Kaela Couture
             </p>
           </section>
 
           <section>
             <h2>2. Website Hosting</h2>
             <p>
-              <strong>Hosting Provider:</strong> Netlify
+              <strong>Hosting Provider:</strong> Not applicable
             </p>
             <address>
               <p>
-                <strong>Address:</strong> 2325 3rd Street, Suite 296, San
-                Francisco, CA 94107, USA
+                <strong>Address:</strong> Not applicable
               </p>
               <p>
                 <strong>Phone:</strong> Not applicable
               </p>
               <p>
                 <strong>Email:</strong>{" "}
-                <a href="mailto:support@netlify.com">support@netlify.com</a>
+                <a href="mailto:">Not applicable</a>
               </p>
             </address>
           </section>
@@ -75,7 +74,7 @@ const LegalNotice = () => {
             <p>
               The website and each of its elements, including but not limited to
               texts, images, videos, photographs, <strong>trademarks</strong>,
-              and <strong>logos</strong>, are the exclusive property of{" "}
+              and <strong>logos</strong>, are the exclusive property of
               <strong>Kaela Couture</strong>. Any reproduction, representation,
               distribution, or redistribution, in whole or in part, of the
               content of this site on any medium or by any process whatsoever,

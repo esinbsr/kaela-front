@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { API_URL } from "../../../actions/serverRequest";
+import { API_URL } from "../../actions/serverRequest";
 
 // This component displays the details of clicked images
 const ProductDetailCard = ({ productDetail }) => {

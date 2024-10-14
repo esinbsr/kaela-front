@@ -8,7 +8,7 @@ const Collection = () => {
   return (
     <div className="collection">
       <Helmet>
-        <title>Kaela Couture Collection | Elegant Women's Fashion</title>
+        <title>Kaela Couture Collection | Elegant Women&apos;s Fashion</title>
         <meta
           name="description"
           content="Browse the Kaela Couture collection, featuring elegant dresses and fashion pieces. From evening gowns to everyday wear, find your style with our expertly crafted designs."

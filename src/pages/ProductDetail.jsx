@@ -1,6 +1,6 @@
 
 import { useDispatch, useSelector } from "react-redux"; 
-import AdminProductDetailCard from "../components/admin/products/ProductDetailCard"; 
+import ProductDetailCard from "../components/admin/ProductDetailCard"; 
 import { useEffect } from "react"; 
 import { getProductById } from "../actions/productAction"; 
 import { useParams } from "react-router-dom"; 
@@ -28,7 +28,7 @@ const ProductDetail = () => {
         <>
             {/* Check if the product details are available */}
             {!isEmpty(productById) ? (
-                <AdminProductDetailCard key={productById.id} productDetail={productById} />
+                <ProductDetailCard key={productById.id} productDetail={productById} />
                 // Display the AdminProductDetailCard component if product details are not empty
             ) : (
                 <p>No products found.</p>

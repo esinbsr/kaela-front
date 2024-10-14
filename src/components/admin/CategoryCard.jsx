@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const AdminCategoryCard = ({ category, onDelete }) => {
+const CategoryCard = ({ category, onDelete }) => {
   return (
     <tr>
       <td>{category.name}</td>
@@ -22,4 +22,4 @@ const AdminCategoryCard = ({ category, onDelete }) => {
   );
 };
 
-export default AdminCategoryCard;
+export default CategoryCard;

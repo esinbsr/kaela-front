@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const AdminSocialNetworkCard = ({ socialNetwork, onDelete }) => {
+const SocialNetworkCard = ({ socialNetwork, onDelete }) => {
   return (
     <tr>
       <td>{socialNetwork.platform}</td>
@@ -27,4 +27,4 @@ const AdminSocialNetworkCard = ({ socialNetwork, onDelete }) => {
   );
 };
 
-export default AdminSocialNetworkCard;
+export default SocialNetworkCard;

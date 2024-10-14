@@ -4,7 +4,7 @@ import {
   getProductCategories,
   deleteCategory,
 } from "../../../actions/categoryAction";
-import AdminCategoryCard from "../../../components/admin/categories/AdminCategoryCard";
+import CategoryCard from "../../../components/admin/CategoryCard";
 import AdminAddCategory from "./AdminAddCategory";
 import { isEmpty } from "../../../components/utils/isEmpty";
 import AdminNavigation from "../AdminNavigation";
@@ -76,7 +76,7 @@ const AdminCategory = () => {
                 {!isEmpty(categories) ? (
                   // Map through categories and render a row for each
                   categories.map((category) => (
-                    <AdminCategoryCard
+                    <CategoryCard
                       key={category.id}
                       category={category}
                       onDelete={() => handleDelete(category)} // Pass delete handler as prop

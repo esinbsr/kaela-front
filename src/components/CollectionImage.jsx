@@ -70,12 +70,14 @@ const CollectionImage = ({ start, end, additionalClass }) => {
                     <img
                       src={`${API_URL}assets/img/${product.path}`}
                       alt={`Image of ${product.name}`}
+                      loading="lazy" 
                     />
                   </Link>
                 ) : (
                   <img
                     src={`${API_URL}assets/img/${product.path}`}
                     alt={`Image of ${product.name}`}
+                    loading="lazy" 
                   />
                 )}
                 <div className="home__collection-description">
