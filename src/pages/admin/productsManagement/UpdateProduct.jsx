@@ -1,86 +1,107 @@
-import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
-import { getProductById, updateProduct } from "../../../actions/productAction";
+import { useMutation, useQuery, useQueryClient } from "react-query";
+import { getProductById, updateProduct } from "../../../api/productApi";
+import { getProductCategories } from "../../../api/categoryApi";
+import { getSection } from "../../../api/sectionApi";
 import AdminNavigation from "../AdminNavigation";
-import { API_URL } from "../../../actions/serverRequest";
-import { getProductCategories } from "../../../actions/categoryAction";
-import { getSection } from "../../../actions/sectionAction";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { API_URL } from "../../../api/serverRequest";
 
 const UpdateProduct = () => {
+  const { productId } = useParams();  // Retrieve product ID from URL params
+  const queryClient = useQueryClient(); 
+
   const [productName, setProductName] = useState("");
   const [productDescription, setProductDescription] = useState("");
   const [productCategory, setProductCategory] = useState("");
   const [productSection, setProductSection] = useState("");
   const [productImage, setProductImage] = useState(null);
-  const [currentImage, setCurrentImage] = useState("");
+  const [currentImage, setCurrentImage] = useState("");  
 
-  const { productId } = useParams();
-  const dispatch = useDispatch();
-
-  const productById = useSelector((state) => state.product.productById);
-  const categories = useSelector((state) => state.category.category);
-  const section = useSelector((state) => state.section.section);
-
-  const message = useSelector((state) => state.product.message);
-  const error = useSelector((state) => state.product.error);
-
-  useEffect(() => {
-    if (productId) {
-      dispatch(getProductById(productId));
+  // Fetch product data by id when the component mounts
+  const { isLoading: loadingProduct, error: productError } = useQuery({
+    queryKey: ['products', productId], // Unique query key for the product
+    queryFn: () => getProductById(productId), // Api call to fetch the product details
+    onSuccess: (data) => {
+      if (data) {
+       // Populate the state with the fetched product data
+        setProductName(data.name || "");
+        setProductDescription(data.description || "");
+        setProductCategory(data.categorie_id || "");
+        setProductSection(data.section_id || "");
+        setCurrentImage(data.path || "");
+      }
+    },
+    // Display an error toast if the Api call fails
+    onError: (error) => {
+      toast.error("Error fetching product: " + error.message);
     }
-    dispatch(getProductCategories());
-    dispatch(getSection());
-    window.scrollTo(0, 0);
-  }, [dispatch, productId]);
+  });
 
-  useEffect(() => {
-    if (productById) {
-      setProductName(productById.name ?? "");
-      setProductDescription(productById.description ?? "");
-      setProductCategory(productById.categorie_id ?? "");
-      setProductSection(productById.section_id ?? "");
-      setCurrentImage(productById.path ?? "");
+  // Fetch categories for product selection
+  const { data: categories, isLoading: loadingCategories, error: categoriesError } = useQuery({
+    queryKey: ["categories"],
+    queryFn: getProductCategories
+  });
+
+  // Fetch sections for product selection
+  const { data: sections, isLoading: loadingSections, error: sectionsError } = useQuery({
+    queryKey: ["sections"],
+    queryFn: getSection
+  });
+
+  // Mutation to update the product
+  const mutation = useMutation({
+    mutationFn: updateProduct,
+    onSuccess: (data) => {
+      queryClient.invalidateQueries("products");  // Invalidate the cache to refetch updated data
+      if (data.success) {
+        toast.success(data.message || "Product updated successfully!");
+      } else {
+        toast.error(data.message || "Error updating product!");
+      }
+    },
+    // Display an error toast if the mutation fails
+    onError: (error) => {
+      toast.error("Error updating product: " + error.message);
     }
-  }, [productById]);
+  });
 
+  // Form submission handler to update product
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const formData = new FormData();
+    // Prepare form data to send to the server
+    const formData = new FormData(); 
     formData.append("productId", productId);
     formData.append("productName", productName);
     formData.append("productDescription", productDescription);
     formData.append("productCategory", productCategory);
     formData.append("productSection", productSection);
+    // Append new image if uploaded
     if (productImage) {
-      formData.append("productImage", productImage);
+      formData.append("productImage", productImage);  
     }
 
-    dispatch(updateProduct(formData));
+    // Trigger the mutation
+    mutation.mutate(formData);
   };
 
-  useEffect(() => {
-    if (message) {
-      toast.success(message);
-    }
-    if (error) {
-      toast.error(error);
-    }
-  }, [message, error]);
+  if (loadingCategories || loadingSections || loadingProduct) return <p>Loading...</p>;
+  if (categoriesError || sectionsError || productError) return <p>Error: {categoriesError?.message || sectionsError?.message || productError?.message}</p>;
 
   return (
     <div className="admin-container">
-      <AdminNavigation />
+      <AdminNavigation />  
       <div className="admin-container__content">
         <form onSubmit={handleSubmit} className="form">
           <fieldset>
-            <legend>Update Product</legend>
+            <legend>Update Product</legend>  
 
             <div className="form__group">
-              <label htmlFor="productName">Name of product:</label>
+              <label htmlFor="productName">Name of product:</label> 
               <input
                 id="productName"
                 type="text"
@@ -91,7 +112,7 @@ const UpdateProduct = () => {
             </div>
 
             <div className="form__group">
-              <label htmlFor="productDescription">Description:</label>
+              <label htmlFor="productDescription">Description:</label> 
               <textarea
                 id="productDescription"
                 name="productDescription"
@@ -101,7 +122,7 @@ const UpdateProduct = () => {
             </div>
 
             <div className="form__group">
-              <label htmlFor="productCategory">Category:</label>
+              <label htmlFor="productCategory">Category:</label>  
               <select
                 id="productCategory"
                 name="productCategory"
@@ -117,14 +138,14 @@ const UpdateProduct = () => {
             </div>
 
             <div className="form__group">
-              <label htmlFor="productSection">Section:</label>
+              <label htmlFor="productSection">Section:</label>  
               <select
                 id="productSection"
                 name="productSection"
                 value={productSection}
                 onChange={(e) => setProductSection(e.target.value)}
               >
-                {section.map((section) => (
+                {sections.map((section) => (
                   <option key={section.id} value={section.id}>
                     {section.name}
                   </option>
@@ -133,12 +154,12 @@ const UpdateProduct = () => {
             </div>
 
             <div className="form__group">
-              <label htmlFor="productImage">Current image:</label>
+              <label htmlFor="productImage">Current image:</label> 
               <div className="form__image-upload">
                 {currentImage && (
                   <img
                     src={`${API_URL}assets/img/${currentImage}`}
-                    alt={`Image of ${productById.name}`}
+                    alt={`Image of ${productName}`}
                     loading="lazy" 
                   />
                 )}
@@ -152,12 +173,14 @@ const UpdateProduct = () => {
             </div>
 
             <div className="form__button">
-              <button type="submit">Update</button>
+              <button type="submit" disabled={mutation.isLoading}>
+              {mutation.isLoading ? "Updating..." : "Update"}
+                </button>  
             </div>
           </fieldset>
         </form>
 
-        <ToastContainer />
+        <ToastContainer /> 
       </div>
     </div>
   );

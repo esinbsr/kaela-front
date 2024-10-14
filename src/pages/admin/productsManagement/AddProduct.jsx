@@ -1,13 +1,11 @@
-import { useState, useEffect, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  addProduct,
-  getProduct
-} from "../../../actions/productAction";
-import { getProductCategories } from "../../../actions/categoryAction";
-import { getSection } from "../../../actions/sectionAction";
+import { useState, useRef } from "react";
+import { useQuery, useMutation, useQueryClient } from "react-query";
 import { toast, ToastContainer } from "react-toastify"; 
 import "react-toastify/dist/ReactToastify.css"; 
+import { getProductCategories } from "../../../api/categoryApi";
+import { getSection } from "../../../api/sectionApi";
+import { addProduct } from "../../../api/productApi";
+
 
 const AddProduct = () => {
   const [productName, setProductName] = useState("");
@@ -17,46 +15,56 @@ const AddProduct = () => {
   const [productImage, setProductImage] = useState(null);
 
   const fileInputRef = useRef(null);
+  const queryClient = useQueryClient();
 
-  const dispatch = useDispatch();
-
-  const categories = useSelector((state) => state.category.category);
-  const section = useSelector((state) => state.section.section);
-
-  const message = useSelector((state) => state.product.message);
-  const error = useSelector((state) => state.product.error);
-
-  useEffect(() => {
-    dispatch(getProductCategories());
-    dispatch(getSection());
-  }, [dispatch]);
-
-  useEffect(() => {
-    if (categories.length > 0) {
-      setProductCategory(categories[0].id);
+  // Retrieving categories
+  const { data: categories, isLoading: loadingCategories, error: categoriesError } = useQuery({
+    queryKey: ["categories"],
+    queryFn: getProductCategories,
+    onSuccess: (data) => {
+      if (data && data.length > 0) {
+        setProductCategory(data[0].id);
+      }
     }
-    if (section.length > 0) {
-      setProductSection(section[0].id);
+  });
+
+// Retrieving sections
+  const { data: sections, isLoading: loadingSections, error: sectionsError } = useQuery({
+    queryKey: ["sections"],
+    queryFn: getSection,
+    onSuccess: (data) => {
+      if(data && data.length > 0) {
+        setProductSection(data[0].id);
+      }
     }
-  }, [categories, section]);
+});
 
-  useEffect(() => {
-    if (message && !error) {
-      toast.success(message);
 
+  // Mutation for adding product
+  const mutation = useMutation({
+    mutationFn: addProduct,
+    onSuccess: (data) => {
+      // If successful, invalidate the 'products' query and reset the form
+      if(data.sucess) {
+      toast.success(data.message || "Produit ajouté avec succès !");
       setProductName("");
       setProductDescription("");
-      setProductCategory(categories[0].id || "");
-      setProductSection(section[0].id || "");
+      setProductCategory(categories[0]?.id || ""); // Resets the field to the first category
+      setProductSection(sections[0]?.id || "");
       setProductImage(null);
       fileInputRef.current.value = "";
-
-      dispatch(getProduct()); 
-    } else if (error) {
-      toast.error(error);
+      queryClient.invalidateQueries("products");
+    } else {
+      toast.error(data.message || "An error has occurred.");
     }
-  }, [message, error, dispatch, categories, section]);
+    },
+    // Handle server errors
+    onError: (error) => {
+      toast.error("Erreur lors de l'ajout du produit : " + error.message);
+    },
+  });
 
+  // Form submission handler
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -67,17 +75,21 @@ const AddProduct = () => {
     formData.append("productSection", productSection);
     formData.append("productImage", productImage);
 
-    dispatch(addProduct(formData));
+    // Trigger the mutation to add product
+    mutation.mutate(formData);
   };
+
+  if (loadingCategories || loadingSections) return "Chargement...";
+  if (categoriesError || sectionsError) return `Erreur : ${categoriesError?.message || sectionsError?.message}`;
 
   return (
     <>
       <form onSubmit={handleSubmit} className="form">
         <fieldset>
-          <legend> Add a new product</legend>
+          <legend>Add a New Product</legend>
 
           <div className="form__group">
-            <label htmlFor="productName">Name of product</label>
+            <label htmlFor="productName">Product Name</label>
             <input
               id="productName"
               type="text"
@@ -108,7 +120,8 @@ const AddProduct = () => {
               onChange={(e) => setProductCategory(e.target.value)}
               aria-required="true"
             >
-              {categories.map((category) => (
+              {categories &&
+              categories.map((category) => (
                 <option key={category.id} value={category.id}>
                   {category.name}
                 </option>
@@ -125,7 +138,8 @@ const AddProduct = () => {
               onChange={(e) => setProductSection(e.target.value)}
               aria-required="true"
             >
-              {section.map((section) => (
+              {sections &&
+              sections.map((section) => (
                 <option key={section.id} value={section.id}>
                   {section.name}
                 </option>
@@ -146,14 +160,17 @@ const AddProduct = () => {
           </div>
 
           <div className="form__button">
-            <button type="submit">Create</button>
+            <button type="submit" disabled={mutation.isLoading}>
+              {mutation.isLoading ? "Creating..." : "Create"}
+            </button>
           </div>
         </fieldset>
       </form>
 
       <ToastContainer />
     </>
-  );
+);
+
 };
 
 export default AddProduct;

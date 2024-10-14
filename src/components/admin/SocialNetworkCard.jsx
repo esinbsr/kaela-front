@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
+import DeleteSocialNetwork from "../../pages/admin/socialNetworksManagement/DeleteSocialNetwork";
 
-const SocialNetworkCard = ({ socialNetwork, onDelete }) => {
+const SocialNetworkCard = ({ socialNetwork }) => {
   return (
     <tr>
       <td>{socialNetwork.platform}</td>
@@ -15,13 +16,7 @@ const SocialNetworkCard = ({ socialNetwork, onDelete }) => {
         </Link>
       </td>
       <td>
-        <button
-          onClick={onDelete}  
-          className="delete-color"
-          aria-label={`Delete ${socialNetwork.platform} network`}
-        >
-          Delete
-        </button>
+      <DeleteSocialNetwork socialNetworkId= {socialNetwork.id}/>
       </td>
     </tr>
   );

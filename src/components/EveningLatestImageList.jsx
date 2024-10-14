@@ -1,9 +1,10 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProduct } from "../actions/productAction";
-import { API_URL } from "../actions/serverRequest";
+
 import { Link } from "react-router-dom";
 import { isEmpty } from './utils/isEmpty';
+import { API_URL } from "../api/serverRequest";
 
 const EveningLatestImageList = ({ start, end, additionalClass = '', section }) => {
     const dispatch = useDispatch(); // Redux action dispatcher

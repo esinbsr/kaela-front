@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
+import DeleteInformation from '../../pages/admin/informationsManagement/DeleteInformation';
 
-const InformationCard = ({ infos, onDelete }) => {
+const InformationCard = ({ infos }) => {
     return (
         <tr>
             <td>{infos.description}</td>
@@ -13,13 +14,7 @@ const InformationCard = ({ infos, onDelete }) => {
                 </Link>
             </td>
             <td>
-                <button
-                    onClick={onDelete}
-                    className="delete-color"
-                    aria-label={`Delete information ${infos.description}`}
-                >
-                    Delete
-                </button>
+            <DeleteInformation informationId={infos.id} informationDescription={infos.description} />
             </td>
         </tr>
     );

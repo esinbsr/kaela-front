@@ -1,65 +1,39 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  deleteInformation,
-  getInformation,
-} from "../../../actions/informationAction";
+import { useQuery } from "react-query";
 import InformationCard from "../../../components/admin/InformationCard";
-import { isEmpty } from "../../../components/utils/isEmpty";
 import AdminNavigation from "../AdminNavigation";
-import ModalAdmin from "../../../components/utils/ModalAdmin";
 import AddInformation from "./AddInformation";
+import { getInformation } from "../../../api/informationApi";
 
 const DisplayInformation = () => {
-  const dispatch = useDispatch(); // Initialize Redux's dispatch function
-  const information = useSelector((state) => state.information.information); // Select the 'information' data from the Redux store
 
-  const [modalShow, setModalShow] = useState(false); // State to control the visibility of the modal
-  const [selectedInformation, setSelectedInformation] = useState(null); // State to track the selected information for deletion
+  // Fetch information from the serveur
+  const { isLoading, error, data } = useQuery({
+    queryKey: ['informations'],  // The unique query key to identify this query
+    queryFn: getInformation,  // The function responsible for fetching the information
+  });
 
-  // Fetch the information data when the component mounts
-  useEffect(() => {
-    if (isEmpty(information)) {
-      dispatch(getInformation());
-    }
-  }, [dispatch, information]);
+  // If there is data and it contains information, use it, otherwise return an empty array
+  const informationList = data?.information?.length > 0 ? data.information : [];
 
-  // Handler to open the delete confirmation modal and set the selected information
-  const handleDelete = (info) => {
-    setSelectedInformation(info);
-    setModalShow(true);
-  };
-
-  // Confirm deletion of the selected information
-  const confirmDelete = () => {
-    if (selectedInformation && selectedInformation.id) {
-      dispatch(deleteInformation(selectedInformation.id)); // Dispatch action to delete the information
-    }
-    setModalShow(false); // Close the modal
-    setSelectedInformation(null); // Reset selected information
-  };
-
-  // Cancel deletion and close the modal
-  const cancelDelete = () => {
-    setModalShow(false);
-    setSelectedInformation(null);
-  };
+  if (isLoading) return "Loading...";
+  if (error) return "An error occurred: " + error.message;
 
   return (
     <div className="admin-container">
-      <AdminNavigation />
+      <AdminNavigation />  
 
       <main className="admin-container__content">
-        <h1>My Information</h1>
-        <AddInformation />
+        <h1>My Information</h1>  
+        <AddInformation /> 
+
         <section className="table">
-          <h2>List of information</h2>
+          <h2>Information List</h2>  
           <div className="table__container">
             <table className="table__content">
               <thead>
                 <tr>
                   <th scope="col">Description</th>
-                  <th scope="col">Mobile</th>
+                  <th scope="col">Phone</th>  
                   <th scope="col">Email</th>
                   <th scope="col">Address</th>
                   <th scope="col" className="action-header" colSpan={2}>
@@ -67,24 +41,18 @@ const DisplayInformation = () => {
                   </th>
                 </tr>
               </thead>
+
               <tbody>
-                {!isEmpty(information) ? (
-                  // Map through the information array and render a row for each item
-                  information.map((info) => (
-                    <InformationCard
-                      key={info.id}
-                      infos={info}
-                      onDelete={() => handleDelete(info)} // Pass the delete handler to the card component
-                    />
+                {/* If the list has items, render each as a row */}
+                {informationList.length ? (
+                  informationList.map((info) => (
+                    <InformationCard key={info.id} infos={info} />
                   ))
                 ) : (
+                  // If no information is available, display a message
                   <tr>
-                    <td
-                      colSpan="6"
-                      style={{ textAlign: "center" }}
-                      role="alert"
-                    >
-                      There is no information
+                    <td colSpan="6" style={{ textAlign: "center" }} role="alert">
+                      There is no information available
                     </td>
                   </tr>
                 )}
@@ -93,14 +61,6 @@ const DisplayInformation = () => {
           </div>
         </section>
       </main>
-
-      {modalShow && selectedInformation && (
-        <ModalAdmin
-          contentSuffix={`information: ${selectedInformation?.description}`} // Pass information description to the modal for display
-          onConfirm={confirmDelete} // Pass confirm handler to the modal
-          onCancel={cancelDelete} // Pass cancel handler to the modal
-        />
-      )}
     </div>
   );
 };

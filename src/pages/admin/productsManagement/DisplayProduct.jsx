@@ -1,54 +1,34 @@
-import { useDispatch, useSelector } from "react-redux";
 import { isEmpty } from "../../../components/utils/isEmpty";
 import AdminNavigation from "../AdminNavigation";
-import { useEffect, useState } from "react";
-import { getProduct, deleteProduct } from "../../../actions/productAction";
-import ModalAdmin from "../../../components/utils/ModalAdmin";
-import ProductCard from "../../../components/admin/ProductCard"
+import ProductCard from "../../../components/admin/ProductCard";
 import AddProduct from "./AddProduct";
-
+import { useQuery } from "react-query";
+import { getProduct } from "../../../api/productApi";
 
 const DisplayProduct = () => {
-  const dispatch = useDispatch();
-  const products = useSelector((state) => state.product.products);
 
-  const [modalShow, setModalShow] = useState(false);  // State to control the visibility of the modal
-  const [selectedProduct, setSelectedProduct] = useState(null);  // State to track the selected product for deletion
+  // Fetch products from the serveur
+  const { isLoading, error, data } = useQuery({
+    queryKey: ["products"],  // The unique query key to identify this query
+    queryFn: getProduct,     // The function responsible for fetching the products
+  });
 
-  useEffect(() => {
-    if(isEmpty(products)) {
-      dispatch(getProduct());  // Fetch products when the component mounts
-    }
-    }, [dispatch, products]);
+  // If there is data and it contains products, use it, otherwise return an empty array
+  const productList = data?.product?.length > 0 ? data.product : [];
 
-  const handleDelete = (product) => {
-    setSelectedProduct(product);
-    setModalShow(true);
-  };
-
-  // Confirm deletion of the selected product
-  const confirmDelete = () => {
-    if (selectedProduct) {
-      dispatch(deleteProduct(selectedProduct.id)); 
-    }
-    setModalShow(false);  // Close the modal
-    setSelectedProduct(null);  // Reset selected product
-  };
-
-  // Cancel deletion and close the modal
-  const cancelDelete = () => {
-    setModalShow(false);
-    setSelectedProduct(null);
-  };
+  if (isLoading) return "Loading...";
+  if (error) return "An error occurred: " + error.message;
 
   return (
     <div className="admin-container">
       <AdminNavigation />
+
       <main className="admin-container__content">
-        <h1>Products</h1>
-        <AddProduct />
+        <h1>Products</h1> 
+        <AddProduct /> 
+
         <section className="table">
-          <h2>List of products</h2>
+          <h2>List of Products</h2> 
           <div className="table__container">
             <table className="table__content">
               <thead>
@@ -63,9 +43,11 @@ const DisplayProduct = () => {
                   </th>
                 </tr>
               </thead>
+
               <tbody>
-                {!isEmpty(products) ? (
-                  products
+                {/* If the list has items, render each as a row, sorted by creation date */}
+                {productList ? (
+                  productList
                     .slice()
                     .sort(
                       (a, b) => new Date(b.created_at) - new Date(a.created_at)
@@ -76,11 +58,11 @@ const DisplayProduct = () => {
                           <ProductCard
                             key={product.id}
                             product={product}
-                            onDelete={() => handleDelete(product)} 
                           />
                         )
                     )
                 ) : (
+                  // If no products are available, display a message
                   <tr>
                     <td colSpan="6" style={{ textAlign: "center" }} role="alert">
                       There are no products
@@ -92,14 +74,6 @@ const DisplayProduct = () => {
           </div>
         </section>
       </main>
-
-      {modalShow && (
-        <ModalAdmin
-          contentSuffix={`product: ${selectedProduct?.name}`}  // Pass product name to the modal for display
-          onConfirm={confirmDelete}  // Pass confirm handler to the modal
-          onCancel={cancelDelete}  // Pass cancel handler to the modal
-        />
-      )}
     </div>
   );
 };

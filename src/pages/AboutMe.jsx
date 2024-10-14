@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getInformation } from "../actions/informationAction";
-import { API_URL } from "../actions/serverRequest";
 import { getProduct } from "../actions/productAction";
 import { Link, useNavigate } from "react-router-dom";
 import { isEmpty } from "../components/utils/isEmpty";
 import { getSocialNetwork } from "../actions/socialNetworkAction";
 import Footer from "../components/Footer";
 import { Helmet } from "react-helmet-async";
+import { API_URL } from "../api/serverRequest";
+
 
 
 // Define section IDs for filtering products

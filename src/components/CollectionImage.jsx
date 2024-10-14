@@ -4,7 +4,8 @@ import { getProduct } from "../actions/productAction";
 import { Link } from "react-router-dom";
 import { getProductCategories } from "../actions/categoryAction";
 import { isEmpty } from "./utils/isEmpty";
-import { API_URL } from "../actions/serverRequest";
+import { API_URL } from "../api/serverRequest";
+
 
 const SECTIONS = {
   COLLECTION: 3, // Section ID for the collection section

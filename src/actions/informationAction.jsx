@@ -1,4 +1,5 @@
-import apiClient from "./api/apiClient";
+import apiClient from "../api/apiClient";
+
 
 export const ADD_INFORMATION_SUCCESS = 'ADD_INFORMATION_SUCCESS';
 export const ADD_INFORMATION_ERROR = 'ADD_INFORMATION_ERROR';

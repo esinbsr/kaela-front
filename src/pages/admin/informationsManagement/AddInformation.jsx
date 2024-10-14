@@ -1,19 +1,40 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { addInformation} from "../../../actions/informationAction";
+import { useState} from "react";
+import { useMutation, useQueryClient } from "react-query";
 import { toast, ToastContainer } from "react-toastify"; 
 import "react-toastify/dist/ReactToastify.css"; 
+import { addInformation } from "../../../api/informationApi"; 
 
 const AddInformation = () => {
+  const queryClient = useQueryClient();
+
   const [description, setDescription] = useState("");
   const [mobile, setMobile] = useState("");
   const [email, setEmail] = useState("");
   const [address, setAddress] = useState("");
 
-  const dispatch = useDispatch();
-  const message = useSelector((state) => state.information.message);
-  const error = useSelector((state) => state.information.error);
+  // Mutation for adding information
+  const mutation = useMutation({
+    mutationFn: addInformation,
+    onSuccess: (data) => {
+      // If successful, invalidate the 'informations' query and reset the form
+      if (data.success) {
+        queryClient.invalidateQueries('informations');
+        toast.success(data.message || "Information added successfully!");
+        setDescription("");
+        setMobile("");
+        setEmail("");
+        setAddress("");
+      } else {
+        toast.error(data.message || "An error has occurred.");
+      }
+    },
+    // Handle server errors
+    onError: (error) => {
+      toast.error("Server error: " + error.message); 
+    }
+  });
 
+  // Form submission handler
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -24,27 +45,15 @@ const AddInformation = () => {
       address,
     };
 
-    dispatch(addInformation(formData));
+    // Trigger the mutation to add information
+    mutation.mutate(formData);
   };
-
-
-  useEffect(() => {
-    if (message && !error) {
-      toast.success(message); 
-      setDescription("");
-      setMobile("");
-      setEmail("");
-      setAddress("");
-    } else if (error) {
-      toast.error(error); 
-    }
-  }, [message, error]);
 
   return (
     <>
       <form onSubmit={handleSubmit} className="form">
         <fieldset>
-          <legend>Add new information</legend>
+          <legend>Add new information</legend> 
           
           <div className="form__group">
             <label htmlFor="description">Description</label>
@@ -57,7 +66,7 @@ const AddInformation = () => {
           </div>
   
           <div className="form__group">
-            <label htmlFor="mobile">Mobile</label>
+            <label htmlFor="mobile">Mobile</label> 
             <input
               type="text"
               id="mobile"
@@ -90,7 +99,9 @@ const AddInformation = () => {
           </div>
   
           <div className="form__button">
-            <button type="submit">Create</button>
+            <button type="submit" disabled={mutation.isLoading}>
+              {mutation.isLoading ? "Creating..." : "Create"} 
+            </button>
           </div>
         </fieldset>
       </form>

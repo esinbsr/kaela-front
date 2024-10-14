@@ -1,5 +1,5 @@
 import axios from 'axios';
-import apiClient from "./api/apiClient";
+
 
 export const GET_PRODUCT_SUCCESS = 'GET_PRODUCT_SUCCESS';
 export const GET_PRODUCT_ERROR = 'GET_PRODUCT_ERROR';
@@ -16,7 +16,8 @@ export const UPDATE_PRODUCT_ERROR = 'UPDATE_PRODUCT_ERROR';
 export const DELETE_PRODUCT_SUCCESS = 'DELETE_PRODUCT_SUCCESS';
 export const DELETE_PRODUCT_ERROR = 'DELETE_PRODUCT_ERROR';
 
-import { API_URL } from "./serverRequest";
+import apiClient from '../api/apiClient';
+import { API_URL } from '../api/serverRequest';
 
 
 export const getProduct = () => {

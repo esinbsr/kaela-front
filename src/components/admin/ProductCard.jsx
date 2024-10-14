@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
-import { API_URL } from "../../actions/serverRequest";
+import { API_URL } from "../../api/serverRequest";
+import DeleteProduct from "../../pages/admin/productsManagement/DeleteProduct";
 
-const ProductCard = ({ product, onDelete }) => {
+const ProductCard = ({ product}) => {
   return (
     <tr>
       <td>
@@ -26,13 +27,7 @@ const ProductCard = ({ product, onDelete }) => {
         </Link>
       </td>
       <td>
-        <button
-          onClick={onDelete} 
-          aria-label={`Delete ${product.name}`}
-          className="delete-color"
-        >
-          Delete
-        </button>
+      <DeleteProduct productId={product.id} />
       </td>
     </tr>
   );

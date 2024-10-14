@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
-import { API_URL } from '../actions/serverRequest';
+import { API_URL } from '../api/serverRequest';
+
 
 const HomeHeaderImageCard = ({ product, userRole, onAdminClick }) => {
   return (

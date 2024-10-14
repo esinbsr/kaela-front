@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
-import apiClient from '../actions/api/apiClient';
+import apiClient from '../api/apiClient';
+
 
 const checkAdminAccess = async () => {
   try {

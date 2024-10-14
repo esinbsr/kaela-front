@@ -1,4 +1,5 @@
-import apiClient from "./api/apiClient";
+import apiClient from "../api/apiClient";
+
 
 export const GET_SOCIAL_NETWORK_SUCCESS = 'GET_SOCIAL_NETWORK_SUCCESS';
 export const GET_SOCIAL_NETWORK_ERROR = 'GET_SOCIAL_NETWORK_ERROR';

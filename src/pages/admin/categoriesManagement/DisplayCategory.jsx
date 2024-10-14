@@ -1,68 +1,38 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  getProductCategories,
-  deleteCategory,
-} from "../../../actions/categoryAction";
-import CategoryCard from "../../../components/admin/CategoryCard";
+import { useQuery } from "react-query";
 import AddCategory from "./AddCategory";
-import { isEmpty } from "../../../components/utils/isEmpty";
 import AdminNavigation from "../AdminNavigation";
-import ModalAdmin from "../../../components/utils/ModalAdmin";
+import { getProductCategories } from "../../../api/categoryApi";
+import CategoryCard from "../../../components/admin/CategoryCard";
 
 const DisplayCategory = () => {
-  const dispatch = useDispatch(); // Initialize Redux dispatch function
-  const categories = useSelector((state) => state.category.category); // Select categories from Redux store
 
-  const [modalShow, setModalShow] = useState(false); // State to control the visibility of the modal
-  const [selectedCategory, setSelectedCategory] = useState(null); // State to track the selected category for deletion
+  // Fetch categories from the server 
+  const { isLoading, error, data } = useQuery({
+    queryKey: ['categories'],  // The unique query key to identify this query
+    queryFn: getProductCategories,  // Function responsible for fetching categories
+  });
 
-  // Fetch categories on component mount or when categories array changes
-  useEffect(() => {
-    if (isEmpty(categories)) {
-      dispatch(getProductCategories()); // Dispatch action to fetch categories if they are not already loaded
-    }
-  }, [dispatch, categories]);
+  // If there is data and it contains categories, use it, otherwise return an empty array
+  const categoryList = data?.length > 0 ? data : [];
 
-  // Handler to open the delete confirmation modal and set the category to be deleted
-  const handleDelete = (category) => {
-    setSelectedCategory(category);
-    setModalShow(true);
-  };
-
-  // Confirm deletion of the selected category
-  const confirmDelete = () => {
-    if (selectedCategory && selectedCategory.id) {
-      // Ensure selectedCategory is defined and has an id
-      dispatch(deleteCategory(selectedCategory.id)); // Dispatch action to delete the category
-    }
-    setModalShow(false); // Close the modal
-    setSelectedCategory(null); // Reset selected category
-  };
-
-  // Cancel deletion and close the modal
-  const cancelDelete = () => {
-    setModalShow(false);
-    setSelectedCategory(null);
-  };
+  if (isLoading) return "Loading...";
+  if (error) return "An error occurred: " + error.message;
 
   return (
     <div className="admin-container">
-      <AdminNavigation />
+      <AdminNavigation /> 
 
       <main className="admin-container__content">
-        <h1>Categories</h1>
-
-        <AddCategory />
-
+        <h1>Categories</h1> 
+        <AddCategory />  
         <section className="table">
-          <h2>List of Categories</h2>
+          <h2>Category List</h2> 
 
           <div className="table__container">
             <table className="table__content">
               <thead>
                 <tr>
-                  <th scope="col">Name</th>
+                  <th scope="col">Name</th> 
                   <th scope="col">Description</th>
                   <th scope="col">Page Title</th>
                   <th scope="col">Page Description</th>
@@ -73,23 +43,23 @@ const DisplayCategory = () => {
               </thead>
 
               <tbody>
-                {!isEmpty(categories) ? (
-                  // Map through categories and render a row for each
-                  categories.map((category) => (
+                {/* If the list has items, render each as a row */}
+                {categoryList.length ? (
+                  categoryList.map((category) => (
                     <CategoryCard
                       key={category.id}
                       category={category}
-                      onDelete={() => handleDelete(category)} // Pass delete handler as prop
                     />
                   ))
                 ) : (
+                  // If no categories are available, display a message
                   <tr>
                     <td
                       colSpan="5"
                       style={{ textAlign: "center" }}
                       role="alert"
                     >
-                      There are no categories
+                      There are no categories.
                     </td>
                   </tr>
                 )}
@@ -98,13 +68,6 @@ const DisplayCategory = () => {
           </div>
         </section>
       </main>
-      {modalShow && selectedCategory && (
-        <ModalAdmin
-          contentSuffix={`category: ${selectedCategory.name || "Unknown"}`} // Handle undefined names gracefully
-          onConfirm={confirmDelete} // Pass confirm handler to the modal
-          onCancel={cancelDelete} // Pass cancel handler to the modal
-        />
-      )}
     </div>
   );
 };

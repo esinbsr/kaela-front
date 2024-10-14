@@ -1,5 +1,6 @@
 import axios from "axios";
-import { API_URL } from "./serverRequest";
+import { API_URL } from "../api/serverRequest";
+
 
 export const GET_SECTION_SUCCESS = 'GET_SECTION_SUCCESS';
 export const GET_SECTION_ERROR = 'GET_SECTION_ERROR';

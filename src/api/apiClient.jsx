@@ -1,5 +1,5 @@
 import axios from "axios";
-import { API_URL } from "../serverRequest";
+import { API_URL } from "../api/serverRequest";
 
 // Avec ce fichier :
 // - Toutes les requêtes utilisant apiClient sont automatiquement envoyées à l'URL de base que j'ai définis
