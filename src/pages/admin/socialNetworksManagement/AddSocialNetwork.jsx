@@ -4,7 +4,7 @@ import { addSocialNetwork } from "../../../actions/socialNetworkAction";
 import { toast, ToastContainer } from "react-toastify"; 
 import "react-toastify/dist/ReactToastify.css"; 
 
-const AdminAddSocialNetwork = () => {
+const AddSocialNetwork = () => {
   const [platform, setPlatform] = useState("");
   const [url, setUrl] = useState("");
 
@@ -75,4 +75,4 @@ const AdminAddSocialNetwork = () => {
   );
 };
 
-export default AdminAddSocialNetwork;
+export default AddSocialNetwork;

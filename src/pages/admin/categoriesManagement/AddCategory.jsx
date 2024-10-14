@@ -6,7 +6,7 @@ import {
 import { toast, ToastContainer } from "react-toastify"; 
 import "react-toastify/dist/ReactToastify.css"; 
 
-const AdminAddCategory = () => {
+const AddCategory = () => {
   const [categoryName, setCategoryName] = useState("");
   const [categoryDescription, setCategoryDescription] = useState("");
   const [categoryPageTitle, setCategoryPageTitle] = useState("");
@@ -104,4 +104,4 @@ const AdminAddCategory = () => {
   );
 };
 
-export default AdminAddCategory;
+export default AddCategory;

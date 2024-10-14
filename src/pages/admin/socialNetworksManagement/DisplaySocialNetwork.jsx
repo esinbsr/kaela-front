@@ -5,12 +5,12 @@ import {
   deleteSocialNetwork,
 } from "../../../actions/socialNetworkAction";
 import SocialNetworkCard from "../../../components/admin/SocialNetworkCard";
-import AdminAddSocialNetwork from "./AdminAddSocialNetwork";
+import AdminAddSocialNetwork from "./AddSocialNetwork";
 import { isEmpty } from "../../../components/utils/isEmpty";
 import AdminNavigation from "../AdminNavigation";
 import ModalAdmin from "../../../components/utils/ModalAdmin";
 
-const AdminSocialNetwork = () => {
+const DisplaySocialNetwork = () => {
   const dispatch = useDispatch(); // Initialize Redux's dispatch function
   const socialNetwork = useSelector(
     (state) => state.socialNetwork.socialNetwork
@@ -104,4 +104,4 @@ const AdminSocialNetwork = () => {
   );
 };
 
-export default AdminSocialNetwork;
+export default DisplaySocialNetwork;

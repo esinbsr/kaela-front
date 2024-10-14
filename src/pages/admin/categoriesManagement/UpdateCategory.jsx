@@ -6,7 +6,7 @@ import AdminNavigation from "../AdminNavigation";
 import { toast, ToastContainer } from "react-toastify"; 
 import 'react-toastify/dist/ReactToastify.css'; 
 
-const AdminUpdateCategory = () => {
+const UpdateCategory = () => {
   const { categoryId } = useParams();
   const dispatch = useDispatch();
 
@@ -120,4 +120,4 @@ const AdminUpdateCategory = () => {
   );
 };
 
-export default AdminUpdateCategory;
+export default UpdateCategory;

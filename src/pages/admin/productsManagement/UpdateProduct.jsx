@@ -9,7 +9,7 @@ import { getSection } from "../../../actions/sectionAction";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const AdminUpdateProduct = () => {
+const UpdateProduct = () => {
   const [productName, setProductName] = useState("");
   const [productDescription, setProductDescription] = useState("");
   const [productCategory, setProductCategory] = useState("");
@@ -163,4 +163,4 @@ const AdminUpdateProduct = () => {
   );
 };
 
-export default AdminUpdateProduct;
+export default UpdateProduct;

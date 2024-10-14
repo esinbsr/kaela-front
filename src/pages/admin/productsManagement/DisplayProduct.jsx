@@ -1,14 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
-import AdminAddProduct from "./AdminAddProduct";
 import { isEmpty } from "../../../components/utils/isEmpty";
 import AdminNavigation from "../AdminNavigation";
 import { useEffect, useState } from "react";
 import { getProduct, deleteProduct } from "../../../actions/productAction";
 import ModalAdmin from "../../../components/utils/ModalAdmin";
 import ProductCard from "../../../components/admin/ProductCard"
+import AddProduct from "./AddProduct";
 
 
-const AdminProduct = () => {
+const DisplayProduct = () => {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.product.products);
 
@@ -46,7 +46,7 @@ const AdminProduct = () => {
       <AdminNavigation />
       <main className="admin-container__content">
         <h1>Products</h1>
-        <AdminAddProduct />
+        <AddProduct />
         <section className="table">
           <h2>List of products</h2>
           <div className="table__container">
@@ -104,4 +104,4 @@ const AdminProduct = () => {
   );
 };
 
-export default AdminProduct;
+export default DisplayProduct;

@@ -1,32 +1,41 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+
 import Home from "./pages/Home";
 import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
 import Contact from "./pages/Contact";
-import AdminProduct from "./pages/admin/products/AdminProduct";
-import AdminAddProduct from "./pages/admin/products/AdminAddProduct";
-import AdminUpdateProduct from "./pages/admin/products/AdminUpdateProduct";
-import AdminInformation from "./pages/admin/informations/AdminInformation";
-import AdminAddInformation from "./pages/admin/informations/AdminAddInformation";
+
 import EveningDresses from "./pages/EveningDresses";
 import LatestCollection from "./pages/LatestCollection";
 import Collection from "./pages/Collection";
 import Navigation from "./components/Navigation";
 import AdminNavigation from "./pages/admin/AdminNavigation";
 import AboutMe from "./pages/AboutMe";
-import AdminCategory from "./pages/admin/categories/AdminCategory";
-import AdminAddCategory from "./pages/admin/categories/AdminAddCategory";
-import AdminUpdateCategory from "./pages/admin/categories/AdminUpdateCategory";
-import AdminSocialNetwork from "./pages/admin/socialNetworks/AdminSocialNetwork";
-import AdminAddSocialNetwork from "./pages/admin/socialNetworks/AdminAddSocialNetwork";
-import AdminUpdateSocialNetwork from "./pages/admin/socialNetworks/AdminUpdateSocialNetwork";
+
 import ProductDetail from "./pages/ProductDetail";
 import Accessibility from "./components/utils/Accessibility";
-import AdminUpdateInformation from "./pages/admin/informations/AdminUpdateInformation";
 import LegalNotice from "./pages/LegalNotice";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import ProtectedRoutes from "./components/ProtectedRoutes";
 import Logout from "./components/Logout";
+
+
+import AddCategory from "./pages/admin/categoriesManagement/AddCategory";
+import DisplayCategory from "./pages/admin/categoriesManagement/DisplayCategory";
+import UpdateCategory from "./pages/admin/categoriesManagement/UpdateCategory";
+
+import AddInformation from "./pages/admin/informationsManagement/AddInformation";
+import DisplayInformation from "./pages/admin/informationsManagement/DisplayInformation";
+import UpdateInformation from "./pages/admin/informationsManagement/UpdateInformation";
+
+import AddProduct from "./pages/admin/productsManagement/AddProduct";
+import DisplayProduct from "./pages/admin/productsManagement/DisplayProduct";
+import UpdateProduct from "./pages/admin/productsManagement/UpdateProduct";
+
+import AddSocialNetwork from "./pages/admin/socialNetworksManagement/AddSocialNetwork";
+import DisplaySocialNetwork from "./pages/admin/socialNetworksManagement/DisplaySocialNetwork";
+import UpdateSocialNetwork from "./pages/admin/socialNetworksManagement/UpdateSocialNetwork";
+
 
 
 const App = () => {
@@ -63,7 +72,7 @@ const App = () => {
             path="/product"
             element={
               <ProtectedRoutes>
-                <AdminProduct />
+                <DisplayProduct />
               </ProtectedRoutes>
             }
           />
@@ -71,7 +80,7 @@ const App = () => {
             path="/addProduct"
             element={
               <ProtectedRoutes>
-                <AdminAddProduct />
+                <AddProduct />
               </ProtectedRoutes>
             }
           />
@@ -79,7 +88,7 @@ const App = () => {
             path="/updateProduct/:productId"
             element={
               <ProtectedRoutes>
-                <AdminUpdateProduct />
+                <UpdateProduct/>
               </ProtectedRoutes>
             }
           />
@@ -87,7 +96,7 @@ const App = () => {
             path="/adminInformation"
             element={
               <ProtectedRoutes>
-                <AdminInformation />
+                <DisplayInformation />
               </ProtectedRoutes>
             }
           />
@@ -95,7 +104,7 @@ const App = () => {
             path="/adminAddInformation"
             element={
               <ProtectedRoutes>
-                <AdminAddInformation />
+                <AddInformation />
               </ProtectedRoutes>
             }
           />
@@ -103,7 +112,7 @@ const App = () => {
             path="/adminUpdateInformation/:informationId"
             element={
               <ProtectedRoutes>
-                <AdminUpdateInformation />
+                <UpdateInformation />
               </ProtectedRoutes>
             }
           />
@@ -112,7 +121,7 @@ const App = () => {
             path="/adminCategory"
             element={
               <ProtectedRoutes>
-                <AdminCategory />
+                <DisplayCategory />
               </ProtectedRoutes>
             }
           />
@@ -120,7 +129,7 @@ const App = () => {
             path="/adminAddCategory"
             element={
               <ProtectedRoutes>
-                <AdminAddCategory />
+                <AddCategory />
                </ProtectedRoutes>
             }
           />
@@ -128,7 +137,7 @@ const App = () => {
             path="/adminUpdateCategory/:categoryId"
             element={
               <ProtectedRoutes>
-                <AdminUpdateCategory />
+                <UpdateCategory />
               </ProtectedRoutes>
             }
           />
@@ -136,7 +145,7 @@ const App = () => {
             path="/adminSocialNetwork"
             element={
               <ProtectedRoutes>
-                <AdminSocialNetwork />
+                <DisplaySocialNetwork />
               </ProtectedRoutes>
             }
           />
@@ -144,7 +153,7 @@ const App = () => {
             path="/adminAddSocialNetwork"
             element={
               <ProtectedRoutes>
-                <AdminAddSocialNetwork />
+                <AddSocialNetwork />
               </ProtectedRoutes>
             }
           />
@@ -152,7 +161,7 @@ const App = () => {
             path="/adminUpdateSocialNetwork/:socialNetworkId"
             element={
               <ProtectedRoutes>
-                <AdminUpdateSocialNetwork />
+                <UpdateSocialNetwork />
               </ProtectedRoutes>
             }
           />

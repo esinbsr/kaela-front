@@ -4,7 +4,7 @@ import { addInformation} from "../../../actions/informationAction";
 import { toast, ToastContainer } from "react-toastify"; 
 import "react-toastify/dist/ReactToastify.css"; 
 
-const AdminAddInformation = () => {
+const AddInformation = () => {
   const [description, setDescription] = useState("");
   const [mobile, setMobile] = useState("");
   const [email, setEmail] = useState("");
@@ -100,4 +100,4 @@ const AdminAddInformation = () => {
   );
 };
 
-export default AdminAddInformation;
+export default AddInformation;

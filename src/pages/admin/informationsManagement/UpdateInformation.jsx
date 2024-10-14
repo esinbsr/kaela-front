@@ -9,7 +9,7 @@ import AdminNavigation from "../AdminNavigation";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const AdminUpdateInformation = () => {
+const UpdateInformation = () => {
   const { informationId } = useParams();
   const dispatch = useDispatch();
 
@@ -129,4 +129,4 @@ const AdminUpdateInformation = () => {
   );
 };
 
-export default AdminUpdateInformation;
+export default UpdateInformation;

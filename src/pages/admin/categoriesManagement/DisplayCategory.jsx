@@ -5,12 +5,12 @@ import {
   deleteCategory,
 } from "../../../actions/categoryAction";
 import CategoryCard from "../../../components/admin/CategoryCard";
-import AdminAddCategory from "./AdminAddCategory";
+import AddCategory from "./AddCategory";
 import { isEmpty } from "../../../components/utils/isEmpty";
 import AdminNavigation from "../AdminNavigation";
 import ModalAdmin from "../../../components/utils/ModalAdmin";
 
-const AdminCategory = () => {
+const DisplayCategory = () => {
   const dispatch = useDispatch(); // Initialize Redux dispatch function
   const categories = useSelector((state) => state.category.category); // Select categories from Redux store
 
@@ -53,7 +53,7 @@ const AdminCategory = () => {
       <main className="admin-container__content">
         <h1>Categories</h1>
 
-        <AdminAddCategory />
+        <AddCategory />
 
         <section className="table">
           <h2>List of Categories</h2>
@@ -109,4 +109,4 @@ const AdminCategory = () => {
   );
 };
 
-export default AdminCategory;
+export default DisplayCategory;

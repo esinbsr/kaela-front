@@ -5,12 +5,12 @@ import {
   getInformation,
 } from "../../../actions/informationAction";
 import InformationCard from "../../../components/admin/InformationCard";
-import AdminAddInformation from "./AdminAddInformation";
 import { isEmpty } from "../../../components/utils/isEmpty";
 import AdminNavigation from "../AdminNavigation";
 import ModalAdmin from "../../../components/utils/ModalAdmin";
+import AddInformation from "./AddInformation";
 
-const AdminInformation = () => {
+const DisplayInformation = () => {
   const dispatch = useDispatch(); // Initialize Redux's dispatch function
   const information = useSelector((state) => state.information.information); // Select the 'information' data from the Redux store
 
@@ -51,7 +51,7 @@ const AdminInformation = () => {
 
       <main className="admin-container__content">
         <h1>My Information</h1>
-        <AdminAddInformation />
+        <AddInformation />
         <section className="table">
           <h2>List of information</h2>
           <div className="table__container">
@@ -105,4 +105,4 @@ const AdminInformation = () => {
   );
 };
 
-export default AdminInformation;
+export default DisplayInformation;

@@ -6,7 +6,7 @@ import AdminNavigation from "../AdminNavigation";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const AdminUpdateSocialNetwork = () => {
+const UpdateSocialNetwork = () => {
   const { socialNetworkId } = useParams();
   const dispatch = useDispatch();
 
@@ -97,4 +97,4 @@ const AdminUpdateSocialNetwork = () => {
   );
 };
 
-export default AdminUpdateSocialNetwork;
+export default UpdateSocialNetwork;
