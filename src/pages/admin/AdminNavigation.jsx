@@ -15,25 +15,25 @@ const AdminNavigation = () => {
     <div className="admin-container">
       <aside className="admin-container__navigation">
         <NavLink
-          to="/product"
+          to="/displayProduct"
           className={({ isActive }) => (isActive ? "active-link" : "")}
         >
           Product
         </NavLink>
         <NavLink
-          to="/adminInformation"
+          to="/displayInformation"
           className={({ isActive }) => (isActive ? "active-link" : "")}
         >
           Information about me
         </NavLink>
         <NavLink
-          to="/adminCategory"
+          to="/displayCategory"
           className={({ isActive }) => (isActive ? "active-link" : "")}
         >
           Category
         </NavLink>
         <NavLink
-          to="/adminSocialNetwork"
+          to="/displaySocialNetwork"
           className={({ isActive }) => (isActive ? "active-link" : "")}
         >
           Social network

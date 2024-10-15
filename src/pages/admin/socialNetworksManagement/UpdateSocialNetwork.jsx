@@ -17,7 +17,7 @@ const UpdateSocialNetwork = () => {
 
   // Fetch social netwoek data by id when the component mounts
   useQuery({
-    queryKey: ["socialNetwork", socialNetworkId],  // Unique query key for the social network
+    queryKey: ["socialNetworks", socialNetworkId],  // Unique query key for the social network
     queryFn: () => getSocialNetworkById(socialNetworkId),  // Api call to fetch the social network details
     onSuccess: (data) => {
       if (data) {
@@ -36,7 +36,7 @@ const UpdateSocialNetwork = () => {
   const mutation = useMutation({
     mutationFn: updateSocialNetwork, 
     onSuccess: (data) => {
-      queryClient.invalidateQueries("socialNetwork"); // Invalidate the cache to refetch updated data
+      queryClient.invalidateQueries("socialNetworks"); // Invalidate the cache to refetch updated data
       if (data.success) {
         toast.success(data.message); 
       } else {

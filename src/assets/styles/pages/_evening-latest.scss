@@ -19,6 +19,7 @@
       max-width: 100%; // Empêche les images de dépasser leur conteneur
       transition: transform 0.3s ease-in-out;
       object-fit: cover;
+      cursor: pointer;
 
       &:hover {
         transform: scale(1.05);

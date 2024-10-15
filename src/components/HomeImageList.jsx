@@ -1,28 +1,30 @@
-import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { getProduct } from '../actions/productAction';
+import { useState, useContext } from 'react';
+import { useQuery } from 'react-query';
 import { useNavigate } from 'react-router-dom';
-import { isEmpty } from './utils/isEmpty';
 import HomeHeaderImageCard from './HomeHeaderImageCard';
+import { AuthContext } from '../context/AuthContext';
+import { getProduct } from '../api/productApi';
 
 const SECTIONS = {
     HOME_HEADER: 2,
 };
 
 const HomeImageList = ({ start, end, additionalClass }) => {
-    const dispatch = useDispatch();
-    const products = useSelector((state) => state.product.products);
-    const userRole = useSelector((state) => state.user.role);
+    const { auth } = useContext(AuthContext); 
+    const userRole = auth.role;
     const navigate = useNavigate();
     
     const [modalVisible, setModalVisible] = useState(false);
     const [selectedProduct, setSelectedProduct] = useState(null);
 
-    useEffect(() => {
-        dispatch(getProduct());
-    }, [dispatch]);
+    const { data, isLoading, error } = useQuery({
+        queryKey: ['products'],
+        queryFn:  getProduct
+    });
 
-    const filteredProducts = products
+    const productList = data?.length > 0 ? data : [];
+
+    const filteredProducts = productList
         .filter((product) => product.section_id === SECTIONS.HOME_HEADER)
         .slice(start, end);
 
@@ -41,9 +43,12 @@ const HomeImageList = ({ start, end, additionalClass }) => {
         closeModal();
     };
 
+    if (isLoading) return "Loading...";
+    if (error) return "An error occurred: " + error.message;
+
     return (
         <div className={`${additionalClass || ''}`}>
-            {!isEmpty(filteredProducts) ? (
+            {filteredProducts ? (
                 filteredProducts.map((product) => (
                     <HomeHeaderImageCard
                         key={product.id}
@@ -53,20 +58,20 @@ const HomeImageList = ({ start, end, additionalClass }) => {
                     />
                 ))
             ) : (
-                <p>No products found for the home header.</p>
+                <p>Aucun produit trouvé pour l&apos;en-tête d&apos;accueil.</p>
             )}
 
             {modalVisible && (
                 <div className="modal">
                     <div className="modal__content">
-                        <h2>What do you want to do?</h2>
+                        <h2>Que souhaitez-vous faire ?</h2>
                         <button onClick={() => handleNavigate(`/productDetail/${selectedProduct.id}`)}>
-                            View Product Details
+                            Voir les détails du produit
                         </button>
-                        <button onClick={() => handleNavigate(`/adminUpdateProduct/${selectedProduct.id}`)}>
-                            Edit Product Image
+                        <button onClick={() => handleNavigate(`/UpdateProduct/${selectedProduct.id}`)}>
+                            Modifier l&apos;image du produit
                         </button>
-                        <button onClick={closeModal}>Cancel</button>
+                        <button onClick={closeModal}>Annuler</button>
                     </div>
                 </div>
             )}

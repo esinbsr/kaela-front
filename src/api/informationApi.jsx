@@ -3,7 +3,7 @@ import apiClient from "./apiClient";
 
 export const getInformation = async () => {
   const response = await apiClient.get("getInformation");
-  return response.data;
+  return response.data.information;
 };
 
 

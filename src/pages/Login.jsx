@@ -1,89 +1,85 @@
-import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
-import { loginUser } from "../actions/userAction";
+import { useState, useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useMutation } from 'react-query';
 import { toast, ToastContainer } from "react-toastify"; 
 import 'react-toastify/dist/ReactToastify.css'; 
 import Footer from "../components/Footer";
+import { loginUser } from "../api/userApi";
+import { AuthContext } from "../context/AuthContext"; // Import du AuthContext
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  // Accessing the user role and error state from Redux store
-  const userRole = useSelector((state) => state.user.role);
-  const error = useSelector((state) => state.user.error);
-
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const { auth, login } = useContext(AuthContext); // Récupérer la fonction login du contexte
 
-  // Reset messages when the component mounts
+  // Redirection si l'utilisateur est déjà connecté
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [dispatch]);
+    if (auth.token) {
+      navigate("/"); // Rediriger si déjà connecté
+    }
+  }, [auth.token, navigate]);
 
-  // Handle form submission
-  const handleSubmit = (e) => {
-    e.preventDefault(); 
-    const formData = { email, password }; 
-    dispatch(loginUser(formData)); 
-  };
+  const mutation = useMutation(loginUser, {
+    onSuccess: (data) => {
+      if (data.success) {
+        // Appeler la fonction login du contexte pour stocker les informations dans le localStorage et le contexte
+        login({ token: data.token, userId: data.user_id, role: data.role });
 
-  // Redirect based on user role after successful login
-  useEffect(() => {
-    if (userRole) {
-      if (userRole === "admin") {
-        navigate("/admin"); 
+        // Redirection selon le rôle de l'utilisateur
+        if (data.role === 'admin') {
+          navigate('/admin');
+        } else {
+          navigate('/');
+        }
       } else {
-        navigate("/"); 
+        toast.error(data.message);
       }
-    }
-  }, [userRole, navigate]);
+    },
+    onError: (error) => {
+      toast.error("Erreur de serveur : " + error.message);
+    },
+  });
 
-  useEffect(() => {
-    if (error) {
-      toast.error(error);
-    }
-  }, [error]);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    mutation.mutate({ email, password });
+  };
 
   return (
     <>
-    <section className="user-form">
-      <h2>Login</h2>
-      <div className="line"></div> {/* Decorative line below the heading */}
-      <form onSubmit={handleSubmit} className="user-form__content">
-        <label htmlFor="email">Email</label>
-        <input
-          id="email"
-          type="text"
-          onChange={(e) => setEmail(e.target.value)}
-          name="email"
-          value={email}
-          placeholder="example@domain.com" 
-          aria-required="true" 
-        />
-        <label htmlFor="password">Password</label>
-        <input
-          id="password"
-          type="password"
-          onChange={(e) => setPassword(e.target.value)}
-          name="password"
-          value={password}
-          placeholder="Enter your password"
-          aria-required="true" 
-        />
-        <button type="submit">Login</button>
-        <p>
-          No account yet?
-          <Link to="/signup" className="user-form__link">
-            Sign up here
-          </Link>
-        </p>
-      </form>
+      <section className="user-form">
+        <h2>Login</h2>
+        <div className="line"></div>
+        <form onSubmit={handleSubmit} className="user-form__content">
+          <label htmlFor="email">Email</label>
+          <input
+            id="email"
+            type="text"
+            onChange={(e) => setEmail(e.target.value)}
+            name="email"
+            value={email}
+            placeholder="example@domain.com"
+            aria-required="true"
+          />
+          <label htmlFor="password">Password</label>
+          <input
+            id="password"
+            type="password"
+            onChange={(e) => setPassword(e.target.value)}
+            name="password"
+            value={password}
+            placeholder="Enter your password"
+            aria-required="true"
+          />
+          <button type="submit" disabled={mutation.isLoading}>
+            {mutation.isLoading ? "Logging in..." : "Login"}
+          </button>
+        </form>
 
-      <ToastContainer />
-    </section>
-    <Footer/>
+        <ToastContainer />
+      </section>
+      <Footer />
     </>
   );
 };

@@ -9,7 +9,7 @@ const InformationCard = ({ infos }) => {
             <td>{infos.email}</td>
             <td>{infos.address}</td>
             <td>
-                <Link to={`/adminUpdateInformation/${infos.id}`} className='update-color' aria-label={`Update information ${infos.description}`}>
+                <Link to={`/updateInformation/${infos.id}`} className='update-color' aria-label={`Update information ${infos.description}`}>
                     Update
                 </Link>
             </td>

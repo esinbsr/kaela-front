@@ -8,12 +8,12 @@ const DisplaySocialNetwork = () => {
 
   // Fetch social networks from the serveur
   const { isLoading, error, data } = useQuery({
-    queryKey: ["socialNetwork"],  // The unique query key to identify this query
+    queryKey: ["socialNetworks"],  // The unique query key to identify this query
     queryFn: getSocialNetwork,    // The function responsible for fetching the social networks
   });
   
   // If there is data and it contains social networks, use it, otherwise return an empty array
-  const socialNetworkList = data?.socialNetwork?.length > 0 ? data.socialNetwork : [];
+  const socialNetworkList = data?.length > 0 ? data : [];
 
   if (isLoading) return "Loading...";
   if (error) return `An error occurred: ${error.message}`;

@@ -1,4 +1,4 @@
-import { useQuery } from "react-query";
+ import { useQuery } from "react-query";
 import AddCategory from "./AddCategory";
 import AdminNavigation from "../AdminNavigation";
 import { getProductCategories } from "../../../api/categoryApi";

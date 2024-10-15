@@ -10,7 +10,7 @@ const CategoryCard = ({ category }) => {
       <td>{category.page_description}</td>
       <td>
         <Link
-          to={`/adminUpdateCategory/${category.id}`}
+          to={`/updateCategory/${category.id}`}
           className="update-color"
           aria-label={`Mettre à jour la catégorie ${category.name}`}
         >

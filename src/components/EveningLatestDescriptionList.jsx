@@ -1,30 +1,28 @@
-import { useEffect} from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getProductCategories } from "../actions/categoryAction";
-import { isEmpty } from './utils/isEmpty'; // Utility function to check if an array is empty
+import { useQuery } from "react-query";
+import { getProductCategories } from "../api/categoryApi";
 
 const EveningLatestDescriptionList = ({ categorySlug }) => {
-  const dispatch = useDispatch(); // Hook to dispatch Redux actions
-  const categories = useSelector((state) => state.category.category); // Selector to access categories from the Redux store
 
-  useEffect(() => {
-    // Dispatch action to get categories and update loading state
-    dispatch(getProductCategories());
-  }, [dispatch]);
+  // Fetch categories from the server 
+  const { isLoading, error, data: categories } = useQuery({
+    queryKey: ['categories'],  // The unique query key to identify this query
+    queryFn: getProductCategories,  // Function responsible for fetching categories
+  });
 
 // Select the category based on the slug passed in prop
-  const category = !isEmpty(categories)
+  const category = categories
     ? categories.find(cat => cat.slug === categorySlug)
     : null;
 
+    // Return loading or error messages if necessary
+    if (isLoading) return "Loading...";
+    if (error) return "An error occurred: " + error.message;
   return (
     <>
       {category ? (
         <>
-        {/* Display the name of the category */}
         <h1>{category.name}</h1>
         <div className="evening-latest__description">
-          {/* Display the page title and description */}
           <h3>{category.page_title}</h3>
           <p>{category.page_description}</p>
         </div>

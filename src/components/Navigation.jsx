@@ -1,13 +1,13 @@
-import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useState, useContext } from "react";
 import { NavLink } from "react-router-dom";
 import Logo from "./Logo";
+import { AuthContext } from "../context/AuthContext";
 
 const Navigation = () => {
   const [menuOpen, setMenuOpen] = useState(false); // État pour ouvrir/fermer le menu
 
-  // Récupérer les informations utilisateur depuis Redux
-  const { token, role } = useSelector((state) => state.user);
+  // Récupérer les informations utilisateur depuis le AuthContext
+  const { auth, logout } = useContext(AuthContext);
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen); // Inverse l'état d'ouverture du menu
@@ -65,32 +65,33 @@ const Navigation = () => {
             Contact
           </NavLink>
 
-          {/* Afficher les liens en fonction de l'état de connexion */}
-          {token ? (
-            <>
-              {/* Si l'utilisateur est connecté et admin, afficher le lien admin */}
-              {role === 'admin' && (
-                <NavLink
-                  to="/admin"
-                  className={({ isActive }) => (isActive ? "active" : "")}
-                  onClick={() => setMenuOpen(false)}
-                >
-                  Admin
-                </NavLink>
-              )}
+          {/* Afficher le lien admin uniquement si l'utilisateur est connecté et est admin */}
+          {auth.role === 'admin' && (
+            <NavLink
+              to="/admin"
+              className={({ isActive }) => (isActive ? "active" : "")}
+              onClick={() => setMenuOpen(false)}
+            >
+              Admin
+            </NavLink>
+          )}
 
-              {/* Lien pour la déconnexion */}
-              <NavLink
-                to="/logout"
-                className={({ isActive }) => (isActive ? "active" : "")}
-                onClick={() => setMenuOpen(false)}
+          {/* Si l'utilisateur est connecté, afficher le bouton de déconnexion */}
+          {auth.token ? (
+            <>
+              <button
+                onClick={() => {
+                  logout(); 
+                  setMenuOpen(false)
+                }}
+                 className="logout-button"
               >
                 Logout
-              </NavLink>
+              </button>
             </>
           ) : (
             <>
-              {/* Si l'utilisateur n'est pas connecté, afficher Login et Signup */}
+              {/* Si l'utilisateur n'est pas connecté, afficher Signup et Login */}
               <NavLink
                 to="/signup"
                 className={({ isActive }) => (isActive ? "active" : "")}

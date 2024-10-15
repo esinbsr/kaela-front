@@ -3,7 +3,7 @@ import apiClient from "./apiClient";
 
 export const getSocialNetwork = async () => {
   const response = await apiClient.get("getSocialNetwork");
-  return response.data;
+  return response.data.socialNetwork;
 };
 
 

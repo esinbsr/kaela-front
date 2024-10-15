@@ -2,7 +2,7 @@ import apiClient from "./apiClient";
 
 export const getProduct = async () => {
   const response = await apiClient.get("getProduct");
-  return response.data;
+  return response.data.product;
 }
 
 export const getProductById = async (id) => {

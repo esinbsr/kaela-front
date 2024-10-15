@@ -1,35 +1,16 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getInformation } from "../actions/informationAction";
-import { contact } from "../actions/contactAction";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPhone, faLocationDot, faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import { useState } from "react";
+import { useMutation, useQuery } from "react-query";
+import { FaPhoneAlt } from "react-icons/fa";
+import { MdEmail } from "react-icons/md";
+import { FaLocationDot } from "react-icons/fa6";
 import Map from "../components/utils/Map";
 import Footer from "../components/Footer";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { sendMessage } from "../api/contactApi";
+import { getInformation } from "../api/informationApi";
 
 const Contact = () => {
-  const dispatch = useDispatch();
-  const information = useSelector((state) => state.information.information);
-  const success = useSelector((state) => state.contact.message); // Message de succès
-  const error = useSelector((state) => state.contact.error);     // Message d'erreur
-
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    dispatch(getInformation());
-    window.scrollTo(0, 0);
-  }, [dispatch]);
-
-  const info = information.length > 0 ? information[0] : null;
-
-  useEffect(() => {
-    if (info) {
-      setLoading(false);
-    }
-  }, [info]);
-
   const [formData, setFormData] = useState({
     email: "",
     object: "",
@@ -37,6 +18,24 @@ const Contact = () => {
   });
 
   const { email, object, message } = formData;
+
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["informations"],
+    queryFn: getInformation,
+  });
+
+  const info = data?.length > 0 ? data[0] : null;
+
+  const mutation = useMutation({
+    mutationFn: sendMessage,
+    onSuccess: (data) => {
+      toast.success(data.message || "Message envoyé avec succès !");
+      setFormData({ email: "", object: "", message: "" }); 
+    },
+    onError: () => {
+      toast.error("Une erreur est survenue lors de l'envoi du message.");
+    },
+  });
 
   const handleChange = (e) => {
     setFormData({
@@ -47,21 +46,11 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(contact(formData));
+    mutation.mutate(formData);
   };
 
-  // Affichage des messages de succès ou d'erreur avec Toastify et réinitialisation des champs
-  useEffect(() => {
-    if (success) {
-      toast.success(success); // Afficher le toast de succès
-      setFormData({ email: "", object: "", message: "" }); // Réinitialiser les champs
-    }
-
-    if (error) {
-      toast.error(error); // Afficher le toast d'erreur
-    }
-  }, [success, error]);
-
+  if (isLoading) return "Loading...";
+  if (error) return "An error occurred: " + error.message;
   return (
     <>
       <ToastContainer />
@@ -75,11 +64,12 @@ const Contact = () => {
               <label htmlFor="email">Email</label>
               <input
                 id="email"
-                type="email"
+                type="text"
                 name="email"
                 value={email}
                 onChange={handleChange}
                 placeholder="example@domain.com"
+                required
               />
               <label htmlFor="object">Object</label>
               <input
@@ -89,6 +79,7 @@ const Contact = () => {
                 value={object}
                 onChange={handleChange}
                 placeholder="Subject of your inquiry"
+                required
               />
               <label htmlFor="message">Message</label>
               <textarea
@@ -97,9 +88,12 @@ const Contact = () => {
                 value={message}
                 onChange={handleChange}
                 placeholder="Hello, I would like to inquire about..."
+                required
               ></textarea>
               <div className="form__button-container">
-                <button type="submit">Send</button>
+                <button type="submit">
+                  Send
+                </button>
               </div>
             </fieldset>
           </form>
@@ -110,45 +104,21 @@ const Contact = () => {
           <div className="line"></div>
 
           <div className="contact__data">
-            <FontAwesomeIcon icon={faPhone} />
-            {loading ? (
-              <p role="alert" aria-live="assertive">
-                Loading the phone number...
-              </p>
-            ) : (
+          <FaPhoneAlt aria-label="Mobile" />
               <p>+{info?.mobile}</p>
-            )}
           </div>
 
           <div className="contact__data">
-            <FontAwesomeIcon icon={faEnvelope} />
-            {loading ? (
-              <p role="alert" aria-live="assertive">
-                Loading email...
-              </p>
-            ) : (
+          <MdEmail aria-label="Email" />
               <p>{info?.email}</p>
-            )}
           </div>
 
           <div className="contact__data localisation">
-            <FontAwesomeIcon icon={faLocationDot} />
-            {loading ? (
-              <p role="alert" aria-live="assertive">
-                Loading the address...
-              </p>
-            ) : (
+          <FaLocationDot aria-label="Address" />
               <p>{info?.address}</p>
-            )}
           </div>
 
-          {loading ? (
-            <p role="alert" aria-live="assertive">
-              Loading map...
-            </p>
-          ) : (
-            info && <Map address={info.address} />
-          )}
+          {info && <Map address={info.address} />}
         </address>
       </div>
       <Footer />

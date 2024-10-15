@@ -13,7 +13,7 @@ const DisplayInformation = () => {
   });
 
   // If there is data and it contains information, use it, otherwise return an empty array
-  const informationList = data?.information?.length > 0 ? data.information : [];
+  const informationList = data?.length > 0 ? data : [];
 
   if (isLoading) return "Loading...";
   if (error) return "An error occurred: " + error.message;

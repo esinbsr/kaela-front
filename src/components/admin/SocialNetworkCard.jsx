@@ -8,7 +8,7 @@ const SocialNetworkCard = ({ socialNetwork }) => {
       <td>{socialNetwork.url}</td>
       <td>
         <Link 
-          to={`/adminUpdateSocialNetwork/${socialNetwork.id}`} 
+          to={`/updateSocialNetwork/${socialNetwork.id}`} 
           className='update-color'
           aria-label={`Update ${socialNetwork.platform} network`}
         >

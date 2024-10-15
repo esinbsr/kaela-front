@@ -45,7 +45,7 @@ const AddProduct = () => {
     mutationFn: addProduct,
     onSuccess: (data) => {
       // If successful, invalidate the 'products' query and reset the form
-      if(data.sucess) {
+      if(data.success) {
       toast.success(data.message || "Produit ajouté avec succès !");
       setProductName("");
       setProductDescription("");

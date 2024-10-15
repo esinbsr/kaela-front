@@ -15,7 +15,7 @@ const DeleteSocialNetwork = ({ socialNetworkId }) => {
       // If successful, show success message and refresh the social networks list
       if (data.success) {
         toast.success(data.message);
-        queryClient.invalidateQueries("socialNetwork");
+        queryClient.invalidateQueries("socialNetworks");
       } else {
         toast.error(data.message || "Une erreur est survenue.");
       }

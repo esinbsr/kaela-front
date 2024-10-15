@@ -14,7 +14,7 @@ const DisplayProduct = () => {
   });
 
   // If there is data and it contains products, use it, otherwise return an empty array
-  const productList = data?.product?.length > 0 ? data.product : [];
+  const productList = data?.length > 0 ? data : [];
 
   if (isLoading) return "Loading...";
   if (error) return "An error occurred: " + error.message;

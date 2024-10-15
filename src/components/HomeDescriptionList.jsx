@@ -1,32 +1,34 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getInformation } from "../actions/informationAction";
+import { useContext} from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { isEmpty } from "./utils/isEmpty";
-// import SocialNetworkIcon from "./utils/SocialNetworkIcon";
+import { AuthContext } from "../context/AuthContext";
+import { useQuery } from "react-query";
+import { getInformation } from "../api/informationApi";
 
 const HomeDescriptionList = () => {
-  const dispatch = useDispatch();
-  const description = useSelector((state) => state.information.information);
-  const userRole = useSelector((state) => state.user.role);
+
+  const {isLoading, error, data} = useQuery({
+    queryKey: ['informations'],
+    queryFn: getInformation
+  });
+
+  const description = data?.length > 0 ? data : [];
+
+  const {auth} = useContext(AuthContext);
+  const userRole = auth.role;
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    dispatch(getInformation());
-  }, [dispatch]);
-
-  if (isEmpty(description)) {
-    return <p>Loading descriptions...</p>;
-  }
 
   const handleAdminClick = (desc) => {
-    navigate(`/adminUpdateInformation/${desc.id}`);
+    navigate(`/updateInformation/${desc.id}`);
   };
+
+  if (isLoading) return "Loading...";
+  if (error) return "An error occurred: " + error.message;
 
   return (
     <div className="home__description">
-      {!isEmpty(description) ? (
+      {description ? (
         <>
           <p
             key={description[0].id}
@@ -38,9 +40,9 @@ const HomeDescriptionList = () => {
             className={userRole === "admin" ? "clickable" : ""}
           >
             {description[0].description}
-            {/* {userRole === "admin" && (
+            {userRole === "admin" && (
               <span className="edit-tooltip">Edit description</span>
-            )} */}
+            )}
           </p>
 
           <Link

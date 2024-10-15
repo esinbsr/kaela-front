@@ -16,7 +16,7 @@ const AddSocialNetwork = () => {
     onSuccess: (data) => {
       // If successful, invalidate the 'socialNetwork' query and reset the form
       if (data.success) {
-        queryClient.invalidateQueries('socialNetwork');
+        queryClient.invalidateQueries('socialNetworks');
         toast.success(data.message || "Réseau social ajouté avec succès !");
         setPlatform("");
         setUrl("");

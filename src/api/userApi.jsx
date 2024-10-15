@@ -12,8 +12,3 @@ export const addUser = async (formData) => {
     const response = await apiClient.post("signup", formData);
     return response.data;
 };
-
-export const logoutUser = async () => {
-    const response = await apiClient.post("logout"); 
-    return response.data;
-};

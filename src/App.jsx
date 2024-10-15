@@ -1,5 +1,4 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-
 import Home from "./pages/Home";
 import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
@@ -17,7 +16,6 @@ import Accessibility from "./components/utils/Accessibility";
 import LegalNotice from "./pages/LegalNotice";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import ProtectedRoutes from "./components/ProtectedRoutes";
-import Logout from "./components/Logout";
 
 
 import AddCategory from "./pages/admin/categoriesManagement/AddCategory";
@@ -49,7 +47,6 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/logout" element={<Logout />} /> 
           <Route path="/contact" element={<Contact />} />
           <Route path="/collection" element={<Collection />} />
           <Route path="/eveningDresses" element={<EveningDresses />} />
@@ -69,7 +66,7 @@ const App = () => {
             }
           />
           <Route
-            path="/product"
+            path="/displayProduct"
             element={
               <ProtectedRoutes>
                 <DisplayProduct />
@@ -93,7 +90,7 @@ const App = () => {
             }
           />
           <Route
-            path="/adminInformation"
+            path="/displayInformation"
             element={
               <ProtectedRoutes>
                 <DisplayInformation />
@@ -101,7 +98,7 @@ const App = () => {
             }
           />
           <Route
-            path="/adminAddInformation"
+            path="/addInformation"
             element={
               <ProtectedRoutes>
                 <AddInformation />
@@ -109,7 +106,7 @@ const App = () => {
             }
           />
           <Route
-            path="/adminUpdateInformation/:informationId"
+            path="/updateInformation/:informationId"
             element={
               <ProtectedRoutes>
                 <UpdateInformation />
@@ -118,7 +115,7 @@ const App = () => {
           />
 
           <Route
-            path="/adminCategory"
+            path="/displayCategory"
             element={
               <ProtectedRoutes>
                 <DisplayCategory />
@@ -126,7 +123,7 @@ const App = () => {
             }
           />
           <Route
-            path="/adminAddCategory"
+            path="/addCategory"
             element={
               <ProtectedRoutes>
                 <AddCategory />
@@ -134,7 +131,7 @@ const App = () => {
             }
           />
           <Route
-            path="/adminUpdateCategory/:categoryId"
+            path="/updateCategory/:categoryId"
             element={
               <ProtectedRoutes>
                 <UpdateCategory />
@@ -142,7 +139,7 @@ const App = () => {
             }
           />
           <Route
-            path="/adminSocialNetwork"
+            path="/displaySocialNetwork"
             element={
               <ProtectedRoutes>
                 <DisplaySocialNetwork />
@@ -150,7 +147,7 @@ const App = () => {
             }
           />
           <Route
-            path="/adminAddSocialNetwork"
+            path="/addSocialNetwork"
             element={
               <ProtectedRoutes>
                 <AddSocialNetwork />
@@ -158,7 +155,7 @@ const App = () => {
             }
           />
           <Route
-            path="/adminUpdateSocialNetwork/:socialNetworkId"
+            path="/updateSocialNetwork/:socialNetworkId"
             element={
               <ProtectedRoutes>
                 <UpdateSocialNetwork />

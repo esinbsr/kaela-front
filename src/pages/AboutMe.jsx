@@ -1,15 +1,14 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getInformation } from "../actions/informationAction";
-import { getProduct } from "../actions/productAction";
+import { useContext, useState } from "react";
+import { useQuery } from "react-query";
 import { Link, useNavigate } from "react-router-dom";
 import { isEmpty } from "../components/utils/isEmpty";
-import { getSocialNetwork } from "../actions/socialNetworkAction";
 import Footer from "../components/Footer";
 import { Helmet } from "react-helmet-async";
 import { API_URL } from "../api/serverRequest";
-
-
+import { AuthContext } from '../context/AuthContext'; 
+import { getInformation } from "../api/informationApi";
+import { getProduct } from "../api/productApi";
+import { getSocialNetwork } from "../api/socialNetworkApi";
 
 // Define section IDs for filtering products
 const SECTIONS = {
@@ -17,28 +16,32 @@ const SECTIONS = {
 };
 
 const AboutMe = () => {
-  // Retrieve data from Redux store or default to empty array if not available
-  const informations =
-    useSelector((state) => state.information.information) || [];
-  const products = useSelector((state) => state.product.products) || [];
-  const socialNetworks =
-    useSelector((state) => state.socialNetwork.socialNetwork) || [];
-  const userRole = useSelector((state) => state.user.role); // Get the role of the current user
-
-  const dispatch = useDispatch(); // Initialize dispatch to trigger actions
-  const navigate = useNavigate(); // Hook for navigation between routes
+  const { auth } = useContext(AuthContext);
+  const userRole = auth.role;
+  const navigate = useNavigate(); 
 
   const [modalVisible, setModalVisible] = useState(false); // State to control the visibility of the modal
   const [selectedProduct, setSelectedProduct] = useState(null); // State to track the selected product for the modal
   const [instagramLink, setInstagramLink] = useState(""); // State to store the Instagram link
 
-  // useEffect to fetch data when the component mounts
-  useEffect(() => {
-    dispatch(getInformation()); // Fetch information data
-    dispatch(getProduct()); // Fetch product data
-    dispatch(getSocialNetwork()); // Fetch social network data
-    window.scrollTo(0, 0);
-  }, [dispatch]);
+  // Fetch data with React Query
+  const { data: informations , isLoading: infoLoading } = 
+  useQuery({
+   queryKey:['informations'],
+  queryFn: getInformation
+});
+
+  const { data: products, isLoading: productLoading } = 
+  useQuery({
+    queryKey:['products'],
+    queryFn: getProduct
+  });
+
+  const { data: socialNetworks , isLoading: socialNetworkLoading } = 
+  useQuery({
+    queryKey:['socialNetworks'],
+    queryFn: getSocialNetwork
+  });
 
   // Filter products related to the "About Me" section
   const filteredProducts = !isEmpty(products)
@@ -72,6 +75,10 @@ const AboutMe = () => {
     navigate(path); // Navigate to the specified path
     closeModal(); // Close the modal after navigation
   };
+
+  if (infoLoading || productLoading || socialNetworkLoading) {
+    return <p>Loading data...</p>;
+  }
 
   return (
     <div className="about-me">
@@ -146,7 +153,7 @@ const AboutMe = () => {
             <h2>What do you want to do?</h2>
             <button
               onClick={() =>
-                handleNavigate(`/adminUpdateProduct/${selectedProduct.id}`)
+                handleNavigate(`/updateProduct/${selectedProduct.id}`)
               }
             >
               Edit Image

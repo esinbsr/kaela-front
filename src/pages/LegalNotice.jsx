@@ -1,23 +1,24 @@
-import { useEffect } from "react";
+
 import Footer from "../components/Footer";
-import { useDispatch, useSelector } from "react-redux";
-import { getInformation } from "../actions/informationAction";
-import { isEmpty } from "../components/utils/isEmpty";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import { getInformation } from "../api/informationApi";
+import { useQuery } from "react-query";
 
 
 const LegalNotice = () => {
-  const information = useSelector((state) => state.information.information);
+  
+  // Fetch informations from the serveur
+  const { isLoading, error, data } = useQuery({
+    queryKey: ["informations"],  // The unique query key to identify this query
+    queryFn: getInformation,     // The function responsible for fetching the products
+  });
 
-  const dispatch = useDispatch();
+  // If there is data and it contains informations, use the first information, otherwise return an empty array.
+  const info = data?.length > 0 ? data[0] : null;
 
-  useEffect(() => {
-    dispatch(getInformation());
-    window.scrollTo(0, 0);
-  }, [dispatch]);
-
-  const info = !isEmpty(information) ? information[0] : null;
+  if (isLoading) return "Loading...";
+  if (error) return "An error occurred: " + error.message;
 
   return (
     <>

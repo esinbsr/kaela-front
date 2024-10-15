@@ -1,61 +1,61 @@
-import { useEffect, useState, useMemo } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getComment } from "../../actions/commentAction";
-import { isEmpty } from "../utils/isEmpty";
+import { useState, useMemo } from "react";
 import { useParams } from "react-router-dom";
+import { useQuery } from "react-query";
+import { getComment } from "../../api/commentApi";
 
 const CommentDisplay = () => {
   const { productDetailId } = useParams();
 
-  const dispatch = useDispatch();
 
-  const comments = useSelector((state) => state.comment.comments);
+  const { data: comments = [], isLoading, error } = useQuery({
+    queryKey: ['comments', productDetailId],
+    queryFn: () => getComment(productDetailId),
+  });
 
   const [showAllComments, setShowAllComments] = useState(false);
 
-  // useEffect to fetch comments when the product ID changes
-  useEffect(() => {
-    if (productDetailId) {
-      dispatch(getComment(productDetailId));
-    }
-  }, [dispatch, productDetailId]);
 
-  // Function to toggle between showing all comments and partial comments
   const handleToggleComments = () => {
     setShowAllComments(!showAllComments);
   };
 
-  // useMemo to optimize the calculation of displayed comments
+
+  const sortedComments = useMemo(() => {
+    return [...comments].sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+  }, [comments]);
+
+
   const displayedComments = useMemo(() => {
-    return showAllComments ? comments : comments.slice(0, 5);
-  }, [showAllComments, comments]);
+    return showAllComments ? sortedComments : sortedComments.slice(0, 5);
+  }, [showAllComments, sortedComments]);
+
+  if (isLoading) return "Loading...";
+  if (error) return "An error occurred: " + error.message;
 
   return (
     <div className="comments">
-      {!isEmpty(displayedComments) ? (
+      {sortedComments.length > 0 ? (
         displayedComments.map(
-          (comment) =>
-            !isEmpty(comment) && (
-              <div key={comment.id} className="comments__username-content">
-                <h4 className="comments__username">
-              {comment.username ? comment.username : "Utilisateur supprimé"}
-            </h4>
-                <p className="comment__content">{comment.content}</p>
-              </div>
-            )
+          (comment) => (
+            <div key={comment.id} className="comments__username-content">
+              <h4 className="comments__username">
+                {comment.username ? comment.username : "Utilisateur supprimé"}
+              </h4>
+              <p className="comment__content">{comment.content}</p>
+            </div>
+          )
         )
       ) : (
         <p>There are currently no comments, so be the first to write one!</p>
       )}
 
-      {/* Button to toggle between showing all comments and partial comments */}
       {comments.length > 5 && (
         <button
           onClick={handleToggleComments}
-          aria-expanded={showAllComments} // Indicates whether the comments are currently expanded or collapsed
+          aria-expanded={showAllComments}
           aria-label={
             showAllComments ? "Show less comments" : "Show more comments"
-          } // Provides an accessible label for screen reader users
+          }
           className="comments__toggle-button"
         >
           {showAllComments ? "Show less" : "Show more"}
