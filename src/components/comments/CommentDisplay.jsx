@@ -46,7 +46,7 @@ const CommentDisplay = () => {
           )
         )
       ) : (
-        <p>There are currently no comments, so be the first to write one!</p>
+        <p className="p-no-comments">There are currently no comments, so be the first to write one!</p>
       )}
 
       {comments.length > 5 && (

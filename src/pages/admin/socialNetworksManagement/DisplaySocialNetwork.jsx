@@ -1,7 +1,5 @@
 import { useQuery } from "react-query";
 import SocialNetworkCard from "../../../components/admin/SocialNetworkCard";
-import AdminAddSocialNetwork from "./AddSocialNetwork";
-import AdminNavigation from "../AdminNavigation";
 import { getSocialNetwork } from "../../../api/socialNetworkApi"; // Ensure correct API import
 
 const DisplaySocialNetwork = () => {
@@ -19,15 +17,10 @@ const DisplaySocialNetwork = () => {
   if (error) return `An error occurred: ${error.message}`;
 
   return (
-    <div className="admin-container">
-      <AdminNavigation />  
-      <main className="admin-container__content">
-        <h1>Social Networks</h1>  
-        <AdminAddSocialNetwork /> 
-        <section className="table">
+    <>
           <h2>List of Social Networks</h2>  
-          <div className="table__container">
-            <table className="table__content">
+          <div className="table-wrapper">
+            <table>
               <thead>
                 <tr>
                   <th scope="col">Platform</th>
@@ -54,10 +47,8 @@ const DisplaySocialNetwork = () => {
                 )}
               </tbody>
             </table>
-          </div>
-        </section>
-      </main>
-    </div>
+            </div>
+    </>
   );
 };
 

@@ -5,6 +5,7 @@ import { FaLocationDot } from "react-icons/fa6";
 import Logo from "./Logo";
 import { getInformation } from "../api/informationApi";
 import { useQuery } from "react-query";
+import SocialNetworkIcon from "./SocialNetworkIcon";
 
 const Footer = () => {
   // Fetch informations from the serveur
@@ -62,6 +63,7 @@ const Footer = () => {
       <div className="footer__copyright">
         <Logo />
         <p> Copyright © 2024 Kaela Couture. All rights reserved.</p>
+      <SocialNetworkIcon/>
       </div>
     </footer>
   );

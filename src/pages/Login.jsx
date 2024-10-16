@@ -1,8 +1,7 @@
 import { useState, useContext, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useMutation } from 'react-query';
-import { toast, ToastContainer } from "react-toastify"; 
-import 'react-toastify/dist/ReactToastify.css'; 
+import { toast } from "react-toastify"; 
 import Footer from "../components/Footer";
 import { loginUser } from "../api/userApi";
 import { AuthContext } from "../context/AuthContext"; // Import du AuthContext
@@ -15,6 +14,7 @@ const Login = () => {
 
   // Redirection si l'utilisateur est déjà connecté
   useEffect(() => {
+    window.scrollTo(0,0);           
     if (auth.token) {
       navigate("/"); // Rediriger si déjà connecté
     }
@@ -75,9 +75,8 @@ const Login = () => {
           <button type="submit" disabled={mutation.isLoading}>
             {mutation.isLoading ? "Logging in..." : "Login"}
           </button>
+          <p>Don&apos;t have an account? <Link to="/signup" className="user-form__link">Sign up here!</Link></p>
         </form>
-
-        <ToastContainer />
       </section>
       <Footer />
     </>

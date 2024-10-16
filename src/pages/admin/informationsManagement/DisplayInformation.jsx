@@ -1,7 +1,5 @@
 import { useQuery } from "react-query";
 import InformationCard from "../../../components/admin/InformationCard";
-import AdminNavigation from "../AdminNavigation";
-import AddInformation from "./AddInformation";
 import { getInformation } from "../../../api/informationApi";
 
 const DisplayInformation = () => {
@@ -19,17 +17,10 @@ const DisplayInformation = () => {
   if (error) return "An error occurred: " + error.message;
 
   return (
-    <div className="admin-container">
-      <AdminNavigation />  
-
-      <main className="admin-container__content">
-        <h1>My Information</h1>  
-        <AddInformation /> 
-
-        <section className="table">
+    <>
           <h2>Information List</h2>  
-          <div className="table__container">
-            <table className="table__content">
+          <div className="table-wrapper">
+            <table>
               <thead>
                 <tr>
                   <th scope="col">Description</th>
@@ -58,10 +49,8 @@ const DisplayInformation = () => {
                 )}
               </tbody>
             </table>
-          </div>
-        </section>
-      </main>
-    </div>
+            </div>
+    </>
   );
 };
 

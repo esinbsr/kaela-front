@@ -4,19 +4,18 @@ import DeleteSocialNetwork from "../../pages/admin/socialNetworksManagement/Dele
 const SocialNetworkCard = ({ socialNetwork }) => {
   return (
     <tr>
-      <td>{socialNetwork.platform}</td>
-      <td>{socialNetwork.url}</td>
-      <td>
+      <td data-label="Platform">{socialNetwork.platform}</td>
+      <td data-label="Url">{socialNetwork.url}</td>
+      <td data-label="Action">
+
+      <div className="button-group">
         <Link 
           to={`/updateSocialNetwork/${socialNetwork.id}`} 
-          className='update-color'
-          aria-label={`Update ${socialNetwork.platform} network`}
-        >
-          Update
-        </Link>
-      </td>
-      <td>
-      <DeleteSocialNetwork socialNetworkId= {socialNetwork.id}/>
+          className="blue-link"
+          aria-label={`Update ${socialNetwork.platform} network`}> Update </Link>
+          <DeleteSocialNetwork socialNetworkId={socialNetwork.id}/>
+      </div>
+
       </td>
     </tr>
   );

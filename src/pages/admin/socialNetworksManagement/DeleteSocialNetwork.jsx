@@ -47,7 +47,7 @@ const DeleteSocialNetwork = ({ socialNetworkId }) => {
       <button
         onClick={handleDeleteClick}
         disabled={mutation.isLoading}
-        className="delete-color "
+        className="red-link"
       >
         {mutation.isLoading ? "Deleting..." : "Delete"}
       </button>

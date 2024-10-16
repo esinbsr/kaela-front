@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
-import { toast, ToastContainer } from "react-toastify"; 
-import "react-toastify/dist/ReactToastify.css"; 
+import { toast } from "react-toastify"; 
 import { addCategory } from "../../../api/categoryApi";
 
 const AddCategory = () => {
@@ -51,10 +50,11 @@ const AddCategory = () => {
 
   return (
     <>
+    <h2>Add a category</h2>
       <form onSubmit={handleSubmit} className="form">
-        <fieldset>
-          <legend>Add a new category</legend>
-          <div className="form__group">
+        {/* <fieldset>
+          <legend>Add a new category</legend> */}
+
             <label htmlFor="categoryName">Category name</label> 
             <input
               id="categoryName"
@@ -64,9 +64,9 @@ const AddCategory = () => {
               onChange={(e) => setCategoryName(e.target.value)}
               aria-required="true"
             />
-          </div>
 
-          <div className="form__group">
+
+
             <label htmlFor="categoryDescription">Description</label> 
             <textarea
               id="categoryDescription"
@@ -75,9 +75,7 @@ const AddCategory = () => {
               onChange={(e) => setCategoryDescription(e.target.value)}
               aria-required="true"
             ></textarea>
-          </div>
 
-          <div className="form__group">
             <label htmlFor="categoryPageTitle">Page title</label>
             <input
               id="categoryPageTitle"
@@ -87,9 +85,9 @@ const AddCategory = () => {
               onChange={(e) => setCategoryPageTitle(e.target.value)}
               aria-required="true"
             />
-          </div>
 
-          <div className="form__group">
+
+       
             <label htmlFor="categoryPageDescription">Page description</label>
             <textarea
               id="categoryPageDescription"
@@ -98,17 +96,15 @@ const AddCategory = () => {
               onChange={(e) => setCategoryPageDescription(e.target.value)}
               aria-required="true"
             ></textarea>
-          </div>
+    
 
-          <div className="form__button">
+   
             <button type="submit" disabled={mutation.isLoading}>
               {mutation.isLoading ? "Creating..." : "Create"} 
             </button>
-          </div>
-        </fieldset>
+   
+        {/* </fieldset> */}
       </form>
-
-      <ToastContainer />
     </>
   );
 };

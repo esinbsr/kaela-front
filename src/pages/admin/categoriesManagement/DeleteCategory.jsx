@@ -45,7 +45,7 @@ const DeleteCategory = ({ categoryId }) => {
 
   return (
     <>
-      <button onClick={handleDeleteClick} disabled={mutation.isLoading} className="delete-color ">
+      <button onClick={handleDeleteClick} disabled={mutation.isLoading} className="red-link">
         {mutation.isLoading ? "Deleting..." : "Delete"} 
       </button>
 

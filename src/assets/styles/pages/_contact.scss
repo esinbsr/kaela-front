@@ -1,18 +1,19 @@
 .contact {
   display: flex;
   flex-direction: row;
-  align-items: stretch;
   justify-content: space-between;
+  gap: 2rem;
 
   input::placeholder,
   textarea::placeholder {
     font-size: 0.9rem;
+    color: rgb(113, 113, 113);
   }
   
   h2 {
     margin-bottom: 10px;
     position: relative;
-    color: $main-color;
+    color: white;
   }
 
   fieldset {
@@ -24,7 +25,7 @@
   }
 
   .line {
-    @include line(50, $main-color);
+    @include line(50, white);
   }
 
   .contact__form,
@@ -37,12 +38,10 @@
     margin-top: 50px;
     width: 100%;
     font-style: normal;
-    background-color: #ffffff;
+    background-color: $main-color;
   }
 
   .contact__form {
-    margin-right: 5rem;
-
     form {
       width: 100%;
       display: flex;
@@ -51,20 +50,18 @@
       label {
         display: block;
         margin-bottom: 8px;
+        color:white;
       }
 
       input,
       textarea {
         width: 100%;
-        padding: 0.7rem;
+        padding: 0.6rem;
         margin-bottom: 1.5rem;
         border: 1px solid $main-color;
         outline: none;
-        background-color: #fff;
+        background-color: white;
         border-radius: 4px;
-        &:focus {
-          box-shadow: 0 0 5px rgba($main-color, 0.3);
-        }
       }
 
       textarea {
@@ -78,13 +75,8 @@
         justify-content: center;
 
         button {
-          width: auto; // Déplacement avant la règle imbriquée pour éviter l'avertissement
-          @include buttonSuqare(white, $main-color);
-
-          @media screen and (max-width: 480px) {
-            width: 100%;
-            padding: 10px 0;
-          }
+          width: auto; 
+          @include buttonSuqare(black, $yellow);
         }
       }
     }
@@ -98,17 +90,17 @@
 
       p {
         margin-left: 1rem;
-        color: $navigation-color;
+        color: white;
       }
 
       svg {
         font-size: 1.5rem;
-        color: $navigation-color;
+        color: white;
       }
     }
 
     .contact__data.localisation {
-      border-bottom: 1px solid $navigation-color;
+      border-bottom: 1px solid white;
       padding-bottom: 1.5rem;
     }
 
@@ -138,19 +130,8 @@
         margin-bottom: 1rem;
       }
     }
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .contact {
-    input::placeholder,
-    textarea::placeholder {
-      font-size: 0.9rem;
-      color: rgb(113, 113, 113);
-    }
-
-    .contact__form form input {
-      padding: 0.8rem !important;
+    .contact__content {
+      margin-bottom: 3rem;
     }
   }
 }

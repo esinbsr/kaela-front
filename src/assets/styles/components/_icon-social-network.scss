@@ -1,29 +1,12 @@
-.social-icons {
+.social-network-icons {
   display: flex;
-  flex-direction: column;
-  gap: 15px; // Espace entre chaque icône
-  position: fixed; // Fixe les icônes à une position spécifique de la page
-  top: 50%; // Centre verticalement les icônes par rapport à la page
-  right: 40px; // Fixe les icônes à 40px du bord droit
-  transform: translateY(-50%); // Centre les icônes verticalement
+  justify-content: center;
+  gap: 0.6rem;
+  // margin-top: 1rem;
 
-  a {
-    transition: color 0.3s ease;
+  .social-network-link {
+    color: white;
+    font-size: 1.6rem;
 
-    &:hover {
-      color: darken($main-color, 10%);
-    }
   }
-}
-
-#facebook {
-  color: #1877f2;
-}
-
-#instagram {
-  color: #b42e77;
-}
-
-#whatsapp {
-  color: #25d366;
 }

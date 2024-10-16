@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
-import { toast, ToastContainer } from "react-toastify"; 
-import "react-toastify/dist/ReactToastify.css"; 
+import { toast } from "react-toastify"; 
 import { addSocialNetwork } from "../../../api/socialNetworkApi"; 
 
 const AddSocialNetwork = () => {
@@ -44,12 +43,12 @@ const AddSocialNetwork = () => {
   };
 
   return (
-    <div className="form">
-      <form onSubmit={handleSubmit}>
-        <fieldset>
-          <legend>Add a New Social Network</legend>
+    <>
+    <h2>Add a social network</h2>
+      <form onSubmit={handleSubmit} className="form">
+        {/* <fieldset>
+          <legend>Add a New Social Network</legend> */}
 
-          <div className="form__group">
             <label htmlFor="platform">Platform</label>
             <input
               type="text"
@@ -59,9 +58,7 @@ const AddSocialNetwork = () => {
               onChange={(e) => setPlatform(e.target.value)}
               aria-required="true"
             />
-          </div>
 
-          <div className="form__group">
             <label htmlFor="url">URL</label>
             <input
               type="text"
@@ -71,17 +68,15 @@ const AddSocialNetwork = () => {
               onChange={(e) => setUrl(e.target.value)}
               aria-required="true"
             />
-          </div>
+  
 
-          <div className="form__button">
+  
             <button type="submit" disabled={mutation.isLoading}>
               {mutation.isLoading ? "Creating..." : "Create"}
             </button>
-          </div>
-        </fieldset>
+        {/* </fieldset> */}
       </form>
-      <ToastContainer />
-    </div>
+    </>
 );
 };
 

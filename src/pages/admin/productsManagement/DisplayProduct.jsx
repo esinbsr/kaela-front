@@ -1,7 +1,5 @@
-import { isEmpty } from "../../../components/utils/isEmpty";
-import AdminNavigation from "../AdminNavigation";
+
 import ProductCard from "../../../components/admin/ProductCard";
-import AddProduct from "./AddProduct";
 import { useQuery } from "react-query";
 import { getProduct } from "../../../api/productApi";
 
@@ -20,17 +18,10 @@ const DisplayProduct = () => {
   if (error) return "An error occurred: " + error.message;
 
   return (
-    <div className="admin-container">
-      <AdminNavigation />
-
-      <main className="admin-container__content">
-        <h1>Products</h1> 
-        <AddProduct /> 
-
-        <section className="table">
+    <>
           <h2>List of Products</h2> 
-          <div className="table__container">
-            <table className="table__content">
+          <div className="table-wrapper">
+            <table>
               <thead>
                 <tr>
                   <th scope="col">Image</th>
@@ -38,9 +29,7 @@ const DisplayProduct = () => {
                   <th scope="col">Description</th>
                   <th scope="col">Category</th>
                   <th scope="col">Section</th>
-                  <th scope="col" className="action-header" colSpan={2}>
-                    Action
-                  </th>
+                  <th scope="col" colSpan={2} className="action-header" >Action</th>
                 </tr>
               </thead>
 
@@ -54,7 +43,7 @@ const DisplayProduct = () => {
                     )
                     .map(
                       (product) =>
-                        !isEmpty(product) && (
+                        product && (
                           <ProductCard
                             key={product.id}
                             product={product}
@@ -71,10 +60,8 @@ const DisplayProduct = () => {
                 )}
               </tbody>
             </table>
-          </div>
-        </section>
-      </main>
-    </div>
+            </div>
+        </>
   );
 };
 

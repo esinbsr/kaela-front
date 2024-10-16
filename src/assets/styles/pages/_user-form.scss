@@ -4,20 +4,21 @@
   padding: 2rem;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  background-color: #ffffff;
+  background-color: $main-color;
 
 
   input::placeholder{
    font-size: 0.9rem;
+   color:rgb(113, 113, 113);
   }
 
   h2 {
     margin-bottom: 10px;
-    color: $main-color;
+    color: white;
   }
 
   .line {
-    @include line(50, $main-color);
+    @include line(80, white);
   }
 
   .user-form__content {
@@ -27,44 +28,37 @@
     label {
       align-self: flex-start;
       margin-bottom: 8px;
+      color: white;
     }
 
     input {
       width: 100%;
-      padding: 0.7rem;
+      padding: 0.6rem;
       margin-bottom: 1rem;
-      border: 1px solid $main-color;
+      border: 1px solid white;
       outline: none;
       border-radius: 4px;
-      background-color: #fff;
+      background-color: white;
       font-size: 1rem;
-
-      &:focus {
-        box-shadow: 0 0 5px rgba($main-color, 0.3);
-      }
-   
     }
 
     button {
       align-self: center;
       width: auto;
-      @include buttonSuqare(white, $main-color);
-
-      @media screen and (max-width: 480px) {
-        width: 100%;
-        padding: 10px 0;
-      }
+      margin-top: 1rem;
+      @include buttonSuqare(black, $yellow);
     }
 
     p {
       margin-top: 15px;
       text-align: center;
+      color: white;
     }
 
     .user-form__link {
       text-decoration: underline;
-      color: $main-color;
       cursor: pointer;
+      color: $yellow;
     }
   }
 }
@@ -78,11 +72,6 @@
   input {
     padding: 12px;
   }}
-  input::placeholder,
-  textarea::placeholder {
-    font-size: 0.9rem;
-    color:rgb(113, 113, 113)
-  }
 }
   
 }

@@ -4,21 +4,17 @@ import DeleteCategory from "../../pages/admin/categoriesManagement/DeleteCategor
 const CategoryCard = ({ category }) => {
   return (
     <tr>
-      <td>{category.name}</td>
-      <td>{category.description}</td>
-      <td>{category.page_title}</td>
-      <td>{category.page_description}</td>
-      <td>
-        <Link
-          to={`/updateCategory/${category.id}`}
-          className="update-color"
-          aria-label={`Mettre à jour la catégorie ${category.name}`}
-        >
-          Modifier
+      <td data-label="Name">{category.name}</td>
+      <td data-label="Description">{category.description}</td>
+      <td data-label="Page title">{category.page_title}</td>
+      <td data-label="Page description">{category.page_description}</td>
+      <td data-label="Action">
+      <div className="button-group">
+        <Link to={`/updateCategory/${category.id}`} className="blue-link" aria-label={`Update category ${category.name}`}
+        > Modifier
         </Link>
-      </td>
-      <td>
-        <DeleteCategory categoryId={category.id} />
+        <DeleteCategory categoryId={category.id}/>
+        </div>
       </td>
     </tr>
   );

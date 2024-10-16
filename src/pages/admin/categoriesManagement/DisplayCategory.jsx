@@ -1,6 +1,4 @@
  import { useQuery } from "react-query";
-import AddCategory from "./AddCategory";
-import AdminNavigation from "../AdminNavigation";
 import { getProductCategories } from "../../../api/categoryApi";
 import CategoryCard from "../../../components/admin/CategoryCard";
 
@@ -19,17 +17,10 @@ const DisplayCategory = () => {
   if (error) return "An error occurred: " + error.message;
 
   return (
-    <div className="admin-container">
-      <AdminNavigation /> 
-
-      <main className="admin-container__content">
-        <h1>Categories</h1> 
-        <AddCategory />  
-        <section className="table">
+    <>
           <h2>Category List</h2> 
-
-          <div className="table__container">
-            <table className="table__content">
+            <div className="table-wrapper">
+            <table>
               <thead>
                 <tr>
                   <th scope="col">Name</th> 
@@ -65,10 +56,8 @@ const DisplayCategory = () => {
                 )}
               </tbody>
             </table>
-          </div>
-        </section>
-      </main>
-    </div>
+            </div>
+    </>
   );
 };
 

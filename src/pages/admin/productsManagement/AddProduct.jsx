@@ -1,7 +1,6 @@
 import { useState, useRef } from "react";
 import { useQuery, useMutation, useQueryClient } from "react-query";
-import { toast, ToastContainer } from "react-toastify"; 
-import "react-toastify/dist/ReactToastify.css"; 
+import { toast } from "react-toastify"; 
 import { getProductCategories } from "../../../api/categoryApi";
 import { getSection } from "../../../api/sectionApi";
 import { addProduct } from "../../../api/productApi";
@@ -84,11 +83,9 @@ const AddProduct = () => {
 
   return (
     <>
+       <h2>Add a product</h2>
       <form onSubmit={handleSubmit} className="form">
-        <fieldset>
-          <legend>Add a New Product</legend>
 
-          <div className="form__group">
             <label htmlFor="productName">Product Name</label>
             <input
               id="productName"
@@ -98,9 +95,7 @@ const AddProduct = () => {
               onChange={(e) => setProductName(e.target.value)}
               aria-required="true"
             />
-          </div>
 
-          <div className="form__group">
             <label htmlFor="productDescription">Description</label>
             <textarea
               id="productDescription"
@@ -109,9 +104,7 @@ const AddProduct = () => {
               onChange={(e) => setProductDescription(e.target.value)}
               aria-required="true"
             ></textarea>
-          </div>
 
-          <div className="form__group">
             <label htmlFor="productCategory">Category</label>
             <select
               id="productCategory"
@@ -127,9 +120,7 @@ const AddProduct = () => {
                 </option>
               ))}
             </select>
-          </div>
 
-          <div className="form__group">
             <label htmlFor="productSection">Section</label>
             <select
               id="productSection"
@@ -145,9 +136,7 @@ const AddProduct = () => {
                 </option>
               ))}
             </select>
-          </div>
 
-          <div className="form__group">
             <label htmlFor="productImage">Image</label>
             <input
               type="file"
@@ -157,17 +146,11 @@ const AddProduct = () => {
               onChange={(e) => setProductImage(e.target.files[0])}
               aria-required="true"
             />
-          </div>
-
-          <div className="form__button">
+            
             <button type="submit" disabled={mutation.isLoading}>
               {mutation.isLoading ? "Creating..." : "Create"}
             </button>
-          </div>
-        </fieldset>
       </form>
-
-      <ToastContainer />
     </>
 );
 

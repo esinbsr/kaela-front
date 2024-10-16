@@ -22,9 +22,8 @@
 
 @mixin containerCenter {
   width: 100%;
-  max-width: 95vw;
+  max-width: 90vw;
   margin: 0 auto;
-  padding: 0 5vw;
 }
 
 @mixin buttonRound($color, $bc: null, $border: false) {

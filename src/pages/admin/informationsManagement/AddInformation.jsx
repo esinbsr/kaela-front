@@ -1,7 +1,6 @@
 import { useState} from "react";
 import { useMutation, useQueryClient } from "react-query";
-import { toast, ToastContainer } from "react-toastify"; 
-import "react-toastify/dist/ReactToastify.css"; 
+import { toast } from "react-toastify"; 
 import { addInformation } from "../../../api/informationApi"; 
 
 const AddInformation = () => {
@@ -51,11 +50,9 @@ const AddInformation = () => {
 
   return (
     <>
+    <h2>Add an information</h2>
       <form onSubmit={handleSubmit} className="form">
-        <fieldset>
-          <legend>Add new information</legend> 
-          
-          <div className="form__group">
+    
             <label htmlFor="description">Description</label>
             <textarea
               id="description"
@@ -63,9 +60,9 @@ const AddInformation = () => {
               value={description}
               onChange={(e) => setDescription(e.target.value)}
             ></textarea>
-          </div>
+   
   
-          <div className="form__group">
+ 
             <label htmlFor="mobile">Mobile</label> 
             <input
               type="text"
@@ -74,9 +71,7 @@ const AddInformation = () => {
               value={mobile}
               onChange={(e) => setMobile(e.target.value)}
             />
-          </div>
-
-          <div className="form__group">
+     
             <label htmlFor="email">Email</label>
             <input
               type="text"
@@ -85,9 +80,8 @@ const AddInformation = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-          </div>
   
-          <div className="form__group">
+ 
             <label htmlFor="address">Address</label>
             <input
               type="text"
@@ -96,17 +90,14 @@ const AddInformation = () => {
               value={address}
               onChange={(e) => setAddress(e.target.value)}
             />
-          </div>
-  
-          <div className="form__button">
+ 
+
             <button type="submit" disabled={mutation.isLoading}>
               {mutation.isLoading ? "Creating..." : "Create"} 
             </button>
-          </div>
-        </fieldset>
+   
+        {/* </fieldset> */}
       </form>
-      
-      <ToastContainer />
     </>
   );
 };

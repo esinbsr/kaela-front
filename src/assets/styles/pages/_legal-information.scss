@@ -1,7 +1,10 @@
 .legal-information{
+  h1 {
+    color: white;
+  }
   margin: 0 auto;
   padding: 2rem;
-  background-color: #fff;
+  background-color: $main-color;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
@@ -10,15 +13,19 @@
   }
   
   h2 {
-    color: $main-color;
+    color: white;
     margin-top: 2rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
     border-bottom: 2px solid $main-color;
     padding-bottom: 0.5rem;
   }
 
+  .line {
+    @include line(70, white);
+  }
+
   p {
-    color: $main-color;
+    color: white;
     line-height: 1.6;
     margin-bottom: 1.2rem;
   }
@@ -29,11 +36,12 @@
 
     li {
       margin-bottom: 0.5rem;
+      color:white;
     }
   }
 
   a {
-    color: $secondary-color;
+    color: $yellow;
     border-bottom: 1px dashed $secondary-color;
     transition: color 0.2s ease;
 

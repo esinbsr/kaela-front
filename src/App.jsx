@@ -1,4 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import Home from "./pages/Home";
 import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
@@ -8,7 +11,6 @@ import EveningDresses from "./pages/EveningDresses";
 import LatestCollection from "./pages/LatestCollection";
 import Collection from "./pages/Collection";
 import Navigation from "./components/Navigation";
-import AdminNavigation from "./pages/admin/AdminNavigation";
 import AboutMe from "./pages/AboutMe";
 
 import ProductDetail from "./pages/ProductDetail";
@@ -18,25 +20,23 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import ProtectedRoutes from "./components/ProtectedRoutes";
 
 
-import AddCategory from "./pages/admin/categoriesManagement/AddCategory";
-import DisplayCategory from "./pages/admin/categoriesManagement/DisplayCategory";
-import UpdateCategory from "./pages/admin/categoriesManagement/UpdateCategory";
+import Admin from "./pages/admin/Admin";
 
-import AddInformation from "./pages/admin/informationsManagement/AddInformation";
-import DisplayInformation from "./pages/admin/informationsManagement/DisplayInformation";
-import UpdateInformation from "./pages/admin/informationsManagement/UpdateInformation";
-
-import AddProduct from "./pages/admin/productsManagement/AddProduct";
-import DisplayProduct from "./pages/admin/productsManagement/DisplayProduct";
+import ProductManager from "./pages/admin/productsManagement/ProductManager";
 import UpdateProduct from "./pages/admin/productsManagement/UpdateProduct";
 
-import AddSocialNetwork from "./pages/admin/socialNetworksManagement/AddSocialNetwork";
-import DisplaySocialNetwork from "./pages/admin/socialNetworksManagement/DisplaySocialNetwork";
+import CategoryManager from "./pages/admin/categoriesManagement/CategoryManager";
+import UpdateCategory from "./pages/admin/categoriesManagement/UpdateCategory";
+
+import InformationManager from "./pages/admin/informationsManagement/InformationManager";
+import UpdateInformation from "./pages/admin/informationsManagement/UpdateInformation";
+
+import SocialNetworkManager from "./pages/admin/socialNetworksManagement/SocialNetworkManager";
 import UpdateSocialNetwork from "./pages/admin/socialNetworksManagement/UpdateSocialNetwork";
 
 
-
 const App = () => {
+
   return (
     <div>
       <BrowserRouter>
@@ -61,26 +61,19 @@ const App = () => {
             path="/admin"
             element={
               <ProtectedRoutes>
-                <AdminNavigation />
+                <Admin />
                </ProtectedRoutes>
             }
           />
           <Route
-            path="/displayProduct"
+            path="/productManager"
             element={
               <ProtectedRoutes>
-                <DisplayProduct />
+                <ProductManager />
               </ProtectedRoutes>
             }
           />
-          <Route
-            path="/addProduct"
-            element={
-              <ProtectedRoutes>
-                <AddProduct />
-              </ProtectedRoutes>
-            }
-          />
+
           <Route
             path="/updateProduct/:productId"
             element={
@@ -90,21 +83,14 @@ const App = () => {
             }
           />
           <Route
-            path="/displayInformation"
+            path="/informationManager"
             element={
               <ProtectedRoutes>
-                <DisplayInformation />
+                <InformationManager />
               </ProtectedRoutes>
             }
           />
-          <Route
-            path="/addInformation"
-            element={
-              <ProtectedRoutes>
-                <AddInformation />
-              </ProtectedRoutes>
-            }
-          />
+      
           <Route
             path="/updateInformation/:informationId"
             element={
@@ -115,21 +101,14 @@ const App = () => {
           />
 
           <Route
-            path="/displayCategory"
+            path="/categoryManager"
             element={
               <ProtectedRoutes>
-                <DisplayCategory />
+                <CategoryManager />
               </ProtectedRoutes>
             }
           />
-          <Route
-            path="/addCategory"
-            element={
-              <ProtectedRoutes>
-                <AddCategory />
-               </ProtectedRoutes>
-            }
-          />
+    
           <Route
             path="/updateCategory/:categoryId"
             element={
@@ -139,21 +118,14 @@ const App = () => {
             }
           />
           <Route
-            path="/displaySocialNetwork"
+            path="/socialNetworkManager"
             element={
               <ProtectedRoutes>
-                <DisplaySocialNetwork />
+                <SocialNetworkManager />
               </ProtectedRoutes>
             }
           />
-          <Route
-            path="/addSocialNetwork"
-            element={
-              <ProtectedRoutes>
-                <AddSocialNetwork />
-              </ProtectedRoutes>
-            }
-          />
+     
           <Route
             path="/updateSocialNetwork/:socialNetworkId"
             element={
@@ -164,6 +136,7 @@ const App = () => {
           />
         </Routes>
       </BrowserRouter>
+      <ToastContainer/>
     </div>
   );
 };

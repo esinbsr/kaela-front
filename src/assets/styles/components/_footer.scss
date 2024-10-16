@@ -91,6 +91,14 @@
 }
 
 /* Responsive - Tablet */
+
+@media screen and (max-width: 995px) {
+  .footer__copyright {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+}
 @media screen and (max-width: 768px) {
   .footer {
     max-width: 80%;

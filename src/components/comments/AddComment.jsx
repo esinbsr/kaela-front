@@ -1,8 +1,7 @@
 import { useState, useContext } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
 import { useParams, Link } from 'react-router-dom';
-import { toast, ToastContainer } from 'react-toastify'; 
-import 'react-toastify/dist/ReactToastify.css'; 
+import { toast } from 'react-toastify'; 
 import { AuthContext } from '../../context/AuthContext'; 
 import { addComment } from '../../api/commentApi';
 
@@ -79,7 +78,6 @@ const AddComment = () => {
           <button type="submit">Send</button>
         </div>
       </form>
-      <ToastContainer />
     </>
   );
 };

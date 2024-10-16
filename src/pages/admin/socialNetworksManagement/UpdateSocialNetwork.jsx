@@ -1,12 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useQuery, useMutation, useQueryClient } from "react-query";
 import AdminNavigation from "../AdminNavigation";
-import { toast, ToastContainer } from "react-toastify"; 
-import 'react-toastify/dist/ReactToastify.css'; 
+import { toast } from "react-toastify"; 
 import { getSocialNetworkById, updateSocialNetwork } from "../../../api/socialNetworkApi"; 
 
 const UpdateSocialNetwork = () => {
+
+  useEffect(() => {
+    window.scrollTo(0,0);
+  }, []);
   
   const { socialNetworkId } = useParams();  // Get social network id from route params
   
@@ -62,14 +65,12 @@ const UpdateSocialNetwork = () => {
   };
 
   return (
-    <div className="admin-container">
+    <div className="navigation-and-content">
       <AdminNavigation />  
-      <div className="admin-container__content">
+      <div className="content-wrapper">
+        <h2>Modify the social network</h2>
         <form onSubmit={handleSubmit} className="form">
-          <fieldset>
-            <legend>Update Social Network</legend>  
-
-            <div className="form__group">
+     
               <label htmlFor="platform">Platform:</label> 
               <input
                 id="platform"
@@ -78,9 +79,9 @@ const UpdateSocialNetwork = () => {
                 value={platform}
                 onChange={(e) => setPlatform(e.target.value)}
               />
-            </div>
+       
 
-            <div className="form__group">
+      
               <label htmlFor="url">URL:</label> 
               <input
                 id="url"
@@ -89,16 +90,12 @@ const UpdateSocialNetwork = () => {
                 value={url}
                 onChange={(e) => setUrl(e.target.value)}
               />
-            </div>
 
-            <div className="form__button">
+      
               <button type="submit" disabled={mutation.isLoading}>
                 {mutation.isLoading ? "Updating..." : "Update"}  
               </button>
-            </div>
-          </fieldset>
         </form>
-        <ToastContainer />  
       </div>
     </div>
   );

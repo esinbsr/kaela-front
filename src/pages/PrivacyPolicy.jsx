@@ -4,8 +4,13 @@ import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { getInformation } from "../api/informationApi";
 import { useQuery } from "react-query";
+import { useEffect } from "react";
 
 const PrivacyPolicy = () => {
+
+  useEffect(() => {
+    window.scrollTo(0,0);
+  }, []);
 
   // Fetch informations from the serveur
   const { isLoading, error, data } = useQuery({
@@ -36,6 +41,7 @@ const PrivacyPolicy = () => {
         <article>
           <section>
             <h2>1. Introduction</h2>
+            <div className="line"></div>
             <p>
               <strong>Kaela Couture</strong> is committed to protecting your
               privacy. This privacy policy explains what{" "}
@@ -46,6 +52,7 @@ const PrivacyPolicy = () => {
 
           <section>
             <h2>2. Data Collected</h2>
+            <div className="line"></div>
             <p>
               When you register on our site, we collect the following
               information:
@@ -71,6 +78,7 @@ const PrivacyPolicy = () => {
 
           <section>
             <h2>3. Data Collected During Site Usage</h2>
+            <div className="line"></div>
             <p>
               When you interact with our site, we also collect the following
               information:
@@ -89,6 +97,7 @@ const PrivacyPolicy = () => {
 
           <section>
             <h2>4. Data Usage</h2>
+            <div className="line"></div>
             <p>The data we collect is used to:</p>
             <ul>
               <li>Manage and secure your user account.</li>
@@ -100,6 +109,7 @@ const PrivacyPolicy = () => {
 
           <section>
             <h2>5. Data Retention</h2>
+            <div className="line"></div>
             <ul>
               <li>
                 We retain your personal data for as long as necessary to achieve
@@ -122,6 +132,7 @@ const PrivacyPolicy = () => {
 
           <section>
             <h2>6. Data Security</h2>
+            <div className="line"></div>
             <p>
               We take the <strong>security of your data</strong> very seriously
               and implement appropriate technical and organizational measures to
@@ -133,6 +144,7 @@ const PrivacyPolicy = () => {
 
           <section>
             <h2>7. Your Rights</h2>
+            <div className="line"></div>
             <p>
               In accordance with the{" "}
               <strong>General Data Protection Regulation (GDPR)</strong>, you
@@ -164,6 +176,7 @@ const PrivacyPolicy = () => {
 
           <section>
             <h2>8. Modifications to the Privacy Policy</h2>
+            <div className="line"></div>
             <p>
               Kaela Couture reserves the right to modify this privacy policy at
               any time. We will inform you of any changes via our website or
@@ -173,6 +186,7 @@ const PrivacyPolicy = () => {
 
           <section>
             <h2>9. Contact</h2>
+            <div className="line"></div>
             <p>
               For any questions regarding this privacy policy, you can contact
               us at the following email address:

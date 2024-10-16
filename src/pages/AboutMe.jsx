@@ -1,7 +1,6 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { Link, useNavigate } from "react-router-dom";
-import { isEmpty } from "../components/utils/isEmpty";
 import Footer from "../components/Footer";
 import { Helmet } from "react-helmet-async";
 import { API_URL } from "../api/serverRequest";
@@ -16,6 +15,10 @@ const SECTIONS = {
 };
 
 const AboutMe = () => {
+  useEffect(() => {
+    window.scrollTo(0,0);
+  }, []);
+
   const { auth } = useContext(AuthContext);
   const userRole = auth.role;
   const navigate = useNavigate(); 
@@ -44,12 +47,12 @@ const AboutMe = () => {
   });
 
   // Filter products related to the "About Me" section
-  const filteredProducts = !isEmpty(products)
+  const filteredProducts = products
     ? products.filter((product) => product.section_id === SECTIONS.ABOUT_ME)
     : [];
 
   // Get the first three information entries
-  const threeInformations = !isEmpty(informations)
+  const threeInformations = informations
     ? informations.slice(1, 4)
     : [];
 
@@ -94,7 +97,7 @@ const AboutMe = () => {
 
       <h2>Who am I?</h2>
       <div className="about-me__header">
-        {!isEmpty(threeInformations) ? (
+        {threeInformations ? (
           threeInformations.map((info) => (
             <p key={info.id}>{info.description}</p>
           ))
@@ -108,7 +111,7 @@ const AboutMe = () => {
       <div className="about-me__footer">
         <h2>Subscribe to my Instagram</h2>
         <div className="about-me__footer-container">
-          {!isEmpty(filteredProducts) && socialNetworks.length > 0 ? (
+          {filteredProducts && socialNetworks.length > 0 ? (
             filteredProducts.slice(1, 9).map((product) => (
               <div className="about-me__footer-image" key={product.id}>
                 {userRole === "admin" ? (

@@ -3,10 +3,15 @@ import HomeDescriptionList from "../components/HomeDescriptionList";
 import HomeImageList from "../components/HomeImageList";
 import Footer from "../components/Footer";
 import { Helmet } from "react-helmet-async";
+import { useEffect } from "react";
 
 
 // This component serves as the main container for combining 3 sub-components
 const Home = () => {
+  useEffect(() => {
+    window.scrollTo(0,0);
+  }, []);
+  
   return (
     <div className="home">
       <Helmet>

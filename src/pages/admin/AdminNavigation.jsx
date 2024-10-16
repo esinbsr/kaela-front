@@ -2,43 +2,33 @@
 import { NavLink} from "react-router-dom";
 
 const AdminNavigation = () => {
-  // const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   const role = localStorage.getItem("role");
-  //   if (role !== "admin") {
-  //     navigate("/");
-  //   } 
-  // }, [navigate]);
 
   return (
-    <div className="admin-container">
-      <aside className="admin-container__navigation">
+    <div className="admin-navigation">
         <NavLink
-          to="/displayProduct"
-          className={({ isActive }) => (isActive ? "active-link" : "")}
+          to="/productManager"
+          className={({ isActive }) => (isActive ? "active" : "")}
         >
           Product
         </NavLink>
         <NavLink
-          to="/displayInformation"
-          className={({ isActive }) => (isActive ? "active-link" : "")}
+          to="/informationManager"
+          className={({ isActive }) => (isActive ? "active" : "")}
         >
           Information about me
         </NavLink>
         <NavLink
-          to="/displayCategory"
-          className={({ isActive }) => (isActive ? "active-link" : "")}
+          to="/categoryManager"
+          className={({ isActive }) => (isActive ? "active" : "")}
         >
           Category
         </NavLink>
         <NavLink
-          to="/displaySocialNetwork"
-          className={({ isActive }) => (isActive ? "active-link" : "")}
+          to="/socialNetworkManager"
+          className={({ isActive }) => (isActive ? "active" : "")}
         >
           Social network
         </NavLink>
-      </aside>
     </div>
   );
 };

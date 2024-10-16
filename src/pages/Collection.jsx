@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import CollectionImage from "../components/CollectionImage";
 import Footer from "../components/Footer";
 import { Helmet } from "react-helmet-async";
@@ -5,6 +6,11 @@ import { Helmet } from "react-helmet-async";
 
 // This component represents the collection page
 const Collection = () => {
+  
+  useEffect(() => {
+    window.scrollTo(0,0);
+  }, []);
+
   return (
     <div className="collection">
       <Helmet>

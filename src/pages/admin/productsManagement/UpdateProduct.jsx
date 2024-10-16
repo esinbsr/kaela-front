@@ -1,15 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { getProductById, updateProduct } from "../../../api/productApi";
 import { getProductCategories } from "../../../api/categoryApi";
 import { getSection } from "../../../api/sectionApi";
 import AdminNavigation from "../AdminNavigation";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 import { API_URL } from "../../../api/serverRequest";
 
 const UpdateProduct = () => {
+
+  useEffect(() => {
+    window.scrollTo(0,0);
+  }, []);
+
   const { productId } = useParams();  // Retrieve product ID from URL params
   const queryClient = useQueryClient(); 
 
@@ -93,14 +97,13 @@ const UpdateProduct = () => {
   if (categoriesError || sectionsError || productError) return <p>Error: {categoriesError?.message || sectionsError?.message || productError?.message}</p>;
 
   return (
-    <div className="admin-container">
+    <div className="navigation-and-content">
       <AdminNavigation />  
-      <div className="admin-container__content">
+      <div className="content-wrapper">
+        <h2>Modify the product</h2>
         <form onSubmit={handleSubmit} className="form">
-          <fieldset>
-            <legend>Update Product</legend>  
 
-            <div className="form__group">
+    
               <label htmlFor="productName">Name of product:</label> 
               <input
                 id="productName"
@@ -109,9 +112,9 @@ const UpdateProduct = () => {
                 value={productName}
                 onChange={(e) => setProductName(e.target.value)}
               />
-            </div>
+  
 
-            <div className="form__group">
+  
               <label htmlFor="productDescription">Description:</label> 
               <textarea
                 id="productDescription"
@@ -119,9 +122,9 @@ const UpdateProduct = () => {
                 value={productDescription}
                 onChange={(e) => setProductDescription(e.target.value)}
               ></textarea>
-            </div>
+      
 
-            <div className="form__group">
+        
               <label htmlFor="productCategory">Category:</label>  
               <select
                 id="productCategory"
@@ -135,9 +138,9 @@ const UpdateProduct = () => {
                   </option>
                 ))}
               </select>
-            </div>
+      
 
-            <div className="form__group">
+      
               <label htmlFor="productSection">Section:</label>  
               <select
                 id="productSection"
@@ -151,9 +154,7 @@ const UpdateProduct = () => {
                   </option>
                 ))}
               </select>
-            </div>
 
-            <div className="form__group">
               <label htmlFor="productImage">Current image:</label> 
               <div className="form__image-upload">
                 {currentImage && (
@@ -161,6 +162,7 @@ const UpdateProduct = () => {
                     src={`${API_URL}assets/img/${currentImage}`}
                     alt={`Image of ${productName}`}
                     loading="lazy" 
+                    width={120}
                   />
                 )}
                 <input
@@ -170,17 +172,13 @@ const UpdateProduct = () => {
                   onChange={(e) => setProductImage(e.target.files[0])}
                 />
               </div>
-            </div>
-
-            <div className="form__button">
+      
+    
               <button type="submit" disabled={mutation.isLoading}>
               {mutation.isLoading ? "Updating..." : "Update"}
                 </button>  
-            </div>
-          </fieldset>
+        
         </form>
-
-        <ToastContainer /> 
       </div>
     </div>
   );

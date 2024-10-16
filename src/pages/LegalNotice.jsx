@@ -4,9 +4,14 @@ import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { getInformation } from "../api/informationApi";
 import { useQuery } from "react-query";
+import { useEffect } from "react";
 
 
 const LegalNotice = () => {
+
+  useEffect(() => {
+    window.scrollTo(0,0);
+  }, []);
   
   // Fetch informations from the serveur
   const { isLoading, error, data } = useQuery({
@@ -34,6 +39,7 @@ const LegalNotice = () => {
         <article>
           <section>
             <h2>1. Website Publisher</h2>
+            <div className="line"></div>
             <p>
               <strong>Company Name:</strong> Kaela Couture
             </p>
@@ -53,6 +59,7 @@ const LegalNotice = () => {
 
           <section>
             <h2>2. Website Hosting</h2>
+            <div className="line"></div>
             <p>
               <strong>Hosting Provider:</strong> Not applicable
             </p>
@@ -72,6 +79,7 @@ const LegalNotice = () => {
 
           <section>
             <h2>3. Intellectual Property</h2>
+            <div className="line"></div>
             <p>
               The website and each of its elements, including but not limited to
               texts, images, videos, photographs, <strong>trademarks</strong>,
@@ -86,6 +94,7 @@ const LegalNotice = () => {
 
           <section>
             <h2>4. Personal Data Protection</h2>
+            <div className="line"></div>
             <p>
               <strong>Data Controller:</strong> <strong>Kaela Demirci</strong>
             </p>
@@ -113,6 +122,7 @@ const LegalNotice = () => {
 
           <section>
             <h2>5. Terms of Use</h2>
+            <div className="line"></div>
             <p>
               The use of this site is governed by the laws in force in France.
               By accessing this site, the user accepts the present terms of use.{" "}
@@ -123,6 +133,7 @@ const LegalNotice = () => {
 
           <section>
             <h2>6. Limitation of Liability</h2>
+            <div className="line"></div>
             <p>
               The information contained on this site is as accurate as possible,
               and the site is periodically updated, but it may still contain
@@ -139,6 +150,7 @@ const LegalNotice = () => {
 
           <section>
             <h2>7. Data Retention</h2>
+            <div className="line"></div>
             <p>
               We retain your personal data for as long as necessary to achieve
               the purposes for which they were collected or to meet our legal
@@ -153,6 +165,7 @@ const LegalNotice = () => {
 
           <section>
             <h2>8. Contact</h2>
+            <div className="line"></div>
             <p>
               For any questions regarding the legal notices of the site, you can
               contact us at:{" "}

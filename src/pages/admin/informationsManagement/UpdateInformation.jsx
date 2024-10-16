@@ -1,12 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useQuery, useMutation, useQueryClient } from "react-query";
 import AdminNavigation from "../AdminNavigation";
-import { toast, ToastContainer } from "react-toastify"; 
-import 'react-toastify/dist/ReactToastify.css'; 
+import { toast } from "react-toastify"; 
 import { getInformationById, updateInformation } from "../../../api/informationApi";
 
 const UpdateInformation = () => {
+
+  useEffect(() => {
+    window.scrollTo(0,0);
+  }, []);
 
   const { informationId } = useParams();  // Get the id of the information from the route params
   
@@ -66,14 +69,12 @@ const UpdateInformation = () => {
   };
 
   return (
-    <div className="admin-container">
+    <div className="navigation-and-content">
       <AdminNavigation /> 
-      <div className="admin-container__content">
+      <div className="content-wrapper">
+      <h2>Modify the information</h2>
         <form onSubmit={handleSubmit} className="form">
-          <fieldset>
-            <legend>Update Information</legend> 
 
-            <div className="form__group">
               <label htmlFor="description">Description:</label>
               <textarea
                 id="description"
@@ -81,9 +82,9 @@ const UpdateInformation = () => {
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
               ></textarea>
-            </div>
+    
 
-            <div className="form__group">
+      
               <label htmlFor="mobile">Phone:</label> 
               <input
                 id="mobile"
@@ -92,9 +93,9 @@ const UpdateInformation = () => {
                 value={mobile}
                 onChange={(e) => setMobile(e.target.value)}
               />
-            </div>
+        
 
-            <div className="form__group">
+        
               <label htmlFor="email">Email:</label>
               <input
                 id="email"
@@ -103,9 +104,9 @@ const UpdateInformation = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
-            </div>
+        
 
-            <div className="form__group">
+    
               <label htmlFor="address">Address:</label>  
               <input
                 id="address"
@@ -114,16 +115,15 @@ const UpdateInformation = () => {
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
               />
-            </div>
+        
 
-            <div className="form__button">
+        
               <button type="submit" disabled={mutation.isLoading}>
                 {mutation.isLoading ? "Updating..." : "Update"}
               </button>
-            </div>
-          </fieldset>
+    
+  
         </form>
-        <ToastContainer /> 
       </div>
     </div>
   );

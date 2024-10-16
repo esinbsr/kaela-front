@@ -5,7 +5,7 @@ import DeleteProduct from "../../pages/admin/productsManagement/DeleteProduct";
 const ProductCard = ({ product}) => {
   return (
     <tr>
-      <td>
+      <td data-label="Image">
         <img
           src={`${API_URL}assets/img/${product.path}`}
           alt={`Image of ${product.name}`}
@@ -13,21 +13,17 @@ const ProductCard = ({ product}) => {
           loading="lazy" 
         />
       </td>
-      <td>{product.name}</td>
-      <td>{product.description}</td>
-      <td>{product.categorie}</td>
-      <td>{product.section}</td>
-      <td>
-        <Link
-          to={`/updateProduct/${product.id}`}
-          aria-label={`Update ${product.name}`}
-          className='update-color'
-        >
-          Update
-        </Link>
-      </td>
-      <td>
-      <DeleteProduct productId={product.id} />
+      <td data-label="Name">{product.name}</td>
+      <td data-label="Description">{product.description}</td>
+      <td data-label="Category">{product.categorie}</td>
+      <td data-label="Section"> {product.section}</td>
+      <td data-label="Action">
+
+      <div className="button-group">
+
+        <Link to={`/updateProduct/${product.id}`} aria-label={`Update ${product.name}`} className="blue-link">Update</Link>
+        <DeleteProduct productId={product.id} />
+      </div>
       </td>
     </tr>
   );

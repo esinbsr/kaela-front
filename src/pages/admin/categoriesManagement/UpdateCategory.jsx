@@ -1,12 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useQuery, useMutation, useQueryClient } from "react-query";
 import AdminNavigation from "../AdminNavigation";
-import { toast, ToastContainer } from "react-toastify"; 
-import 'react-toastify/dist/ReactToastify.css'; 
+import { toast} from "react-toastify"; 
 import { getCategoryById, updateCategory } from "../../../api/categoryApi";
 
 const UpdateCategory = () => {
+
+  useEffect(() => {
+    window.scrollTo(0,0);
+  }, []);
 
   const { categoryId } = useParams();  // Get the id of the category from the route params
 
@@ -67,14 +70,11 @@ const UpdateCategory = () => {
   };
 
   return (
-    <div className="admin-container">
+    <div className="navigation-and-content">
       <AdminNavigation />  
-      <div className="admin-container__content">
+      <div className="content-wrapper">
+        <h2>Modify the category</h2>
         <form onSubmit={handleSubmit} className="form">
-          <fieldset>
-            <legend>Update Category</legend>  
-
-            <div className="form__group">
               <label htmlFor="categoryName">Category name:</label> 
               <input
                 id="categoryName"
@@ -83,9 +83,7 @@ const UpdateCategory = () => {
                 value={categoryName}
                 onChange={(e) => setCategoryName(e.target.value)}
               />
-            </div>
-
-            <div className="form__group">
+    
               <label htmlFor="categoryDescription">Description:</label>  
               <textarea
                 id="categoryDescription"
@@ -93,9 +91,7 @@ const UpdateCategory = () => {
                 value={categoryDescription}
                 onChange={(e) => setCategoryDescription(e.target.value)}
               ></textarea>
-            </div>
 
-            <div className="form__group">
               <label htmlFor="categoryPageTitle">Page title:</label> 
               <input
                 id="categoryPageTitle"
@@ -104,9 +100,9 @@ const UpdateCategory = () => {
                 value={categoryPageTitle}
                 onChange={(e) => setCategoryPageTitle(e.target.value)}
               />
-            </div>
+    
 
-            <div className="form__group">
+    
               <label htmlFor="categoryPageDescription">Page description:</label> 
               <textarea
                 id="categoryPageDescription"
@@ -114,16 +110,13 @@ const UpdateCategory = () => {
                 value={categoryPageDescription}
                 onChange={(e) => setCategoryPageDescription(e.target.value)}
               ></textarea>
-            </div>
+    
 
-            <div className="form__button">
+    
               <button type="submit" disabled={mutation.isLoading}>
                 {mutation.isLoading ? "Updating..." : "Update"}  
               </button>
-            </div>
-          </fieldset>
         </form>
-        <ToastContainer />  
       </div>
     </div>
   );

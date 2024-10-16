@@ -1,23 +1,20 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useMutation, useQuery } from "react-query";
+import { toast } from "react-toastify";
+import { sendMessage } from "../api/contactApi";
+import { getInformation } from "../api/informationApi";
 import { FaPhoneAlt } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { FaLocationDot } from "react-icons/fa6";
 import Map from "../components/utils/Map";
 import Footer from "../components/Footer";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { sendMessage } from "../api/contactApi";
-import { getInformation } from "../api/informationApi";
+import { AuthContext } from "../context/AuthContext";
 
 const Contact = () => {
-  const [formData, setFormData] = useState({
-    email: "",
-    object: "",
-    message: "",
-  });
-
-  const { email, object, message } = formData;
+  const { auth } = useContext(AuthContext);
+  const [email, setEmail] = useState(""); 
+  const [object, setObject] = useState("");
+  const [message, setMessage] = useState("");
 
   const { data, isLoading, error } = useQuery({
     queryKey: ["informations"],
@@ -29,93 +26,109 @@ const Contact = () => {
   const mutation = useMutation({
     mutationFn: sendMessage,
     onSuccess: (data) => {
+      setEmail(""), setObject("");
+      setMessage("");
       toast.success(data.message || "Message envoyé avec succès !");
-      setFormData({ email: "", object: "", message: "" }); 
     },
     onError: () => {
       toast.error("Une erreur est survenue lors de l'envoi du message.");
     },
   });
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // Si l'utilisateur est connecté pas besoin d'envoyer l'email, juste le userId
+    const formData = {
+      email: !auth.email ? email : null, // Envoie l'email que si l'utilisateur n'est pas connecté
+      object,
+      message,
+      userId: auth.userId || null, // Envoie le userId pour récupérer l'email côté backend si connecté
+    };
+
     mutation.mutate(formData);
   };
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   if (isLoading) return "Loading...";
-  if (error) return "An error occurred: " + error.message;
+  if (error) return "Une erreur est survenue : " + error.message;
+
   return (
     <>
-      <ToastContainer />
       <div className="contact">
         <section className="contact__form">
           <form onSubmit={handleSubmit}>
             <fieldset>
-              <h2>Contact Me</h2>
+              <h2>Contactez-nous</h2>
               <div className="line"></div>
 
-              <label htmlFor="email">Email</label>
-              <input
-                id="email"
-                type="text"
-                name="email"
-                value={email}
-                onChange={handleChange}
-                placeholder="example@domain.com"
-                required
-              />
-              <label htmlFor="object">Object</label>
-              <input
-                id="object"
-                type="text"
-                name="object"
-                value={object}
-                onChange={handleChange}
-                placeholder="Subject of your inquiry"
-                required
-              />
-              <label htmlFor="message">Message</label>
-              <textarea
-                id="message"
-                name="message"
-                value={message}
-                onChange={handleChange}
-                placeholder="Hello, I would like to inquire about..."
-                required
-              ></textarea>
+              {!auth.email && ( 
+                <>
+                  <label htmlFor="email">Email</label>
+                  <input
+                    id="email"
+                    type="email"
+                    name="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="example@domain.com"
+                    required
+                  />
+                </>
+              )}
+
+              <div>
+                <label htmlFor="object">Objet</label>
+                <input
+                  id="object"
+                  type="text"
+                  name="object"
+                  value={object}
+                  onChange={(e) => setObject(e.target.value)}
+                  placeholder="Objet de votre message"
+                  required
+                />
+              </div>
+
+              <div>
+                <label htmlFor="message">Message</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  placeholder="Votre message"
+                  required
+                ></textarea>
+              </div>
+
               <div className="form__button-container">
-                <button type="submit">
-                  Send
-                </button>
+                <button type="submit">Envoyer</button>
               </div>
             </fieldset>
           </form>
         </section>
 
         <address className="contact__content">
-          <h2>Contact Details</h2>
+          <h2>Détails de contact</h2>
           <div className="line"></div>
 
           <div className="contact__data">
-          <FaPhoneAlt aria-label="Mobile" />
-              <p>+{info?.mobile}</p>
+            <FaPhoneAlt aria-label="Mobile" />
+            <p>+{info?.mobile}</p>
           </div>
 
           <div className="contact__data">
-          <MdEmail aria-label="Email" />
-              <p>{info?.email}</p>
+            <MdEmail aria-label="Email" />
+            <p>{info?.email}</p>
           </div>
 
           <div className="contact__data localisation">
-          <FaLocationDot aria-label="Address" />
-              <p>{info?.address}</p>
+            <FaLocationDot aria-label="Adresse" />
+            <p>{info?.address}</p>
           </div>
 
           {info && <Map address={info.address} />}
