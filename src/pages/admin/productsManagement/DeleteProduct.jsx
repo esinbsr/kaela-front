@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
 import { deleteProduct } from '../../../api/productApi';
-import ModalAdmin from '../../../components/utils/ModalAdmin';
+import ModalAdminDelete from "../../../components/utils/ModalAdminDelete";
 
 const DeleteProduct = ( {productId}) => {
     const [modalShow, setModalShow] = useState(false); // State to control the visibility of the modal
@@ -48,7 +48,7 @@ const DeleteProduct = ( {productId}) => {
         </button>
   
         {modalShow && (
-          <ModalAdmin
+          <ModalAdminDelete
             contentSuffix={`product : ${productId}`}
             onConfirm={confirmDelete}
             onCancel={cancelDelete}

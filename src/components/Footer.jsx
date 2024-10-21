@@ -17,8 +17,7 @@ const Footer = () => {
   // If there is data and it contains informations, use the first information, otherwise return an empty array.
   const info = data?.length > 0 ? data[0] : null;
 
-  if (isLoading) return "Loading...";
-  if (error) return "An error occurred: " + error.message;
+
   return (
     <footer className="footer">
       <div className="footer__container">
@@ -28,16 +27,22 @@ const Footer = () => {
 
           <div className="footer__contact-item">
             <FaPhoneAlt aria-label="Mobile" />
+            {isLoading && <span role="status"> Loading..</span>}
+            {error && <span role="alert"> An error occurred :  {error.message}</span>}
             {info && <p>+{info.mobile}</p>}
           </div>
 
           <div className="footer__contact-item">
             <MdEmail aria-label="Email" />
+            {isLoading && <span role="status"> Loading..</span>}
+            {error && <span role="alert"> An error occurred :  {error.message}</span>}
             {info && <p>{info.email}</p>}
           </div>
 
           <div className="footer__contact-item">
             <FaLocationDot aria-label="Address" />
+            {isLoading && <span role="status"> Loading..</span>}
+            {error && <span role="alert"> An error occurred :  {error.message}</span>}
             {info && <p>{info.address}</p>}
           </div>
         </div>

@@ -4,7 +4,7 @@ import { useMutation } from 'react-query';
 import { toast } from "react-toastify"; 
 import Footer from "../components/Footer";
 import { loginUser } from "../api/userApi";
-import { AuthContext } from "../context/AuthContext"; // Import du AuthContext
+import { AuthContext } from "../context/AuthProvider";
 
 const Login = () => {
   const [email, setEmail] = useState("");

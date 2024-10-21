@@ -15,7 +15,7 @@
     padding: 20px;
     border-radius: 10px;
     text-align: center;
-    max-width: 400px;
+    max-width: 30%;
     width: 100%;
 
     h2 {
@@ -30,5 +30,10 @@
         margin: 10px auto;
       }
     }
+  }
+}
+@media (max-width: 768px) {
+  .modal__content {
+    max-width: 90%!important;
   }
 }

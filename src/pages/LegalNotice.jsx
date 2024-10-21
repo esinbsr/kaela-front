@@ -6,7 +6,6 @@ import { getInformation } from "../api/informationApi";
 import { useQuery } from "react-query";
 import { useEffect } from "react";
 
-
 const LegalNotice = () => {
 
   useEffect(() => {
@@ -22,8 +21,8 @@ const LegalNotice = () => {
   // If there is data and it contains informations, use the first information, otherwise return an empty array.
   const info = data?.length > 0 ? data[0] : null;
 
-  if (isLoading) return "Loading...";
-  if (error) return "An error occurred: " + error.message;
+  if (isLoading) return <p role="status">Loading...</p>;
+  if (error) return <p role="alert">An error occurred: {error.message}</p>;
 
   return (
     <>
@@ -47,7 +46,7 @@ const LegalNotice = () => {
               <strong>Address:</strong> {info && info.address}
             </p>
             <p>
-              <strong>Phone:</strong> +{info && info.mobile}
+              <strong>Phone:</strong> {info && info.mobile}
             </p>
             <p>
               <strong>Email:</strong> {info && info.email}

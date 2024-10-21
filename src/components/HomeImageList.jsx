@@ -1,15 +1,16 @@
 import { useState, useContext } from 'react';
 import { useQuery } from 'react-query';
-import { useNavigate } from 'react-router-dom';
-import HomeHeaderImageCard from './HomeHeaderImageCard';
-import { AuthContext } from '../context/AuthContext';
+import { useNavigate, Link } from 'react-router-dom';
+import { AuthContext } from '../context/AuthProvider';
 import { getProduct } from '../api/productApi';
+import { API_URL } from '../api/serverRequest';
 
 const SECTIONS = {
     HOME_HEADER: 2,
 };
 
 const HomeImageList = ({ start, end, additionalClass }) => {
+    
     const { auth } = useContext(AuthContext); 
     const userRole = auth.role;
     const navigate = useNavigate();
@@ -19,7 +20,7 @@ const HomeImageList = ({ start, end, additionalClass }) => {
 
     const { data, isLoading, error } = useQuery({
         queryKey: ['products'],
-        queryFn:  getProduct
+        queryFn: getProduct
     });
 
     const productList = data?.length > 0 ? data : [];
@@ -43,39 +44,51 @@ const HomeImageList = ({ start, end, additionalClass }) => {
         closeModal();
     };
 
-    if (isLoading) return "Loading...";
-    if (error) return "An error occurred: " + error.message;
+    if (isLoading) return <p role="status"> Loading...</p>;
+    if (error) return <p role="alert">An error occurred: {error.message}</p>;
 
     return (
-        <div className={`${additionalClass || ''}`}>
-            {filteredProducts ? (
+        <section className={`${additionalClass || ''}`}>
+            {filteredProducts.length &&
                 filteredProducts.map((product) => (
-                    <HomeHeaderImageCard
+                    <Link
                         key={product.id}
-                        product={product}
-                        userRole={userRole}
-                        onAdminClick={handleAdminClick}
-                    />
+                        to={userRole === "admin" ? "#" : `/productDetail/${product.id}`}
+                        onClick={userRole === "admin" ? () => handleAdminClick(product) : null}
+                    >
+                        <img
+                            src={`${API_URL}assets/img/${product.path}`}
+                            alt={product.name}
+                            loading="lazy"
+                        />
+                    </Link>
                 ))
-            ) : (
-                <p>Aucun produit trouvé pour l&apos;en-tête d&apos;accueil.</p>
-            )}
+                }
 
-            {modalVisible && (
+            {modalVisible && selectedProduct && (
+                      <div
+                      className="modal"
+                      role="dialog"
+                      aria-labelledby="modal-title"
+                      aria-describedby="modal-description"
+                      aria-modal="true"
+                    >
                 <div className="modal">
                     <div className="modal__content">
-                        <h2>Que souhaitez-vous faire ?</h2>
+                        <h2 id="modal-title">What do you want to do?</h2>
+                        <p id="modal-description">Choose an action to perform on the product.</p>
                         <button onClick={() => handleNavigate(`/productDetail/${selectedProduct.id}`)}>
-                            Voir les détails du produit
+                        View product details
                         </button>
                         <button onClick={() => handleNavigate(`/UpdateProduct/${selectedProduct.id}`)}>
-                            Modifier l&apos;image du produit
+                        Modify the product image
                         </button>
-                        <button onClick={closeModal}>Annuler</button>
+                        <button onClick={closeModal}>Cancel</button>
                     </div>
                 </div>
+                </div>
             )}
-        </div>
+        </section>
     );
 };
 

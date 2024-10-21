@@ -34,7 +34,7 @@ const SocialNetworkIcon = () => {
 
   return (
     <div className="social-network-icons">
-      {socialNetworks.length > 0 ? (
+      {socialNetworks.length &&
         socialNetworks.map((network) => (
           <Link
             key={network.id}
@@ -46,9 +46,7 @@ const SocialNetworkIcon = () => {
             {getIcon(network.platform)}
           </Link>
         ))
-      ) : (
-        <p>No social networks found.</p>
-      )}
+     }
     </div>
   );
 };

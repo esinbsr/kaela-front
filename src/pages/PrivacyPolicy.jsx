@@ -21,9 +21,6 @@ const PrivacyPolicy = () => {
   // If there is data and it contains informations, use the first information, otherwise return an empty array.
   const info = data?.length > 0 ? data[0] : null;
 
-  if (isLoading) return "Loading...";
-  if (error) return "An error occurred: " + error.message;
-
   return (
     <>
       <Helmet>
@@ -34,9 +31,10 @@ const PrivacyPolicy = () => {
         />
       </Helmet>
       <main className="legal-information">
-        <header>
           <h1>Privacy Policy</h1>
-        </header>
+{/* 
+        {isLoading && <p role="alert">Chargement en cours...</p>}
+        {error && <p role="alert">Une erreur sest produite : {error.message}</p>} */}
 
         <article>
           <section>
@@ -146,7 +144,7 @@ const PrivacyPolicy = () => {
             <h2>7. Your Rights</h2>
             <div className="line"></div>
             <p>
-              In accordance with the{" "}
+              In accordance with the
               <strong>General Data Protection Regulation (GDPR)</strong>, you
               have the following rights:
             </p>
@@ -168,6 +166,8 @@ const PrivacyPolicy = () => {
             <p>
               To exercise these rights, please contact us at the following email
               address:
+              {isLoading && <span role="status"> Loading...</span>}
+              {error && <span role="alert"> An error occurred : {error.message}</span>}
               {info && (
                 <Link to="mailto:kaelacouture@gmail.com"> {info.email} </Link>
               )}
@@ -190,6 +190,8 @@ const PrivacyPolicy = () => {
             <p>
               For any questions regarding this privacy policy, you can contact
               us at the following email address:
+              {isLoading && <span role="status"> Loading...</span>}
+              {error && <span role="alert"> An error occurred : {error.message}</span>}
               {info && (
                 <Link to="mailto:kaelacouture@gmail.com"> {info.email} </Link>
               )}

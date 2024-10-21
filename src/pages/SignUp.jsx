@@ -4,7 +4,7 @@ import { useMutation } from 'react-query';
 import { toast } from "react-toastify"; 
 import Footer from "../components/Footer";
 import { addUser } from "../api/userApi";
-import { AuthContext } from "../context/AuthContext"; 
+import { AuthContext } from "../context/AuthProvider";
 
 const SignUp = () => {
   const [username, setUsername] = useState("");
@@ -13,7 +13,6 @@ const SignUp = () => {
   const navigate = useNavigate();
   const { auth } = useContext(AuthContext);
 
-  // Redirection si l'utilisateur est déjà connecté
   useEffect(() => {
   window.scrollTo(0,0);
     if (auth.token) {

@@ -1,6 +1,6 @@
 .logo {
   @include flexbox(null, center, column);
-  color: $navigation-color;
+  color: $secondary-color;
   animation: fadeIn 1s ease-in-out;
 
   &__kaela {
@@ -8,7 +8,7 @@
     letter-spacing: 0.15em;
     position: relative;
     animation: slideInFromLeft 1s ease-out;
-    color: $navigation-color;
+    color: $secondary-color;
   }
 
   &__couture {

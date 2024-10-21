@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
-import ModalAdmin from "../../../components/utils/ModalAdmin"; 
+import ModalAdminDelete from "../../../components/utils/ModalAdminDelete";
 import { deleteInformation } from '../../../api/informationApi';
 
 const DeleteInformation = ({ informationId }) => {
@@ -49,7 +49,7 @@ const DeleteInformation = ({ informationId }) => {
       </button>
 
       {modalShow && (
-        <ModalAdmin
+        <ModalAdminDelete
           contentSuffix={`information : ${informationId}`}
           onConfirm={confirmDelete}
           onCancel={cancelDelete}

@@ -8,11 +8,15 @@ import { MdEmail } from "react-icons/md";
 import { FaLocationDot } from "react-icons/fa6";
 import Map from "../components/utils/Map";
 import Footer from "../components/Footer";
-import { AuthContext } from "../context/AuthContext";
+import { AuthContext } from "../context/AuthProvider";
 
 const Contact = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const { auth } = useContext(AuthContext);
-  const [email, setEmail] = useState(""); 
+  const [email, setEmail] = useState("");
   const [object, setObject] = useState("");
   const [message, setMessage] = useState("");
 
@@ -49,13 +53,6 @@ const Contact = () => {
     mutation.mutate(formData);
   };
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
-  if (isLoading) return "Loading...";
-  if (error) return "Une erreur est survenue : " + error.message;
-
   return (
     <>
       <div className="contact">
@@ -65,7 +62,7 @@ const Contact = () => {
               <h2>Contactez-nous</h2>
               <div className="line"></div>
 
-              {!auth.email && ( 
+              {!auth.email && (
                 <>
                   <label htmlFor="email">Email</label>
                   <input
@@ -75,35 +72,30 @@ const Contact = () => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="example@domain.com"
-                    required
+                    aria-required="true"
                   />
                 </>
               )}
+              <label htmlFor="object">Objet</label>
+              <input
+                id="object"
+                type="text"
+                name="object"
+                value={object}
+                onChange={(e) => setObject(e.target.value)}
+                placeholder="Objet de votre message"
+                aria-required="true"
+              />
 
-              <div>
-                <label htmlFor="object">Objet</label>
-                <input
-                  id="object"
-                  type="text"
-                  name="object"
-                  value={object}
-                  onChange={(e) => setObject(e.target.value)}
-                  placeholder="Objet de votre message"
-                  required
-                />
-              </div>
-
-              <div>
-                <label htmlFor="message">Message</label>
-                <textarea
-                  id="message"
-                  name="message"
-                  value={message}
-                  onChange={(e) => setMessage(e.target.value)}
-                  placeholder="Votre message"
-                  required
-                ></textarea>
-              </div>
+              <label htmlFor="message">Message</label>
+              <textarea
+                id="message"
+                name="message"
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                placeholder="Votre message"
+                aria-required="true"
+              ></textarea>
 
               <div className="form__button-container">
                 <button type="submit">Envoyer</button>
@@ -118,19 +110,38 @@ const Contact = () => {
 
           <div className="contact__data">
             <FaPhoneAlt aria-label="Mobile" />
-            <p>+{info?.mobile}</p>
+            <p>
+              {isLoading && <span role="status"> Loading...</span>}
+              {error && (
+                <span role="alert"> An error occurred : {error.message}</span>
+              )}
+              {info?.mobile}
+            </p>
           </div>
 
           <div className="contact__data">
             <MdEmail aria-label="Email" />
-            <p>{info?.email}</p>
+            <p>
+              {isLoading && <span role="status"> Loading...</span>}
+              {error && (
+                <span role="alert"> An error occurred : {error.message}</span>
+              )}
+              {info?.email}
+            </p>
           </div>
 
           <div className="contact__data localisation">
             <FaLocationDot aria-label="Adresse" />
-            <p>{info?.address}</p>
+            <p>
+              {isLoading && <span role="status"> Loading...</span>}
+              {error && (
+                <span role="alert"> An error occurred : {error.message}</span>
+              )}
+              {info?.address}
+            </p>
           </div>
-
+          {isLoading && <span role="status"> Loading...</span>}
+          {error && <span role="alert"> An error occurred : {error.message}</span>}
           {info && <Map address={info.address} />}
         </address>
       </div>

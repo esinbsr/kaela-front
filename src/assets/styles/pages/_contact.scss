@@ -4,6 +4,10 @@
   justify-content: space-between;
   gap: 2rem;
 
+  span {
+    color: white;
+  }
+
   input::placeholder,
   textarea::placeholder {
     font-size: 0.9rem;

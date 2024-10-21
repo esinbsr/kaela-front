@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
 import { deleteCategory } from '../../../api/categoryApi';
-import ModalAdmin from "../../../components/utils/ModalAdmin";
+import ModalAdminDelete from "../../../components/utils/ModalAdminDelete";
 
 const DeleteCategory = ({ categoryId }) => {
   
@@ -51,7 +51,7 @@ const DeleteCategory = ({ categoryId }) => {
 
       {/* Show confirmation modal */}
       {modalShow && (
-        <ModalAdmin
+        <ModalAdminDelete
           contentSuffix={`category : ${categoryId}`}
           onConfirm={confirmDelete}
           onCancel={cancelDelete}

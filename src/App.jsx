@@ -14,7 +14,6 @@ import Navigation from "./components/Navigation";
 import AboutMe from "./pages/AboutMe";
 
 import ProductDetail from "./pages/ProductDetail";
-import Accessibility from "./components/utils/Accessibility";
 import LegalNotice from "./pages/LegalNotice";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import ProtectedRoutes from "./components/ProtectedRoutes";
@@ -33,6 +32,7 @@ import UpdateInformation from "./pages/admin/informationsManagement/UpdateInform
 
 import SocialNetworkManager from "./pages/admin/socialNetworksManagement/SocialNetworkManager";
 import UpdateSocialNetwork from "./pages/admin/socialNetworksManagement/UpdateSocialNetwork";
+import Accessibility from "./components/utils/Accessibility";
 
 
 const App = () => {
@@ -41,7 +41,7 @@ const App = () => {
     <div>
       <BrowserRouter>
         <Navigation />
-        <Accessibility />
+        <Accessibility/>
         <Routes>
           <Route path="*" element={<Home />} />
           <Route path="/" element={<Home />} />

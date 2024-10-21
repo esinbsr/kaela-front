@@ -41,12 +41,7 @@
   }
 
   a {
-    color: $yellow;
-    border-bottom: 1px dashed $secondary-color;
+    color: white;
     transition: color 0.2s ease;
-
-    &:hover {
-      color: darken($secondary-color, 20%);
-    }
   }
 }

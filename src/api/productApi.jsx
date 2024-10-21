@@ -30,6 +30,6 @@ export const updateProduct = async (formData) => {
 };
 
 export const deleteProduct = async (productId) => {
-  const response = await apiClient.post("deleteProduct", { productId });
+  const response = await apiClient.delete(`deleteProduct/${productId}`);
   return response.data;
 };

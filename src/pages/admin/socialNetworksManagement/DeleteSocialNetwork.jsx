@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { deleteSocialNetwork } from "../../../api/socialNetworkApi";
 import { toast } from "react-toastify";
-import ModalAdmin from "../../../components/utils/ModalAdmin";
+import ModalAdminDelete from "../../../components/utils/ModalAdminDelete";
 
 const DeleteSocialNetwork = ({ socialNetworkId }) => {
   const [modalShow, setModalShow] = useState(false); // State to control the visibility of the modal
@@ -53,7 +53,7 @@ const DeleteSocialNetwork = ({ socialNetworkId }) => {
       </button>
 
       {modalShow && (
-        <ModalAdmin
+        <ModalAdminDelete
           contentSuffix={`social network : ${socialNetworkId}`}
           onConfirm={confirmDelete}
           onCancel={cancelDelete}

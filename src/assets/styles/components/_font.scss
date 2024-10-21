@@ -21,9 +21,12 @@
 }
 
 @font-face {
-  font-family: 'Allura Regular';
-  src: url('/src/assets/fonts/Allura-Regular.woff') format("woff") ;
+  font-family: 'OpenDyslexic';
+  src: url('/src/assets/fonts/OpenDyslexic-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
 }
+
 
 h1 {
   text-align: center;
@@ -34,18 +37,22 @@ h1 {
 }
 
 h2, legend {
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   font-family: 'Montserrat Medium';
 }
 
 h3 {
-  font-size: 1.17rem;
+  font-size: 1.25rem;
   font-family: 'Montserrat Medium';
 }
 
 
 p, textarea,label, select, input {
   font-size: 1rem;
+}
+
+p  {
+  line-height: 1.5;
 }
 
 a {

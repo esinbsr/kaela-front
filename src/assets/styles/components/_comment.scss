@@ -78,7 +78,7 @@
 
 .comments__toggle-button {
   margin-bottom: 1rem;
-  @include buttonSuqare(white, $navigation-color);
+  @include buttonSuqare(white, $secondary-color);
 }
 
 .comment__login-link {

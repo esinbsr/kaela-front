@@ -4,10 +4,10 @@ import { Link, useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
 import { Helmet } from "react-helmet-async";
 import { API_URL } from "../api/serverRequest";
-import { AuthContext } from '../context/AuthContext'; 
 import { getInformation } from "../api/informationApi";
 import { getProduct } from "../api/productApi";
 import { getSocialNetwork } from "../api/socialNetworkApi";
+import { AuthContext } from "../context/AuthProvider";
 
 // Define section IDs for filtering products
 const SECTIONS = {
@@ -28,19 +28,19 @@ const AboutMe = () => {
   const [instagramLink, setInstagramLink] = useState(""); // State to store the Instagram link
 
   // Fetch data with React Query
-  const { data: informations , isLoading: infoLoading } = 
+  const { data: informations , isLoading: infoLoading, error : infoError } = 
   useQuery({
    queryKey:['informations'],
   queryFn: getInformation
 });
 
-  const { data: products, isLoading: productLoading } = 
+  const { data: products, isLoading: productLoading, error : productError } = 
   useQuery({
     queryKey:['products'],
     queryFn: getProduct
   });
 
-  const { data: socialNetworks , isLoading: socialNetworkLoading } = 
+  const { data: socialNetworks , isLoading: socialNetworkLoading,  error :socialNetworkError } = 
   useQuery({
     queryKey:['socialNetworks'],
     queryFn: getSocialNetwork
@@ -53,7 +53,7 @@ const AboutMe = () => {
 
   // Get the first three information entries
   const threeInformations = informations
-    ? informations.slice(1, 4)
+    ? informations.slice(1, 5)
     : [];
 
   // Handle click event for admin users
@@ -79,8 +79,12 @@ const AboutMe = () => {
     closeModal(); // Close the modal after navigation
   };
 
-  if (infoLoading || productLoading || socialNetworkLoading) {
-    return <p>Loading data...</p>;
+  if ( productLoading || socialNetworkLoading) {
+    return <p role="status">Loading...</p>;
+  }
+
+  if (productError || socialNetworkError) {
+    return  <p role="alert">An error occurred</p>;
   }
 
   return (
@@ -96,22 +100,21 @@ const AboutMe = () => {
       <h1>About Me</h1>
 
       <h2>Who am I?</h2>
-      <div className="about-me__header">
-        {threeInformations ? (
+
+      <section className="about-me__header">
+        {infoLoading && <span role="status"> Loading...</span>}
+        {infoError && <span role="alert"> An error occurred</span>}
+        {threeInformations &&
           threeInformations.map((info) => (
             <p key={info.id}>{info.description}</p>
           ))
-        ) : (
-          <p role="alert" aria-live="assertive">
-            Loading descriptions...
-          </p>
-        )}
-      </div>
-
-      <div className="about-me__footer">
+        }
+      </section>
+  
+      <section className="about-me__footer">
         <h2>Subscribe to my Instagram</h2>
         <div className="about-me__footer-container">
-          {filteredProducts && socialNetworks.length > 0 ? (
+          {filteredProducts && socialNetworks.length > 0 &&
             filteredProducts.slice(1, 9).map((product) => (
               <div className="about-me__footer-image" key={product.id}>
                 {userRole === "admin" ? (
@@ -142,23 +145,22 @@ const AboutMe = () => {
                 )}
               </div>
             ))
-          ) : (
-            <p role="alert" aria-live="assertive">
-              Loading images...
-            </p>
-          )}
+          }
         </div>
-      </div>
+      </section>
 
-      {modalVisible && ( // Display the modal if modalVisible is true
-        <div className="modal">
+      {modalVisible && (
+        <div
+          className="modal"
+          role="dialog"
+          aria-labelledby="modal-title"
+          aria-describedby="modal-description"
+          aria-modal="true"
+        >
           <div className="modal__content">
-            <h2>What do you want to do?</h2>
-            <button
-              onClick={() =>
-                handleNavigate(`/updateProduct/${selectedProduct.id}`)
-              }
-            >
+            <h2 id="modal-title">What do you want to do?</h2>
+            <p id="modal-description">Choose an action to perform on the product.</p>
+            <button onClick={() => handleNavigate(`/updateProduct/${selectedProduct.id}`)}>
               Edit Image
             </button>
             <button onClick={() => window.open(instagramLink, "_blank")}>

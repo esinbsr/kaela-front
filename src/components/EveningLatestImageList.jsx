@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { API_URL } from "../api/serverRequest";
-import { AuthContext } from "../context/AuthContext";
+import { AuthContext } from "../context/AuthProvider";
 import { getProduct } from "../api/productApi";
 import { useQuery } from "react-query";
 
@@ -55,17 +55,16 @@ const EveningLatestImageList = ({ start, end, additionalClass, section }) => {
     };
 
     // Return loading or error messages if necessary
-    if (isLoading) return "Loading..."; 
-    if (error) return "An error occurred: " + error.message;
+    if (isLoading) return <p role="status"> Loading...</p>;
+    if (error) return <p role="alert"> An error occurred : {error.message}</p>;
 
     return (
         <section className={additionalClass}>
             {/* Render the product images if any filtered products are available */}
-            {filteredProducts.length > 0 ? (
+            {filteredProducts.length > 0 &&
                 filteredProducts.map((product, index) => {
                     // Apply a specific class to the first and third images (visual positioning)
                     const topImageClass = index === 0 || index === 2 ? "top-image" : "";
-
                     return (
                         <div key={product.id} className="evening-latest__item">
                             <img
@@ -77,13 +76,7 @@ const EveningLatestImageList = ({ start, end, additionalClass, section }) => {
                             />
                         </div>
                     );
-                })
-            ) : (
-                // Display a message if no products were found for the section
-                <p role="alert" aria-live="assertive">
-                    No products found for this section.
-                </p>
-            )}
+                })}
 
             {/* Modal displayed only for admin users */}
             {modalVisible && (

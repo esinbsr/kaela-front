@@ -13,7 +13,6 @@ const SECTIONS = {
 // This component displays the latest collection
 const LatestCollection = () => {
   useEffect(() => {
-
     window.scrollTo(0, 0);
 
 }, [])

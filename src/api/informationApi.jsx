@@ -19,12 +19,12 @@ export const addInformation = async (formData) => {
 };
 
 export const updateInformation = async (formData) => {
-  const response = await apiClient.post("updateInformation", formData);
+  const response = await apiClient.put("updateInformation", formData);
   return response.data;
 };
 
 
 export const deleteInformation = async (informationId) => {
-  const response = await apiClient.post("deleteInformation", { informationId });
+  const response = await apiClient.delete(`deleteInformation/${informationId }`);
   return response.data;
 };

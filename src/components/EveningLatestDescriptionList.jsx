@@ -15,17 +15,18 @@ const EveningLatestDescriptionList = ({ categorySlug }) => {
     : null;
 
     // Return loading or error messages if necessary
-    if (isLoading) return "Loading...";
-    if (error) return "An error occurred: " + error.message;
+    if (isLoading) return <p role="status"> Loading...</p>;
+    if (error) return <p role="alert"> An error occurred : {error.message}</p>;
+
   return (
     <>
       {category ? (
         <>
         <h1>{category.name}</h1>
-        <div className="evening-latest__description">
+        <section className="evening-latest__description">
           <h3>{category.page_title}</h3>
           <p>{category.page_description}</p>
-        </div>
+        </section>
         </>
       ) : (
         // Message displayed if no category is found

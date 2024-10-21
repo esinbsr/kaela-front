@@ -6,12 +6,6 @@ export const getComment = async (productDetailId) => {
   };
   
   
-  export const getCommentById = async (commentId) => {
-    const response = await apiClient.get(`getCommentById/${commentId}`);
-    return response.data.comment;
-  };
-  
-  
   export const addComment = async (formData) => {
     const response = await apiClient.post("addComment", formData);
     return response.data;

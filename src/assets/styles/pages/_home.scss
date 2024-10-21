@@ -3,7 +3,7 @@
     letter-spacing: 3px;
     font-family: "Great Vibes";
     font-size: 3rem;
-    color: $navigation-color;
+    color: $secondary-color;
   }
 
   .home__header-image {
@@ -12,10 +12,10 @@
       center,
       row,
       wrap
-    ); // 3 images sur une ligne pour les écrans plus larges
+    ); 
 
     a {
-      width: 30%; // Chaque image occupe 30% de la largeur en grand écran
+      width: 28%; 
     }
 
     img {
@@ -98,7 +98,7 @@
       width: auto;
       align-self: flex-start;
       & {
-        @include buttonRound(white, $navigation-color);
+        @include buttonRound(white, $secondary-color);
       }
     }
   }

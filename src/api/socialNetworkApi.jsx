@@ -3,7 +3,7 @@ import apiClient from "./apiClient";
 
 export const getSocialNetwork = async () => {
   const response = await apiClient.get("getSocialNetwork");
-  return response.data.socialNetwork;
+  return response.data.socialNetworks;
 };
 
 
@@ -19,12 +19,12 @@ export const addSocialNetwork = async (formData) => {
 };
 
 export const updateSocialNetwork = async (formData) => {
-  const response = await apiClient.post("updateSocialNetwork", formData);
+  const response = await apiClient.put("updateSocialNetwork", formData);
   return response.data;
 };
 
 
 export const deleteSocialNetwork = async (socialNetworkId) => {
-  const response = await apiClient.post("deleteSocialNetwork", { socialNetworkId });
+  const response = await apiClient.delete(`deleteSocialNetwork/${socialNetworkId}`);
   return response.data;
 };

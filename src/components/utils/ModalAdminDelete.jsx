@@ -1,4 +1,4 @@
-const ModalAdmin = ({ contentPrefix = "Are you sure you want to delete this", contentSuffix, onConfirm, onCancel }) => {
+const ModalAdminDelete = ({ contentPrefix = "Are you sure you want to delete this", contentSuffix, onConfirm, onCancel }) => {
     return (
       <div className="modal">
         <div className="modal__content">
@@ -11,5 +11,5 @@ const ModalAdmin = ({ contentPrefix = "Are you sure you want to delete this", co
     );
   };
   
-  export default ModalAdmin;
+  export default ModalAdminDelete;
   

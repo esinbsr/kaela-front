@@ -29,9 +29,9 @@ const CommentDisplay = () => {
     return showAllComments ? sortedComments : sortedComments.slice(0, 5);
   }, [showAllComments, sortedComments]);
 
-  if (isLoading) return "Loading...";
-  if (error) return "An error occurred: " + error.message;
-
+  if (isLoading) return <p role="status"> Loading...</p>;
+  if (error) return <p role="alert"> An error occurred : {error.message}</p>;
+  
   return (
     <div className="comments">
       {sortedComments.length > 0 ? (
