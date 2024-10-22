@@ -5,6 +5,7 @@ import { Helmet } from "react-helmet-async";
 import { getInformation } from "../api/informationApi";
 import { useQuery } from "react-query";
 import { useEffect } from "react";
+import "../assets/styles/pages/_legal-information.scss";
 
 const LegalNotice = () => {
 

@@ -3,6 +3,7 @@ import EveningLatestImageList from "../components/EveningLatestImageList";
 import Footer from "../components/Footer";
 import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
+import "../assets/styles/pages/_evening-latest.scss";
 
 
 // Define section identifiers to display only images in that section

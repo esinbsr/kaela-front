@@ -5,6 +5,7 @@
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   background-color: $main-color;
+  color: white;
 
 
   input::placeholder{
@@ -14,7 +15,6 @@
 
   h2 {
     margin-bottom: 10px;
-    color: white;
   }
 
   .line {
@@ -28,7 +28,6 @@
     label {
       align-self: flex-start;
       margin-bottom: 8px;
-      color: white;
     }
 
     input {
@@ -52,13 +51,12 @@
     p {
       margin-top: 15px;
       text-align: center;
-      color: white;
     }
 
     .user-form__link {
       text-decoration: underline;
       cursor: pointer;
-      color: $yellow;
+      color: white;
     }
   }
 }
@@ -73,5 +71,4 @@
     padding: 12px;
   }}
 }
-  
 }

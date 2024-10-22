@@ -8,6 +8,7 @@ import { getInformation } from "../api/informationApi";
 import { getProduct } from "../api/productApi";
 import { getSocialNetwork } from "../api/socialNetworkApi";
 import { AuthContext } from "../context/AuthProvider";
+import '../assets/styles/pages/_about-me.scss';
 
 // Define section IDs for filtering products
 const SECTIONS = {

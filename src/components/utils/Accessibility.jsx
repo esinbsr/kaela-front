@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { IoAccessibilitySharp } from 'react-icons/io5';
 import { MdTextDecrease, MdTextIncrease } from 'react-icons/md';
+import '../../assets/styles/components/_accessibility.scss';
 
 const Accessibility = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);

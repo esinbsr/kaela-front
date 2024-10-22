@@ -1,3 +1,4 @@
+import "../../assets/styles/components/_modal-admin.scss";
 const ModalAdminDelete = ({ contentPrefix = "Are you sure you want to delete this", contentSuffix, onConfirm, onCancel }) => {
     return (
       <div className="modal">

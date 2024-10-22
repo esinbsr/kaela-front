@@ -4,6 +4,7 @@ import Comment from "../components/comments/Comment";
 import Footer from "../components/Footer";
 import ProductDetailCard from "../components/admin/ProductDetailCard";
 import { getProductById } from "../api/productApi"; 
+import "../assets/styles/components/_product-detail.scss";
 
 const ProductDetail = () => {
 

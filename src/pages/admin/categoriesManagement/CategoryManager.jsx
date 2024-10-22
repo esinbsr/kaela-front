@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import AdminNavigation from "../AdminNavigation";
 import AddCategory from "./AddCategory";
 import DisplayCategory from "./DisplayCategory"
+import "../../../assets/styles/components/_table-admin.scss";
+import "../../../assets/styles/components/_form-admin.scss";
 
 
 const CategoryManager = () => {

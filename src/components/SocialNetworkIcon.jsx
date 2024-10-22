@@ -1,9 +1,9 @@
 import { useQuery } from "react-query";
 import { getSocialNetwork } from "../api/socialNetworkApi";
-
-// Import des icônes spécifiques depuis react-icons
 import { FaInstagram, FaFacebook, FaWhatsapp } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import '../assets/styles/components/_icon-social-network.scss';
+
 
 const SocialNetworkIcon = () => {
   // Fetch social networks from the server

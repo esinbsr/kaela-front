@@ -9,6 +9,7 @@ import { FaLocationDot } from "react-icons/fa6";
 import Map from "../components/utils/Map";
 import Footer from "../components/Footer";
 import { AuthContext } from "../context/AuthProvider";
+import '../assets/styles/pages/_contact.scss';
 
 const Contact = () => {
   useEffect(() => {

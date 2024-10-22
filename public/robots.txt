@@ -1,0 +1,13 @@
+User-agent: *
+Disallow: /admin
+Disallow: /productManager
+Disallow: /updateProduct
+Disallow: /categoryManager
+Disallow: /updateCategory
+Disallow: /informationManager
+Disallow: /updateInformation
+Disallow: /socialNetworkManager
+Disallow: /updateSocialNetwork
+
+# Autoriser le reste du site à être indexé
+Allow: /

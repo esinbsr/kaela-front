@@ -4,6 +4,8 @@ import HomeImageList from "../components/HomeImageList";
 import Footer from "../components/Footer";
 import { Helmet } from "react-helmet-async";
 import { useEffect } from "react";
+import '../assets/styles/pages/_home.scss';
+import '../assets/styles/components/_collection.scss';
 
 // This component serves as the main container for combining 3 sub-components
 const Home = () => {

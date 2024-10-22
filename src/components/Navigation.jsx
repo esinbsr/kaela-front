@@ -2,6 +2,7 @@ import { useState, useContext } from "react";
 import { NavLink } from "react-router-dom";
 import Logo from "./Logo";
 import { AuthContext } from "../context/AuthProvider";
+import '../assets/styles/components/_navigation.scss';
 
 const Navigation = () => {
   const [menuOpen, setMenuOpen] = useState(false); // État pour ouvrir/fermer le menu

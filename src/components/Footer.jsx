@@ -6,6 +6,7 @@ import Logo from "./Logo";
 import { getInformation } from "../api/informationApi";
 import { useQuery } from "react-query";
 import SocialNetworkIcon from "./SocialNetworkIcon";
+import '../assets/styles/components/_footer.scss';
 
 const Footer = () => {
   // Fetch informations from the serveur

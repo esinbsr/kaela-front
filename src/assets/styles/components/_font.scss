@@ -2,22 +2,26 @@
 @font-face {
     font-family: 'Montserrat';
     src: url('/src/assets/fonts/Montserrat.woff') format("woff");
+    font-display: swap;
   }
 
   @font-face {
     font-family: 'Montserrat Medium';
     src: url('/src/assets/fonts/Montserrat-Medium.woff') format("woff") ;
+    font-display: swap;
   }
 
   @font-face {
     font-family: 'Montserrat SemiBold';
     src: url('/src/assets/fonts/Montserrat-SemiBold.woff') format("woff") ;
+    font-display: swap;
   }
 
 
 @font-face {
   font-family: 'Great Vibes';
   src: url('/src/assets/fonts/GreatVibes-Regular.woff') format("woff") ;
+  font-display: swap;
 }
 
 @font-face {
@@ -25,6 +29,7 @@
   src: url('/src/assets/fonts/OpenDyslexic-Regular.woff') format('woff');
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
 }
 
 
