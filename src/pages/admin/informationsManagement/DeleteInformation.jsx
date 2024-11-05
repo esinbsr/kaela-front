@@ -14,10 +14,10 @@ const DeleteInformation = ({ informationId }) => {
     onSuccess: (data) => {
       // If successful, show success message and refresh the categories list
       if (data.success) {
-        toast.success(data.message || "Information supprimée avec succès !");
+        toast.success(data.message || "Information successfully deleted!");
         queryClient.invalidateQueries('informations');
       } else {
-        toast.error(data.message || "Une erreur est survenue.");
+        toast.error(data.message || "An error has occurred.");
       }
     },
     // Handle server errors

@@ -13,4 +13,3 @@ const ModalAdminDelete = ({ contentPrefix = "Are you sure you want to delete thi
   };
   
   export default ModalAdminDelete;
-  

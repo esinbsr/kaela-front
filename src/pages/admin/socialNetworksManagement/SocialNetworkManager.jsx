@@ -2,7 +2,8 @@ import { useEffect } from "react";
 import AdminNavigation from "../AdminNavigation";
 import AddSocialNetwork from "./AddSocialNetwork";
 import DisplaySocialNetwork from "./DisplaySocialNetwork";
-
+import "../../../assets/styles/components/_table-admin.scss";
+import "../../../assets/styles/components/_form-admin.scss";
 
 const SocialNetworkManager = () => {
 

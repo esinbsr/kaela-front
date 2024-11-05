@@ -1,0 +1,42 @@
+.home__description {
+    @include flexbox(null, null, column, null);
+    margin: 60px 0;
+
+    p {
+      position: relative;
+      margin-bottom: 15px;
+      max-width: 50%;
+    }
+
+    a {
+      width: auto;
+      align-self: flex-start;
+      & {
+        @include buttonRound(white, $secondary-color);
+      }
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .home__description {
+      margin: 40px 0;
+      @include flexbox(center, center, null, null);
+      text-align: center;
+
+      p {
+        max-width: 70%;
+      }
+
+      a {
+        align-self: center;
+      }
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    .home__description {
+      p {
+        max-width: 100%;
+      }
+    }
+  }

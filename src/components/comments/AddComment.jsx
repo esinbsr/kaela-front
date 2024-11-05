@@ -1,33 +1,32 @@
-import { useState, useContext } from 'react';
-import { useMutation, useQueryClient } from 'react-query';
-import { useParams, Link } from 'react-router-dom';
-import { toast } from 'react-toastify'; 
-import { AuthContext } from '../../context/AuthProvider'; 
-import { addComment } from '../../api/commentApi';
+import { useState, useContext } from "react";
+import { useMutation, useQueryClient } from "react-query";
+import { useParams, Link } from "react-router-dom";
+import { toast } from "react-toastify";
+import { AuthContext } from "../../context/AuthProvider";
+import { addComment } from "../../api/commentApi";
 
 const AddComment = () => {
-  const [content, setContent] = useState('');
-  const { auth } = useContext(AuthContext); 
+  const [content, setContent] = useState("");
+  const { auth } = useContext(AuthContext);
   const userId = auth.userId;
 
   const { productDetailId } = useParams();
   const queryClient = useQueryClient();
 
-
-  const mutation  = useMutation({
+  const mutation = useMutation({
     mutationFn: addComment,
     onSuccess: (data) => {
-      if(data.success) {
-        setContent('');
-        toast.success(data.message || 'Comment added successfully!');
-        queryClient.invalidateQueries('comments');
+      if (data.success) {
+        setContent("");
+        toast.success(data.message || "Comment added successfully!");
+        queryClient.invalidateQueries("comments");
       } else {
         toast.error(data.message || "An error has occurred.");
       }
     },
     onError: (error) => {
-      toast.error("Server error: " + error.message); 
-    }
+      toast.error("Server error: " + error.message);
+    },
   });
 
   const handleSubmit = (e) => {
@@ -46,7 +45,9 @@ const AddComment = () => {
     return (
       <div className="comment__login-link">
         <p>Login to write a comment</p>
-        <Link className="comment__link" to="/login">Login</Link>
+        <Link className="comment__link" to="/login">
+          Login
+        </Link>
       </div>
     );
   }

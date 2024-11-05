@@ -17,34 +17,31 @@ const SECTIONS = {
 
 const AboutMe = () => {
   useEffect(() => {
-    window.scrollTo(0,0);
+    window.scrollTo(0, 0);
   }, []);
 
   const { auth } = useContext(AuthContext);
   const userRole = auth.role;
   const navigate = useNavigate(); 
 
-  const [modalVisible, setModalVisible] = useState(false); // State to control the visibility of the modal
-  const [selectedProduct, setSelectedProduct] = useState(null); // State to track the selected product for the modal
-  const [instagramLink, setInstagramLink] = useState(""); // State to store the Instagram link
+  const [modalVisible, setModalVisible] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [instagramLink, setInstagramLink] = useState("");
 
   // Fetch data with React Query
-  const { data: informations , isLoading: infoLoading, error : infoError } = 
-  useQuery({
-   queryKey:['informations'],
-  queryFn: getInformation
-});
-
-  const { data: products, isLoading: productLoading, error : productError } = 
-  useQuery({
-    queryKey:['products'],
-    queryFn: getProduct
+  const { data: informations, isLoading: infoLoading, error: infoError } = useQuery({
+    queryKey: ['informations'],
+    queryFn: getInformation,
   });
 
-  const { data: socialNetworks , isLoading: socialNetworkLoading,  error :socialNetworkError } = 
-  useQuery({
-    queryKey:['socialNetworks'],
-    queryFn: getSocialNetwork
+  const { data: products, isLoading: productLoading, error: productError } = useQuery({
+    queryKey: ['products'],
+    queryFn: getProduct,
+  });
+
+  const { data: socialNetworks, isLoading: socialNetworkLoading, error: socialNetworkError } = useQuery({
+    queryKey: ['socialNetworks'],
+    queryFn: getSocialNetwork,
   });
 
   // Filter products related to the "About Me" section
@@ -53,39 +50,37 @@ const AboutMe = () => {
     : [];
 
   // Get the first three information entries
-  const threeInformations = informations
-    ? informations.slice(1, 5)
-    : [];
+  const threeInformations = informations ? informations.slice(1, 5) : [];
 
   // Handle click event for admin users
   const handleAdminClick = (product) => {
     const instagramUrl = socialNetworks.find(
       (network) => network.platform.toLowerCase() === "instagram"
     ).url;
-    setInstagramLink(instagramUrl); // Set the Instagram link
-    setSelectedProduct(product); // Set the selected product
-    setModalVisible(true); // Show the modal
+    setInstagramLink(instagramUrl);
+    setSelectedProduct(product);
+    setModalVisible(true);
   };
 
   // Function to close the modal
   const closeModal = () => {
-    setModalVisible(false); // Hide the modal
-    setSelectedProduct(null); // Reset the selected product
-    setInstagramLink(""); // Reset the Instagram link
+    setModalVisible(false);
+    setSelectedProduct(null);
+    setInstagramLink("");
   };
 
   // Function to navigate to the desired page from the modal
   const handleNavigate = (path) => {
-    navigate(path); // Navigate to the specified path
-    closeModal(); // Close the modal after navigation
+    navigate(path);
+    closeModal();
   };
 
-  if ( productLoading || socialNetworkLoading) {
+  if (productLoading || socialNetworkLoading) {
     return <p role="status">Loading...</p>;
   }
 
   if (productError || socialNetworkError) {
-    return  <p role="alert">An error occurred</p>;
+    return <p role="alert">An error occurred</p>;
   }
 
   return (
@@ -103,19 +98,18 @@ const AboutMe = () => {
       <h2>Who am I?</h2>
 
       <section className="about-me__header">
-        {infoLoading && <span role="status"> Loading...</span>}
-        {infoError && <span role="alert"> An error occurred</span>}
+        {infoLoading && <span role="status">Loading...</span>}
+        {infoError && <span role="alert">An error occurred</span>}
         {threeInformations &&
           threeInformations.map((info) => (
             <p key={info.id}>{info.description}</p>
-          ))
-        }
+          ))}
       </section>
   
       <section className="about-me__footer">
         <h2>Subscribe to my Instagram</h2>
         <div className="about-me__footer-container">
-          {filteredProducts && socialNetworks.length > 0 &&
+          {filteredProducts.length > 0 && socialNetworks?.length > 0 ? (
             filteredProducts.slice(1, 9).map((product) => (
               <div className="about-me__footer-image" key={product.id}>
                 {userRole === "admin" ? (
@@ -146,7 +140,9 @@ const AboutMe = () => {
                 )}
               </div>
             ))
-          }
+          ) : (
+            <p>No products available.</p>
+          )}
         </div>
       </section>
 

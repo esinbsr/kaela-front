@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import Footer from "../components/Footer";
 import { loginUser } from "../api/userApi";
 import { AuthContext } from "../context/AuthProvider";
+import '../assets/styles/pages/_user-form.scss';
 
 const Login = () => {
   const [email, setEmail] = useState("");

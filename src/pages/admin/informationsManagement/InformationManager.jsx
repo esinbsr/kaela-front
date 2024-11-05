@@ -2,7 +2,8 @@ import { useEffect } from "react";
 import AdminNavigation from "../AdminNavigation";
 import AddInformation from "./AddInformation";
 import DisplayInformation from "./DisplayInformation";
-
+import "../../../assets/styles/components/_table-admin.scss";
+import "../../../assets/styles/components/_form-admin.scss";
 
 const InformationManager = () => {
     useEffect(() => {

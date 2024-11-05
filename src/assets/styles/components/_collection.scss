@@ -2,7 +2,7 @@
   @include flexbox(space-between, center, row, wrap);
 
   .collection-item {
-    width: 35%; 
+    width: 30%; 
     position: relative;
 
     img {
@@ -37,33 +37,14 @@
   .home__collection-image {
     @include flexbox(null, center, column, null);
     .collection-item {
-      width: 50%; 
-      margin-bottom: 50px;
+      width: 100%; 
+      margin-bottom: 3rem;
     }
 
     .home__collection-description {
       h3 {
-        margin-top: 15px;
+        margin-top: 1rem;
       }
-
-      p {
-        margin: 10px 0 15px 0;
-      }
-
-      a {
-        align-self: center;
-      }
-    }
-  }
-}
-
-/* Responsive - Mobile */
-@media screen and (max-width: 480px) {
-  .home__collection-image {
-    @include flexbox(center, center, column, null);
-
-    .collection-item {
-      width: 100%;
     }
   }
 }

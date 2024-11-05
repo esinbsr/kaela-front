@@ -4,6 +4,8 @@ import { useNavigate, Link } from 'react-router-dom';
 import { AuthContext } from '../context/AuthProvider';
 import { getProduct } from '../api/productApi';
 import { API_URL } from '../api/serverRequest';
+import '../assets/styles/components/_home-image.scss';
+import '../assets/styles/components/_modal-admin.scss';
 
 const SECTIONS = {
     HOME_HEADER: 2,
@@ -48,8 +50,10 @@ const HomeImageList = ({ start, end, additionalClass }) => {
     if (error) return <p role="alert">An error occurred: {error.message}</p>;
 
     return (
+
+
         <section className={`${additionalClass || ''}`}>
-            {filteredProducts.length &&
+            {filteredProducts.length > 0 ? (
                 filteredProducts.map((product) => (
                     <Link
                         key={product.id}
@@ -59,11 +63,12 @@ const HomeImageList = ({ start, end, additionalClass }) => {
                         <img
                             src={`${API_URL}assets/img/${product.path}`}
                             alt={product.name}
-                            loading="lazy"
                         />
                     </Link>
                 ))
-                }
+            ) : (
+                <p>No products available.</p>
+            )}
 
             {modalVisible && selectedProduct && (
                       <div

@@ -17,7 +17,7 @@ const DeleteSocialNetwork = ({ socialNetworkId }) => {
         toast.success(data.message);
         queryClient.invalidateQueries("socialNetworks");
       } else {
-        toast.error(data.message || "Une erreur est survenue.");
+        toast.error(data.message || "An error has occurred.");
       }
     },
     // Handle server errors

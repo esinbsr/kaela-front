@@ -4,6 +4,7 @@ import { useQuery, useMutation, useQueryClient } from "react-query";
 import AdminNavigation from "../AdminNavigation";
 import { toast } from "react-toastify"; 
 import { getSocialNetworkById, updateSocialNetwork } from "../../../api/socialNetworkApi"; 
+import "../../../assets/styles/components/_form-admin.scss";
 
 const UpdateSocialNetwork = () => {
 

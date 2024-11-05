@@ -4,6 +4,7 @@ import { useQuery, useMutation, useQueryClient } from "react-query";
 import AdminNavigation from "../AdminNavigation";
 import { toast} from "react-toastify"; 
 import { getCategoryById, updateCategory } from "../../../api/categoryApi";
+import "../../../assets/styles/components/_form-admin.scss";
 
 const UpdateCategory = () => {
 

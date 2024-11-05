@@ -35,7 +35,7 @@ const DisplayCategory = () => {
 
               <tbody>
                 {/* If the list has items, render each as a row */}
-                {categoryList.length ? (
+                {categoryList.length > 0 ? (
                   categoryList.map((category) => (
                     <CategoryCard
                       key={category.id}

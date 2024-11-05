@@ -3,12 +3,14 @@
   color: $secondary-color;
   animation: fadeIn 1s ease-in-out;
 
+
   &__kaela {
     font-size: 1.7rem;
     letter-spacing: 0.15em;
     position: relative;
     animation: slideInFromLeft 1s ease-out;
     color: $secondary-color;
+    font-family: "Montserrat", sans-serif!important;
   }
 
   &__couture {
@@ -20,6 +22,7 @@
     transform: translateY(10px);
     opacity: 0;
     animation: slideInFromRight 1.2s ease-out forwards;
+    font-family: "Montserrat", sans-serif!important;
   }
 }
 

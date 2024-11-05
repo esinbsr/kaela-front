@@ -35,7 +35,7 @@ const DisplayInformation = () => {
 
               <tbody>
                 {/* If the list has items, render each as a row */}
-                {informationList.length ? (
+                {informationList.length > 0 ? (
                   informationList.map((info) => (
                     <InformationCard key={info.id} infos={info} />
                   ))

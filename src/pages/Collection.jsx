@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import CollectionImage from "../components/CollectionImage";
 import Footer from "../components/Footer";
 import { Helmet } from "react-helmet-async";
+import '../assets/styles/components/_collection.scss';
 
 
 // This component represents the collection page

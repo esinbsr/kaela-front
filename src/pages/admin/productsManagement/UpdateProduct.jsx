@@ -7,6 +7,7 @@ import { getSection } from "../../../api/sectionApi";
 import AdminNavigation from "../AdminNavigation";
 import { toast } from "react-toastify";
 import { API_URL } from "../../../api/serverRequest";
+import "../../../assets/styles/components/_form-admin.scss";
 
 const UpdateProduct = () => {
 

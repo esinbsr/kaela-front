@@ -47,7 +47,7 @@
   
   /* Police lisible (OpenDyslexic) */
   .dyslexic-font * {
-    font-family: "OpenDyslexic", sans-serif !important;
+    font-family: "OpenDyslexic", sans-serif;
   }
   
   /* Interlignage augmenté */
@@ -59,7 +59,6 @@
     position: fixed;
     right: 0px;
     z-index: 1000;
-    top: 5rem;
     margin-right: 5vw;
     background-color: #007bff;
     border-radius: 4px;

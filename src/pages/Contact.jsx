@@ -31,12 +31,16 @@ const Contact = () => {
   const mutation = useMutation({
     mutationFn: sendMessage,
     onSuccess: (data) => {
+      if(data.success) {
       setEmail(""), setObject("");
       setMessage("");
-      toast.success(data.message || "Message envoyé avec succès !");
+      toast.success(data.message || "Email sent successfully");
+    } else {
+      toast.error(data.message || "A valid email is required")
+    }
     },
     onError: () => {
-      toast.error("Une erreur est survenue lors de l'envoi du message.");
+      toast.error("An error has occurred while sending the message.");
     },
   });
 
@@ -60,7 +64,7 @@ const Contact = () => {
         <section className="contact__form">
           <form onSubmit={handleSubmit}>
             <fieldset>
-              <h2>Contactez-nous</h2>
+              <h2>Contacte Me</h2>
               <div className="line"></div>
 
               {!auth.email && (
@@ -68,7 +72,7 @@ const Contact = () => {
                   <label htmlFor="email">Email</label>
                   <input
                     id="email"
-                    type="email"
+                    type="text"
                     name="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
@@ -77,7 +81,7 @@ const Contact = () => {
                   />
                 </>
               )}
-              <label htmlFor="object">Objet</label>
+              <label htmlFor="object">Object</label>
               <input
                 id="object"
                 type="text"
@@ -99,14 +103,16 @@ const Contact = () => {
               ></textarea>
 
               <div className="form__button-container">
-                <button type="submit">Envoyer</button>
+                <button type="submit" disabled={mutation.isLoading}>
+                {mutation.isLoading ? "Sending..." : "Send"}
+                  </button>
               </div>
             </fieldset>
           </form>
         </section>
 
         <address className="contact__content">
-          <h2>Détails de contact</h2>
+          <h2>Contact Details</h2>
           <div className="line"></div>
 
           <div className="contact__data">

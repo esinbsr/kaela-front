@@ -43,25 +43,24 @@ const AddProduct = () => {
   const mutation = useMutation({
     mutationFn: addProduct,
     onSuccess: (data) => {
-      // If successful, invalidate the 'products' query and reset the form
-      if(data.success) {
-      toast.success(data.message || "Produit ajouté avec succès !");
-      setProductName("");
-      setProductDescription("");
-      setProductCategory(categories[0]?.id || ""); // Resets the field to the first category
-      setProductSection(sections[0]?.id || "");
-      setProductImage(null);
-      fileInputRef.current.value = "";
-      queryClient.invalidateQueries("products");
-    } else {
-      toast.error(data.message || "An error has occurred.");
-    }
+      if (data.success) {
+        toast.success(data.message || "Product successfully added!");
+        setProductName("");
+        setProductDescription("");
+        setProductCategory(categories[0]?.id || "");
+        setProductSection(sections[0]?.id || "");
+        setProductImage(null);
+        fileInputRef.current.value = "";
+        queryClient.invalidateQueries("products");
+      } else {
+        toast.error(data.message || "An error has occurred.");
+      }
     },
-    // Handle server errors
     onError: (error) => {
-      toast.error("Erreur lors de l'ajout du produit : " + error.message);
+      toast.error("Error when adding product: " + error.message);
     },
   });
+  
 
   // Form submission handler
   const handleSubmit = (e) => {

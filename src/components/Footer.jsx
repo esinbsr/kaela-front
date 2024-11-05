@@ -18,7 +18,6 @@ const Footer = () => {
   // If there is data and it contains informations, use the first information, otherwise return an empty array.
   const info = data?.length > 0 ? data[0] : null;
 
-
   return (
     <footer className="footer">
       <div className="footer__container">
@@ -26,26 +25,26 @@ const Footer = () => {
           <h3>Contact Details</h3>
           <div className="line"></div>
 
-          <div className="footer__contact-item">
-            <FaPhoneAlt aria-label="Mobile" />
-            {isLoading && <span role="status"> Loading..</span>}
-            {error && <span role="alert"> An error occurred :  {error.message}</span>}
-            {info && <p>+{info.mobile}</p>}
-          </div>
+          {error ? (
+            <p role="alert">An error occurred: {error.message}</p>
+          ) : (
+            <>
+              <div className="footer__contact-item">
+                <FaPhoneAlt aria-label="Mobile" />
+                {isLoading ? <p>Loading...</p> : <p>+{info?.mobile}</p>}
+              </div>
 
-          <div className="footer__contact-item">
-            <MdEmail aria-label="Email" />
-            {isLoading && <span role="status"> Loading..</span>}
-            {error && <span role="alert"> An error occurred :  {error.message}</span>}
-            {info && <p>{info.email}</p>}
-          </div>
+              <div className="footer__contact-item">
+                <MdEmail aria-label="Email" />
+                {isLoading ? <p>Loading...</p> : <p>{info?.email}</p>}
+              </div>
 
-          <div className="footer__contact-item">
-            <FaLocationDot aria-label="Address" />
-            {isLoading && <span role="status"> Loading..</span>}
-            {error && <span role="alert"> An error occurred :  {error.message}</span>}
-            {info && <p>{info.address}</p>}
-          </div>
+              <div className="footer__contact-item">
+                <FaLocationDot aria-label="Address" />
+                {isLoading ? <p>Loading...</p> : <p>{info?.address}</p>}
+              </div>
+            </>
+          )}
         </div>
 
         <div className="footer__column">
@@ -69,7 +68,7 @@ const Footer = () => {
       <div className="footer__copyright">
         <Logo />
         <p> Copyright © 2024 Kaela Couture. All rights reserved.</p>
-      <SocialNetworkIcon/>
+        <SocialNetworkIcon />
       </div>
     </footer>
   );

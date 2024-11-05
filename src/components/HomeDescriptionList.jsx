@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useQuery } from "react-query";
 import { getInformation } from "../api/informationApi";
+import '../assets/styles/components/_home-description.scss';
 
 const HomeDescriptionList = () => {
 

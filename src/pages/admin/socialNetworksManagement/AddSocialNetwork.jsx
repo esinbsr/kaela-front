@@ -16,11 +16,11 @@ const AddSocialNetwork = () => {
       // If successful, invalidate the 'socialNetwork' query and reset the form
       if (data.success) {
         queryClient.invalidateQueries('socialNetworks');
-        toast.success(data.message || "Réseau social ajouté avec succès !");
+        toast.success(data.message || "Social network added successfully!");
         setPlatform("");
         setUrl("");
       } else {
-        toast.error(data.message || "Une erreur est survenue.");
+        toast.error(data.message || "An error has occurred.");
       }
     },
     // Handle server errors

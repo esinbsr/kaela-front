@@ -1,32 +1,28 @@
 import axios from "axios";
 import { API_URL } from "../api/serverRequest";
 
-// Avec ce fichier :
-// - Toutes les requêtes utilisant apiClient sont automatiquement envoyées à l'URL de base que j'ai définis
-// - L'intercepteur ajoute automatiquement un token JWT à chaque requête
-
-// Créer une instance d'Axios
+// Crée une instance personnalisé de axios / Creates a custom instance of axios
 const apiClient = axios.create({
-  baseURL: API_URL,
+  baseURL: API_URL, // Url de base / Base url
   headers: {
-    "Content-Type": "application/json",
+    "Content-Type": "application/json", // En-tête par défaut / Default header
   },
 });
 
-// Intercepteur pour ajouter automatiquement le token JWT à toutes les requêtes
-apiClient.interceptors.request.use(
-  (config) => {
+// Intercepteur pour ajouter automatiquement le token JWT à toutes les requêtes 
+//  Interceptor to automatically add the JWT token to all requests
+apiClient.interceptors.request.use((config) => {
     const token = localStorage.getItem("token");
-    
+
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
-
     // Ne pas écraser le Content-Type si déjà défini, comme dans multipart/form-data
-    if (!config.headers['Content-Type']) {
-      config.headers['Content-Type'] = 'application/json';
+    // Do not overwrite Content-Type if already defined, as in multipart/form-data
+    if (!config.headers["Content-Type"]) {
+      config.headers["Content-Type"] = "application/json";
     }
-    
+
     return config;
   },
   (error) => {
@@ -34,13 +30,12 @@ apiClient.interceptors.request.use(
   }
 );
 
-
 // Fonction pour configurer l'intercepteur avec la fonction de déconnexion
 export const setupInterceptors = (logout) => {
   apiClient.interceptors.response.use(
     (response) => response,
     (error) => {
-          // Si le token est expiré, déconnecter l'utilisateur
+      // Si le token est expiré, déconnecter l'utilisateur
       if (error.response && error.response.status === 401) {
         logout(); // Appel à la fonction logout passée depuis AuthContext
       }
@@ -48,6 +43,5 @@ export const setupInterceptors = (logout) => {
     }
   );
 };
-
 
 export default apiClient;

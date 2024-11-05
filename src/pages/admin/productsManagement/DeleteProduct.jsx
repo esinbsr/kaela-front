@@ -14,15 +14,15 @@ const DeleteProduct = ( {productId}) => {
       onSuccess: (data) => {
         // If successful, show success message and refresh the products list
         if (data.success) {
-          toast.success(data.message || "Produit supprimée avec succès !");
+          toast.success(data.message || "Product successfully deleted!");
           queryClient.invalidateQueries('products');
         } else {
-          toast.error(data.message || "Une erreur est survenue.");
+          toast.error(data.message || "An error has occurred.");
         }
       },
       // Handle server errors
       onError: (error) => {
-        toast.error("Erreur de serveur : " + error.message);
+        toast.error("Server error: " + error.message);
       }
     });
     // Open delete confirmation modal

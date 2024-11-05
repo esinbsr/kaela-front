@@ -24,6 +24,10 @@
   width: 100%;
   max-width: 90vw;
   margin: 0 auto;
+
+  @media screen and (max-width: 480px) {
+    max-width: 88vw;
+  }
 }
 
 @mixin buttonRound($color, $bc: null, $border: false) {
@@ -46,6 +50,9 @@
   @if $border {
     border: 2px solid black;
   }
+  @media screen and (max-width: 480px) {
+    padding: 0.6rem 3.5rem;
+  }
 }
 
 
@@ -61,6 +68,9 @@
 
   &:hover {
     background-color: darken($bc, 5%);
+  }
+  @media screen and (max-width: 480px) {
+    padding: 0.6rem 3rem;
   }
 }
 

@@ -3,7 +3,8 @@ import { useEffect } from 'react';
 import AdminNavigation from '../AdminNavigation';
 import AddProduct from "./AddProduct";
 import DisplayProduct from "./DisplayProduct"
-
+import "../../../assets/styles/components/_table-admin.scss";
+import "../../../assets/styles/components/_form-admin.scss";
 
 const ProductManager = () => {
 

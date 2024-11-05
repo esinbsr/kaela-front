@@ -1,0 +1,53 @@
+.home {
+  h1 {
+    letter-spacing: 3px;
+    font-family: "Great Vibes";
+    // font-size: 3rem;
+    font-size: 3.8vw;
+    color: $secondary-color;
+  }
+
+  .home__header-image {
+    @include flexbox(space-between, center, row);
+    gap: 2rem;
+
+    img {
+      object-fit: contain;
+      transition: transform 0.3s ease-in-out;
+
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    h1 {
+      font-size: 2.6rem;
+    }
+
+    .home__header-image {
+      @include flexbox(center, center, row, wrap);
+
+      img {
+        width: 100%;
+        & {
+          &:hover {
+            transform: none;
+          }
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    h1 {
+      font-size: 2.4rem;
+    }
+
+    .home__header-image {
+      @include flexbox(center, center, column, null);
+      gap: 10px;
+    }
+  }
+}

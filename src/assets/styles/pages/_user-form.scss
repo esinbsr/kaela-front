@@ -7,10 +7,9 @@
   background-color: $main-color;
   color: white;
 
-
-  input::placeholder{
-   font-size: 0.9rem;
-   color:rgb(113, 113, 113);
+  input::placeholder {
+    font-size: 0.9rem;
+    color: rgb(113, 113, 113);
   }
 
   h2 {
@@ -62,13 +61,15 @@
 }
 
 @media screen and (max-width: 768px) {
-.user-form {
-  h2 {
-    font-size: 1.4rem;
+  .user-form {
+    max-width: 100%;
+    h2 {
+      font-size: 1.4rem;
+    }
+    .user-form__content {
+      input {
+        padding: 12px;
+      }
+    }
   }
-  .user-form__content {
-  input {
-    padding: 12px;
-  }}
-}
 }

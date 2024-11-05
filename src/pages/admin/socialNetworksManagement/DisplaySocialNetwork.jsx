@@ -30,7 +30,7 @@ const DisplaySocialNetwork = () => {
               </thead>
               <tbody>
                 {/* If the list has items, render each as a row */}
-                {socialNetworkList ? (
+                {socialNetworkList.length > 0 ? (
                   socialNetworkList.map((socialNetwork) => (
                     <SocialNetworkCard
                       key={socialNetwork.id}

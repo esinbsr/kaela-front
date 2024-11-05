@@ -33,7 +33,6 @@
         @media screen and (max-width: 768px) {
           flex: 0 1 calc(50% - 20px); // 2 images par ligne
           @include flexbox(center, center, null, null);
-          margin: 0 auto;
           margin-bottom: 10px;
         }
 
