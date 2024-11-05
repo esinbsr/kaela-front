@@ -32,7 +32,7 @@ const ProtectedRoutes = lazy(() => import("./components/ProtectedRoutes"));
 const App = () => {
   return (
     <div>
-      <BrowserRouter>
+       <BrowserRouter basename="/esin">
         <Navigation />
         <Accessibility />
         <Suspense fallback={<div>Loading...</div>}>
