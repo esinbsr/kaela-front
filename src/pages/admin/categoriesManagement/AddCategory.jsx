@@ -65,8 +65,6 @@ const AddCategory = () => {
               aria-required="true"
             />
 
-
-
             <label htmlFor="categoryDescription">Description</label> 
             <textarea
               id="categoryDescription"
@@ -97,8 +95,6 @@ const AddCategory = () => {
               aria-required="true"
             ></textarea>
     
-
-   
             <button type="submit" disabled={mutation.isLoading}>
               {mutation.isLoading ? "Creating..." : "Create"} 
             </button>

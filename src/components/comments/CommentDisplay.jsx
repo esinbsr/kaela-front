@@ -6,7 +6,6 @@ import { getComment } from "../../api/commentApi";
 const CommentDisplay = () => {
   const { productDetailId } = useParams();
 
-
   const { data: comments = [], isLoading, error } = useQuery({
     queryKey: ['comments', productDetailId],
     queryFn: () => getComment(productDetailId),

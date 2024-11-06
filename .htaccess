@@ -3,3 +3,5 @@ RewriteBase /esin/
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule . /esin/index.html [L]
+
+
