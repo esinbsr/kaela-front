@@ -2,7 +2,6 @@
   h1 {
     letter-spacing: 3px;
     font-family: "Great Vibes";
-    // font-size: 3rem;
     font-size: 3.8vw;
     color: $secondary-color;
   }
@@ -12,6 +11,8 @@
     gap: 2rem;
 
     img {
+      width: 380px;
+      height: auto;
       object-fit: contain;
       transition: transform 0.3s ease-in-out;
 
@@ -19,6 +20,10 @@
         transform: scale(1.05);
       }
     }
+
+    .middle-img {
+      width: 410px!important;
+      }
   }
 
   @media screen and (max-width: 768px) {
@@ -29,13 +34,17 @@
     .home__header-image {
       @include flexbox(center, center, row, wrap);
 
-      img {
+      img{
         width: 100%;
         & {
           &:hover {
             transform: none;
           }
         }
+      }
+
+      .middle-img {
+        width: 100%!important;
       }
     }
   }
@@ -51,3 +60,5 @@
     }
   }
 }
+
+
