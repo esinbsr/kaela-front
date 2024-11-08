@@ -8,6 +8,8 @@ const DisplayInformation = () => {
   const { isLoading, error, data } = useQuery({
     queryKey: ['informations'],  // The unique query key to identify this query
     queryFn: getInformation,  // The function responsible for fetching the information
+    staleTime: 1000 * 60 * 60,    // Time in milliseconds (1 hour) during which the data is considered fresh and won't be re-fetched
+    cacheTime: 1000 * 60 * 60 * 24 // Time in milliseconds (24 hours) that the data will remain in cache even if it's stale
   });
 
   // If there is data and it contains information, use it, otherwise return an empty array

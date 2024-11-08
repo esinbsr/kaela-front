@@ -14,6 +14,7 @@ export const getSocialNetworkById = async (id) => {
 
 // Ajoute un nouveau réseau social / Add a new social network
 export const addSocialNetwork = async (formData) => {
+  console.log(formData);
   const response = await apiClient.post("addSocialNetwork", formData);
   return response.data;
 };

@@ -49,6 +49,7 @@ const DeleteProduct = ( {productId}) => {
   
         {modalShow && (
           <ModalAdminDelete
+           isOpen={modalShow}
             contentSuffix={`product : ${productId}`}
             onConfirm={confirmDelete}
             onCancel={cancelDelete}

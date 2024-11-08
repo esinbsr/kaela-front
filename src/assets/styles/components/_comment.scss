@@ -18,9 +18,11 @@
 
   label {
     margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+    font-family: 'Montserrat Medium';
   }
 
-  textarea {
+  textarea{
     resize: none;
     padding: 1rem;
     height: 6rem;
@@ -47,6 +49,7 @@
 }
 
 .comments__username-content {
+  position: relative;
   margin-bottom: 1.5rem;
   background-color: white;
   border-radius: 8px;
@@ -60,8 +63,39 @@
   word-wrap: break-word;
   overflow-wrap: break-word;
 
+  .comments__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
   .comments__username {
     font-family: 'Montserrat SemiBold';
+    font-size: 1.1rem;
+  }
+
+  .comments__icons {
+    display: flex;
+    gap: 0.5rem;
+
+    .edit-icon {
+      color: $main-color;
+      font-size: 1.3rem;
+      cursor: pointer;
+    }
+
+    .delete-icon {
+      color:rgb(190, 13, 13);
+      font-size: 1.3rem;
+      cursor: pointer;
+    }
+  }
+
+  .comment__date {
+    align-self: flex-end;
+    color: gray;
+    font-style: italic;
+    margin-top: 8px;
   }
 
   h4 {
@@ -147,4 +181,21 @@
     text-align: center!important;
     margin-bottom: 2rem;
   }
+}
+.comment__edit-textarea {
+  resize: none;
+  padding: 0.6rem;
+  border-radius: 4px;
+  outline: none;
+}
+
+.comments__button-group {
+display: flex;
+justify-content: center;
+gap: 1rem;
+margin: 1rem 0;
+button {
+  @include buttonSuqare(white, $secondary-color);
+}
+
 }

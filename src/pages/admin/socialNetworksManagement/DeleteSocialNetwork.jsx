@@ -54,6 +54,7 @@ const DeleteSocialNetwork = ({ socialNetworkId }) => {
 
       {modalShow && (
         <ModalAdminDelete
+        isOpen={modalShow}
           contentSuffix={`social network : ${socialNetworkId}`}
           onConfirm={confirmDelete}
           onCancel={cancelDelete}

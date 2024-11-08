@@ -3,14 +3,17 @@ import { useQuery } from "react-query";
 import { Link, useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
 import { Helmet } from "react-helmet-async";
+import Modal from 'react-modal';  // Import Modal
 import { API_URL } from "../api/serverRequest";
 import { getInformation } from "../api/informationApi";
 import { getProduct } from "../api/productApi";
 import { getSocialNetwork } from "../api/socialNetworkApi";
 import { AuthContext } from "../context/AuthProvider";
 import '../assets/styles/pages/_about-me.scss';
+import "../assets/styles/components/_modal-admin.scss";
 
-// Define section IDs for filtering products
+Modal.setAppElement('#root');  // Set the app element for accessibility
+
 const SECTIONS = {
   ABOUT_ME: 6,
 };
@@ -146,27 +149,24 @@ const AboutMe = () => {
         </div>
       </section>
 
-      {modalVisible && (
-        <div
-          className="modal"
-          role="dialog"
-          aria-labelledby="modal-title"
-          aria-describedby="modal-description"
-          aria-modal="true"
-        >
-          <div className="modal__content">
-            <h2 id="modal-title">What do you want to do?</h2>
-            <p id="modal-description">Choose an action to perform on the product.</p>
-            <button onClick={() => handleNavigate(`/updateProduct/${selectedProduct.id}`)}>
-              Edit Image
-            </button>
-            <button onClick={() => window.open(instagramLink, "_blank")}>
-              Go to Instagram
-            </button>
-            <button onClick={closeModal}>Cancel</button>
-          </div>
-        </div>
-      )}
+      <Modal
+        isOpen={modalVisible}
+        onRequestClose={closeModal}
+        className="modal__content"
+        overlayClassName="modal"  
+        contentLabel="Admin Actions Modal"
+      >
+        <h2 id="modal-title">What do you want to do?</h2>
+        <p id="modal-description">Choose an action to perform on the product.</p>
+        <button onClick={() => handleNavigate(`/updateProduct/${selectedProduct?.id}`)}>
+          Edit Image
+        </button>
+        <button onClick={() => window.open(instagramLink, "_blank")}>
+          Go to Instagram
+        </button>
+        <button onClick={closeModal}>Cancel</button>
+      </Modal>
+      
       <Footer />
     </div>
   );

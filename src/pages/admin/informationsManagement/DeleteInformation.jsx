@@ -50,6 +50,7 @@ const DeleteInformation = ({ informationId }) => {
 
       {modalShow && (
         <ModalAdminDelete
+        isOpen={modalShow}
           contentSuffix={`information : ${informationId}`}
           onConfirm={confirmDelete}
           onCancel={cancelDelete}

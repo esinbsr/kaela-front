@@ -5,7 +5,7 @@ import { addSocialNetwork } from "../../../api/socialNetworkApi";
 
 const AddSocialNetwork = () => {
   const queryClient = useQueryClient();
-
+console.log(queryClient);
   const [platform, setPlatform] = useState("");
   const [url, setUrl] = useState("");
 
@@ -38,6 +38,7 @@ const AddSocialNetwork = () => {
       url,
     };
 
+    console.log(formData);
     // Trigger the mutation to add information
     mutation.mutate(formData);
   };

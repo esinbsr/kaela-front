@@ -11,3 +11,13 @@ export const addComment = async (formData) => {
   const response = await apiClient.post("addComment", formData);
   return response.data;
 };
+
+export const updateComment = async (formData) => {
+  const response = await apiClient.post("updateComment", formData);
+  return response.data;
+};
+
+export const deleteComment = async (commentId) => {
+  const response = await apiClient.delete(`deleteComment/${commentId}`);
+  return response.data;
+};

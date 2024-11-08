@@ -4,8 +4,11 @@ import { useNavigate, Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthProvider";
 import { getProduct } from "../api/productApi";
 import { API_URL } from "../api/serverRequest";
+import Modal from 'react-modal';  // Import Modal
 import "../assets/styles/components/_home-image.scss";
 import "../assets/styles/components/_modal-admin.scss";
+
+Modal.setAppElement('#root');  // Set the app element for accessibility
 
 const SECTIONS = {
   HOME_HEADER: 2,
@@ -70,39 +73,29 @@ const HomeImageList = ({ start, end, additionalClass }) => {
         <p>No products available.</p>
       )}
 
-      {modalVisible && selectedProduct && (
-        <div
-          className="modal"
-          role="dialog"
-          aria-labelledby="modal-title"
-          aria-describedby="modal-description"
-          aria-modal="true"
+      <Modal
+        isOpen={modalVisible}
+        onRequestClose={closeModal}
+        className="modal__content" 
+        overlayClassName="modal"           
+        contentLabel="Admin Actions Modal"
+      >
+        <h2 id="modal-title">What do you want to do?</h2>
+        <p id="modal-description">
+          Choose an action to perform on the product.
+        </p>
+        <button
+          onClick={() => handleNavigate(`/productDetail/${selectedProduct?.id}`)}
         >
-          <div className="modal">
-            <div className="modal__content">
-              <h2 id="modal-title">What do you want to do?</h2>
-              <p id="modal-description">
-                Choose an action to perform on the product.
-              </p>
-              <button
-                onClick={() =>
-                  handleNavigate(`/productDetail/${selectedProduct.id}`)
-                }
-              >
-                View product details
-              </button>
-              <button
-                onClick={() =>
-                  handleNavigate(`/UpdateProduct/${selectedProduct.id}`)
-                }
-              >
-                Modify the product image
-              </button>
-              <button onClick={closeModal}>Cancel</button>
-            </div>
-          </div>
-        </div>
-      )}
+          View product details
+        </button>
+        <button
+          onClick={() => handleNavigate(`/UpdateProduct/${selectedProduct?.id}`)}
+        >
+          Modify the product image
+        </button>
+        <button onClick={closeModal}>Cancel</button>
+      </Modal>
     </section>
   );
 };

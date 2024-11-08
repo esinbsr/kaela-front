@@ -52,6 +52,7 @@ const DeleteCategory = ({ categoryId }) => {
       {/* Show confirmation modal */}
       {modalShow && (
         <ModalAdminDelete
+          isOpen={modalShow}
           contentSuffix={`category : ${categoryId}`}
           onConfirm={confirmDelete}
           onCancel={cancelDelete}
