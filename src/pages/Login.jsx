@@ -1,54 +1,70 @@
 import { useState, useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useMutation } from 'react-query';
-import { toast } from "react-toastify"; 
+import { useMutation } from "react-query";
+import { toast } from "react-toastify";
 import Footer from "../components/Footer";
 import { loginUser } from "../api/userApi";
 import { AuthContext } from "../context/AuthProvider";
-import '../assets/styles/pages/_user-form.scss';
+import "../assets/styles/pages/_user-form.scss";
+import { Helmet } from "react-helmet-async";
 
 const Login = () => {
+  // State variables for email and password input fields
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate();
-  const { auth, login } = useContext(AuthContext); // Récupérer la fonction login du contexte
 
-  // Redirection si l'utilisateur est déjà connecté
+  // Using useNavigate for page navigation
+  const navigate = useNavigate();
+
+  // Access authentication context (auth data and login function)
+  const { auth, login } = useContext(AuthContext);
+
+  // Redirect if the user is already logged in
   useEffect(() => {
-    window.scrollTo(0,0);           
+    window.scrollTo(0, 0);
     if (auth.token) {
-      navigate("/"); // Rediriger si déjà connecté
+      navigate("/");
     }
   }, [auth.token, navigate]);
 
+  // Set up mutation for user login using react-query
   const mutation = useMutation(loginUser, {
     onSuccess: (data) => {
       if (data.success) {
-        // Appeler la fonction login du contexte pour stocker les informations dans le localStorage et le contexte
+        // Call login function from context to store user information (token, userId, role) in localStorage and context
         login({ token: data.token, userId: data.user_id, role: data.role });
 
-        // Redirection selon le rôle de l'utilisateur
-        if (data.role === 'admin') {
-          navigate('/admin');
+        // Redirect based on user role (admin or regular user)
+        if (data.role === "admin") {
+          navigate("/admin"); // Redirect to admin dashboard
         } else {
-          navigate('/');
+          navigate("/"); // Redirect to homepage
         }
       } else {
-        toast.error(data.message);
+        toast.error(data.message); // Display error toast if login failed
       }
     },
     onError: (error) => {
-      toast.error("Erreur de serveur : " + error.message);
+      toast.error("Server error: " + error.message); // Display error toast in case of server error
     },
   });
 
+  // Handle form submission
   const handleSubmit = (e) => {
-    e.preventDefault();
-    mutation.mutate({ email, password });
+    e.preventDefault(); // Prevent page reload on form submission
+    mutation.mutate({ email, password }); // Trigger the mutation with the email and password
   };
 
   return (
     <>
+      <Helmet>
+        <title>Kaela Couture | Login</title>
+        <meta
+          name="description"
+          content="Log in to your Kaela Couture account to leave comments on products."
+        />
+      </Helmet>
+
       <section className="user-form">
         <h2>Login</h2>
         <div className="line"></div>
@@ -76,7 +92,12 @@ const Login = () => {
           <button type="submit" disabled={mutation.isLoading}>
             {mutation.isLoading ? "Logging in..." : "Login"}
           </button>
-          <p>Don&apos;t have an account? <Link to="/signup" className="user-form__link">Sign up here!</Link></p>
+          <p>
+            Don&apos;t have an account?
+            <Link to="/signup" className="user-form__link">
+              Sign up here!
+            </Link>
+          </p>
         </form>
       </section>
       <Footer />

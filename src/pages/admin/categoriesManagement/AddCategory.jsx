@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
-import { toast } from "react-toastify"; 
+import { toast } from "react-toastify";
 import { addCategory } from "../../../api/categoryApi";
 
 const AddCategory = () => {
@@ -15,9 +15,12 @@ const AddCategory = () => {
   const mutation = useMutation({
     mutationFn: addCategory,
     onSuccess: (data) => {
-       // If successful, invalidate the 'categories' query and reset the form
+      // If successful, invalidate the 'categories' query and reset the form
       if (data.success) {
-        queryClient.invalidateQueries('categories'); 
+        queryClient.setQueryData("categories", (oldCategories = []) => [
+          ...oldCategories,
+          data.category,
+        ]);
         setCategoryName("");
         setCategoryDescription("");
         setCategoryPageTitle("");
@@ -30,7 +33,7 @@ const AddCategory = () => {
     // Handle server errors
     onError: (error) => {
       toast.error("Server error: " + error.message);
-    }
+    },
   });
 
   // Form submission handler
@@ -43,66 +46,60 @@ const AddCategory = () => {
       categoryPageTitle,
       categoryPageDescription,
     };
-    
+
     // Trigger the mutation with form data
     mutation.mutate(formData);
   };
 
   return (
     <>
-    <h2>Add a category</h2>
+      <h2>Add a category</h2>
       <form onSubmit={handleSubmit} className="form">
         {/* <fieldset>
           <legend>Add a new category</legend> */}
 
-            <label htmlFor="categoryName">Category name</label> 
-            <input
-              id="categoryName"
-              type="text"
-              name="categoryName"
-              value={categoryName}
-              onChange={(e) => setCategoryName(e.target.value)}
-              aria-required="true"
-            />
+        <label htmlFor="categoryName">Category name</label>
+        <input
+          id="categoryName"
+          type="text"
+          name="categoryName"
+          value={categoryName}
+          onChange={(e) => setCategoryName(e.target.value)}
+          aria-required="true"
+        />
 
+        <label htmlFor="categoryDescription">Description</label>
+        <textarea
+          id="categoryDescription"
+          name="categoryDescription"
+          value={categoryDescription}
+          onChange={(e) => setCategoryDescription(e.target.value)}
+          aria-required="true"
+        ></textarea>
 
+        <label htmlFor="categoryPageTitle">Page title</label>
+        <input
+          id="categoryPageTitle"
+          type="text"
+          name="categoryPageTitle"
+          value={categoryPageTitle}
+          onChange={(e) => setCategoryPageTitle(e.target.value)}
+          aria-required="true"
+        />
 
-            <label htmlFor="categoryDescription">Description</label> 
-            <textarea
-              id="categoryDescription"
-              name="categoryDescription"
-              value={categoryDescription}
-              onChange={(e) => setCategoryDescription(e.target.value)}
-              aria-required="true"
-            ></textarea>
+        <label htmlFor="categoryPageDescription">Page description</label>
+        <textarea
+          id="categoryPageDescription"
+          name="categoryPageDescription"
+          value={categoryPageDescription}
+          onChange={(e) => setCategoryPageDescription(e.target.value)}
+          aria-required="true"
+        ></textarea>
 
-            <label htmlFor="categoryPageTitle">Page title</label>
-            <input
-              id="categoryPageTitle"
-              type="text"
-              name="categoryPageTitle"
-              value={categoryPageTitle}
-              onChange={(e) => setCategoryPageTitle(e.target.value)}
-              aria-required="true"
-            />
+        <button type="submit" disabled={mutation.isLoading}>
+          {mutation.isLoading ? "Creating..." : "Create"}
+        </button>
 
-
-       
-            <label htmlFor="categoryPageDescription">Page description</label>
-            <textarea
-              id="categoryPageDescription"
-              name="categoryPageDescription"
-              value={categoryPageDescription}
-              onChange={(e) => setCategoryPageDescription(e.target.value)}
-              aria-required="true"
-            ></textarea>
-    
-
-   
-            <button type="submit" disabled={mutation.isLoading}>
-              {mutation.isLoading ? "Creating..." : "Create"} 
-            </button>
-   
         {/* </fieldset> */}
       </form>
     </>

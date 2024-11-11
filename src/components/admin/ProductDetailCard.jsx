@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { API_URL } from "../../api/serverRequest";
 
-// This component displays the details of clicked images
+// This component displays the details of a selected product
 const ProductDetailCard = ({ productDetail }) => {
   return (
     <article className="detail-product">
@@ -11,15 +11,19 @@ const ProductDetailCard = ({ productDetail }) => {
         <p>{productDetail.description}</p>
       </div>
       <div className="detail-product__image">
-        <img 
-          src={`${API_URL}assets/img/${productDetail.path}`} 
-          alt={`Image of ${productDetail.name}`} 
-          loading="lazy" 
+        <img
+          src={`${API_URL}assets/img/${productDetail.path}`}
+          alt={`Image of ${productDetail.name}`}
+          loading="lazy"
         />
       </div>
 
-      <p>Do you have a question? <Link to="/contact" className="detail-product__contact">Contact me!</Link></p>
-
+      <p>
+        Do you have a question?{" "}
+        <Link to="/contact" className="detail-product__contact">
+          Contact me!
+        </Link>
+      </p>
     </article>
   );
 };

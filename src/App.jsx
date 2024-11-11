@@ -1,10 +1,11 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Navigation from "./components/Navigation";
 import Accessibility from "./components/utils/Accessibility";
-import { Suspense , lazy} from 'react';
+import { Suspense, lazy } from "react";
 
+// Lazy loading the pages/components for better performance
 const Home = lazy(() => import("./pages/Home"));
 const SignUp = lazy(() => import("./pages/SignUp"));
 const Login = lazy(() => import("./pages/Login"));
@@ -17,16 +18,34 @@ const ProductDetail = lazy(() => import("./pages/ProductDetail"));
 const LegalNotice = lazy(() => import("./pages/LegalNotice"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
 
+// Admin-related routes and pages (all lazy-loaded for performance)
 const Admin = lazy(() => import("./pages/admin/Admin"));
-const ProductManager = lazy(() => import("./pages/admin/productsManagement/ProductManager"));
-const UpdateProduct = lazy(() => import("./pages/admin/productsManagement/UpdateProduct"));
-const CategoryManager = lazy(() => import("./pages/admin/categoriesManagement/CategoryManager"));
-const UpdateCategory = lazy(() => import("./pages/admin/categoriesManagement/UpdateCategory"));
-const InformationManager = lazy(() => import("./pages/admin/informationsManagement/InformationManager"));
-const UpdateInformation = lazy(() => import("./pages/admin/informationsManagement/UpdateInformation"));
-const SocialNetworkManager = lazy(() => import("./pages/admin/socialNetworksManagement/SocialNetworkManager"));
-const UpdateSocialNetwork = lazy(() => import("./pages/admin/socialNetworksManagement/UpdateSocialNetwork"));
+const ProductManager = lazy(() =>
+  import("./pages/admin/productsManagement/ProductManager")
+);
+const UpdateProduct = lazy(() =>
+  import("./pages/admin/productsManagement/UpdateProduct")
+);
+const CategoryManager = lazy(() =>
+  import("./pages/admin/categoriesManagement/CategoryManager")
+);
+const UpdateCategory = lazy(() =>
+  import("./pages/admin/categoriesManagement/UpdateCategory")
+);
+const InformationManager = lazy(() =>
+  import("./pages/admin/informationsManagement/InformationManager")
+);
+const UpdateInformation = lazy(() =>
+  import("./pages/admin/informationsManagement/UpdateInformation")
+);
+const SocialNetworkManager = lazy(() =>
+  import("./pages/admin/socialNetworksManagement/SocialNetworkManager")
+);
+const UpdateSocialNetwork = lazy(() =>
+  import("./pages/admin/socialNetworksManagement/UpdateSocialNetwork")
+);
 
+// Protected routes component for admin access
 const ProtectedRoutes = lazy(() => import("./components/ProtectedRoutes"));
 
 const App = () => {
@@ -37,6 +56,7 @@ const App = () => {
         <Accessibility />
         <Suspense fallback={<div>Loading...</div>}>
           <Routes>
+            {/* Public Routes */}
             <Route path="*" element={<Home />} />
             <Route path="/" element={<Home />} />
             <Route path="/signup" element={<SignUp />} />
@@ -48,9 +68,12 @@ const App = () => {
             <Route path="/aboutMe" element={<AboutMe />} />
             <Route path="/legalNotice" element={<LegalNotice />} />
             <Route path="/privacyPolicy" element={<PrivacyPolicy />} />
-            <Route path="/productDetail/:productDetailId" element={<ProductDetail />} />
+            <Route
+              path="/productDetail/:productDetailId"
+              element={<ProductDetail />}
+            />
 
-            {/* Routes Admin protégées */}
+            {/* Admin Routes with Protected access */}
             <Route
               path="/admin"
               element={

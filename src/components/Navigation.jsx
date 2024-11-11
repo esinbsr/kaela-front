@@ -2,26 +2,27 @@ import { useState, useContext } from "react";
 import { NavLink } from "react-router-dom";
 import Logo from "./Logo";
 import { AuthContext } from "../context/AuthProvider";
-import '../assets/styles/components/_navigation.scss';
+import "../assets/styles/components/_navigation.scss";
 
 const Navigation = () => {
-  const [menuOpen, setMenuOpen] = useState(false); // État pour ouvrir/fermer le menu
+  const [menuOpen, setMenuOpen] = useState(false); // State to open/close the menu
 
-  // Récupérer les informations utilisateur depuis le AuthContext
+  // Retrieve user information from AuthContext
   const { auth, logout } = useContext(AuthContext);
 
+  // Toggle menu open/close state
   const toggleMenu = () => {
-    setMenuOpen(!menuOpen); // Inverse l'état d'ouverture du menu
+    setMenuOpen(!menuOpen);
   };
 
   return (
     <header>
       <nav className="navigation">
         <NavLink to="/" className="logo_kaela">
-          <Logo />
+          <Logo /> {/* Logo component as a link to home */}
         </NavLink>
 
-        {/* Icône Burger pour mobile */}
+        {/* Burger icon for mobile menu */}
         <button
           className="burger-icon"
           aria-label="Toggle navigation menu"
@@ -32,12 +33,12 @@ const Navigation = () => {
           <div className={`bar ${menuOpen ? "open" : ""}`}></div>
         </button>
 
-        {/* Menu de navigation */}
+        {/* Navigation menu links */}
         <section className={`navigation_links ${menuOpen ? "open" : ""}`}>
           <NavLink
             to="/"
             className={({ isActive }) => (isActive ? "active" : "")}
-            onClick={() => setMenuOpen(false)}
+            onClick={() => setMenuOpen(false)} // Close menu on link click
           >
             Home
           </NavLink>
@@ -66,8 +67,8 @@ const Navigation = () => {
             Contact
           </NavLink>
 
-          {/* Afficher le lien admin uniquement si l'utilisateur est connecté et est admin */}
-          {auth.role === 'admin' && (
+          {/* Show admin link only if the user is logged in and has an admin role */}
+          {auth.role === "admin" && (
             <NavLink
               to="/admin"
               className={({ isActive }) => (isActive ? "active" : "")}
@@ -77,22 +78,22 @@ const Navigation = () => {
             </NavLink>
           )}
 
-          {/* Si l'utilisateur est connecté, afficher le bouton de déconnexion */}
+          {/* If the user is logged in, show the logout button */}
           {auth.token ? (
             <>
               <button
                 onClick={() => {
-                  logout(); 
-                  setMenuOpen(false)
+                  logout(); // Call logout function
+                  setMenuOpen(false); // Close menu after logout
                 }}
-                 className="logout-button"
+                className="logout-button"
               >
                 Logout
               </button>
             </>
           ) : (
             <>
-              {/* Si l'utilisateur n'est pas connecté, afficher Signup et Login */}
+              {/* If the user is not logged in, show Signup and Login links */}
               <NavLink
                 to="/signup"
                 className={({ isActive }) => (isActive ? "active" : "")}

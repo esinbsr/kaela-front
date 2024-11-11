@@ -14,9 +14,6 @@ const DisplayCategory = () => {
   // If there is data and it contains categories, use it, otherwise return an empty array
   const categoryList = data?.length > 0 ? data : [];
 
-  if (isLoading) return "Loading...";
-  if (error) return "An error occurred: " + error.message;
-
   return (
     <>
       <h2>Category List</h2>
@@ -44,7 +41,8 @@ const DisplayCategory = () => {
               // If no categories are available, display a message
               <tr>
                 <td colSpan="5" style={{ textAlign: "center" }} role="alert">
-                  There are no categories.
+                  {isLoading && <p>Loading...</p>}
+                  {error && error.message}
                 </td>
               </tr>
             )}

@@ -9,5 +9,5 @@ Disallow: /updateInformation
 Disallow: /socialNetworkManager
 Disallow: /updateSocialNetwork
 
-# Autoriser le reste du site à être indexé
+# Allow the rest of the site to be indexed / Autoriser le reste du site à être indexé
 Allow: /

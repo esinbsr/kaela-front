@@ -22,11 +22,11 @@ const DeleteSocialNetwork = ({ socialNetworkId }) => {
     },
     // Handle server errors
     onError: (error) => {
-      toast.error("Erreur de serveur : " + error.message);
+      toast.error("Server error: " + error.message);
     },
   });
 
-   // Open delete confirmation modal
+  // Open delete confirmation modal
   const handleDeleteClick = () => {
     setModalShow(true);
   };
@@ -54,7 +54,7 @@ const DeleteSocialNetwork = ({ socialNetworkId }) => {
 
       {modalShow && (
         <ModalAdminDelete
-        isOpen={modalShow}
+          isOpen={modalShow}
           contentSuffix={`social network : ${socialNetworkId}`}
           onConfirm={confirmDelete}
           onCancel={cancelDelete}

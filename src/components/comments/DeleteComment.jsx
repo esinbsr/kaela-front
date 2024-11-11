@@ -10,7 +10,7 @@ const DeleteComment = ({ commentId }) => {
   const [modalShow, setModalShow] = useState(false);
   const queryClient = useQueryClient();
 
-  // Mutation pour supprimer le commentaire
+  // Mutation to delete the comment
   const mutation = useMutation({
     mutationFn: deleteComment,
     onSuccess: (data) => {

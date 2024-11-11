@@ -1,4 +1,4 @@
-import '../assets/styles/components/_logo.scss';
+import "../assets/styles/components/_logo.scss";
 // Kaela website logo
 const Logo = () => {
   return (

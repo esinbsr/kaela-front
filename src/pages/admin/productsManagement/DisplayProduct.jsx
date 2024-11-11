@@ -3,13 +3,12 @@ import { useQuery } from "react-query";
 import { getProduct } from "../../../api/productApi";
 
 const DisplayProduct = () => {
-
   // Fetch products from the server
   const { isLoading, error, data } = useQuery({
-    queryKey: ["products"],  // The unique query key to identify this query
-    queryFn: getProduct,     // The function responsible for fetching the products
-    staleTime: 1000 * 60 * 60,    // Time in milliseconds (1 hour) during which the data is considered fresh and won't be re-fetched
-    cacheTime: 1000 * 60 * 60 * 24 // Time in milliseconds (24 hours) that the data will remain in cache even if it's stale
+    queryKey: ["products"], // The unique query key to identify this query
+    queryFn: getProduct, // The function responsible for fetching the products
+    staleTime: 1000 * 60 * 60, // Time in milliseconds (1 hour) during which the data is considered fresh and won't be re-fetched
+    cacheTime: 1000 * 60 * 60 * 24, // Time in milliseconds (24 hours) that the data will remain in cache even if it's stale
   });
 
   // If there is data and it contains products, use it, otherwise return an empty array
@@ -20,7 +19,7 @@ const DisplayProduct = () => {
 
   return (
     <>
-      <h2>List of Products</h2> 
+      <h2>List of Products</h2>
       <div className="table-wrapper">
         <table>
           <thead>
@@ -30,7 +29,9 @@ const DisplayProduct = () => {
               <th scope="col">Description</th>
               <th scope="col">Category</th>
               <th scope="col">Section</th>
-              <th scope="col" colSpan={2} className="action-header">Action</th>
+              <th scope="col" colSpan={2} className="action-header">
+                Action
+              </th>
             </tr>
           </thead>
 

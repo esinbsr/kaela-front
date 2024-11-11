@@ -9,9 +9,10 @@ const apiClient = axios.create({
   },
 });
 
-// Intercepteur pour ajouter automatiquement le token JWT à toutes les requêtes 
+// Intercepteur pour ajouter automatiquement le token JWT à toutes les requêtes
 //  Interceptor to automatically add the JWT token to all requests
-apiClient.interceptors.request.use((config) => {
+apiClient.interceptors.request.use(
+  (config) => {
     const token = localStorage.getItem("token");
 
     if (token) {

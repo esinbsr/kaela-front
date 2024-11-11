@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import { useMutation, useQueryClient } from 'react-query';
-import { toast } from 'react-toastify';
+import { useState } from "react";
+import { useMutation, useQueryClient } from "react-query";
+import { toast } from "react-toastify";
 import ModalAdminDelete from "../../../components/utils/ModalAdminDelete";
-import { deleteInformation } from '../../../api/informationApi';
+import { deleteInformation } from "../../../api/informationApi";
 
 const DeleteInformation = ({ informationId }) => {
   const [modalShow, setModalShow] = useState(false); // State to control the visibility of the modal
@@ -15,15 +15,15 @@ const DeleteInformation = ({ informationId }) => {
       // If successful, show success message and refresh the categories list
       if (data.success) {
         toast.success(data.message || "Information successfully deleted!");
-        queryClient.invalidateQueries('informations');
+        queryClient.invalidateQueries("informations");
       } else {
         toast.error(data.message || "An error has occurred.");
       }
     },
     // Handle server errors
     onError: (error) => {
-      toast.error("Erreur de serveur : " + error.message);
-    }
+      toast.error("Server error: " + error.message);
+    },
   });
 
   // Open delete confirmation modal
@@ -44,13 +44,17 @@ const DeleteInformation = ({ informationId }) => {
 
   return (
     <>
-      <button onClick={handleDeleteClick} disabled={mutation.isLoading} className="red-link">
+      <button
+        onClick={handleDeleteClick}
+        disabled={mutation.isLoading}
+        className="red-link"
+      >
         {mutation.isLoading ? "Deleting..." : "Delete"}
       </button>
 
       {modalShow && (
         <ModalAdminDelete
-        isOpen={modalShow}
+          isOpen={modalShow}
           contentSuffix={`information : ${informationId}`}
           onConfirm={confirmDelete}
           onCancel={cancelDelete}

@@ -1,4 +1,3 @@
-
 import { jwtDecode } from "jwt-decode";
 import { createContext, useState } from "react";
 
@@ -10,12 +9,11 @@ export const AuthContext = createContext();
 // Auth provider is a context provider component. It encapsulates child components and provides them with access to authentication data and login and logout functions.
 export const AuthProvider = ({ children }) => {
   const decodeToken = (token) => {
-
     // Vérifie si le token est fourni, si le token est présent, la fonction continue, sinon elle passe à la dernière ligne et retourne des valeurs null.
     if (token) {
       // Bloc pour attraper des erreurs potentielles, comme un token invalide ou malformé.
       try {
-        const decoded = jwtDecode(token); 
+        const decoded = jwtDecode(token);
         return {
           token,
           userId: decoded.user_id,
@@ -26,12 +24,24 @@ export const AuthProvider = ({ children }) => {
       } catch {
         // Si le décodage échoue, la fonction retourne un objet avec toutes les valeurs définies à null donc ca signifie que l'utilisateur n'est pas authentifié ou son token est invalide.
         // If decoding fails, the function returns an object with all the values set to null, which means that the user is not authenticated or his token is invalid.
-        return { token: null, userId: null, role: null, username: null, email: null };
+        return {
+          token: null,
+          userId: null,
+          role: null,
+          username: null,
+          email: null,
+        };
       }
     }
     // Si le token n'est pas fourni (condition if non satisfaite), la fonction retourne aussi un objet avec toutes les valeurs à null
     // If the token is not supplied (if condition not met), the function also returns an object with all the values set to null.
-    return { token: null, userId: null, role: null, username: null, email: null };
+    return {
+      token: null,
+      userId: null,
+      role: null,
+      username: null,
+      email: null,
+    };
   };
 
   // Cette fonction sert à initialiser l'état d'authentification de l'application quand elle est chargée pour la première fois
@@ -43,19 +53,25 @@ export const AuthProvider = ({ children }) => {
 
   const [auth, setAuth] = useState(initialAuth);
 
-  // Fonction utilisée pour authentifier un utilisateur 
-  // Function used to authenticate a user 
+  // Fonction utilisée pour authentifier un utilisateur
+  // Function used to authenticate a user
   const login = ({ token }) => {
     localStorage.setItem("token", token);
     const decodedAuth = decodeToken(token);
     setAuth(decodedAuth);
   };
 
-  // Fonction utilisée pour déconnecter un utilisateur 
-  // Function used to disconnect a user 
+  // Fonction utilisée pour déconnecter un utilisateur
+  // Function used to disconnect a user
   const logout = () => {
     localStorage.removeItem("token");
-    setAuth({ token: null, userId: null, role: null, username: null, email: null });
+    setAuth({
+      token: null,
+      userId: null,
+      role: null,
+      username: null,
+      email: null,
+    });
   };
 
   // Partage l'état d'authentification et les fonctions de connexion/déconnexion avec tous les composants enfants

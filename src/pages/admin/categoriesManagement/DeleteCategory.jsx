@@ -1,11 +1,10 @@
-import { useState } from 'react';
-import { useMutation, useQueryClient } from 'react-query';
-import { toast } from 'react-toastify';
-import { deleteCategory } from '../../../api/categoryApi';
+import { useState } from "react";
+import { useMutation, useQueryClient } from "react-query";
+import { toast } from "react-toastify";
+import { deleteCategory } from "../../../api/categoryApi";
 import ModalAdminDelete from "../../../components/utils/ModalAdminDelete";
 
 const DeleteCategory = ({ categoryId }) => {
-  
   const [modalShow, setModalShow] = useState(false); // State to control the visibility of the modal
   const queryClient = useQueryClient();
 
@@ -16,7 +15,7 @@ const DeleteCategory = ({ categoryId }) => {
       // If successful, show success message and refresh the categories list
       if (data.success) {
         toast.success(data.message || "Category deleted successfully!");
-        queryClient.invalidateQueries('categories'); 
+        queryClient.invalidateQueries("categories");
       } else {
         toast.error(data.message || "An error has occurred.");
       }
@@ -24,7 +23,7 @@ const DeleteCategory = ({ categoryId }) => {
     // Handle server errors
     onError: (error) => {
       toast.error("Server error: " + error.message);
-    }
+    },
   });
 
   // Open delete confirmation modal
@@ -34,7 +33,7 @@ const DeleteCategory = ({ categoryId }) => {
 
   // Confirm the deletion
   const confirmDelete = () => {
-    mutation.mutate(categoryId); 
+    mutation.mutate(categoryId);
     setModalShow(false);
   };
 
@@ -45,8 +44,12 @@ const DeleteCategory = ({ categoryId }) => {
 
   return (
     <>
-      <button onClick={handleDeleteClick} disabled={mutation.isLoading} className="red-link">
-        {mutation.isLoading ? "Deleting..." : "Delete"} 
+      <button
+        onClick={handleDeleteClick}
+        disabled={mutation.isLoading}
+        className="red-link"
+      >
+        {mutation.isLoading ? "Deleting..." : "Delete"}
       </button>
 
       {/* Show confirmation modal */}

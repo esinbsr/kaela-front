@@ -1,4 +1,3 @@
-
 import Footer from "../components/Footer";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
@@ -8,15 +7,14 @@ import { useEffect } from "react";
 import "../assets/styles/pages/_legal-information.scss";
 
 const LegalNotice = () => {
-
   useEffect(() => {
-    window.scrollTo(0,0);
+    window.scrollTo(0, 0);
   }, []);
-  
+
   // Fetch informations from the serveur
   const { isLoading, error, data } = useQuery({
-    queryKey: ["informations"],  // The unique query key to identify this query
-    queryFn: getInformation,     // The function responsible for fetching the products
+    queryKey: ["informations"], // The unique query key to identify this query
+    queryFn: getInformation, // The function responsible for fetching the products
   });
 
   // If there is data and it contains informations, use the first information, otherwise return an empty array.
@@ -71,8 +69,7 @@ const LegalNotice = () => {
                 <strong>Phone:</strong> Not applicable
               </p>
               <p>
-                <strong>Email:</strong>{" "}
-                <a href="mailto:">Not applicable</a>
+                <strong>Email:</strong> <a href="mailto:">Not applicable</a>
               </p>
             </address>
           </section>

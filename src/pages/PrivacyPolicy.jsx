@@ -1,4 +1,3 @@
-
 import Footer from "../components/Footer";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
@@ -8,15 +7,14 @@ import { useEffect } from "react";
 import "../assets/styles/pages/_legal-information.scss";
 
 const PrivacyPolicy = () => {
-
   useEffect(() => {
-    window.scrollTo(0,0);
+    window.scrollTo(0, 0);
   }, []);
 
   // Fetch informations from the serveur
   const { isLoading, error, data } = useQuery({
-    queryKey: ["informations"],  // The unique query key to identify this query
-    queryFn: getInformation,     // The function responsible for fetching the products
+    queryKey: ["informations"], // The unique query key to identify this query
+    queryFn: getInformation, // The function responsible for fetching the products
   });
 
   // If there is data and it contains informations, use the first information, otherwise return an empty array.
@@ -32,8 +30,8 @@ const PrivacyPolicy = () => {
         />
       </Helmet>
       <main className="legal-information">
-          <h1>Privacy Policy</h1>
-{/* 
+        <h1>Privacy Policy</h1>
+        {/* 
         {isLoading && <p role="alert">Chargement en cours...</p>}
         {error && <p role="alert">Une erreur sest produite : {error.message}</p>} */}
 
@@ -168,7 +166,9 @@ const PrivacyPolicy = () => {
               To exercise these rights, please contact us at the following email
               address:
               {isLoading && <span role="status"> Loading...</span>}
-              {error && <span role="alert"> An error occurred : {error.message}</span>}
+              {error && (
+                <span role="alert"> An error occurred : {error.message}</span>
+              )}
               {info && (
                 <Link to="mailto:kaelacouture@gmail.com"> {info.email} </Link>
               )}
@@ -192,7 +192,9 @@ const PrivacyPolicy = () => {
               For any questions regarding this privacy policy, you can contact
               us at the following email address:
               {isLoading && <span role="status"> Loading...</span>}
-              {error && <span role="alert"> An error occurred : {error.message}</span>}
+              {error && (
+                <span role="alert"> An error occurred : {error.message}</span>
+              )}
               {info && (
                 <Link to="mailto:kaelacouture@gmail.com"> {info.email} </Link>
               )}

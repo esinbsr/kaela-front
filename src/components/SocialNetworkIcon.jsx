@@ -2,14 +2,13 @@ import { useQuery } from "react-query";
 import { getSocialNetwork } from "../api/socialNetworkApi";
 import { FaInstagram, FaFacebook, FaWhatsapp } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import '../assets/styles/components/_icon-social-network.scss';
-
+import "../assets/styles/components/_icon-social-network.scss";
 
 const SocialNetworkIcon = () => {
   // Fetch social networks from the server
   const { isLoading, error, data } = useQuery({
-    queryKey: ["socialNetworks"],  // The unique query key to identify this query
-    queryFn: getSocialNetwork,    // The function responsible for fetching the social networks
+    queryKey: ["socialNetworks"], // The unique query key to identify this query
+    queryFn: getSocialNetwork, // The function responsible for fetching the social networks
   });
 
   // If there is data and it contains social networks, use it, otherwise return an empty array
@@ -22,11 +21,11 @@ const SocialNetworkIcon = () => {
   const getIcon = (platform) => {
     switch (platform.toLowerCase()) {
       case "instagram":
-        return <FaInstagram  />;
+        return <FaInstagram />;
       case "facebook":
         return <FaFacebook />;
       case "whatsapp":
-        return <FaWhatsapp/>;
+        return <FaWhatsapp />;
       default:
         return null;
     }
@@ -45,8 +44,7 @@ const SocialNetworkIcon = () => {
           >
             {getIcon(network.platform)}
           </Link>
-        ))
-     }
+        ))}
     </div>
   );
 };

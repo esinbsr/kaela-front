@@ -5,30 +5,33 @@ import { toast } from "react-toastify";
 import { AuthContext } from "../../context/AuthProvider";
 import { addComment } from "../../api/commentApi";
 
+// Component to add a comment for a specific product
 const AddComment = () => {
-  const [content, setContent] = useState("");
-  const { auth } = useContext(AuthContext);
-  const userId = auth.userId;
+  const [content, setContent] = useState(""); // Manages comment content
+  const { auth } = useContext(AuthContext); // Retrieves user authentication info
+  const userId = auth.userId; // Gets the current user's ID
 
-  const { productDetailId } = useParams();
-  const queryClient = useQueryClient();
+  const { productDetailId } = useParams(); // Retrieves product ID from URL parameters
+  const queryClient = useQueryClient(); // QueryClient instance for cache management
 
+  // Mutation for adding a comment
   const mutation = useMutation({
     mutationFn: addComment,
     onSuccess: (data) => {
       if (data.success) {
-        setContent("");
-        toast.success(data.message || "Comment added successfully!");
-        queryClient.invalidateQueries("comments");
+        queryClient.invalidateQueries(["comments", productDetailId]); // Refreshes comments for the product
+        setContent(""); // Clears the input field
+        toast.success(data.message || "Comment added successfully."); // Success notification
       } else {
-        toast.error(data.message || "An error has occurred.");
+        toast.error(data.message || "An error has occurred."); // Error notification
       }
     },
     onError: (error) => {
-      toast.error("Server error: " + error.message);
+      toast.error("Server error: " + error.message); // Error handling on failure
     },
   });
 
+  // Handles form submission to add a new comment
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -38,9 +41,10 @@ const AddComment = () => {
       productId: productDetailId,
     };
 
-    mutation.mutate(formData);
+    mutation.mutate(formData); // Triggers the mutation with form data
   };
 
+  // If user is not logged in, show login prompt
   if (!userId) {
     return (
       <div className="comment__login-link">
@@ -52,13 +56,14 @@ const AddComment = () => {
     );
   }
 
+  // Render form to add a comment if user is logged in
   return (
     <>
       <h3>Give your opinion</h3>
 
       <form onSubmit={handleSubmit}>
-        <input type="hidden" value={productDetailId} />
-
+        <input type="hidden" value={productDetailId} />{" "}
+        {/* Hidden input for product ID */}
         <div className="comments__input-container">
           <label htmlFor="content">Message</label>
           <textarea
@@ -74,7 +79,6 @@ const AddComment = () => {
             Enter your message to give your opinion on the product.
           </div>
         </div>
-
         <div className="comments__button">
           <button type="submit">Send</button>
         </div>

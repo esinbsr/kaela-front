@@ -2,19 +2,20 @@ import { useEffect } from "react";
 import CollectionImage from "../components/CollectionImage";
 import Footer from "../components/Footer";
 import { Helmet } from "react-helmet-async";
-import '../assets/styles/components/_collection.scss';
-
+import "../assets/styles/components/_collection.scss";
 
 // This component represents the collection page
 const Collection = () => {
-  
+  // useEffect hook to ensure the page scrolls to the top when the component mounts
   useEffect(() => {
-    window.scrollTo(0,0);
+    window.scrollTo(0, 0);
   }, []);
 
   return (
     <div className="collection">
       <Helmet>
+        {" "}
+        {/* Helmet component for SEO optimization (title and meta description) */}
         <title>Kaela Couture Collection | Elegant Women&apos;s Fashion</title>
         <meta
           name="description"
