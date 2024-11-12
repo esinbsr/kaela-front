@@ -40,6 +40,7 @@ const CommentDisplay = () => {
     setEditingCommentId(comment.id);
     setEditedContent(comment.content);
   };
+  
   // Mutation to handle comment updates
   const mutation = useMutation({
     mutationFn: updateComment,
