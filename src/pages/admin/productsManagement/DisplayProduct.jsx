@@ -38,12 +38,9 @@ const DisplayProduct = () => {
           <tbody>
             {/* If the list has items, render each as a row, sorted by creation date */}
             {productList.length > 0 ? (
-              productList
-                .slice()
-                .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
-                .map((product) => (
-                  <ProductCard key={product.id} product={product} />
-                ))
+              productList.map((product) => (
+                <ProductCard key={product.id} product={product} />
+              ))
             ) : (
               // If no products are available, display a message
               <tr>
