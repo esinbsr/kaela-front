@@ -55,6 +55,7 @@ const DeleteComment = ({ commentId }) => {
       {/* Show confirmation modal */}
       {modalShow && (
         <ModalAdminDelete
+          isOpen={modalShow}
           contentSuffix="comment ?"
           onConfirm={confirmDelete}
           onCancel={cancelDelete}
