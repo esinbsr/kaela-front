@@ -8,7 +8,13 @@
   }
 
   .detail-product__description {
-    margin-bottom: 10px;
+    @include flexbox(center, center, column);
+    margin-bottom: 1rem;
+
+    p {
+      margin-top: 1.5rem;
+      width: 50%;
+    }
   }
 
   .detail-product__image {
@@ -23,9 +29,6 @@
     }
   }
 
-  p {
-    margin-top: 1.5rem;
-  }
 
   .detail-product__contact {
     text-decoration: underline;
@@ -49,6 +52,11 @@
     img {
       width: 100%;
       max-width: 100%;
+    }
+  }
+  .detail-product__description {
+    p {
+      min-width: 100%;
     }
   }
 }
