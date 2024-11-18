@@ -1,5 +1,12 @@
-RewriteEngine On
-RewriteBase /esin/
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule . /esin/index.html [L]
+# Rediriger toutes les requêtes vers index.html
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # Redirection si le fichier ou le dossier n'existe pas
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+
+  # Renvoie toutes les requêtes vers index.html
+  RewriteRule . /index.html [L]
+</IfModule>
