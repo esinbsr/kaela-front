@@ -1,62 +1,82 @@
-.detail-product {
-  @include flexbox(center, center, column);
-  text-align: center;
-  width: 100%;
+/* Conteneur principal */
 
   h1 {
-    margin-bottom: 1rem;
+    margin-bottom: 3rem;
   }
 
-  .detail-product__description {
-    @include flexbox(center, center, column);
-    margin-bottom: 1rem;
-
-    p {
-      margin-top: 1.5rem;
-      width: 50%;
-    }
-  }
-
-  .detail-product__image {
-    width: 100%;
-    max-width: 400px;
+  .product-detail {
+    display: flex;
     @include flexbox(center, center);
-
-    img {
-      width: 100%;
-      height: auto;
-      object-fit: cover;
-    }
   }
 
 
-  .detail-product__contact {
-    text-decoration: underline;
-    color: $secondary-color;
+/* Section de description */
+.product-detail__description {
+  h2 {
+    color: rgb(58, 58, 58);
+    margin-bottom: 1rem;
   }
-}
 
-/* Responsive - Tablet */
-@media screen and (max-width: 768px) {
-  .detail-product__image img {
-    max-width: 80%;
-  }
-}
-
-/* Responsive - Mobile */
-@media screen and (max-width: 480px) {
-  .detail-product__image {
-    width: 100%;
-    max-width: 100%;
-
-    img {
-      width: 100%;
-      max-width: 100%;
-    }
-  }
-  .detail-product__description {
+  .product-detail__header {
+    text-align: left; 
+    margin-bottom: 1rem;
+  
     p {
-      min-width: 100%;
+      width: 70%;
+    }
+  }
+  
+
+  .product-detail__body {
+    p {
+      margin: 0.4rem 0;
+    }
+  }
+
+  .bold {
+    font-family: "Montserrat Medium";
+  }
+}
+
+/* Section de l'image */
+.product-detail__image {
+  flex: 1 1 40%;
+  @include flexbox(center, center);
+  margin: 0 auto;
+  width: 100%;
+
+  img {
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 380px;
+    min-width: 300px;
+  }
+}
+
+/* Responsive Design */
+
+/* Pour tablettes */
+@media screen and (max-width: 768px) {
+  .product-detail {
+    @include flexbox(center, center, column);
+  }
+
+  .product-detail__description {
+    .product-detail__body {
+      margin-bottom: 1rem;
+      p {
+        width: 100%;
+        margin: 0.3rem 0;
+      }
+    }
+  }
+
+  .product-detail__image {
+    width: 100%; // L'image prend toute la largeur
+    img {
+      width: 100%; // S'assure que l'image est responsive
     }
   }
 }

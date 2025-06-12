@@ -1,8 +1,12 @@
 import { useQuery } from "react-query";
 import SocialNetworkCard from "../../../components/admin/SocialNetworkCard";
 import { getSocialNetwork } from "../../../api/socialNetworkApi"; // Ensure correct API import
+import { useState } from "react";
+import "../../../assets/styles/components/_search-bar.scss";
+import { IoIosSearch } from "react-icons/io";
 
 const DisplaySocialNetwork = () => {
+  const [search, setSearch] = useState("");
   // Fetch social networks from the serveur
   const { isLoading, error, data } = useQuery({
     queryKey: ["socialNetworks"], // The unique query key to identify this query
@@ -14,8 +18,25 @@ const DisplaySocialNetwork = () => {
   // If there is data and it contains social networks, use it, otherwise return an empty array
   const socialNetworkList = data?.length > 0 ? data : [];
 
+  // Filter products based on the search input
+  const filteredsocialNetwork = socialNetworkList.filter((socialNetwork) =>
+    socialNetwork.platform.toLowerCase().includes(search.toLowerCase())
+  );
+
   return (
     <>
+      <div className="search-bar">
+        <input
+          type="text"
+          name="search"
+          autoFocus
+          id="search"
+          placeholder="Enter your search"
+          onChange={(e) => setSearch(e.target.value)}
+          value={search}
+        />
+        <IoIosSearch />
+      </div>
       <h2>List of Social Networks</h2>
       <div className="table-wrapper">
         <table>
@@ -30,8 +51,8 @@ const DisplaySocialNetwork = () => {
           </thead>
           <tbody>
             {/* If the list has items, render each as a row */}
-            {socialNetworkList.length > 0 ? (
-              socialNetworkList.map((socialNetwork) => (
+            {filteredsocialNetwork.length > 0 ? (
+              filteredsocialNetwork.map((socialNetwork) => (
                 <SocialNetworkCard
                   key={socialNetwork.id}
                   socialNetwork={socialNetwork}

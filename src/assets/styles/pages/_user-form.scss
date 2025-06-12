@@ -1,5 +1,5 @@
 .user-form {
-  max-width: 500px;
+  max-width: 600px;
   margin: 50px auto;
   padding: 2rem;
   border-radius: 8px;
@@ -58,6 +58,35 @@
       color: white;
     }
   }
+
+  .singup__form-footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+
+    .signup__form-checkbox {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1rem;
+
+      input {
+        width: 15px;
+        transform: scale(1.2);
+        margin-right: 0.8rem;
+      }
+
+      label {
+        color: #fff;
+      }
+    }
+    a {
+      color: rgb(224, 224, 224);
+      text-decoration: underline;
+      margin-bottom: 1.5rem;
+    }
+  }
 }
 
 @media screen and (max-width: 768px) {
@@ -70,6 +99,22 @@
       input {
         padding: 12px;
       }
+    }
+  }
+
+  .signup__form-checkbox {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+
+    input {
+      width: 15px;
+      transform: scale(1);
+      margin-right: 0.8rem;
+    }
+
+    label {
+      color: #fff;
     }
   }
 }

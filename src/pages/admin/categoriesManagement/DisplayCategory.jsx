@@ -1,8 +1,12 @@
 import { useQuery } from "react-query";
 import { getProductCategories } from "../../../api/categoryApi";
 import CategoryCard from "../../../components/admin/CategoryCard";
+import { IoIosSearch } from "react-icons/io";
+import { useState } from "react";
+import "../../../assets/styles/components/_search-bar.scss";
 
 const DisplayCategory = () => {
+  const [search, setSearch] = useState("");
   // Fetch categories from the server
   const { isLoading, error, data } = useQuery({
     queryKey: ["categories"], // The unique query key to identify this query
@@ -14,8 +18,25 @@ const DisplayCategory = () => {
   // If there is data and it contains categories, use it, otherwise return an empty array
   const categoryList = data?.length > 0 ? data : [];
 
+  // Filter products based on the search input
+  const filteredCategory = categoryList.filter((category) =>
+    category.name.toLowerCase().includes(search.toLowerCase())
+  );
+
   return (
     <>
+      <div className="search-bar">
+        <input
+          type="text"
+          name="search"
+          autoFocus
+          id="search"
+          placeholder="Enter your search"
+          onChange={(e) => setSearch(e.target.value)}
+          value={search}
+        />
+        <IoIosSearch />
+      </div>
       <h2>Category List</h2>
       <div className="table-wrapper">
         <table>
@@ -33,8 +54,8 @@ const DisplayCategory = () => {
 
           <tbody>
             {/* If the list has items, render each as a row */}
-            {categoryList.length > 0 ? (
-              categoryList.map((category) => (
+            {filteredCategory.length > 0 ? (
+              filteredCategory.map((category) => (
                 <CategoryCard key={category.id} category={category} />
               ))
             ) : (

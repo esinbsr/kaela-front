@@ -59,17 +59,19 @@ const LegalNotice = () => {
             <h2>2. Website Hosting</h2>
             <div className="line"></div>
             <p>
-              <strong>Hosting Provider:</strong> Not applicable
+              <strong>Hosting Provider:</strong> OVHcloud
             </p>
             <address>
               <p>
-                <strong>Address:</strong> Not applicable
+                <strong>Address:</strong> 2 rue Kellermann, 59100 Roubaix,
+                France
               </p>
               <p>
-                <strong>Phone:</strong> Not applicable
+                <strong>Phone:</strong> +33 9 72 10 10 07
               </p>
               <p>
-                <strong>Email:</strong> <a href="mailto:">Not applicable</a>
+                <strong>Email:</strong>{" "}
+                <a href="mailto:support@ovh.com">support@ovh.com</a>
               </p>
             </address>
           </section>

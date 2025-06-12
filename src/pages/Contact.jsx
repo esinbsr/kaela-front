@@ -6,6 +6,7 @@ import { getInformation } from "../api/informationApi";
 import { FaPhoneAlt } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { FaLocationDot } from "react-icons/fa6";
+import Map from "../components/utils/Map";
 import Footer from "../components/Footer";
 import { AuthContext } from "../context/AuthProvider";
 import "../assets/styles/pages/_contact.scss";
@@ -13,60 +14,49 @@ import { Helmet } from "react-helmet-async";
 import SocialNetworkIcon from "../components/SocialNetworkIcon";
 
 const Contact = () => {
-  // Scroll to the top of the page on mount
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  // Get authentication data from context (like user email and userId)
   const { auth } = useContext(AuthContext);
-
-  // Local state for managing form inputs
   const [email, setEmail] = useState("");
   const [object, setObject] = useState("");
   const [message, setMessage] = useState("");
 
-  // Fetch contact information using react-query
   const { data, isLoading, error } = useQuery({
     queryKey: ["informations"],
-    queryFn: getInformation, // Fetch the contact information
+    queryFn: getInformation,
   });
 
-  // Get the first data entry (information)
   const info = data?.length > 0 ? data[0] : null;
 
-  // Setup mutation for sending the contact message
   const mutation = useMutation({
-    mutationFn: sendMessage, // Function to send the message
+    mutationFn: sendMessage,
     onSuccess: (data) => {
       if (data.success) {
-        // Clear form fields if message is sent successfully
-        setEmail("");
-        setObject("");
+        setEmail(""), setObject("");
         setMessage("");
-        toast.success(data.message || "Email sent successfully"); // Show success toast
+        toast.success(data.message || "Email sent successfully");
       } else {
-        toast.error(data.message || "A valid email is required"); // Show error toast
+        toast.error(data.message || "A valid email is required");
       }
     },
     onError: () => {
-      toast.error("An error has occurred while sending the message."); // Error handling for message sending
+      toast.error("An error has occurred while sending the message.");
     },
   });
 
-  // Handle form submission
   const handleSubmit = (e) => {
-    e.preventDefault(); // Prevent page reload on form submission
+    e.preventDefault();
 
-    // Prepare the data to be sent
+    // Si l'utilisateur est connecté pas besoin d'envoyer l'email, juste le userId
     const formData = {
-      email: !auth.email ? email : null, // Only send email if the user is not authenticated
+      email: !auth.email ? email : null, // Envoie l'email que si l'utilisateur n'est pas connecté
       object,
       message,
-      userId: auth.userId || null, // Send userId if the user is authenticated
+      userId: auth.userId || null, // Envoie le userId pour récupérer l'email côté backend si connecté
     };
 
-    // Trigger mutation to send the message
     mutation.mutate(formData);
   };
 
@@ -136,7 +126,7 @@ const Contact = () => {
 
           <div className="contact__data">
             <FaPhoneAlt aria-label="Mobile" />
-            <p>
+            <p>+
               {isLoading && <span role="status"> Loading...</span>}
               {error && (
                 <span role="alert"> An error occurred : {error.message}</span>
@@ -170,7 +160,8 @@ const Contact = () => {
           {error && (
             <span role="alert"> An error occurred : {error.message}</span>
           )}
-          <SocialNetworkIcon />
+          {info && <Map address={info.address} />}
+          <SocialNetworkIcon/>
         </address>
       </div>
       <Footer />

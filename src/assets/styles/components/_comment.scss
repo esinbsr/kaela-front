@@ -147,26 +147,26 @@
   }
 
   .comments__input-container textarea {
-    min-width: 80vw;
+    min-width: 87vw;
   }
 
   .comments__username-content {
     padding: 0.75rem;
-    min-width: 80vw;
-    max-width: 80vw;
+    min-width: 87vw;
+    max-width: 87vw;
   }
 }
 
 /* Responsive - Mobile */
 @media screen and (max-width: 480px) {
   .comments__input-container textarea {
-    min-width: 85vw;
+    min-width: 87vw;
     height: 7rem;
   }
 
   .comments__username-content {
     padding: 0.75rem;
-    min-width: 85vw;
+    min-width: 87vw;
   }
 
   .comments__button {

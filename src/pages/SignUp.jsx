@@ -13,6 +13,7 @@ const SignUp = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [consent, setConsent] = useState(false);
 
   // Navigation hook to redirect user
   const navigate = useNavigate();
@@ -35,6 +36,7 @@ const SignUp = () => {
       if (data.success) {
         toast.success(data.message); // Show success toast if user is created successfully
         navigate("/login"); // Redirect to login page after successful sign-up
+        setConsent(false);
       } else {
         toast.error(data.message); // Show error toast if the response has an error message
       }
@@ -47,7 +49,7 @@ const SignUp = () => {
   // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault(); // Prevent the default form submission behavior
-    mutation.mutate({ username, email, password }); // Trigger the mutation with username, email, and password
+    mutation.mutate({ username, email, password, consent }); // Trigger the mutation with username, email, and password
   };
 
   return (
@@ -93,6 +95,25 @@ const SignUp = () => {
             placeholder="Create a strong password"
             aria-required="true"
           />
+          <div className="singup__form-footer">
+            <div className="signup__form-checkbox">
+              <input
+                type="checkbox"
+                id="consent"
+                name="consent"
+                checked={consent}
+                onChange={(e) => setConsent(e.target.checked)}
+              />
+
+              <label htmlFor="consent">
+              I agree to the collection and processing of my personal data by www.kaela-couture.com.
+              </label>
+            </div>
+            <Link to="/privacyPolicy">
+            See the confidentiality policy.
+            </Link>
+          </div>
+
           <button type="submit" disabled={mutation.isLoading}>
             {mutation.isLoading ? "Signing up..." : "Sign Up"}
           </button>

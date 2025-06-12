@@ -1,8 +1,12 @@
 import { useQuery } from "react-query";
 import InformationCard from "../../../components/admin/InformationCard";
 import { getInformation } from "../../../api/informationApi";
+import { IoIosSearch } from "react-icons/io";
+import { useState } from "react";
+import "../../../assets/styles/components/_search-bar.scss";
 
 const DisplayInformation = () => {
+  const [search, setSearch] = useState("");
   // Fetch information from the serveur
   const { isLoading, error, data } = useQuery({
     queryKey: ["informations"], // The unique query key to identify this query
@@ -14,11 +18,27 @@ const DisplayInformation = () => {
   // If there is data and it contains information, use it, otherwise return an empty array
   const informationList = data?.length > 0 ? data : [];
 
+  const filteredInformations = informationList.filter((information) =>
+    information.description.toLowerCase().includes(search.toLowerCase())
+  );
+
   if (isLoading) return "Loading...";
   if (error) return "An error occurred: " + error.message;
 
   return (
     <>
+      <div className="search-bar">
+        <input
+          type="text"
+          name="search"
+          autoFocus
+          id="search"
+          placeholder="Enter your search"
+          onChange={(e) => setSearch(e.target.value)}
+          value={search}
+        />
+        <IoIosSearch />
+      </div>
       <h2>Information List</h2>
       <div className="table-wrapper">
         <table>
@@ -36,8 +56,8 @@ const DisplayInformation = () => {
 
           <tbody>
             {/* If the list has items, render each as a row */}
-            {informationList.length > 0 ? (
-              informationList.map((info) => (
+            {filteredInformations.length > 0 ? (
+              filteredInformations.map((info) => (
                 <InformationCard key={info.id} infos={info} />
               ))
             ) : (

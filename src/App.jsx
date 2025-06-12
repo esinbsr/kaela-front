@@ -4,6 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Navigation from "./components/Navigation";
 import Accessibility from "./components/utils/Accessibility";
 import { Suspense, lazy } from "react";
+import CommentsManager from "./pages/admin/commentsManagement/CommentsManager";
 
 // Lazy loading the pages/components for better performance
 const Home = lazy(() => import("./pages/Home"));
@@ -140,6 +141,16 @@ const App = () => {
                 </ProtectedRoutes>
               }
             />
+
+            <Route
+              path="/commentsManagement"
+              element={
+                <ProtectedRoutes>
+                  <CommentsManager />
+                </ProtectedRoutes>
+              }
+            />
+
             <Route
               path="/updateSocialNetwork/:socialNetworkId"
               element={

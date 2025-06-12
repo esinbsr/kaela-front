@@ -1,8 +1,12 @@
 import ProductCard from "../../../components/admin/ProductCard";
 import { useQuery } from "react-query";
 import { getProduct } from "../../../api/productApi";
+import { useState } from "react";
+import "../../../assets/styles/components/_search-bar.scss";
+import { IoIosSearch } from "react-icons/io";
 
 const DisplayProduct = () => {
+  const [search, setSearch] = useState("");
   // Fetch products from the server
   const { isLoading, error, data } = useQuery({
     queryKey: ["products"], // The unique query key to identify this query
@@ -14,11 +18,29 @@ const DisplayProduct = () => {
   // If there is data and it contains products, use it, otherwise return an empty array
   const productList = data?.length > 0 ? data : [];
 
+  // Filter products based on the search input
+  const filteredProducts = productList.filter((product) =>
+    product.name.toLowerCase().includes(search.toLowerCase())
+  );
+
   if (isLoading) return "Loading...";
   if (error) return "An error occurred: " + error.message;
 
   return (
     <>
+      <div className="search-bar">
+        <input
+          type="text"
+          name="search"
+          autoFocus
+          id="search"
+          placeholder="Enter your search"
+          onChange={(e) => setSearch(e.target.value)}
+          value={search}
+        />
+        <IoIosSearch />
+      </div>
+
       <h2>List of Products</h2>
       <div className="table-wrapper">
         <table>
@@ -36,16 +58,14 @@ const DisplayProduct = () => {
           </thead>
 
           <tbody>
-            {/* If the list has items, render each as a row, sorted by creation date */}
-            {productList.length > 0 ? (
-              productList.map((product) => (
+            {filteredProducts.length > 0 ? (
+              filteredProducts.map((product) => (
                 <ProductCard key={product.id} product={product} />
               ))
             ) : (
-              // If no products are available, display a message
               <tr>
                 <td colSpan="6" style={{ textAlign: "center" }} role="alert">
-                  There are no products
+                  No products match your search
                 </td>
               </tr>
             )}

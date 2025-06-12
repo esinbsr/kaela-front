@@ -29,6 +29,13 @@ const AdminNavigation = () => {
         >
           Social network
         </NavLink>
+
+        <NavLink
+          to="/commentsManagement"
+          className={({ isActive }) => (isActive ? "active" : "")}
+        >
+          Comments
+        </NavLink>
     </div>
   );
 };
