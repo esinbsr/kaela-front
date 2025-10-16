@@ -1,19 +1,23 @@
-import { defineConfig } from "vite"; 
-import react from "@vitejs/plugin-react"; 
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import path from "path";
 
-// Exporting the Vite configuration
 export default defineConfig({
-  plugins: [react()], // Applying the React plugin to the Vite configuration
+  plugins: [react()],
   base: "/",
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "src"), // @ = src
+    },
+  },
   css: {
     preprocessorOptions: {
       scss: {
-        // This ensures that the files listed below are available in every SCSS file
         additionalData: `
-          @import "./src/assets/styles/components/colors.scss";
-          @import "./src/assets/styles/components/mixins.scss";
-          @import "./src/assets/styles/components/font.scss";
-          @import "./src/assets/styles/components/global.scss";
+          @import "@/assets/styles/components/colors.scss";
+          @import "@/assets/styles/components/mixins.scss";
+          @import "@/assets/styles/components/font.scss";
+          @import "@/assets/styles/components/global.scss";
         `,
       },
     },
