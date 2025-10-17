@@ -196,3 +196,26 @@ kaela-front/
 
 ## Licence
 Projet privé Kaela Couture. Tous droits réservés.
+
+---
+
+## Annexe — Workflows utilisateur et administrateur
+
+### Workflow utilisateur (visiteur)
+
+![Workflow utilisateur](./img_readme/workflow_user.png)
+
+
+### Workflow administrateur
+
+![Workflow administrateur](./img_readme/workflow_admin.png)
+
+---
+
+## Sources
+
+Projet réalisé en apprenant React via des ressources publiques:
+
+- Formation: [From Scratch – Formation React](https://fromscratch.podia.com/)
+- YouTube: [Vi dev](https://www.youtube.com/@videv9858)
+- YouTube: [Melvynx](https://www.youtube.com/@melvynxdev)
